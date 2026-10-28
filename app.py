@@ -14,6 +14,9 @@ import db
 import nsm_data
 
 app = Flask(__name__)
+# Tell browsers to re-check style.css on every load, so design changes show up
+# immediately instead of an old cached version being used.
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 
 # How much each status counts towards the progress score (0-100 %).
 SCORE = {"ikke_startet": 0, "delvis": 0.5, "implementert": 1}
@@ -41,6 +44,18 @@ def category_progress(category, progress):
     return round(100 * points / len(category["principles"]))
 
 
+def status_counts(category, progress):
+    """Count how many principles in a category have each status.
+
+    Returns e.g. {"ikke_startet": 8, "delvis": 1, "implementert": 1}.
+    """
+    counts = {key: 0 for key in db.STATUSES}
+    for number, _title, _link in category["principles"]:
+        row = progress.get(number)
+        counts[row["status"] if row else "ikke_startet"] += 1
+    return counts
+
+
 @app.route("/")
 def home():
     progress = db.get_all_progress()
@@ -49,7 +64,10 @@ def home():
         cards.append({
             "category": category,
             "percent": category_progress(category, progress),
+            "counts": status_counts(category, progress),
         })
+    # Number of principles marked "Implementert", shown next to the big ring.
+    implemented = sum(card["counts"]["implementert"] for card in cards)
     # Overall progress is the average over all 21 principles, not over the 4 cards,
     # so the large category (10 principles) weighs more than the small ones.
     total = sum(len(c["principles"]) for c in nsm_data.CATEGORIES)
@@ -59,6 +77,8 @@ def home():
         "home.html",
         cards=cards,
         overall=overall,
+        implemented=implemented,
+        total=total,
         roadmap=ROADMAP,
         current_version=CURRENT_VERSION,
         source_url=nsm_data.SOURCE_URL,
@@ -72,11 +92,22 @@ def category_page(category_id):
     if category is None:
         abort(404)
     progress = db.get_all_progress()
+
+    # Previous and next category, for the arrows at the bottom of the page.
+    # The modulo (%) wraps around, so after category 4 comes category 1.
+    categories = nsm_data.CATEGORIES
+    index = categories.index(category)
+    previous_category = categories[(index - 1) % len(categories)]
+    next_category = categories[(index + 1) % len(categories)]
+
     return render_template(
         "category.html",
         category=category,
         progress=progress,
         percent=category_progress(category, progress),
+        counts=status_counts(category, progress),
+        previous_category=previous_category,
+        next_category=next_category,
         statuses=db.STATUSES,
         base=nsm_data.BASE,
         # After saving, this principle is shown open so the user sees the result.
