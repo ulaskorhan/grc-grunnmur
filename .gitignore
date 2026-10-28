@@ -1,0 +1,6 @@
+# Virtual environment (recreate with: python3 -m venv .venv)
+.venv/
+__pycache__/
+
+# The local database holds your personal progress, so it is not committed
+grunnmur.db
