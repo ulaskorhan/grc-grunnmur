@@ -11,6 +11,7 @@ Pages:
 from flask import Flask, abort, redirect, render_template, request, url_for
 
 import db
+import examples
 import nsm_data
 
 app = Flask(__name__)
@@ -106,6 +107,7 @@ def category_page(category_id):
         progress=progress,
         percent=category_progress(category, progress),
         counts=status_counts(category, progress),
+        examples=examples.EXAMPLES,
         previous_category=previous_category,
         next_category=next_category,
         statuses=db.STATUSES,

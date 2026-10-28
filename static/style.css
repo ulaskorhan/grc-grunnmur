@@ -193,7 +193,8 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
   transition: transform 0.2s, border-color 0.2s;
 }
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-.card-index { font-size: 0.8rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.card-index { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.cat-number { color: var(--accent-text); }   /* the "1." in front of a category name */
 .card h2 { font-size: 1.15rem; margin: 0; }
 .card p { margin: 0 0 10px; font-size: 0.9rem; }
 .card-bottom { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; margin-top: 8px; }
@@ -259,7 +260,7 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
 .principle.is-delvis { border-left-color: var(--partial); }
 .principle.is-implementert { border-left-color: var(--accent); }
 
-.principle summary {
+.principle > summary {
   display: grid;
   grid-template-columns: auto 1fr;       /* number | title, then meta on a new row */
   gap: 6px 12px;
@@ -269,7 +270,7 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
   list-style: none;                      /* hide the default triangle */
   -webkit-tap-highlight-color: transparent;
 }
-.principle summary::-webkit-details-marker { display: none; }
+.principle > summary::-webkit-details-marker { display: none; }
 .p-number { font-weight: 700; color: var(--accent-text); font-variant-numeric: tabular-nums; min-width: 2.2em; }
 .p-title { font-weight: 500; min-width: 0; overflow-wrap: anywhere; }  /* long words never overflow */
 .p-meta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
@@ -281,10 +282,34 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
   transform: rotate(45deg); transition: transform 0.2s;
 }
 .principle[open] .chevron { transform: rotate(-135deg); }
-.principle[open] summary { border-bottom: 1px solid var(--border); }
+.principle[open] > summary { border-bottom: 1px solid var(--border); }
+
+/* Body of an open principle: example panel on top, form below (phones) */
+.p-body { display: grid; gap: 16px; padding: 16px; }
+
+/* "Eksempel" button and the text it reveals */
+.example {
+  border: 1px dashed color-mix(in srgb, var(--accent-2) 45%, var(--border));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent-2) 6%, var(--surface));
+}
+.example summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  min-height: 44px;
+  display: flex; align-items: center;
+  font-size: 0.9rem; font-weight: 600; color: var(--accent-2);
+  -webkit-tap-highlight-color: transparent;
+}
+.example summary::-webkit-details-marker { display: none; }
+.example summary::after { content: "Vis"; margin-left: auto; font-weight: 500; font-size: 0.8rem; color: var(--muted); }
+.example[open] summary::after { content: "Skjul"; }
+.example p { margin: 0; padding: 0 14px 12px; font-size: 0.9rem; line-height: 1.55; }
+.example .example-note { font-size: 0.75rem; color: var(--muted); }
 
 /* Form inside an open principle */
-form { padding: 16px; display: grid; gap: 16px; }
+form { display: grid; gap: 16px; min-width: 0; }
 .field { display: grid; gap: 6px; font-size: 0.85rem; font-weight: 500; color: var(--muted); }
 /* 16px font on inputs stops iPhones from zooming in when you tap a field */
 input, textarea {
@@ -379,13 +404,20 @@ button:active { transform: scale(0.98); }
   .cat-head { grid-template-columns: auto 1fr auto; }
   .cat-head .ring { grid-column: auto; display: grid; }
 
-  .principle summary { grid-template-columns: auto 1fr auto; align-items: center; }
+  .principle > summary { grid-template-columns: auto 1fr auto; align-items: center; }
   .p-meta { grid-column: auto; flex-wrap: nowrap; }
   .chevron { margin-left: 6px; }
 
   /* On wider screens the button sits on the right, after "Lagret" */
   button { width: auto; margin-left: auto; }
   .saved + button { margin-left: 0; }
+}
+
+/* ---------- 8. Desktop (≥ 860px): example panel moves to the right ---------- */
+@media (min-width: 860px) {
+  .p-body { grid-template-columns: 1fr 280px; gap: 24px; padding: 20px; align-items: start; }
+  .example-panel { grid-column: 2; grid-row: 1; position: sticky; top: 72px; }
+  .p-body form { grid-column: 1; grid-row: 1; }
 }
 
 /* Respect users who have turned off animations in their system settings */

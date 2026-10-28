@@ -11,7 +11,7 @@
   <span class="icon-box icon-box-lg">{{ icon(category.id) }}</span>
   <div class="cat-title">
     <p class="eyebrow">Kategori {{ category.number }} av 4</p>
-    <h1>{{ category.name }}</h1>
+    <h1><span class="cat-number">{{ category.number }}.</span> {{ category.name }}</h1>
     <div class="chips">
       <span class="chip chip-implementert">{{ counts.implementert }} implementert</span>
       <span class="chip chip-delvis">{{ counts.delvis }} delvis</span>
@@ -44,6 +44,20 @@
         <span class="chevron" aria-hidden="true"></span>
       </span>
     </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    {% if examples.get(number) %}
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>{{ examples[number] }}</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    {% endif %}
 
     <form method="post" action="{{ url_for('save_principle', principle_id=number) }}">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
@@ -81,6 +95,7 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+    </div>
   </details>
 {% endfor %}
 </div>
@@ -88,10 +103,10 @@
 <!-- Previous / next category -->
 <nav class="pager" aria-label="Andre kategorier">
   <a href="{{ url_for('category_page', category_id=previous_category.id) }}">
-    <span class="muted">← Forrige</span>{{ previous_category.name }}
+    <span class="muted">← Forrige</span>{{ previous_category.number }}. {{ previous_category.name }}
   </a>
   <a href="{{ url_for('category_page', category_id=next_category.id) }}" class="pager-next">
-    <span class="muted">Neste →</span>{{ next_category.name }}
+    <span class="muted">Neste →</span>{{ next_category.number }}. {{ next_category.name }}
   </a>
 </nav>
 {% endblock %}

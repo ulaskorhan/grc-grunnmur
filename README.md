@@ -27,6 +27,7 @@ Then open <http://127.0.0.1:5050>.
 - `app.py`: Flask routes (homepage, category page, saving a principle)
 - `db.py`: SQLite setup plus reading and writing progress
 - `nsm_data.py`: the 4 categories and 21 principles, copied from NSM's website
+- `examples.py`: one home lab example per principle, behind the "Eksempel" button (written for this app, not NSM text)
 - `templates/`: HTML pages (Jinja)
 - `static/style.css`: the minimalist styling
 
