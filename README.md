@@ -22,11 +22,29 @@ python3 -m venv .venv
 
 Then open <http://127.0.0.1:5050>.
 
+## Public version (GitHub Pages)
+
+Live: <https://ulaskorhan.github.io/grc-grunnmur/>
+
+GitHub Pages can only host static files, so `build.py` renders the same Flask
+templates into `docs/` with empty progress. On that version, `static/static-mode.js`
+saves each visitor's answers in their own browser (localStorage). Nothing is sent
+to a server, and my local database is never part of the build.
+
+After changing templates, styles or data, rebuild and commit `docs/`:
+
+```bash
+.venv/bin/python build.py
+git add docs && git commit -m "Rebuild GitHub Pages site"
+```
+
 ## Files
 
 - `app.py`: Flask routes (homepage, category page, saving a principle)
 - `db.py`: SQLite setup plus reading and writing progress
 - `nsm_data.py`: the 4 categories and 21 principles, copied from NSM's website
+- `build.py`: builds the static GitHub Pages version into `docs/`
+- `static/static-mode.js`: browser storage for the GitHub Pages version
 - `examples.py`: one home lab example per principle, behind the "Eksempel" button (written for this app, not NSM text)
 - `templates/`: HTML pages (Jinja)
 - `static/style.css`: the minimalist styling
