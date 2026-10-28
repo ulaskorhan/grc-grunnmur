@@ -20,7 +20,7 @@ python3 -m venv .venv
 .venv/bin/python app.py
 ```
 
-Then open <http://127.0.0.1:5000>.
+Then open <http://127.0.0.1:5050>.
 
 ## Files
 

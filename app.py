@@ -1,6 +1,6 @@
 """Grunnmur: a small personal GRC app built on NSM Grunnprinsipper for IKT-sikkerhet.
 
-Run with:  .venv/bin/python app.py   and open http://127.0.0.1:5000
+Run with:  .venv/bin/python app.py   and open http://127.0.0.1:5050
 
 Pages:
   /                     homepage: the 4 categories with progress, plus the roadmap
@@ -111,4 +111,4 @@ def save_principle(principle_id):
 if __name__ == "__main__":
     db.init_db()
     # 127.0.0.1 = only reachable from this computer. debug=True reloads on code changes.
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="127.0.0.1", port=5050, debug=True)
