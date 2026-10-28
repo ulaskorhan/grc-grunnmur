@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+  <h1>Hvor solid er din grunnmur?</h1>
+  <p>Følg din egen IKT-sikkerhet etter NSMs 21 grunnprinsipper.
+     Start enkelt: velg en kategori, åpne et prinsipp og sett status.</p>
+  <p class="overall">Total fremdrift: <strong>{{ overall }} %</strong></p>
+</section>
+
+<!-- The 4 categories. Principles are only shown on the category page. -->
+<section class="cards">
+  {% for card in cards %}
+  <a class="card" href="{{ url_for('category_page', category_id=card.category.id) }}">
+    <span class="card-number">{{ card.category.number }}</span>
+    <h2>{{ card.category.name }}</h2>
+    <p class="muted">{{ card.category.principles|length }} prinsipper</p>
+    <div class="bar"><div class="bar-fill" style="width: {{ card.percent }}%"></div></div>
+    <p class="percent">{{ card.percent }} %</p>
+  </a>
+  {% endfor %}
+</section>
+
+<!-- The roadmap tells the user that the app grows step by step. -->
+<section class="roadmap">
+  <h2>Versjon {{ current_version }} av {{ roadmap|length }}</h2>
+  <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.</p>
+  <ol>
+    {% for number, name, text in roadmap %}
+    <li class="{{ 'active' if number == current_version else ('done' if number < current_version else 'planned') }}">
+      <strong>v{{ number }} – {{ name }}</strong>
+      <span class="muted">{{ text }}</span>
+      {% if number == current_version %}<span class="badge">Nå</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endblock %}

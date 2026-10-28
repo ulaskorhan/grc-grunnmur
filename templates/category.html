@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category.name }} · Grunnmur{% endblock %}
+
+{% block content %}
+<p><a href="{{ url_for('home') }}" class="back">← Alle kategorier</a></p>
+
+<section class="intro">
+  <h1>{{ category.number }}. {{ category.name }}</h1>
+  <div class="bar"><div class="bar-fill" style="width: {{ percent }}%"></div></div>
+  <p class="percent">{{ percent }} % fremdrift</p>
+</section>
+
+<!--
+  Each principle is a <details> element: closed by default, opens on click.
+  This needs no JavaScript; it is built into HTML.
+-->
+{% for number, title, link in category.principles %}
+  {% set row = progress.get(number) %}
+  {% set status = row.status if row else 'ikke_startet' %}
+  <details class="principle" id="p{{ number }}" {% if number == open_id %}open{% endif %}>
+    <summary>
+      <span class="p-number">{{ number }}</span>
+      <span class="p-title">{{ title }}</span>
+      <span class="status status-{{ status }}">{{ statuses[status] }}</span>
+      {% if row and row.gdpr %}<span class="tag">Personvern</span>{% endif %}
+    </summary>
+
+    <form method="post" action="{{ url_for('save_principle', principle_id=number) }}">
+      <label>Status
+        <select name="status">
+          {% for key, label in statuses.items() %}
+          <option value="{{ key }}" {% if key == status %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label>Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer">{{ row.notes if row else '' }}</textarea>
+      </label>
+
+      <label>ISO 27001-referanse
+        <input name="iso_ref" value="{{ row.iso_ref if row else '' }}" placeholder="F.eks. A.5.15, A.8.5">
+      </label>
+
+      <label class="checkbox">
+        <input type="checkbox" name="gdpr" {% if row and row.gdpr %}checked{% endif %}>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="{{ base }}{{ link }}" target="_blank" rel="noopener">Les prinsippet hos NSM ↗</a>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </details>
+{% endfor %}
+{% endblock %}
