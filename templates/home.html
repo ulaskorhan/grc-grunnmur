@@ -3,7 +3,8 @@
 
 {% block content %}
 <!-- Hero: short intro on the left, overall progress ring on the right -->
-<section class="hero">
+<!-- data-ids lists the principles this block summarises (used by static-mode.js) -->
+<section class="hero" data-ids="{% for c in cards %}{% for p in c.category.principles %}{{ p[0] }} {% endfor %}{% endfor %}">
   <div class="hero-text">
     <p class="eyebrow">NSMs grunnprinsipper · {{ cards|length }} kategorier · {{ total }} prinsipper</p>
     <h1>Hvor solid er din <span class="highlight">grunnmur</span>?</h1>
@@ -15,8 +16,8 @@
   <div class="ring ring-lg" style="--p: {{ overall }}" role="img"
        aria-label="Total fremdrift {{ overall }} prosent">
     <div class="ring-inner">
-      <strong>{{ overall }}<small>%</small></strong>
-      <span>{{ implemented }} av {{ total }} implementert</span>
+      <strong><span class="js-pct">{{ overall }}</span><small>%</small></strong>
+      <span><span data-count="implementert">{{ implemented }}</span> av {{ total }} implementert</span>
     </div>
   </div>
 </section>
@@ -24,7 +25,8 @@
 <!-- The 4 categories in a 2 × 2 grid (one column on phones) -->
 <section class="cards" aria-label="Kategorier">
   {% for card in cards %}
-  <a class="card" href="{{ url_for('category_page', category_id=card.category.id) }}">
+  <a class="card" href="{{ url_for('category_page', category_id=card.category.id) }}"
+     data-ids="{% for p in card.category.principles %}{{ p[0] }} {% endfor %}">
     <div class="card-top">
       <span class="icon-box">{{ icon(card.category.id) }}</span>
       <span class="card-index">Kategori {{ card.category.number }}</span>
@@ -34,8 +36,9 @@
 
     <div class="bar" aria-hidden="true"><div class="bar-fill" style="width: {{ card.percent }}%"></div></div>
     <div class="card-bottom">
-      <span>{{ card.percent }} %</span>
-      <span class="muted">{{ card.counts.implementert }} ✓ · {{ card.counts.delvis }} delvis</span>
+      <span><span class="js-pct">{{ card.percent }}</span> %</span>
+      <span class="muted"><span data-count="implementert">{{ card.counts.implementert }}</span> ✓ ·
+        <span data-count="delvis">{{ card.counts.delvis }}</span> delvis</span>
       <span class="arrow" aria-hidden="true">→</span>
     </div>
   </a>

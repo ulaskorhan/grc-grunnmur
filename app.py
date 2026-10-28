@@ -18,6 +18,9 @@ app = Flask(__name__)
 # Tell browsers to re-check style.css on every load, so design changes show up
 # immediately instead of an old cached version being used.
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+# STATIC_SITE is switched on by build.py when it makes the GitHub Pages version.
+# In that mode no data is read from the database, and the browser saves progress instead.
+app.config["STATIC_SITE"] = False
 
 # How much each status counts towards the progress score (0-100 %).
 SCORE = {"ikke_startet": 0, "delvis": 0.5, "implementert": 1}
@@ -30,6 +33,23 @@ ROADMAP = [
     (4, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
 ]
 CURRENT_VERSION = 1
+
+
+@app.context_processor
+def add_static_flag():
+    """Make the variable "static_site" available in every template."""
+    return {"static_site": app.config["STATIC_SITE"]}
+
+
+def load_progress():
+    """Read saved progress, except in static mode.
+
+    The public GitHub Pages build must never contain my own local data,
+    so it always starts empty. Visitors' progress is saved in their own browser.
+    """
+    if app.config["STATIC_SITE"]:
+        return {}
+    return db.get_all_progress()
 
 
 def category_progress(category, progress):
@@ -59,7 +79,7 @@ def status_counts(category, progress):
 
 @app.route("/")
 def home():
-    progress = db.get_all_progress()
+    progress = load_progress()
     cards = []
     for category in nsm_data.CATEGORIES:
         cards.append({
@@ -92,7 +112,7 @@ def category_page(category_id):
     category = nsm_data.find_category(category_id)
     if category is None:
         abort(404)
-    progress = db.get_all_progress()
+    progress = load_progress()
 
     # Previous and next category, for the arrows at the bottom of the page.
     # The modulo (%) wraps around, so after category 4 comes category 1.

@@ -27,7 +27,17 @@
 
   <footer class="wrap site-footer">
     <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
-       Data lagres kun lokalt på din maskin.</p>
+       {% if static_site %}
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       {% else %}
+       Data lagres kun lokalt på din maskin.
+       {% endif %}</p>
   </footer>
+
+  {% if static_site %}
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="{{ url_for('static', filename='static-mode.js') }}"></script>
+  {% endif %}
 </body>
 </html>

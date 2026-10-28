@@ -7,19 +7,19 @@
 <a href="{{ url_for('home') }}" class="back">← Oversikt</a>
 
 <!-- Category header: icon, name, small ring and a count per status -->
-<section class="cat-head">
+<section class="cat-head" data-ids="{% for p in category.principles %}{{ p[0] }} {% endfor %}">
   <span class="icon-box icon-box-lg">{{ icon(category.id) }}</span>
   <div class="cat-title">
     <p class="eyebrow">Kategori {{ category.number }} av 4</p>
     <h1><span class="cat-number">{{ category.number }}.</span> {{ category.name }}</h1>
     <div class="chips">
-      <span class="chip chip-implementert">{{ counts.implementert }} implementert</span>
-      <span class="chip chip-delvis">{{ counts.delvis }} delvis</span>
-      <span class="chip">{{ counts.ikke_startet }} ikke startet</span>
+      <span class="chip chip-implementert"><span data-count="implementert">{{ counts.implementert }}</span> implementert</span>
+      <span class="chip chip-delvis"><span data-count="delvis">{{ counts.delvis }}</span> delvis</span>
+      <span class="chip"><span data-count="ikke_startet">{{ counts.ikke_startet }}</span> ikke startet</span>
     </div>
   </div>
   <div class="ring ring-sm" style="--p: {{ percent }}" role="img" aria-label="{{ percent }} prosent">
-    <div class="ring-inner"><strong>{{ percent }}<small>%</small></strong></div>
+    <div class="ring-inner"><strong><span class="js-pct">{{ percent }}</span><small>%</small></strong></div>
   </div>
 </section>
 
@@ -27,7 +27,7 @@
 
 <!--
   Each principle is a <details> element: closed by default, opens on click.
-  This is built into HTML, so it needs no JavaScript.
+  This is built into HTML, so opening and closing needs no JavaScript.
   The class "is-<status>" colours the stripe on the left edge.
 -->
 <div class="principles">
@@ -39,7 +39,7 @@
       <span class="p-number">{{ number }}</span>
       <span class="p-title">{{ title }}</span>
       <span class="p-meta">
-        {% if row and row.gdpr %}<span class="tag">Personvern</span>{% endif %}
+        <span class="tag" {% if not (row and row.gdpr) %}hidden{% endif %}>Personvern</span>
         <span class="status status-{{ status }}">{{ statuses[status] }}</span>
         <span class="chevron" aria-hidden="true"></span>
       </span>
@@ -91,7 +91,7 @@
 
       <div class="form-footer">
         <a href="{{ base }}{{ link }}" target="_blank" rel="noopener">Les hos NSM ↗</a>
-        {% if number == open_id %}<span class="saved">✓ Lagret</span>{% endif %}
+        <span class="saved" {% if number != open_id %}hidden{% endif %}>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
     </form>

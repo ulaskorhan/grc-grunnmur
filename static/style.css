@@ -46,6 +46,9 @@
 /* ---------- 2. Base ---------- */
 * { box-sizing: border-box; }
 
+/* Elements with the "hidden" attribute stay hidden even if a class sets display */
+[hidden] { display: none !important; }
+
 html { -webkit-text-size-adjust: 100%; }  /* stop iOS from enlarging text on rotate */
 
 body {
@@ -112,6 +115,12 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
   border: 1px solid var(--border); color: var(--muted);
 }
 .site-footer { color: var(--muted); font-size: 0.8rem; padding-top: 24px; padding-bottom: 40px; }
+/* "Slett mine data" looks like a link, not like the big Lagre button */
+.link-button {
+  width: auto; min-height: 0; margin: 0; padding: 0;
+  background: none; color: var(--accent-text);
+  font: inherit; font-weight: 400; text-decoration: underline; cursor: pointer;
+}
 
 /* ---------- 4. Shared pieces ---------- */
 .eyebrow {
@@ -410,7 +419,7 @@ button:active { transform: scale(0.98); }
 
   /* On wider screens the button sits on the right, after "Lagret" */
   button { width: auto; margin-left: auto; }
-  .saved + button { margin-left: 0; }
+  .saved:not([hidden]) + button { margin-left: 0; }
 }
 
 /* ---------- 8. Desktop (≥ 860px): example panel moves to the right ---------- */
