@@ -5,7 +5,7 @@
 <!-- Hero: short intro on the left, overall progress ring on the right -->
 <section class="hero">
   <div class="hero-text">
-    <p class="eyebrow">NSMs grunnprinsipper · {{ total }} prinsipper</p>
+    <p class="eyebrow">NSMs grunnprinsipper · {{ cards|length }} kategorier · {{ total }} prinsipper</p>
     <h1>Hvor solid er din <span class="highlight">grunnmur</span>?</h1>
     <p class="lead">Følg din egen IKT-sikkerhet steg for steg. Velg en kategori,
        åpne et prinsipp og sett status.</p>
@@ -27,9 +27,9 @@
   <a class="card" href="{{ url_for('category_page', category_id=card.category.id) }}">
     <div class="card-top">
       <span class="icon-box">{{ icon(card.category.id) }}</span>
-      <span class="card-index">0{{ card.category.number }}</span>
+      <span class="card-index">Kategori {{ card.category.number }}</span>
     </div>
-    <h2>{{ card.category.name }}</h2>
+    <h2><span class="cat-number">{{ card.category.number }}.</span> {{ card.category.name }}</h2>
     <p class="muted">{{ card.category.principles|length }} prinsipper</p>
 
     <div class="bar" aria-hidden="true"><div class="bar-fill" style="width: {{ card.percent }}%"></div></div>
