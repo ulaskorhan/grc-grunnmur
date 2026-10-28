@@ -156,7 +156,7 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
 }
 .ring-inner strong { font-size: 2rem; line-height: 1; letter-spacing: -0.03em; }
 .ring-inner small { font-size: 0.5em; margin-left: 2px; color: var(--muted); }
-.ring-inner span { font-size: 0.7rem; color: var(--muted); margin-top: 4px; padding: 0 8px; }
+.ring-inner > span {   /* only the caption under the number */ font-size: 0.7rem; color: var(--muted); margin-top: 4px; padding: 0 8px; }
 .ring-sm { --size: 72px; }
 .ring-sm .ring-inner strong { font-size: 1.1rem; }
 
