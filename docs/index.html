@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <title>Grunnmur</title>
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+</head>
+<body>
+  <!-- Sticky header: stays at the top while scrolling -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/grc-grunnmur/" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Grunnmur
+      </a>
+      <span class="version-pill">v1</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    
+<!-- Hero: short intro on the left, overall progress ring on the right -->
+<!-- data-ids lists the principles this block summarises (used by static-mode.js) -->
+<section class="hero" data-ids="1.1 1.2 1.3 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 3.1 3.2 3.3 3.4 4.1 4.2 4.3 4.4 ">
+  <div class="hero-text">
+    <p class="eyebrow">NSMs grunnprinsipper · 4 kategorier · 21 prinsipper</p>
+    <h1>Hvor solid er din <span class="highlight">grunnmur</span>?</h1>
+    <p class="lead">Følg din egen IKT-sikkerhet steg for steg. Velg en kategori,
+       åpne et prinsipp og sett status.</p>
+  </div>
+
+  <!-- The ring is a CSS conic-gradient. --p is the percentage it fills. -->
+  <div class="ring ring-lg" style="--p: 0" role="img"
+       aria-label="Total fremdrift 0 prosent">
+    <div class="ring-inner">
+      <strong><span class="js-pct">0</span><small>%</small></strong>
+      <span><span data-count="implementert">0</span> av 21 implementert</span>
+    </div>
+  </div>
+</section>
+
+<!-- The 4 categories in a 2 × 2 grid (one column on phones) -->
+<section class="cards" aria-label="Kategorier">
+  
+  <a class="card" href="/grc-grunnmur/kategori/identifisere"
+     data-ids="1.1 1.2 1.3 ">
+    <div class="card-top">
+      <span class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>                       
+  
+</svg></span>
+      <span class="card-index">Kategori 1</span>
+    </div>
+    <h2><span class="cat-number">1.</span> Identifisere og kartlegge</h2>
+    <p class="muted">3 prinsipper</p>
+
+    <div class="bar" aria-hidden="true"><div class="bar-fill" style="width: 0%"></div></div>
+    <div class="card-bottom">
+      <span><span class="js-pct">0</span> %</span>
+      <span class="muted"><span data-count="implementert">0</span> ✓ ·
+        <span data-count="delvis">0</span> delvis</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </div>
+  </a>
+  
+  <a class="card" href="/grc-grunnmur/kategori/beskytte"
+     data-ids="2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 ">
+    <div class="card-top">
+      <span class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/> 
+  
+</svg></span>
+      <span class="card-index">Kategori 2</span>
+    </div>
+    <h2><span class="cat-number">2.</span> Beskytte og opprettholde</h2>
+    <p class="muted">10 prinsipper</p>
+
+    <div class="bar" aria-hidden="true"><div class="bar-fill" style="width: 0%"></div></div>
+    <div class="card-bottom">
+      <span><span class="js-pct">0</span> %</span>
+      <span class="muted"><span data-count="implementert">0</span> ✓ ·
+        <span data-count="delvis">0</span> delvis</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </div>
+  </a>
+  
+  <a class="card" href="/grc-grunnmur/kategori/oppdage"
+     data-ids="3.1 3.2 3.3 3.4 ">
+    <div class="card-top">
+      <span class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/> 
+  
+</svg></span>
+      <span class="card-index">Kategori 3</span>
+    </div>
+    <h2><span class="cat-number">3.</span> Oppdage</h2>
+    <p class="muted">4 prinsipper</p>
+
+    <div class="bar" aria-hidden="true"><div class="bar-fill" style="width: 0%"></div></div>
+    <div class="card-bottom">
+      <span><span class="js-pct">0</span> %</span>
+      <span class="muted"><span data-count="implementert">0</span> ✓ ·
+        <span data-count="delvis">0</span> delvis</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </div>
+  </a>
+  
+  <a class="card" href="/grc-grunnmur/kategori/handtere"
+     data-ids="4.1 4.2 4.3 4.4 ">
+    <div class="card-top">
+      <span class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>                           
+  
+</svg></span>
+      <span class="card-index">Kategori 4</span>
+    </div>
+    <h2><span class="cat-number">4.</span> Håndtere og gjenopprette</h2>
+    <p class="muted">4 prinsipper</p>
+
+    <div class="bar" aria-hidden="true"><div class="bar-fill" style="width: 0%"></div></div>
+    <div class="card-bottom">
+      <span><span class="js-pct">0</span> %</span>
+      <span class="muted"><span data-count="implementert">0</span> ✓ ·
+        <span data-count="delvis">0</span> delvis</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </div>
+  </a>
+  
+</section>
+
+<!-- Roadmap: a stepper that shows the app grows version by version -->
+<section class="roadmap">
+  <div class="section-head">
+    <h2>Versjon 1 av 4</h2>
+    <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.</p>
+  </div>
+  <ol class="stepper">
+    
+    <li class="step active">
+      <span class="step-dot">1</span>
+      <div>
+        <strong>Grunnprinsipper</strong>
+        <p class="muted">Status, notater, ISO-referanse og personvern per prinsipp</p>
+      </div>
+    </li>
+    
+    <li class="step planned">
+      <span class="step-dot">2</span>
+      <div>
+        <strong>Risikoregister</strong>
+        <p class="muted">Sannsynlighet × konsekvens, tiltak og kobling til prinsipper</p>
+      </div>
+    </li>
+    
+    <li class="step planned">
+      <span class="step-dot">3</span>
+      <div>
+        <strong>Tiltak og varmekart</strong>
+        <p class="muted">NSMs tiltak under hvert prinsipp og et risikovarmekart</p>
+      </div>
+    </li>
+    
+    <li class="step planned">
+      <span class="step-dot">4</span>
+      <div>
+        <strong>Eksport og portefølje</strong>
+        <p class="muted">Eksport av data og ferdig presentasjon</p>
+      </div>
+    </li>
+    
+  </ol>
+</section>
+
+  </main>
+
+  <footer class="wrap site-footer">
+    <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       </p>
+  </footer>
+
+  
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
+</body>
+</html>

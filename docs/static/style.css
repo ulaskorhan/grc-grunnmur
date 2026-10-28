@@ -1,0 +1,435 @@
+/*
+  Grunnmur stylesheet.
+  Mobile-first: the base rules are for phones, and the @media (min-width: ...)
+  blocks further down add the wider layouts for tablets and desktops.
+*/
+
+/* ---------- 1. Colours (light mode) ---------- */
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --text: #1a1a19;
+  --muted: #6f6e69;
+  --border: #e6e5e1;
+  --track: #ebeae6;          /* empty part of rings and bars */
+  --accent: #0d9488;         /* teal */
+  --accent-2: #4f46e5;       /* indigo, used only in gradients */
+  --accent-soft: #ccfbf1;
+  --accent-text: #0f766e;
+  --partial: #d97706;        /* amber for "Delvis" */
+  --partial-soft: #fef3c7;
+  --partial-text: #92400e;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.05);
+  --radius: 16px;
+}
+
+/* Dark mode follows the phone's or computer's own setting */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111110;
+    --surface: #1b1b1a;
+    --text: #f2f2f0;
+    --muted: #a3a29c;
+    --border: #2e2d2b;
+    --track: #2e2d2b;
+    --accent: #2dd4bf;
+    --accent-2: #818cf8;
+    --accent-soft: #134e4a;
+    --accent-text: #5eead4;
+    --partial: #fbbf24;
+    --partial-soft: #422006;
+    --partial-text: #fcd34d;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
+  }
+}
+
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; }
+
+/* Elements with the "hidden" attribute stay hidden even if a class sets display */
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }  /* stop iOS from enlarging text on rotate */
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;                   /* safety net against sideways scrolling */
+}
+
+/* A soft coloured glow at the top of every page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 420px;
+  background: radial-gradient(60% 100% at 20% 0%, rgb(13 148 136 / 0.12), transparent 70%),
+              radial-gradient(50% 80% at 90% 0%, rgb(79 70 229 / 0.10), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Centred column with 16px side margin on phones */
+.wrap {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left));   /* respects the iPhone notch */
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+a { color: var(--accent-text); }
+.muted { color: var(--muted); }
+h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
+
+/* Visible keyboard focus for accessibility */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+/* ---------- 3. Header and footer ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 75%, transparent);
+  backdrop-filter: blur(12px);                 /* frosted glass effect */
+  -webkit-backdrop-filter: blur(12px);         /* same, for Safari */
+  border-bottom: 1px solid var(--border);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); text-decoration: none; }
+/* Logo mark: four small squares, one per category (a "foundation" of blocks) */
+.logo-mark {
+  width: 22px; height: 22px; border-radius: 6px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 45% 45% no-repeat,
+    linear-gradient(var(--accent-2), var(--accent-2)) 100% 0 / 45% 45% no-repeat,
+    linear-gradient(var(--accent-2), var(--accent-2)) 0 100% / 45% 45% no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 100% 100% / 45% 45% no-repeat;
+}
+.version-pill {
+  font-size: 0.75rem; font-weight: 600;
+  padding: 3px 10px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--muted);
+}
+.site-footer { color: var(--muted); font-size: 0.8rem; padding-top: 24px; padding-bottom: 40px; }
+/* "Slett mine data" looks like a link, not like the big Lagre button */
+.link-button {
+  width: auto; min-height: 0; margin: 0; padding: 0;
+  background: none; color: var(--accent-text);
+  font: inherit; font-weight: 400; text-decoration: underline; cursor: pointer;
+}
+
+/* ---------- 4. Shared pieces ---------- */
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--accent-text);
+}
+
+/* Icon in a tinted rounded square */
+.icon-box {
+  display: inline-grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--accent-soft); color: var(--accent-text);
+  flex-shrink: 0;
+}
+.icon-box-lg { width: 56px; height: 56px; border-radius: 16px; }
+.icon { width: 24px; height: 24px; }
+
+/* Progress ring: a conic-gradient fills --p percent of the circle */
+.ring {
+  --size: 132px;
+  width: var(--size); height: var(--size);
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--p) * 1%), var(--track) 0);
+  display: grid; place-items: center;
+}
+.ring-inner {
+  width: 80%; height: 80%; border-radius: 50%;
+  background: var(--surface);
+  display: grid; place-content: center; text-align: center;
+}
+.ring-inner strong { font-size: 2rem; line-height: 1; letter-spacing: -0.03em; }
+.ring-inner small { font-size: 0.5em; margin-left: 2px; color: var(--muted); }
+.ring-inner span { font-size: 0.7rem; color: var(--muted); margin-top: 4px; padding: 0 8px; }
+.ring-sm { --size: 72px; }
+.ring-sm .ring-inner strong { font-size: 1.1rem; }
+
+/* Progress bar */
+.bar { height: 6px; background: var(--track); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+/* Small rounded labels */
+.tag, .status, .chip {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 500;
+  padding: 2px 10px; border-radius: 999px;
+  white-space: nowrap;
+}
+.tag { background: color-mix(in srgb, var(--accent-2) 15%, transparent); color: var(--accent-2); }
+.status, .chip { background: var(--track); color: var(--muted); }
+.status-delvis, .chip-delvis { background: var(--partial-soft); color: var(--partial-text); }
+.status-implementert, .chip-implementert { background: var(--accent-soft); color: var(--accent-text); }
+
+/* ---------- 5. Homepage ---------- */
+.hero {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
+  padding: 32px 0 8px;
+}
+.hero h1 { font-size: clamp(1.9rem, 7vw, 2.8rem); margin: 0 0 12px; }
+/* Gradient text on the word "grunnmur" */
+.highlight {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lead { color: var(--muted); font-size: 1.05rem; margin: 0; max-width: 34em; }
+
+/* Category cards: 1 column on phones, 2 × 2 from tablet width */
+.cards { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 32px 0; }
+.card {
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  color: var(--text); text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.card-index { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.cat-number { color: var(--accent-text); }   /* the "1." in front of a category name */
+.card h2 { font-size: 1.15rem; margin: 0; }
+.card p { margin: 0 0 10px; font-size: 0.9rem; }
+.card-bottom { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; margin-top: 8px; }
+.card-bottom .arrow { margin-left: auto; color: var(--accent-text); transition: transform 0.2s; }
+
+/* Hover effects only on devices with a real mouse (prevents "sticky" hover on phones) */
+@media (hover: hover) {
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card:hover .arrow { transform: translateX(4px); }
+}
+.card:active { transform: scale(0.99); }
+
+/* Roadmap stepper: vertical on phones, horizontal on wider screens */
+.roadmap { margin: 48px 0 16px; }
+.section-head h2 { font-size: 1.2rem; margin: 0 0 4px; }
+.section-head p { margin: 0; font-size: 0.9rem; }
+.stepper { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 0; }
+.step { position: relative; display: flex; gap: 14px; padding-bottom: 20px; }
+.step p { margin: 2px 0 0; font-size: 0.85rem; }
+/* The connecting line between dots */
+.step:not(:last-child)::after {
+  content: ""; position: absolute;
+  left: 15px; top: 34px; bottom: 2px; width: 2px;
+  background: var(--border);
+}
+.step-dot {
+  display: grid; place-items: center; flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 50%;
+  font-size: 0.85rem; font-weight: 700;
+  background: var(--surface); border: 2px solid var(--border); color: var(--muted);
+}
+.step.active .step-dot, .step.done .step-dot {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent; color: #fff;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.step.planned > div { opacity: 0.6; }
+
+/* ---------- 6. Category page ---------- */
+.back { display: inline-block; margin-top: 20px; font-size: 0.9rem; text-decoration: none; padding: 6px 0; }
+
+.cat-head {
+  display: grid;
+  grid-template-columns: auto 1fr;   /* icon | title. The ring moves to its own row. */
+  gap: 16px; align-items: center;
+  margin: 16px 0 8px;
+}
+.cat-head h1 { font-size: clamp(1.5rem, 6vw, 2.2rem); margin: 0 0 10px; }
+.cat-head .ring { grid-column: 1 / -1; display: none; }   /* hidden on phones: the chips say enough */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.hint { font-size: 0.85rem; margin: 20px 0 10px; }
+
+/* Principle rows */
+.principles { display: grid; gap: 10px; }
+.principle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--track);   /* coloured stripe = status */
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  scroll-margin-top: 72px;               /* so the sticky header does not cover it after saving */
+}
+.principle.is-delvis { border-left-color: var(--partial); }
+.principle.is-implementert { border-left-color: var(--accent); }
+
+.principle > summary {
+  display: grid;
+  grid-template-columns: auto 1fr;       /* number | title, then meta on a new row */
+  gap: 6px 12px;
+  padding: 14px 16px;
+  min-height: 56px;                      /* big enough to tap comfortably */
+  cursor: pointer;
+  list-style: none;                      /* hide the default triangle */
+  -webkit-tap-highlight-color: transparent;
+}
+.principle > summary::-webkit-details-marker { display: none; }
+.p-number { font-weight: 700; color: var(--accent-text); font-variant-numeric: tabular-nums; min-width: 2.2em; }
+.p-title { font-weight: 500; min-width: 0; overflow-wrap: anywhere; }  /* long words never overflow */
+.p-meta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+
+/* Chevron that turns when the row is open */
+.chevron {
+  width: 8px; height: 8px; margin-left: auto;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg); transition: transform 0.2s;
+}
+.principle[open] .chevron { transform: rotate(-135deg); }
+.principle[open] > summary { border-bottom: 1px solid var(--border); }
+
+/* Body of an open principle: example panel on top, form below (phones) */
+.p-body { display: grid; gap: 16px; padding: 16px; }
+
+/* "Eksempel" button and the text it reveals */
+.example {
+  border: 1px dashed color-mix(in srgb, var(--accent-2) 45%, var(--border));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent-2) 6%, var(--surface));
+}
+.example summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  min-height: 44px;
+  display: flex; align-items: center;
+  font-size: 0.9rem; font-weight: 600; color: var(--accent-2);
+  -webkit-tap-highlight-color: transparent;
+}
+.example summary::-webkit-details-marker { display: none; }
+.example summary::after { content: "Vis"; margin-left: auto; font-weight: 500; font-size: 0.8rem; color: var(--muted); }
+.example[open] summary::after { content: "Skjul"; }
+.example p { margin: 0; padding: 0 14px 12px; font-size: 0.9rem; line-height: 1.55; }
+.example .example-note { font-size: 0.75rem; color: var(--muted); }
+
+/* Form inside an open principle */
+form { display: grid; gap: 16px; min-width: 0; }
+.field { display: grid; gap: 6px; font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+/* 16px font on inputs stops iPhones from zooming in when you tap a field */
+input, textarea {
+  width: 100%;
+  font: inherit; font-size: 16px; color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 12px;
+}
+textarea { resize: vertical; min-height: 80px; }
+input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* Segmented control: radio buttons that look like one row of buttons */
+.segmented { border: 0; margin: 0; padding: 0; min-width: 0; }
+.segmented legend { font-size: 0.85rem; font-weight: 500; color: var(--muted); padding: 0; margin-bottom: 6px; }
+.seg-options {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+  padding: 4px; background: var(--track); border-radius: 12px;
+}
+.segmented label { position: relative; }
+.segmented input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }   /* invisible, but still clickable */
+.segmented span {
+  display: grid; place-items: center; text-align: center;
+  min-height: 40px; padding: 4px 6px; border-radius: 9px;
+  font-size: 0.85rem; font-weight: 500; color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+.segmented input:checked + span { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.seg-delvis input:checked + span { color: var(--partial-text); }
+.seg-implementert input:checked + span { color: var(--accent-text); }
+.segmented input:focus-visible + span { outline: 2px solid var(--accent); }
+
+/* On/off switch built from a normal checkbox */
+.switch { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; cursor: pointer; position: relative; }
+.switch input { position: absolute; opacity: 0; width: 44px; height: 26px; margin: 0; cursor: pointer; }
+.switch-track {
+  position: relative; flex-shrink: 0;
+  width: 44px; height: 26px; border-radius: 999px;
+  background: var(--track); transition: background 0.2s;
+}
+.switch-track::after {   /* the round knob */
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  transition: transform 0.2s;
+}
+.switch input:checked + .switch-track { background: var(--accent-2); }
+.switch input:checked + .switch-track::after { transform: translateX(18px); }
+.switch input:focus-visible + .switch-track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.form-footer { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.form-footer a { font-size: 0.9rem; }
+.saved { font-size: 0.85rem; color: var(--accent-text); margin-left: auto; }
+button {
+  width: 100%;                 /* full-width, easy-to-tap button on phones */
+  order: 3;                    /* always last, on its own row */
+  font: inherit; font-weight: 600; color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: 0; border-radius: 10px;
+  padding: 10px 24px; min-height: 44px;
+  cursor: pointer;
+}
+button:active { transform: scale(0.98); }
+
+/* Previous / next category links */
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 32px 0 8px; }
+.pager a {
+  display: grid; gap: 2px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.9rem;
+  min-width: 0; overflow-wrap: anywhere;
+}
+.pager a span { font-size: 0.8rem; font-weight: 400; }
+.pager-next { text-align: right; }
+
+/* ---------- 7. Tablet and up (≥ 640px) ---------- */
+@media (min-width: 640px) {
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 16px; }   /* the 2 × 2 grid */
+  .card { padding: 24px; }
+
+  .hero { flex-direction: row; align-items: center; justify-content: space-between; padding-top: 56px; }
+  .ring-lg { --size: 168px; }
+  .ring-lg .ring-inner strong { font-size: 2.6rem; }
+
+  .stepper { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .step { flex-direction: column; gap: 10px; padding-bottom: 0; }
+  .step:not(:last-child)::after {           /* the line now runs sideways */
+    left: 40px; right: -4px; top: 15px; bottom: auto; width: auto; height: 2px;
+  }
+
+  .cat-head { grid-template-columns: auto 1fr auto; }
+  .cat-head .ring { grid-column: auto; display: grid; }
+
+  .principle > summary { grid-template-columns: auto 1fr auto; align-items: center; }
+  .p-meta { grid-column: auto; flex-wrap: nowrap; }
+  .chevron { margin-left: 6px; }
+
+  /* On wider screens the button sits on the right, after "Lagret" */
+  button { width: auto; margin-left: auto; }
+  .saved:not([hidden]) + button { margin-left: 0; }
+}
+
+/* ---------- 8. Desktop (≥ 860px): example panel moves to the right ---------- */
+@media (min-width: 860px) {
+  .p-body { grid-template-columns: 1fr 280px; gap: 24px; padding: 20px; align-items: start; }
+  .example-panel { grid-column: 2; grid-row: 1; position: sticky; top: 72px; }
+  .p-body form { grid-column: 1; grid-row: 1; }
+}
+
+/* Respect users who have turned off animations in their system settings */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

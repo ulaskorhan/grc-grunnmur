@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <title>Beskytte og opprettholde · Grunnmur</title>
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+</head>
+<body>
+  <!-- Sticky header: stays at the top while scrolling -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/grc-grunnmur/" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Grunnmur
+      </a>
+      <span class="version-pill">v1</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    
+<a href="/grc-grunnmur/" class="back">← Oversikt</a>
+
+<!-- Category header: icon, name, small ring and a count per status -->
+<section class="cat-head" data-ids="2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 ">
+  <span class="icon-box icon-box-lg"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/> 
+  
+</svg></span>
+  <div class="cat-title">
+    <p class="eyebrow">Kategori 2 av 4</p>
+    <h1><span class="cat-number">2.</span> Beskytte og opprettholde</h1>
+    <div class="chips">
+      <span class="chip chip-implementert"><span data-count="implementert">0</span> implementert</span>
+      <span class="chip chip-delvis"><span data-count="delvis">0</span> delvis</span>
+      <span class="chip"><span data-count="ikke_startet">10</span> ikke startet</span>
+    </div>
+  </div>
+  <div class="ring ring-sm" style="--p: 0" role="img" aria-label="0 prosent">
+    <div class="ring-inner"><strong><span class="js-pct">0</span><small>%</small></strong></div>
+  </div>
+</section>
+
+<p class="hint muted">Trykk på et prinsipp for å åpne det.</p>
+
+<!--
+  Each principle is a <details> element: closed by default, opens on click.
+  This is built into HTML, so opening and closing needs no JavaScript.
+  The class "is-<status>" colours the stripe on the left edge.
+-->
+<div class="principles">
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.1" >
+    <summary>
+      <span class="p-number">2.1</span>
+      <span class="p-title">Ivareta sikkerhet i anskaffelses- og utviklingsprosesser</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Før jeg kjøper nytt utstyr sjekker jeg at leverandøren gir sikkerhetsoppdateringer i flere år. Egen kode ligger på GitHub med Dependabot slått på, så sårbare avhengigheter blir varslet.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.1">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.2" >
+    <summary>
+      <span class="p-number">2.2</span>
+      <span class="p-title">Etabler en sikker IKT-arkitektur</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Nettet er delt i soner: hovednett, gjestenett for IoT-enheter og et eget VLAN for labben. Lab-maskinene når ikke hovednettet. En enkel nettverkstegning ligger i dokumentasjonen.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.2">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.3" >
+    <summary>
+      <span class="p-number">2.3</span>
+      <span class="p-title">Ivareta en sikker konfigurasjon</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Standardpassord er byttet på ruter og NAS. Unødvendige funksjoner som UPnP og WPS er slått av. Linux-serverne herdes med et Ansible-playbook basert på CIS Benchmark nivå 1.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.3">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.4" >
+    <summary>
+      <span class="p-number">2.4</span>
+      <span class="p-title">Beskytt virksomhetens nettverk</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Brannmuren på ruteren blokkerer all innkommende trafikk. Ingen porter er åpne mot internett; fjerntilgang skjer kun via WireGuard VPN. Wi-Fi bruker WPA3.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.4">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.5" >
+    <summary>
+      <span class="p-number">2.5</span>
+      <span class="p-title">Kontroller dataflyt</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Lab-VLAN-et kan bare nå internett, ikke hovednettet. IoT-enheter er blokkert fra å kommunisere med laptop og NAS. DNS-oppslag filtreres gjennom Pi-hole.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.5">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.6" >
+    <summary>
+      <span class="p-number">2.6</span>
+      <span class="p-title">Ha kontroll på identiteter og tilganger</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>MFA er slått på for e-post, skylagring, GitHub og passordhåndtereren. Alle passord er unike og ligger i passordhåndtereren. Jeg bruker en vanlig konto til daglig og admin-kontoen bare ved behov.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.6">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.7" >
+    <summary>
+      <span class="p-number">2.7</span>
+      <span class="p-title">Beskytt data i ro og i transitt</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Disken på laptopen er kryptert (FileVault), og NAS-volumet er kryptert. Tjenestene i labben brukes kun over HTTPS eller SSH. Sikkerhetskopier i skyen krypteres før opplasting.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.7">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.8" >
+    <summary>
+      <span class="p-number">2.8</span>
+      <span class="p-title">Beskytt e-post og nettleser</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Nettleseren oppdateres automatisk og har en reklameblokkering. E-postleverandøren filtrerer spam, og mitt eget domene har SPF, DKIM og DMARC satt opp.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.8">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.9" >
+    <summary>
+      <span class="p-number">2.9</span>
+      <span class="p-title">Etabler evne til gjenoppretting av data</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>3-2-1-backup: originalen på laptopen, én kopi på NAS og én kryptert kopi i skyen. Gjenoppretting testes hvert kvartal ved å hente tilbake en mappe og sjekke at filene åpner.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.9">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+  
+  
+  <details class="principle is-ikke_startet" id="p2.10" >
+    <summary>
+      <span class="p-number">2.10</span>
+      <span class="p-title">Integrer sikkerhet i prosess for endringshåndtering</span>
+      <span class="p-meta">
+        <span class="tag" hidden>Personvern</span>
+        <span class="status status-ikke_startet">Ikke startet</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+
+    <!-- Body of an open principle: the form, plus an example panel
+         (on the right on wide screens, at the top on phones) -->
+    <div class="p-body">
+    
+    <aside class="example-panel">
+      <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
+      <details class="example">
+        <summary>💡 Eksempel</summary>
+        <p>Endringer i labben føres i en enkel endringslogg: hva, når, hvorfor og hvordan rulle tilbake. Ansible-oppsettet ligger i Git, så en endring kan reverseres.</p>
+        <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
+      </details>
+    </aside>
+    
+
+    <form method="post" action="/grc-grunnmur/prinsipp/2.10">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+
+      <label class="field">Notater og bevis
+        <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer"></textarea>
+      </label>
+
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
+      </label>
+
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
+        <input type="checkbox" name="gdpr" >
+        <span class="switch-track" aria-hidden="true"></span>
+        Relevant for personvern (GDPR)
+      </label>
+
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+    </div>
+  </details>
+
+</div>
+
+<!-- Previous / next category -->
+<nav class="pager" aria-label="Andre kategorier">
+  <a href="/grc-grunnmur/kategori/identifisere">
+    <span class="muted">← Forrige</span>1. Identifisere og kartlegge
+  </a>
+  <a href="/grc-grunnmur/kategori/oppdage" class="pager-next">
+    <span class="muted">Neste →</span>3. Oppdage
+  </a>
+</nav>
+
+  </main>
+
+  <footer class="wrap site-footer">
+    <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       </p>
+  </footer>
+
+  
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
+</body>
+</html>
