@@ -1,58 +1,97 @@
 {% extends "base.html" %}
+{% from "_icons.html" import icon %}
 
 {% block title %}{{ category.name }} · Grunnmur{% endblock %}
 
 {% block content %}
-<p><a href="{{ url_for('home') }}" class="back">← Alle kategorier</a></p>
+<a href="{{ url_for('home') }}" class="back">← Oversikt</a>
 
-<section class="intro">
-  <h1>{{ category.number }}. {{ category.name }}</h1>
-  <div class="bar"><div class="bar-fill" style="width: {{ percent }}%"></div></div>
-  <p class="percent">{{ percent }} % fremdrift</p>
+<!-- Category header: icon, name, small ring and a count per status -->
+<section class="cat-head">
+  <span class="icon-box icon-box-lg">{{ icon(category.id) }}</span>
+  <div class="cat-title">
+    <p class="eyebrow">Kategori {{ category.number }} av 4</p>
+    <h1>{{ category.name }}</h1>
+    <div class="chips">
+      <span class="chip chip-implementert">{{ counts.implementert }} implementert</span>
+      <span class="chip chip-delvis">{{ counts.delvis }} delvis</span>
+      <span class="chip">{{ counts.ikke_startet }} ikke startet</span>
+    </div>
+  </div>
+  <div class="ring ring-sm" style="--p: {{ percent }}" role="img" aria-label="{{ percent }} prosent">
+    <div class="ring-inner"><strong>{{ percent }}<small>%</small></strong></div>
+  </div>
 </section>
+
+<p class="hint muted">Trykk på et prinsipp for å åpne det.</p>
 
 <!--
   Each principle is a <details> element: closed by default, opens on click.
-  This needs no JavaScript; it is built into HTML.
+  This is built into HTML, so it needs no JavaScript.
+  The class "is-<status>" colours the stripe on the left edge.
 -->
+<div class="principles">
 {% for number, title, link in category.principles %}
   {% set row = progress.get(number) %}
   {% set status = row.status if row else 'ikke_startet' %}
-  <details class="principle" id="p{{ number }}" {% if number == open_id %}open{% endif %}>
+  <details class="principle is-{{ status }}" id="p{{ number }}" {% if number == open_id %}open{% endif %}>
     <summary>
       <span class="p-number">{{ number }}</span>
       <span class="p-title">{{ title }}</span>
-      <span class="status status-{{ status }}">{{ statuses[status] }}</span>
-      {% if row and row.gdpr %}<span class="tag">Personvern</span>{% endif %}
+      <span class="p-meta">
+        {% if row and row.gdpr %}<span class="tag">Personvern</span>{% endif %}
+        <span class="status status-{{ status }}">{{ statuses[status] }}</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
     </summary>
 
     <form method="post" action="{{ url_for('save_principle', principle_id=number) }}">
-      <label>Status
-        <select name="status">
+      <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
           {% for key, label in statuses.items() %}
-          <option value="{{ key }}" {% if key == status %}selected{% endif %}>{{ label }}</option>
+          <label class="seg-{{ key }}">
+            <input type="radio" name="status" value="{{ key }}" {% if key == status %}checked{% endif %}>
+            <span>{{ label }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
+        </div>
+      </fieldset>
 
-      <label>Notater og bevis
+      <label class="field">Notater og bevis
         <textarea name="notes" rows="3" placeholder="F.eks. MFA aktivert på alle kontoer">{{ row.notes if row else '' }}</textarea>
       </label>
 
-      <label>ISO 27001-referanse
-        <input name="iso_ref" value="{{ row.iso_ref if row else '' }}" placeholder="F.eks. A.5.15, A.8.5">
+      <label class="field">ISO 27001-referanse
+        <input name="iso_ref" value="{{ row.iso_ref if row else '' }}" placeholder="F.eks. A.5.15, A.8.5"
+               autocapitalize="characters" autocomplete="off">
       </label>
 
-      <label class="checkbox">
+      <!-- A normal checkbox, styled as an on/off switch in CSS -->
+      <label class="switch">
         <input type="checkbox" name="gdpr" {% if row and row.gdpr %}checked{% endif %}>
+        <span class="switch-track" aria-hidden="true"></span>
         Relevant for personvern (GDPR)
       </label>
 
       <div class="form-footer">
-        <a href="{{ base }}{{ link }}" target="_blank" rel="noopener">Les prinsippet hos NSM ↗</a>
+        <a href="{{ base }}{{ link }}" target="_blank" rel="noopener">Les hos NSM ↗</a>
+        {% if number == open_id %}<span class="saved">✓ Lagret</span>{% endif %}
         <button type="submit">Lagre</button>
       </div>
     </form>
   </details>
 {% endfor %}
+</div>
+
+<!-- Previous / next category -->
+<nav class="pager" aria-label="Andre kategorier">
+  <a href="{{ url_for('category_page', category_id=previous_category.id) }}">
+    <span class="muted">← Forrige</span>{{ previous_category.name }}
+  </a>
+  <a href="{{ url_for('category_page', category_id=next_category.id) }}" class="pager-next">
+    <span class="muted">Neste →</span>{{ next_category.name }}
+  </a>
+</nav>
 {% endblock %}

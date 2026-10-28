@@ -2,23 +2,32 @@
 <html lang="no">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
   <title>{% block title %}Grunnmur{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
-    <a href="{{ url_for('home') }}" class="logo">Grunnmur</a>
-    <span class="tagline">Personlig GRC på NSMs grunnprinsipper</span>
+    <div class="wrap header-inner">
+      <a href="{{ url_for('home') }}" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Grunnmur
+      </a>
+      <span class="version-pill">v1</span>
+    </div>
   </header>
 
-  <main>
+  <main class="wrap">
     {% block content %}{% endblock %}
   </main>
 
-  <footer>
-    Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
-    Data lagres lokalt på din maskin.
+  <footer class="wrap site-footer">
+    <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       Data lagres kun lokalt på din maskin.</p>
   </footer>
 </body>
 </html>

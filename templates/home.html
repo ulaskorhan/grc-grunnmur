@@ -1,36 +1,61 @@
 {% extends "base.html" %}
+{% from "_icons.html" import icon %}
 
 {% block content %}
-<section class="intro">
-  <h1>Hvor solid er din grunnmur?</h1>
-  <p>Følg din egen IKT-sikkerhet etter NSMs 21 grunnprinsipper.
-     Start enkelt: velg en kategori, åpne et prinsipp og sett status.</p>
-  <p class="overall">Total fremdrift: <strong>{{ overall }} %</strong></p>
+<!-- Hero: short intro on the left, overall progress ring on the right -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">NSMs grunnprinsipper · {{ total }} prinsipper</p>
+    <h1>Hvor solid er din <span class="highlight">grunnmur</span>?</h1>
+    <p class="lead">Følg din egen IKT-sikkerhet steg for steg. Velg en kategori,
+       åpne et prinsipp og sett status.</p>
+  </div>
+
+  <!-- The ring is a CSS conic-gradient. --p is the percentage it fills. -->
+  <div class="ring ring-lg" style="--p: {{ overall }}" role="img"
+       aria-label="Total fremdrift {{ overall }} prosent">
+    <div class="ring-inner">
+      <strong>{{ overall }}<small>%</small></strong>
+      <span>{{ implemented }} av {{ total }} implementert</span>
+    </div>
+  </div>
 </section>
 
-<!-- The 4 categories. Principles are only shown on the category page. -->
-<section class="cards">
+<!-- The 4 categories in a 2 × 2 grid (one column on phones) -->
+<section class="cards" aria-label="Kategorier">
   {% for card in cards %}
   <a class="card" href="{{ url_for('category_page', category_id=card.category.id) }}">
-    <span class="card-number">{{ card.category.number }}</span>
+    <div class="card-top">
+      <span class="icon-box">{{ icon(card.category.id) }}</span>
+      <span class="card-index">0{{ card.category.number }}</span>
+    </div>
     <h2>{{ card.category.name }}</h2>
     <p class="muted">{{ card.category.principles|length }} prinsipper</p>
-    <div class="bar"><div class="bar-fill" style="width: {{ card.percent }}%"></div></div>
-    <p class="percent">{{ card.percent }} %</p>
+
+    <div class="bar" aria-hidden="true"><div class="bar-fill" style="width: {{ card.percent }}%"></div></div>
+    <div class="card-bottom">
+      <span>{{ card.percent }} %</span>
+      <span class="muted">{{ card.counts.implementert }} ✓ · {{ card.counts.delvis }} delvis</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </div>
   </a>
   {% endfor %}
 </section>
 
-<!-- The roadmap tells the user that the app grows step by step. -->
+<!-- Roadmap: a stepper that shows the app grows version by version -->
 <section class="roadmap">
-  <h2>Versjon {{ current_version }} av {{ roadmap|length }}</h2>
-  <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.</p>
-  <ol>
+  <div class="section-head">
+    <h2>Versjon {{ current_version }} av {{ roadmap|length }}</h2>
+    <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.</p>
+  </div>
+  <ol class="stepper">
     {% for number, name, text in roadmap %}
-    <li class="{{ 'active' if number == current_version else ('done' if number < current_version else 'planned') }}">
-      <strong>v{{ number }} – {{ name }}</strong>
-      <span class="muted">{{ text }}</span>
-      {% if number == current_version %}<span class="badge">Nå</span>{% endif %}
+    <li class="step {{ 'active' if number == current_version else ('done' if number < current_version else 'planned') }}">
+      <span class="step-dot">{{ number }}</span>
+      <div>
+        <strong>{{ name }}</strong>
+        <p class="muted">{{ text }}</p>
+      </div>
     </li>
     {% endfor %}
   </ol>

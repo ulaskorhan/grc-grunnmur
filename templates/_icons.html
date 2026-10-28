@@ -1,0 +1,19 @@
+{#
+  Simple line icons for the 4 NSM categories, drawn as inline SVG.
+  Usage:  {% from "_icons.html" import icon %}  then  {{ icon("beskytte") }}
+  "currentColor" makes the icon take the text colour of its parent element.
+#}
+{% macro icon(name) -%}
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {% if name == "identifisere" %}
+    <circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>                       {# magnifying glass #}
+  {% elif name == "beskytte" %}
+    <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/> {# shield #}
+  {% elif name == "oppdage" %}
+    <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/> {# eye #}
+  {% elif name == "handtere" %}
+    <path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>                           {# circular arrow #}
+  {% endif %}
+</svg>
+{%- endmacro %}
