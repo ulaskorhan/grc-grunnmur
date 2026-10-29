@@ -45,6 +45,14 @@
   {% endfor %}
 </section>
 
+<!-- Link to the risk register, new in version 2 -->
+<a class="feature-banner" href="{{ url_for('risk_list') }}">
+  <span class="badge">Nytt i v2</span>
+  <span><strong>Risikoregister</strong>
+        <span class="muted">Vurder hva som kan gå galt, og koble risikoen til et NSM-prinsipp.</span></span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+
 <!-- Roadmap: a stepper that shows the app grows version by version -->
 <section class="roadmap">
   <div class="section-head">

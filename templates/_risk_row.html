@@ -1,0 +1,26 @@
+{#
+  One row in the risk list. Used in two ways:
+    - Flask fills it in for every risk in the database.
+    - On GitHub Pages it is rendered once, empty, inside a <template> element,
+      and static-risks.js copies it for every risk saved in the browser.
+  The data-field attributes tell the JavaScript which element shows which value.
+#}
+{% macro risk_row(r, edit_url) -%}
+<li class="risk level-{{ r.level }}{% if r.status == 'lukket' %} is-closed{% endif %}">
+  <a class="risk-link" href="{{ edit_url }}">
+    <span class="score" data-field="score" title="Sannsynlighet × konsekvens">{{ r.score }}</span>
+    <span class="risk-main">
+      <span class="risk-title" data-field="title">{{ r.title }}</span>
+      <span class="risk-meta">
+        <span class="level-tag" data-field="level_label">{{ r.level_label }}</span>
+        <span class="chip" data-field="treatment_label">{{ r.treatment_label }}</span>
+        <span class="chip" data-field="status_label">{{ r.status_label }}</span>
+        <span class="chip" data-field="principle" {% if not r.principle_id %}hidden{% endif %}>NSM {{ r.principle_id }}</span>
+        <span class="tag" data-field="gdpr" {% if not r.gdpr %}hidden{% endif %}>Personvern</span>
+        <span class="overdue" data-field="overdue" {% if not r.overdue %}hidden{% endif %}>Gjennomgang forfalt</span>
+      </span>
+    </span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+</li>
+{%- endmacro %}
