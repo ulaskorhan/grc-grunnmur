@@ -9,7 +9,7 @@
     <p class="eyebrow">NSMs grunnprinsipper · {{ cards|length }} kategorier · {{ total }} prinsipper</p>
     <h1>Hvor solid er din <span class="highlight">grunnmur</span>?</h1>
     <p class="lead">Følg din egen IKT-sikkerhet steg for steg. Velg en kategori,
-       åpne et prinsipp og sett status.</p>
+       åpne et prinsipp og angi status.</p>
   </div>
 
   <!-- The ring is a CSS conic-gradient. --p is the percentage it fills. -->
@@ -49,7 +49,8 @@
 <section class="roadmap">
   <div class="section-head">
     <h2>Versjon {{ current_version }} av {{ roadmap|length }}</h2>
-    <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.</p>
+    <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.
+       Versjonene er utviklingssteg: nye deler blir tilgjengelige når de er ferdig bygget.</p>
   </div>
   <ol class="stepper">
     {% for number, name, text in roadmap %}
