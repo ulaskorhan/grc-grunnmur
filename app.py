@@ -28,9 +28,10 @@ SCORE = {"ikke_startet": 0, "delvis": 0.5, "implementert": 1}
 # The version plan shown on the homepage, so users know the app will grow.
 ROADMAP = [
     (1, "Grunnprinsipper", "Status, notater, ISO-referanse og personvern per prinsipp"),
-    (2, "Risikoregister", "Sannsynlighet × konsekvens, tiltak og kobling til prinsipper"),
-    (3, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
-    (4, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
+    (2, "Risikoregister", "Sannsynlighet × konsekvens, behandling og kobling til NSM og ISO 27001 6.1"),
+    (3, "ISO 27001 styringssystem", "Kapittel 4–10 og kobling mellom NSM-prinsipper og Annex A"),
+    (4, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
+    (5, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
 ]
 CURRENT_VERSION = 1
 

@@ -7,10 +7,15 @@ It starts simple and grows one version at a time:
 
 | Version | Content | Status |
 |---------|---------|--------|
-| v1 | Control tracker: 4 categories, 21 principles, status, notes, ISO 27001 reference, GDPR tag | Done |
-| v2 | Risk register (likelihood × impact, treatment, link to a principle) | Planned |
-| v3 | NSM measures (tiltak) under each principle, plus a risk heatmap | Planned |
-| v4 | Export, English/Norwegian README, screenshots | Planned |
+| v1 | Control tracker: 4 categories, 21 principles, status, notes, ISO 27001 reference, GDPR tag, examples | Done |
+| v2 | Risk register (likelihood × impact, treatment), linked to NSM principles and ISO 27001 clause 6.1 | Planned |
+| v3 | ISO 27001 management system: clauses 4–10, plus a view linking NSM principles to Annex A controls | Planned |
+| v4 | NSM measures (tiltak) under each principle, plus a risk heatmap | Planned |
+| v5 | Export, English/Norwegian README, screenshots | Planned |
+
+NSM gives the technical baseline (what to do); ISO 27001 adds the management
+system (how security is governed). ISO text is copyrighted, so only clause and
+control numbers with short titles in my own words will be used.
 
 ## Running it
 
