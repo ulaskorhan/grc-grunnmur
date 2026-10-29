@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <title>Om · Grunnmur</title>
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+</head>
+<body>
+  <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
+       Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026. Les mer hos NSM.">
+    <span class="wrap cyber-inner">
+      <span class="cyber-dot" aria-hidden="true"></span>
+      <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
+      <strong class="cyber-value">HØYT</strong>
+      <!-- The 5 levels as small bars; the ones up to the current level are filled -->
+      <span class="cyber-scale" aria-hidden="true">
+        <i class="on" title="Svært lavt"></i><i class="on" title="Lavt"></i><i class="on" title="Moderat"></i><i class="on" title="Høyt"></i><i class="" title="Ekstremt høyt"></i>
+      </span>
+      <span class="cyber-source">NSM · 27.10.2026 <span aria-hidden="true">↗</span></span>
+    </span>
+  </a>
+
+  <!-- Sticky header: stays at the top while scrolling -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/grc-grunnmur/" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">Grunnmur</span>
+      </a>
+      <!-- Main menu. request.endpoint is the name of the current page's function,
+           used to underline the section the user is in. -->
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/grc-grunnmur/"
+           >Prinsipper</a>
+        <a href="/grc-grunnmur/risikoer"
+           >Risikoer</a>
+        <a href="/grc-grunnmur/om"
+           aria-current="page">Om</a>
+      </nav>
+      <span class="version-pill">v2</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Om Grunnmur</p>
+    <h1>Fra råd til oppfølging</h1>
+    <p class="lead">Grunnmur er et lite verktøy for å følge opp egen IKT-sikkerhet med
+       NSMs grunnprinsipper som utgangspunkt.</p>
+  </div>
+</section>
+
+<div class="about">
+  <!-- Why the topic matters right now: the current national level -->
+  <section class="about-section about-alert">
+    <h2>Nasjonalt cyberrisikonivå: høyt</h2>
+    <p>NSM satte det nasjonale cyberrisikonivået til <strong>HØYT</strong>
+       27.10.2026. Skalaen har fem nivåer: svært lavt, lavt, moderat, høyt, ekstremt høyt.
+       Moderat er normaltilstanden. Det var første gang NSM publiserte nivået åpent.</p>
+    <p>Ved høyt nivå ber NSM virksomheter om å iverksette forebyggende tiltak straks,
+       blant annet å følge de 21 grunnprinsippene for IKT-sikkerhet.</p>
+    <p class="muted">Nivået på denne siden oppdateres manuelt (sist kontrollert 29.10.2026).
+       Sjekk alltid <a href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt" rel="noopener">NSMs egen kunngjøring</a>
+       for gjeldende nivå.</p>
+  </section>
+
+  <section class="about-section">
+    <h2>Bakgrunn</h2>
+    <p>NSMs <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/" rel="noopener">grunnprinsipper for IKT-sikkerhet
+       (v2.1)</a> er 21 prinsipper i fire kategorier: identifisere og kartlegge,
+       beskytte og opprettholde, oppdage, og håndtere og gjenopprette. De sier
+       <em>hva</em> en virksomhet bør gjøre. NSM tilbyr også
+       <a href="https://cybersjekk.no" rel="noopener">Cybersjekk</a>, en selvevaluering
+       som gir en rask oversikt og forslag til prioriterte tiltak.</p>
+    <p>Etter at rådene er lest og sjekklisten er fylt ut, gjenstår arbeidet:
+       hvem gjør hva, hva er gjort, hvilke risikoer gjenstår, og når skal det
+       vurderes på nytt? Det er dette Grunnmur er laget for.</p>
+  </section>
+
+  <section class="about-section">
+    <h2>Hva Grunnmur legger til</h2>
+    <ul class="adds">
+      <li><strong>Status over tid</strong>
+          <span>Ikke startet, delvis eller implementert per prinsipp, med egne notater
+                og fremdrift per kategori.</span></li>
+      <li><strong>Risikoregister</strong>
+          <span>Sannsynlighet × konsekvens, behandling og neste gjennomgang,
+                koblet til prinsippet som reduserer risikoen.</span></li>
+      <li><strong>Bro til ISO 27001 og GDPR</strong>
+          <span>Felt for ISO 27001-referanse og et personvernmerke, slik at samme arbeid
+                kan brukes i et styringssystem.</span></li>
+      <li><strong>Konkrete eksempler</strong>
+          <span>Et praktisk eksempel under hvert prinsipp, skrevet for et lite miljø
+                eller en hjemmelab.</span></li>
+      <li><strong>Vokser steg for steg</strong>
+          <span>Starter enkelt og får flere deler i hver versjon, fra prinsipper til
+                styringssystem, tiltak og eksport.</span></li>
+      <li><strong>Dine data er dine</strong>
+          <span>Alt lagres i din egen nettleser. Ingenting sendes til en server.
+                </span></li>
+    </ul>
+  </section>
+
+  <section class="about-section">
+    <h2>Hva Grunnmur ikke er</h2>
+    <ul>
+      <li>Ikke en offisiell tjeneste, og ikke tilknyttet NSM.</li>
+      <li>Ikke en erstatning for NSMs råd, Cybersjekk eller en revisjon. Bruk dem sammen.</li>
+      <li>Ingen ISO-tekst er gjengitt. ISO 27001 er opphavsrettsbeskyttet, så appen bruker
+          bare kapittel- og kontrollnumre.</li>
+    </ul>
+  </section>
+
+  <section class="about-section">
+    <h2>Prosjektet</h2>
+    <p>Grunnmur er et personlig læringsprosjekt innen styring, risiko og etterlevelse (GRC),
+       bygget med Python, Flask og SQLite. Den offentlige versjonen er statiske sider på
+       GitHub Pages. Kildekoden ligger på
+       <a href="https://github.com/ulaskorhan/grc-grunnmur" rel="noopener">GitHub</a>.</p>
+  </section>
+</div>
+
+  </main>
+
+  <footer class="wrap site-footer">
+    <p><a href="/grc-grunnmur/om">Om Grunnmur</a> ·
+       Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       </p>
+  </footer>
+
+  
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
+  
+</body>
+</html>

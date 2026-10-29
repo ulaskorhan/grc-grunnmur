@@ -10,12 +10,28 @@
   <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
 </head>
 <body>
+  <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
+       Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026. Les mer hos NSM.">
+    <span class="wrap cyber-inner">
+      <span class="cyber-dot" aria-hidden="true"></span>
+      <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
+      <strong class="cyber-value">HØYT</strong>
+      <!-- The 5 levels as small bars; the ones up to the current level are filled -->
+      <span class="cyber-scale" aria-hidden="true">
+        <i class="on" title="Svært lavt"></i><i class="on" title="Lavt"></i><i class="on" title="Moderat"></i><i class="on" title="Høyt"></i><i class="" title="Ekstremt høyt"></i>
+      </span>
+      <span class="cyber-source">NSM · 27.10.2026 <span aria-hidden="true">↗</span></span>
+    </span>
+  </a>
+
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
     <div class="wrap header-inner">
       <a href="/grc-grunnmur/" class="logo">
         <span class="logo-mark" aria-hidden="true"></span>
-        Grunnmur
+        <span class="logo-text">Grunnmur</span>
       </a>
       <!-- Main menu. request.endpoint is the name of the current page's function,
            used to underline the section the user is in. -->
@@ -24,6 +40,8 @@
            aria-current="page">Prinsipper</a>
         <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
+        <a href="/grc-grunnmur/om"
+           >Om</a>
       </nav>
       <span class="version-pill">v2</span>
     </div>
@@ -307,7 +325,8 @@
   </main>
 
   <footer class="wrap site-footer">
-    <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+    <p><a href="/grc-grunnmur/om">Om Grunnmur</a> ·
+       Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
        
        Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
        <button type="button" class="link-button" id="clear-data">Slett mine data</button>
