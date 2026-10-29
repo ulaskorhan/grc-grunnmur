@@ -49,6 +49,9 @@ def main():
     for category in nsm_data.CATEGORIES:
         save_page(client, f"/kategori/{category['id']}",
                   OUT / "kategori" / category["id"] / "index.html")
+    # v2: the risk list and the form. Editing uses the same form page with ?id=...
+    save_page(client, "/risikoer", OUT / "risikoer" / "index.html")
+    save_page(client, "/risikoer/ny", OUT / "risikoer" / "ny" / "index.html")
 
     shutil.copytree(Path(__file__).parent / "static", OUT / "static")
     # Tells GitHub Pages to serve the files as they are, without Jekyll processing.
