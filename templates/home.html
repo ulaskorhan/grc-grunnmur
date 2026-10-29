@@ -6,8 +6,8 @@
 <!-- data-ids lists the principles this block summarises (used by static-mode.js) -->
 <section class="hero" data-ids="{% for c in cards %}{% for p in c.category.principles %}{{ p[0] }} {% endfor %}{% endfor %}">
   <div class="hero-text">
-    <!-- Says "kobling til" ISO 27001, not "basert på": until v3 ISO is only a reference field -->
-    <p class="eyebrow">Basert på NSMs grunnprinsipper · med kobling til ISO 27001 og GDPR</p>
+    <!-- NSM first: it is the base. ISO 27001 and GDPR are references until v3 -->
+    <p class="eyebrow">NSMs grunnprinsipper · ISO 27001 · GDPR</p>
     <h1>Hvor solid er din <span class="highlight">grunnmur</span>?</h1>
     <p class="lead">Følg din egen IKT-sikkerhet steg for steg. Velg en kategori,
        åpne et prinsipp og angi status.</p>
