@@ -94,3 +94,7 @@ def find_category(category_id):
         if category["id"] == category_id:
             return category
     return None
+
+
+# Every valid principle number, e.g. {"1.1", "1.2", ..., "4.4"}. Used to validate forms.
+PRINCIPLE_IDS = {number for category in CATEGORIES for number, _t, _l in category["principles"]}
