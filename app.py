@@ -10,10 +10,12 @@ Pages:
   /risikoer/ny          v2: form for a new risk
   /risikoer/<id>        v2: edit one risk (POST saves it)
   /risikoer/<id>/slett  v2: delete one risk (POST)
+  /om                   about page: background, and what Grunnmur adds to NSM's advice
 """
 
 from flask import Flask, abort, redirect, render_template, request, url_for
 
+import cyber_level
 import db
 import examples
 import nsm_data
@@ -43,8 +45,13 @@ CURRENT_VERSION = 2
 
 @app.context_processor
 def add_template_globals():
-    """Variables available in every template: static mode and the app version."""
-    return {"static_site": app.config["STATIC_SITE"], "current_version": CURRENT_VERSION}
+    """Variables available in every template: static mode, the app version and
+    NSM's national cyber risk level (the banner at the top of every page)."""
+    return {
+        "static_site": app.config["STATIC_SITE"],
+        "current_version": CURRENT_VERSION,
+        "cyber": cyber_level.for_template(),
+    }
 
 
 def load_progress():
@@ -110,6 +117,12 @@ def home():
         source_url=nsm_data.SOURCE_URL,
         nsm_version=nsm_data.VERSION,
     )
+
+
+@app.route("/om")
+def about():
+    return render_template("about.html", source_url=nsm_data.SOURCE_URL,
+                           nsm_version=nsm_data.VERSION)
 
 
 @app.route("/kategori/<category_id>")

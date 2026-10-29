@@ -10,12 +10,28 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
+       Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <a class="cyber-banner{% if cyber.elevated %} is-elevated{% endif %}" href="{{ cyber.source_url }}"
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: {{ cyber.current }}. Satt av NSM {{ cyber.set_on }}. Les mer hos NSM.">
+    <span class="wrap cyber-inner">
+      <span class="cyber-dot" aria-hidden="true"></span>
+      <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
+      <strong class="cyber-value">{{ cyber.current|upper }}</strong>
+      <!-- The 5 levels as small bars; the ones up to the current level are filled -->
+      <span class="cyber-scale" aria-hidden="true">
+        {% for step in cyber.scale %}<i class="{{ 'on' if loop.index0 <= cyber.position }}" title="{{ step }}"></i>{% endfor %}
+      </span>
+      <span class="cyber-source">NSM · {{ cyber.set_on }} <span aria-hidden="true">↗</span></span>
+    </span>
+  </a>
+
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
     <div class="wrap header-inner">
       <a href="{{ url_for('home') }}" class="logo">
         <span class="logo-mark" aria-hidden="true"></span>
-        Grunnmur
+        <span class="logo-text">Grunnmur</span>
       </a>
       <!-- Main menu. request.endpoint is the name of the current page's function,
            used to underline the section the user is in. -->
@@ -24,6 +40,8 @@
            {% if request.endpoint in ('home', 'category_page') %}aria-current="page"{% endif %}>Prinsipper</a>
         <a href="{{ url_for('risk_list') }}"
            {% if request.endpoint and request.endpoint.startswith('risk') %}aria-current="page"{% endif %}>Risikoer</a>
+        <a href="{{ url_for('about') }}"
+           {% if request.endpoint == 'about' %}aria-current="page"{% endif %}>Om</a>
       </nav>
       <span class="version-pill">v{{ current_version }}</span>
     </div>
@@ -34,7 +52,8 @@
   </main>
 
   <footer class="wrap site-footer">
-    <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+    <p><a href="{{ url_for('about') }}">Om Grunnmur</a> ·
+       Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
        {% if static_site %}
        Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
        <button type="button" class="link-button" id="clear-data">Slett mine data</button>
