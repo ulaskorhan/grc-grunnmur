@@ -404,12 +404,6 @@ button:active { transform: scale(0.98); }
   .ring-lg { --size: 168px; }
   .ring-lg .ring-inner strong { font-size: 2.6rem; }
 
-  .stepper { grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  .step { flex-direction: column; gap: 10px; padding-bottom: 0; }
-  .step:not(:last-child)::after {           /* the line now runs sideways */
-    left: 40px; right: -4px; top: 15px; bottom: auto; width: auto; height: 2px;
-  }
-
   .cat-head { grid-template-columns: auto 1fr auto; }
   .cat-head .ring { grid-column: auto; display: grid; }
 
@@ -422,8 +416,13 @@ button:active { transform: scale(0.98); }
   .saved:not([hidden]) + button { margin-left: 0; }
 }
 
-/* ---------- 8. Desktop (≥ 860px): example panel moves to the right ---------- */
+/* ---------- 8. Desktop (≥ 860px): horizontal roadmap, example panel on the right ---------- */
 @media (min-width: 860px) {
+  .stepper { grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; }   /* one column per version, however many */
+  .step { flex-direction: column; gap: 10px; padding-bottom: 0; }
+  .step:not(:last-child)::after {           /* the line now runs sideways */
+    left: 40px; right: -4px; top: 15px; bottom: auto; width: auto; height: 2px;
+  }
   .p-body { grid-template-columns: 1fr 280px; gap: 24px; padding: 20px; align-items: start; }
   .example-panel { grid-column: 2; grid-row: 1; position: sticky; top: 72px; }
   .p-body form { grid-column: 1; grid-row: 1; }
