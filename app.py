@@ -6,6 +6,10 @@ Pages:
   /                     homepage: the 4 categories with progress, plus the roadmap
   /kategori/<id>        one category: its principles, collapsed until clicked
   /prinsipp/<nr> (POST) saves the form for one principle
+  /risikoer             v2: the risk register, highest risk first
+  /risikoer/ny          v2: form for a new risk
+  /risikoer/<id>        v2: edit one risk (POST saves it)
+  /risikoer/<id>/slett  v2: delete one risk (POST)
 """
 
 from flask import Flask, abort, redirect, render_template, request, url_for
@@ -13,6 +17,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 import db
 import examples
 import nsm_data
+import risks
 
 app = Flask(__name__)
 # Tell browsers to re-check style.css on every load, so design changes show up
@@ -33,13 +38,13 @@ ROADMAP = [
     (4, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
     (5, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
 ]
-CURRENT_VERSION = 1
+CURRENT_VERSION = 2
 
 
 @app.context_processor
-def add_static_flag():
-    """Make the variable "static_site" available in every template."""
-    return {"static_site": app.config["STATIC_SITE"]}
+def add_template_globals():
+    """Variables available in every template: static mode and the app version."""
+    return {"static_site": app.config["STATIC_SITE"], "current_version": CURRENT_VERSION}
 
 
 def load_progress():
@@ -102,7 +107,6 @@ def home():
         implemented=implemented,
         total=total,
         roadmap=ROADMAP,
-        current_version=CURRENT_VERSION,
         source_url=nsm_data.SOURCE_URL,
         nsm_version=nsm_data.VERSION,
     )
@@ -160,6 +164,81 @@ def save_principle(principle_id):
     # resubmitting the form if the user refreshes the page.
     return redirect(url_for("category_page", category_id=category["id"],
                             apen=principle_id) + "#p" + principle_id)
+
+
+# ---------- v2: risk register ----------
+
+def render_risk_form(risk, risk_id=None, error=None):
+    """Show the new/edit form. risk_id is None for a new risk."""
+    return render_template(
+        "risk_form.html",
+        risk=risk,
+        risk_id=risk_id,
+        error=error,
+        categories=nsm_data.CATEGORIES,
+        likelihood=risks.LIKELIHOOD,
+        impact=risks.IMPACT,
+        treatments=risks.TREATMENTS,
+        statuses=risks.STATUSES,
+        example=risks.EXAMPLE,
+        risk_config=risks.config_for_browser(),
+    )
+
+
+@app.route("/risikoer")
+def risk_list():
+    # Same rule as load_progress(): the public build never contains my own data.
+    rows = [] if app.config["STATIC_SITE"] else db.get_all_risks()
+    items = sorted((risks.enrich(row) for row in rows), key=risks.sort_key)
+
+    # How many risks there are per level, for the summary at the top.
+    level_counts = {key: 0 for key, _label, _lowest in risks.LEVELS}
+    for item in items:
+        level_counts[item["level"]] += 1
+
+    # An empty example row. On GitHub Pages, static-risks.js copies it
+    # for every risk saved in the browser, so both versions share one layout.
+    placeholder = risks.enrich({**risks.DEFAULTS, "id": "", "title": ""})
+
+    return render_template(
+        "risks.html",
+        items=items,
+        levels=risks.LEVELS,
+        level_counts=level_counts,
+        placeholder=placeholder,
+        risk_config=risks.config_for_browser(),
+    )
+
+
+@app.route("/risikoer/ny", methods=["GET", "POST"])
+def risk_new():
+    if request.method == "POST":
+        data, error = risks.read_form(request.form)
+        if error:
+            return render_risk_form(data, error=error), 400
+        db.add_risk(data)
+        return redirect(url_for("risk_list"))
+    return render_risk_form(dict(risks.DEFAULTS))
+
+
+@app.route("/risikoer/<int:risk_id>", methods=["GET", "POST"])
+def risk_edit(risk_id):
+    risk = db.get_risk(risk_id)
+    if risk is None:
+        abort(404)
+    if request.method == "POST":
+        data, error = risks.read_form(request.form)
+        if error:
+            return render_risk_form(data, risk_id, error), 400
+        db.update_risk(risk_id, data)
+        return redirect(url_for("risk_list"))
+    return render_risk_form(risk, risk_id)
+
+
+@app.route("/risikoer/<int:risk_id>/slett", methods=["POST"])
+def risk_delete(risk_id):
+    db.delete_risk(risk_id)
+    return redirect(url_for("risk_list"))
 
 
 if __name__ == "__main__":
