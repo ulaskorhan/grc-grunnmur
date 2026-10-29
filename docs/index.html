@@ -17,7 +17,15 @@
         <span class="logo-mark" aria-hidden="true"></span>
         Grunnmur
       </a>
-      <span class="version-pill">v1</span>
+      <!-- Main menu. request.endpoint is the name of the current page's function,
+           used to underline the section the user is in. -->
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/grc-grunnmur/"
+           aria-current="page">Prinsipper</a>
+        <a href="/grc-grunnmur/risikoer"
+           >Risikoer</a>
+      </nav>
+      <span class="version-pill">v2</span>
     </div>
   </header>
 
@@ -30,7 +38,7 @@
     <p class="eyebrow">NSMs grunnprinsipper · 4 kategorier · 21 prinsipper</p>
     <h1>Hvor solid er din <span class="highlight">grunnmur</span>?</h1>
     <p class="lead">Følg din egen IKT-sikkerhet steg for steg. Velg en kategori,
-       åpne et prinsipp og sett status.</p>
+       åpne et prinsipp og angi status.</p>
   </div>
 
   <!-- The ring is a CSS conic-gradient. --p is the percentage it fills. -->
@@ -140,15 +148,24 @@
   
 </section>
 
+<!-- Link to the risk register, new in version 2 -->
+<a class="feature-banner" href="/grc-grunnmur/risikoer">
+  <span class="badge">Nytt i v2</span>
+  <span><strong>Risikoregister</strong>
+        <span class="muted">Vurder hva som kan gå galt, og koble risikoen til et NSM-prinsipp.</span></span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+
 <!-- Roadmap: a stepper that shows the app grows version by version -->
 <section class="roadmap">
   <div class="section-head">
-    <h2>Versjon 1 av 5</h2>
-    <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.</p>
+    <h2>Versjon 2 av 5</h2>
+    <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.
+       Versjonene er utviklingssteg: nye deler blir tilgjengelige når de er ferdig bygget.</p>
   </div>
   <ol class="stepper">
     
-    <li class="step active">
+    <li class="step done">
       <span class="step-dot">1</span>
       <div>
         <strong>Grunnprinsipper</strong>
@@ -156,7 +173,7 @@
       </div>
     </li>
     
-    <li class="step planned">
+    <li class="step active">
       <span class="step-dot">2</span>
       <div>
         <strong>Risikoregister</strong>
@@ -204,6 +221,7 @@
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
   <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
   
 </body>
 </html>

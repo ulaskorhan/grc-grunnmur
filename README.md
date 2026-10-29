@@ -8,7 +8,7 @@ It starts simple and grows one version at a time:
 | Version | Content | Status |
 |---------|---------|--------|
 | v1 | Control tracker: 4 categories, 21 principles, status, notes, ISO 27001 reference, GDPR tag, examples | Done |
-| v2 | Risk register (likelihood × impact, treatment), linked to NSM principles and ISO 27001 clause 6.1 | Planned |
+| v2 | Risk register (likelihood × impact, treatment), linked to NSM principles and ISO 27001 clause 6.1 | Done |
 | v3 | ISO 27001 management system: clauses 4–10, plus a view linking NSM principles to Annex A controls | Planned |
 | v4 | NSM measures (tiltak) under each principle, plus a risk heatmap | Planned |
 | v5 | Export, English/Norwegian README, screenshots | Planned |
@@ -50,6 +50,8 @@ git add docs && git commit -m "Rebuild GitHub Pages site"
 - `nsm_data.py`: the 4 categories and 21 principles, copied from NSM's website
 - `build.py`: builds the static GitHub Pages version into `docs/`
 - `static/static-mode.js`: browser storage for the GitHub Pages version
+- `risks.py`: v2 risk logic: 1-5 scales, score = likelihood × impact, levels (Lav 1-4, Middels 5-9, Høy 10-16, Kritisk 20-25), validation
+- `static/static-risks.js`: the risk register on the GitHub Pages version (browser storage)
 - `examples.py`: one home lab example per principle, behind the "Eksempel" button (written for this app, not NSM text)
 - `templates/`: HTML pages (Jinja)
 - `static/style.css`: the minimalist styling

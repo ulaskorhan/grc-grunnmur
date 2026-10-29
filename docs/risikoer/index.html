@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <title>Risikoregister · Grunnmur</title>
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+</head>
+<body>
+  <!-- Sticky header: stays at the top while scrolling -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/grc-grunnmur/" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Grunnmur
+      </a>
+      <!-- Main menu. request.endpoint is the name of the current page's function,
+           used to underline the section the user is in. -->
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/grc-grunnmur/"
+           >Prinsipper</a>
+        <a href="/grc-grunnmur/risikoer"
+           aria-current="page">Risikoer</a>
+      </nav>
+      <span class="version-pill">v2</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Versjon 2 · ISO 27001 6.1</p>
+    <h1>Risikoregister</h1>
+    <p class="lead">Hva kan gå galt, hvor sannsynlig er det, og hvor ille blir det?
+       Risiko = sannsynlighet × konsekvens.</p>
+  </div>
+  <a class="button" href="/grc-grunnmur/risikoer/ny">+ Ny risiko</a>
+</section>
+
+<!-- How many risks there are on each level -->
+<div class="level-summary" aria-label="Risikoer per nivå">
+  
+  <div class="level-box level-kritisk">
+    <strong data-level-count="kritisk">0</strong>
+    <span>Kritisk</span>
+  </div>
+  
+  <div class="level-box level-hoy">
+    <strong data-level-count="hoy">0</strong>
+    <span>Høy</span>
+  </div>
+  
+  <div class="level-box level-middels">
+    <strong data-level-count="middels">0</strong>
+    <span>Middels</span>
+  </div>
+  
+  <div class="level-box level-lav">
+    <strong data-level-count="lav">0</strong>
+    <span>Lav</span>
+  </div>
+  
+</div>
+
+<!-- Shown when there are no risks yet -->
+<div class="empty-state" id="empty-state" >
+  <p><strong>Ingen risikoer ennå.</strong></p>
+  <p class="muted">Start med det du er mest bekymret for, for eksempel at du mister alle bildene dine.</p>
+  <a class="button" href="/grc-grunnmur/risikoer/ny">Legg til første risiko</a>
+</div>
+
+<!-- The list, highest risk first. Closed risks are at the bottom. -->
+<ol class="risk-list" id="risk-list" data-edit-url="/grc-grunnmur/risikoer/ny">
+  
+</ol>
+
+<p class="hint muted">Nivåer: Lav 1–4 · Middels 5–9 · Høy 10–16 · Kritisk 20–25.</p>
+
+
+<!-- Empty row that static-risks.js copies for each risk saved in the browser -->
+<template id="risk-row-template"><li class="risk level-middels">
+  <a class="risk-link" href="#">
+    <span class="score" data-field="score" title="Sannsynlighet × konsekvens">9</span>
+    <span class="risk-main">
+      <span class="risk-title" data-field="title"></span>
+      <span class="risk-meta">
+        <span class="level-tag" data-field="level_label">Middels</span>
+        <span class="chip" data-field="treatment_label">Redusere</span>
+        <span class="chip" data-field="status_label">Åpen</span>
+        <span class="chip" data-field="principle" hidden>NSM </span>
+        <span class="tag" data-field="gdpr" hidden>Personvern</span>
+        <span class="overdue" data-field="overdue" hidden>Gjennomgang forfalt</span>
+      </span>
+    </span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+</li></template>
+
+
+  </main>
+
+  <footer class="wrap site-footer">
+    <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       </p>
+  </footer>
+
+  
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
+<!-- The same level rules as risks.py, so the browser calculates exactly the same -->
+<script id="risk-config" type="application/json">{"levels": [["kritisk", "Kritisk", 20], ["hoy", "H\u00f8y", 10], ["middels", "Middels", 5], ["lav", "Lav", 1]], "statuses": {"apen": "\u00c5pen", "lukket": "Lukket", "under_behandling": "Under behandling"}, "treatments": {"akseptere": "Akseptere", "overfore": "Overf\u00f8re", "redusere": "Redusere", "unnga": "Unng\u00e5"}}</script>
+<script src="/grc-grunnmur/static/static-risks.js"></script>
+
+  
+</body>
+</html>

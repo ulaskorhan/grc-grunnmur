@@ -121,9 +121,12 @@ document.querySelectorAll("details.principle form").forEach(function (form) {
 const clearButton = document.getElementById("clear-data");
 if (clearButton) {
   clearButton.addEventListener("click", function () {
-    if (confirm("Slette all fremdrift som er lagret i denne nettleseren?")) {
-      try { localStorage.removeItem(STORAGE_KEY); } catch (error) { /* nothing saved */ }
-      renderAll();
+    if (confirm("Slette all fremdrift og alle risikoer som er lagret i denne nettleseren?")) {
+      try {
+        localStorage.removeItem(STORAGE_KEY);       // principle progress (v1)
+        localStorage.removeItem("grunnmur-risks");  // risk register (v2)
+      } catch (error) { /* nothing saved */ }
+      location.reload();                            // redraw the page with empty data
     }
   });
 }

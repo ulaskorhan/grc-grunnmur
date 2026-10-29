@@ -17,7 +17,15 @@
         <span class="logo-mark" aria-hidden="true"></span>
         Grunnmur
       </a>
-      <span class="version-pill">v1</span>
+      <!-- Main menu. request.endpoint is the name of the current page's function,
+           used to underline the section the user is in. -->
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/grc-grunnmur/"
+           aria-current="page">Prinsipper</a>
+        <a href="/grc-grunnmur/risikoer"
+           >Risikoer</a>
+      </nav>
+      <span class="version-pill">v2</span>
     </div>
   </header>
 
@@ -841,6 +849,7 @@
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
   <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
   
 </body>
 </html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <title>Ny risiko · Grunnmur</title>
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+</head>
+<body>
+  <!-- Sticky header: stays at the top while scrolling -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/grc-grunnmur/" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Grunnmur
+      </a>
+      <!-- Main menu. request.endpoint is the name of the current page's function,
+           used to underline the section the user is in. -->
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/grc-grunnmur/"
+           >Prinsipper</a>
+        <a href="/grc-grunnmur/risikoer"
+           aria-current="page">Risikoer</a>
+      </nav>
+      <span class="version-pill">v2</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    
+<a href="/grc-grunnmur/risikoer" class="back">← Risikoregister</a>
+
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Risikoregister</p>
+    <h1 id="form-heading">Ny risiko</h1>
+  </div>
+</section>
+
+
+
+<div class="panel p-body">
+  <!-- Example panel: on the right on wide screens, at the top on phones -->
+  <aside class="example-panel">
+    <details class="example">
+      <summary>💡 Eksempel</summary>
+      <p><strong>Løsepengevirus krypterer filene på NAS-en</strong></p>
+      <p>Skadevare via phishing på laptopen kan nå NAS-en over nettverksdeling og kryptere bilder og dokumenter.</p>
+      <p><strong>Score:</strong> Sannsynlighet 3 (Mulig) × Konsekvens 4 (Alvorlig) = 12, Høy<br>
+         <strong>Behandling:</strong> Redusere<br>
+         <strong>NSM:</strong> 2.9 Etabler evne til gjenoppretting av data</p>
+      <p><strong>Tiltak:</strong> Ukentlig kopi til en disk som kobles fra etterpå, og versjonering (snapshots) på NAS-en. Test gjenoppretting hvert kvartal.</p>
+      <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM eller ISO.</p>
+    </details>
+  </aside>
+
+  <form method="post" id="risk-form"
+        action="/grc-grunnmur/risikoer/ny"
+        data-list-url="/grc-grunnmur/risikoer">
+
+    <label class="field">Tittel
+      <input name="title" value="" required maxlength="200"
+             placeholder="F.eks. Mister alle bildene ved diskfeil">
+    </label>
+
+    <label class="field">Beskrivelse (trussel og sårbarhet)
+      <textarea name="description" rows="3"
+                placeholder="Hva kan skje, og hvorfor er du sårbar?"></textarea>
+    </label>
+
+    <!-- 1-5 scales as button rows (radio inputs), same style as the status in v1 -->
+    
+    <fieldset class="segmented">
+      <legend>Sannsynlighet</legend>
+      <div class="seg-options seg-5">
+        
+        <label title="1 = Svært usannsynlig">
+          <input type="radio" name="likelihood" value="1" >
+          <span>1</span>
+        </label>
+        
+        <label title="2 = Lite sannsynlig">
+          <input type="radio" name="likelihood" value="2" >
+          <span>2</span>
+        </label>
+        
+        <label title="3 = Mulig">
+          <input type="radio" name="likelihood" value="3" checked>
+          <span>3</span>
+        </label>
+        
+        <label title="4 = Sannsynlig">
+          <input type="radio" name="likelihood" value="4" >
+          <span>4</span>
+        </label>
+        
+        <label title="5 = Svært sannsynlig">
+          <input type="radio" name="likelihood" value="5" >
+          <span>5</span>
+        </label>
+        
+      </div>
+      <p class="scale-hint">1 = Svært usannsynlig · 3 = Mulig · 5 = Svært sannsynlig</p>
+    </fieldset>
+    
+    <fieldset class="segmented">
+      <legend>Konsekvens</legend>
+      <div class="seg-options seg-5">
+        
+        <label title="1 = Ubetydelig">
+          <input type="radio" name="impact" value="1" >
+          <span>1</span>
+        </label>
+        
+        <label title="2 = Liten">
+          <input type="radio" name="impact" value="2" >
+          <span>2</span>
+        </label>
+        
+        <label title="3 = Moderat">
+          <input type="radio" name="impact" value="3" checked>
+          <span>3</span>
+        </label>
+        
+        <label title="4 = Alvorlig">
+          <input type="radio" name="impact" value="4" >
+          <span>4</span>
+        </label>
+        
+        <label title="5 = Kritisk">
+          <input type="radio" name="impact" value="5" >
+          <span>5</span>
+        </label>
+        
+      </div>
+      <p class="scale-hint">1 = Ubetydelig · 3 = Moderat · 5 = Kritisk</p>
+    </fieldset>
+    
+
+    <fieldset class="segmented">
+      <legend>Behandling (ISO 27001 6.1.3)</legend>
+      <div class="seg-options seg-4">
+        
+        <label>
+          <input type="radio" name="treatment" value="redusere" checked>
+          <span>Redusere</span>
+        </label>
+        
+        <label>
+          <input type="radio" name="treatment" value="akseptere" >
+          <span>Akseptere</span>
+        </label>
+        
+        <label>
+          <input type="radio" name="treatment" value="unnga" >
+          <span>Unngå</span>
+        </label>
+        
+        <label>
+          <input type="radio" name="treatment" value="overfore" >
+          <span>Overføre</span>
+        </label>
+        
+      </div>
+    </fieldset>
+
+    <label class="field">Tiltak
+      <textarea name="actions" rows="3"
+                placeholder="Hva gjør du, eller planlegger du å gjøre?"></textarea>
+    </label>
+
+    <!-- The NSM principle that best reduces this risk, grouped by category -->
+    <label class="field">Koblet NSM-prinsipp
+      <select name="principle_id">
+        <option value="">Ingen</option>
+        
+        <optgroup label="1. Identifisere og kartlegge">
+          
+          <option value="1.1" >1.1 Kartlegg styringsstrukturer, leveranser og understøttende systemer</option>
+          
+          <option value="1.2" >1.2 Kartlegg enheter og programvare</option>
+          
+          <option value="1.3" >1.3 Kartlegg brukere og behov for tilgang</option>
+          
+        </optgroup>
+        
+        <optgroup label="2. Beskytte og opprettholde">
+          
+          <option value="2.1" >2.1 Ivareta sikkerhet i anskaffelses- og utviklingsprosesser</option>
+          
+          <option value="2.2" >2.2 Etabler en sikker IKT-arkitektur</option>
+          
+          <option value="2.3" >2.3 Ivareta en sikker konfigurasjon</option>
+          
+          <option value="2.4" >2.4 Beskytt virksomhetens nettverk</option>
+          
+          <option value="2.5" >2.5 Kontroller dataflyt</option>
+          
+          <option value="2.6" >2.6 Ha kontroll på identiteter og tilganger</option>
+          
+          <option value="2.7" >2.7 Beskytt data i ro og i transitt</option>
+          
+          <option value="2.8" >2.8 Beskytt e-post og nettleser</option>
+          
+          <option value="2.9" >2.9 Etabler evne til gjenoppretting av data</option>
+          
+          <option value="2.10" >2.10 Integrer sikkerhet i prosess for endringshåndtering</option>
+          
+        </optgroup>
+        
+        <optgroup label="3. Oppdage">
+          
+          <option value="3.1" >3.1 Oppdag og fjern kjente sårbarheter og trusler</option>
+          
+          <option value="3.2" >3.2 Etabler sikkerhetsovervåkning</option>
+          
+          <option value="3.3" >3.3 Analyser data fra sikkerhetsovervåkning</option>
+          
+          <option value="3.4" >3.4 Gjennomfør inntrengningstester</option>
+          
+        </optgroup>
+        
+        <optgroup label="4. Håndtere og gjenopprette">
+          
+          <option value="4.1" >4.1 Forbered virksomheten på håndtering av hendelser</option>
+          
+          <option value="4.2" >4.2 Vurder og klassifiser hendelser</option>
+          
+          <option value="4.3" >4.3 Kontroller og håndter hendelser</option>
+          
+          <option value="4.4" >4.4 Evaluer og lær av hendelser</option>
+          
+        </optgroup>
+        
+      </select>
+    </label>
+
+    <fieldset class="segmented">
+      <legend>Status</legend>
+      <div class="seg-options">
+        
+        <label>
+          <input type="radio" name="status" value="apen" checked>
+          <span>Åpen</span>
+        </label>
+        
+        <label>
+          <input type="radio" name="status" value="under_behandling" >
+          <span>Under behandling</span>
+        </label>
+        
+        <label>
+          <input type="radio" name="status" value="lukket" >
+          <span>Lukket</span>
+        </label>
+        
+      </div>
+    </fieldset>
+
+    <label class="field">Neste gjennomgang
+      <input type="date" name="review_date" value="">
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" name="gdpr" >
+      <span class="switch-track" aria-hidden="true"></span>
+      Gjelder personopplysninger (GDPR)
+    </label>
+
+    <div class="form-footer">
+      <a href="/grc-grunnmur/risikoer">Avbryt</a>
+      <button type="submit">Lagre risiko</button>
+    </div>
+  </form>
+</div>
+
+<!-- Delete is its own small form, because forms cannot be nested.
+     Flask shows it when editing. On GitHub Pages static-risks.js shows it. -->
+<form method="post" class="delete-form" id="delete-form"
+      action="#"
+      hidden
+      onsubmit="return confirm('Slette denne risikoen?')">
+  <button type="submit" class="danger-button">Slett risiko</button>
+</form>
+
+  </main>
+
+  <footer class="wrap site-footer">
+    <p>Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       </p>
+  </footer>
+
+  
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
+<script src="/grc-grunnmur/static/static-risks.js"></script>
+
+  
+</body>
+</html>
