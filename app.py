@@ -17,8 +17,11 @@ Pages:
   /styringssystem/<nr>  v4: saves one requirement (POST)
   /tiltak               v5: NSM's 118 measures, in NSM's priority groups
   /tiltak/<nr>          v5: saves the status of one measure (POST)
+  /rapport              v6: a print-friendly report of everything above (save as PDF from the browser)
   /om                   about page: background, and what Grunnmur adds to NSM's advice
 """
+
+from datetime import date
 
 from flask import Flask, abort, redirect, render_template, request, url_for
 
@@ -49,9 +52,9 @@ ROADMAP = [
     (3, "ISO/IEC 27002", "De 93 kontrollene og NSMs egen kobling til grunnprinsippene"),
     (4, "ISO 27001 styringssystem", "Kapittel 4–10 i PDCA-sirkelen og anvendelseserklæring (SoA)"),
     (5, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
-    (6, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
+    (6, "Rapport og portefølje", "Utskriftsvennlig rapport og README på engelsk og norsk"),
 ]
-CURRENT_VERSION = 5
+CURRENT_VERSION = 6
 
 
 @app.context_processor
@@ -274,6 +277,58 @@ def save_measure(measure_id):
     return redirect(url_for("measures_page", apen=measure_id) + "#t" + measure_id)
 
 
+# ---------- v6: report ----------
+
+@app.route("/rapport")
+def report():
+    """One page with the state of everything, made to be printed or saved as PDF.
+
+    In static mode every saved value is empty here, and report.js fills the
+    page from the visitor's browser instead (like static-mode.js does elsewhere).
+    """
+    progress = load_progress()
+    isms = load_statuses("isms")
+    measure_rows = load_statuses("measures")
+    soa = load_statuses("soa")
+
+    principle_ids = [number for c in nsm_data.CATEGORIES for number, _t, _l in c["principles"]]
+    clause_ids = [number for clause in iso27001.CLAUSES for number, _title in clause["items"]]
+    groups = []
+    for number, items in nsm_measures.by_group().items():
+        label, name = nsm_measures.GROUPS[number]
+        ids = [m["id"] for m in items]
+        groups.append({"number": number, "label": label, "name": name, "measures": items,
+                       "ids": ids, "percent": percent_done(ids, measure_rows)})
+
+    soa_counts = {key: 0 for key in db.SOA_STATUSES}
+    for control_id in iso27002.CONTROLS:
+        soa_counts[soa[control_id]["status"] if control_id in soa else "ikke_vurdert"] += 1
+
+    return render_template(
+        "report.html",
+        today=date.today().strftime("%d.%m.%Y"),
+        categories=nsm_data.CATEGORIES,
+        progress=progress,
+        principle_ids=principle_ids,
+        principles_percent=percent_done(principle_ids, progress),
+        groups=groups,
+        measure_rows=measure_rows,
+        measure_ids=[i for g in groups for i in g["ids"]],
+        measures_percent=percent_done([i for g in groups for i in g["ids"]], measure_rows),
+        clauses=iso27001.CLAUSES,
+        clause_ids=clause_ids,
+        isms=isms,
+        isms_percent=percent_done(clause_ids, isms),
+        themes=iso27002.themes_with_controls(),
+        soa=soa,
+        soa_counts=soa_counts,
+        statuses=db.STATUSES,
+        soa_statuses=db.SOA_STATUSES,
+        labels={**db.STATUSES, **db.SOA_STATUSES},   # every status label, for report.js
+        **risk_overview(),
+    )
+
+
 @app.route("/om")
 def about():
     return render_template("about.html", source_url=nsm_data.SOURCE_URL,
@@ -369,8 +424,8 @@ def render_risk_form(risk, risk_id=None, error=None):
     )
 
 
-@app.route("/risikoer")
-def risk_list():
+def risk_overview():
+    """Everything the risk list shows, also used by the report (v6)."""
     # Same rule as load_progress(): the public build never contains my own data.
     rows = [] if app.config["STATIC_SITE"] else db.get_all_risks()
     items = sorted((risks.enrich(row) for row in rows), key=risks.sort_key)
@@ -384,8 +439,7 @@ def risk_list():
     # for every risk saved in the browser, so both versions share one layout.
     placeholder = risks.enrich({**risks.DEFAULTS, "id": "", "title": ""})
 
-    return render_template(
-        "risks.html",
+    return dict(
         items=items,
         levels=risks.LEVELS,
         level_counts=level_counts,
@@ -398,6 +452,11 @@ def risk_list():
         placeholder=placeholder,
         risk_config=risks.config_for_browser(),
     )
+
+
+@app.route("/risikoer")
+def risk_list():
+    return render_template("risks.html", **risk_overview())
 
 
 @app.route("/risikoer/ny", methods=["GET", "POST"])

@@ -416,9 +416,10 @@ button:active { transform: scale(0.98); }
   font-size: 0.9rem; font-weight: 500; color: var(--muted); text-decoration: none;
 }
 .main-nav a[aria-current="page"] { color: var(--text); background: var(--track); }
-/* Phones: the 6 menu links get their own row under the logo.
-   overflow-x is a safety net: the row scrolls sideways instead of breaking the page. */
-@media (max-width: 639px) {
+/* Phones and small tablets: the 7 menu links get their own row under the logo
+   (side by side they need about 760px). overflow-x is a safety net: the row
+   scrolls sideways instead of breaking the page. */
+@media (max-width: 759px) {
   .header-inner { flex-wrap: wrap; height: auto; padding-top: 8px; row-gap: 2px; }
   .version-pill { margin-left: auto; }
   .main-nav { order: 3; width: 100%; margin: 0 -8px; padding-bottom: 6px; overflow-x: auto; scrollbar-width: none; }
@@ -752,6 +753,59 @@ button:active { transform: scale(0.98); }
   .heat-maps { grid-template-columns: 1fr 1fr; }
   .residual-row { grid-template-columns: 7em 1fr; align-items: center; }
   .seg-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- 6i. Report (v6) ---------- */
+.report-meta { font-size: 0.85rem; margin: 8px 0 0; }
+.print-button { width: auto; margin-left: 0; }
+.report-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 8px; }
+.report-stat {
+  display: grid; gap: 4px; align-content: start; padding: 14px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--border); font-size: 0.8rem; color: var(--muted);
+}
+.report-stat strong { font-size: 1.6rem; line-height: 1.1; color: var(--text); }
+.report-section { margin-top: 32px; }
+.report-section h2 { font-size: 1.2rem; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+.report-section h3 { font-size: 0.9rem; margin: 18px 0 6px; color: var(--muted); }
+.report-note, .report-empty { font-size: 0.85rem; }
+
+/* One line: number | title and notes | status. Works on phones and on paper. */
+.report-rows { list-style: none; margin: 0; padding: 0; }
+.report-row {
+  display: grid; grid-template-columns: 3.6em 1fr auto; gap: 4px 10px; align-items: baseline;
+  padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+  break-inside: avoid;                 /* a line is never split across two printed pages */
+}
+.r-id { font-weight: 600; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.r-main { display: grid; gap: 2px; min-width: 0; overflow-wrap: anywhere; }
+.r-notes { font-size: 0.8rem; color: var(--muted); white-space: pre-line; }
+.report-groups { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 8px; font-size: 0.85rem; }
+.report-groups li { display: grid; grid-template-columns: 1fr 5em 3em; gap: 10px; align-items: center; }
+.report-groups li > span:last-child { text-align: right; color: var(--muted); }
+
+/* The planned measures of a risk: hidden on the risk page, shown in the report */
+.risk-actions { display: none; }
+.report .risk-actions { display: block; font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
+.report .cell { cursor: default; pointer-events: none; }   /* no filter in the report */
+.report .risk-list .arrow { display: none; }
+
+@media (min-width: 640px) {
+  .report-summary { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Paper (and "Save as PDF"): only the report, black on white, no menus or buttons */
+@media print {
+  @page { margin: 16mm; }
+  :root { --bg: #fff; --surface: #fff; --shadow: none; }
+  body { background: #fff; font-size: 10.5pt; }
+  body::before, .cyber-banner, .site-header, .site-footer, .print-button { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .report-section { break-before: auto; }
+  .report-section h2, .report-section h3 { break-after: avoid; }
+  .heat-maps { grid-template-columns: 1fr 1fr; }
+  .heat-map, .risk-link, .report-stat { box-shadow: none; break-inside: avoid; }
+  .risk { break-inside: avoid; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }   /* keep the heat map colours */
 }
 
 /* ---------- 7. Tablet and up (≥ 640px) ---------- */

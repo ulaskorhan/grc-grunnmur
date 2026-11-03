@@ -26,6 +26,8 @@
         <span class="tag" data-field="gdpr" {% if not r.gdpr %}hidden{% endif %}>Personvern</span>
         <span class="overdue" data-field="overdue" {% if not r.overdue %}hidden{% endif %}>Gjennomgang forfalt</span>
       </span>
+      <!-- v6: the planned measures, only shown in the report -->
+      <span class="risk-actions" data-field="actions" {% if not r.actions %}hidden{% endif %}>Tiltak: {{ r.actions }}</span>
     </span>
     <span class="arrow" aria-hidden="true">→</span>
   </a>

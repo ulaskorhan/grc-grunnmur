@@ -1,0 +1,30 @@
+{#
+  v5: one 5 × 5 heat map. Likelihood runs up the side (5 at the top), impact along the bottom.
+  Used on the risk list and in the report (v6).
+  Each cell is a button: clicking it shows only the risks in that cell (risk-tools.js).
+  The colour comes from the level of likelihood × impact, the number is how many risks sit there.
+#}
+{% macro heat_map(grid, name, title) -%}
+<figure class="heat-map" aria-label="{{ title }}">
+  <figcaption>{{ title }}</figcaption>
+  <div class="heat-body">
+    <span class="axis axis-y">Sannsynlighet</span>
+    <div class="heat-grid">
+      {% for row in grid %}
+        <span class="axis-n">{{ row[0].likelihood }}</span>
+        {% for cell in row %}
+        <button type="button" class="cell level-{{ cell.level }}" data-map="{{ name }}"
+                data-cell="{{ cell.likelihood }}-{{ cell.impact }}" aria-pressed="false"
+                aria-label="Sannsynlighet {{ cell.likelihood }}, konsekvens {{ cell.impact }}: {{ cell.count }} risikoer"
+                {% if not cell.count %}disabled{% endif %}>
+          <span data-cell-count>{{ cell.count or '' }}</span>
+        </button>
+        {% endfor %}
+      {% endfor %}
+      <span></span>
+      {% for impact in range(1, 6) %}<span class="axis-n">{{ impact }}</span>{% endfor %}
+    </div>
+  </div>
+  <span class="axis axis-x">Konsekvens</span>
+</figure>
+{%- endmacro %}

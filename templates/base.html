@@ -47,6 +47,8 @@
            {% if request.endpoint == 'isms_page' %}aria-current="page"{% endif %}><span class="nav-iso">ISO </span>27001</a>
         <a href="{{ url_for('iso_page') }}"
            {% if request.endpoint == 'iso_page' %}aria-current="page"{% endif %}><span class="nav-iso">ISO </span>27002</a>
+        <a href="{{ url_for('report') }}"
+           {% if request.endpoint == 'report' %}aria-current="page"{% endif %}>Rapport</a>
         <a href="{{ url_for('about') }}"
            {% if request.endpoint == 'about' %}aria-current="page"{% endif %}>Om</a>
       </nav>

@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% from "_risk_row.html" import risk_row %}
+{% from "_heat_map.html" import heat_map %}
+
+{% block title %}Rapport · Grunnmur{% endblock %}
+
+{#
+  One line in the report: number, title (+ notes underneath) and a status pill.
+  data-row is the saved id. On GitHub Pages report.js fills the status and notes
+  from the browser, using the data-store of the section around it.
+  hide_if: the line is left out while it has this status (e.g. unassessed SoA controls).
+#}
+{% macro report_row(id, title, row, labels, default, hide_if=None, priority=None) -%}
+{% set status = row.status if row else default %}
+<li class="report-row" data-row="{{ id }}" {% if hide_if %}data-hide-if="{{ hide_if }}"{% endif %}
+    {% if hide_if and status == hide_if %}hidden{% endif %}>
+  <span class="r-id">{{ id }}</span>
+  <span class="r-main">
+    <span>{{ title }}{% if priority %} <span class="prio prio-{{ priority }}">Prioritet {{ priority }}</span>{% endif %}</span>
+    <span class="r-notes" data-show="notes" {% if not (row and row.notes) %}hidden{% endif %}>{{ row.notes if row else '' }}</span>
+  </span>
+  <span class="status status-{{ status }}" data-show="status">{{ labels[status] }}</span>
+</li>
+{%- endmacro %}
+
+{% block content %}
+<div class="report">
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Versjon 6 · Rapport</p>
+    <h1>Sikkerhetsrapport</h1>
+    <p class="lead">Status for grunnprinsipper, tiltak, risikoer, styringssystem og
+       anvendelseserklæring, samlet på én side.</p>
+    <p class="report-meta muted">
+      Laget <span data-today>{{ today }}</span> ·
+      Nasjonalt cyberrisikonivå: <strong>{{ cyber.current }}</strong> (NSM, {{ cyber.set_on }}) ·
+      {% if static_site %}Data fra denne nettleseren{% else %}Data fra den lokale databasen{% endif %}
+    </p>
+  </div>
+  <!-- The browser's own print dialog can also save the page as a PDF -->
+  <button type="button" class="print-button" onclick="window.print()">Skriv ut / lagre som PDF</button>
+</section>
+
+<!-- 1. Summary: one box per part. data-ids lets static-mode.js recalculate them on GitHub Pages. -->
+<section class="report-summary" aria-label="Sammendrag">
+  <div class="report-stat" data-ids="{{ principle_ids|join(' ') }}">
+    <strong><span class="js-pct">{{ principles_percent }}</span> %</strong>
+    <span>NSMs grunnprinsipper</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: {{ principles_percent }}%"></span></span>
+  </div>
+  <div class="report-stat" data-store="grunnmur-measures" data-ids="{{ measure_ids|join(' ') }}">
+    <strong><span class="js-pct">{{ measures_percent }}</span> %</strong>
+    <span>NSMs tiltak</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: {{ measures_percent }}%"></span></span>
+  </div>
+  <div class="report-stat" data-store="grunnmur-isms" data-ids="{{ clause_ids|join(' ') }}">
+    <strong><span class="js-pct">{{ isms_percent }}</span> %</strong>
+    <span>ISO 27001 kapittel 4–10</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: {{ isms_percent }}%"></span></span>
+  </div>
+  <div class="report-stat" data-store="grunnmur-soa" data-default="ikke_vurdert"
+       data-ids="{% for t in themes %}{% for c in t.controls %}{{ c.id }} {% endfor %}{% endfor %}">
+    <strong><span data-count="ikke_vurdert">{{ soa_counts.ikke_vurdert }}</span></strong>
+    <span>av 93 kontroller ikke vurdert i SoA</span>
+  </div>
+</section>
+
+<!-- 2. NSM's principles, all 21 -->
+<section class="report-section">
+  <h2>NSMs grunnprinsipper</h2>
+  {% for category in categories %}
+  <h3>{{ category.number }}. {{ category.name }}</h3>
+  <ul class="report-rows" data-rows>
+    {% for number, title, _link in category.principles %}
+    {{ report_row(number, title, progress.get(number), statuses, 'ikke_startet') }}
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</section>
+
+<!-- 3. NSM's measures: progress per group, all of group 1, and the rest once started -->
+<section class="report-section" data-store="grunnmur-measures">
+  <h2>NSMs tiltak</h2>
+  <ul class="report-groups">
+    {% for group in groups %}
+    <li data-ids="{{ group.ids|join(' ') }}">
+      <span>{{ group.label }} · {{ group.name }} ({{ group.measures|length }})</span>
+      <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: {{ group.percent }}%"></span></span>
+      <span><span class="js-pct">{{ group.percent }}</span> %</span>
+    </li>
+    {% endfor %}
+  </ul>
+  <p class="muted report-note">Alle tiltak i gruppe 1 vises. Fra gruppe 2 og 3 vises bare tiltak som er påbegynt.</p>
+  <ul class="report-rows" data-rows>
+    {% for group in groups %}
+      {% for m in group.measures %}
+      {{ report_row(m.id, m.title, measure_rows.get(m.id), statuses, 'ikke_startet',
+                    hide_if=None if m.priority == 1 else 'ikke_startet', priority=m.priority) }}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</section>
+
+<!-- 4. Risks: both heat maps and the full register (same rows as the risk page) -->
+<section class="report-section">
+  <h2>Risikoregister</h2>
+  <div class="heat-maps">
+    {{ heat_map(map_before, 'before', 'Før tiltak') }}
+    {{ heat_map(map_after, 'after', 'Etter tiltak (restrisiko)') }}
+  </div>
+  <p class="heat-note muted">
+    <span id="missing-residual" {% if not missing_residual %}hidden{% endif %}>
+      Åpne risikoer uten restrisiko: <strong data-missing>{{ missing_residual }}</strong>.</span>
+    Lukkede risikoer er ikke med i kartene.
+  </p>
+  <p class="muted report-empty" id="empty-state" {% if items %}hidden{% endif %}>Ingen risikoer registrert.</p>
+  <ol class="risk-list" id="risk-list" data-edit-url="{{ url_for('risk_new') }}">
+    {% for r in items %}
+      {{ risk_row(r, url_for('risk_edit', risk_id=r.id)) }}
+    {% endfor %}
+  </ol>
+</section>
+
+<!-- 5. ISO 27001 clauses 4-10 -->
+<section class="report-section" data-store="grunnmur-isms">
+  <h2>Styringssystem (ISO 27001 kapittel 4–10)</h2>
+  {% for clause in clauses %}
+  <h3>{{ clause.number }}. {{ clause.name }}</h3>
+  <ul class="report-rows" data-rows>
+    {% for number, title in clause["items"] %}
+    {{ report_row(number, title, isms.get(number), statuses, 'ikke_startet') }}
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</section>
+
+<!-- 6. Statement of applicability: only the controls that have been assessed -->
+<section class="report-section" data-store="grunnmur-soa" data-default="ikke_vurdert">
+  <h2>Anvendelseserklæring (SoA)</h2>
+  <p class="soa-summary" data-ids="{% for t in themes %}{% for c in t.controls %}{{ c.id }} {% endfor %}{% endfor %}">
+    {% for key, label in soa_statuses.items() %}
+    <span class="status status-{{ key }}"><span data-count="{{ key }}">{{ soa_counts[key] }}</span> {{ label|lower }}</span>
+    {% endfor %}
+  </p>
+  <ul class="report-rows" data-rows>
+    {% for theme in themes %}
+      {% for control in theme.controls %}
+      {{ report_row(control.id, control.title, soa.get(control.id), soa_statuses, 'ikke_vurdert', hide_if='ikke_vurdert') }}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+  <p class="muted report-empty" data-empty {% if soa_counts.ikke_vurdert < 93 %}hidden{% endif %}>Ingen kontroller er vurdert ennå.</p>
+</section>
+
+<p class="report-footnote muted">Grunnmur er et personlig læringsprosjekt og ikke tilknyttet NSM.
+  Prinsipp- og tiltakstitler er NSMs egne. ISO-titlene er korte beskrivelser med egne ord,
+  ikke tekst fra standarden.</p>
+</div>
+
+<!-- Status labels for report.js, and the empty row static-risks.js copies for each saved risk -->
+<script id="report-labels" type="application/json">{{ labels|tojson }}</script>
+{% if static_site %}
+<template id="risk-row-template">{{ risk_row(placeholder, '#') }}</template>
+{% endif %}
+{% endblock %}
+
+{% block static_scripts %}
+<script id="risk-config" type="application/json">{{ risk_config|tojson }}</script>
+<script src="{{ url_for('static', filename='static-risks.js') }}"></script>
+<script src="{{ url_for('static', filename='report.js') }}"></script>
+{% endblock %}
