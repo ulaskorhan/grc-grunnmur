@@ -1,28 +1,82 @@
 # Grunnmur
 
+**English** · [Norsk](README.no.md)
+
 A small personal GRC (Governance, Risk and Compliance) app, in Norwegian, built on
-[NSM Grunnprinsipper for IKT-sikkerhet v2.1](https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/).
+[NSM's basic principles for ICT security, v2.1](https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/)
+(NSM Grunnprinsipper for IKT-sikkerhet), with links to ISO/IEC 27001, ISO/IEC 27002 and GDPR.
 
-It starts simple and grows one version at a time (6 versions):
+Live: <https://ulaskorhan.github.io/grc-grunnmur/>
 
-| Version | Content | Status |
-|---------|---------|--------|
-| v1 | Control tracker: 4 categories, 21 principles, status, notes, ISO 27001 reference, GDPR tag, examples | Done |
-| v2 | Risk register (likelihood × impact, treatment), linked to NSM principles and ISO 27001 clause 6.1 | Done |
-| v3 | ISO/IEC 27002:2022: the 93 controls in 4 themes, with NSM's own mapping to the principles | Done |
-| v4 | ISO 27001 management system: clauses 4–10 in the PDCA cycle, plus a statement of applicability (SoA) for the 93 controls | Done |
-| v5 | NSM's 118 measures (tiltak) with status, under each principle and on a page sorted by NSM's priority; residual risk and two heat maps (before/after measures); suggested NSM measures on the risk form | Done |
-| v6 | Export, English/Norwegian README, screenshots | Planned |
+## Why
 
-NSM gives the technical baseline (what to do); ISO 27001 adds the management
-system (how security is governed). ISO text is copyrighted, so only clause and
-control numbers with short titles in my own words will be used.
+NSM (the Norwegian National Security Authority) says *what* an organisation should do:
+21 principles with 118 measures. NSM's own self-assessment, Cybersjekk, gives a quick
+overview. What is left after that is the follow-up work: who does what, what is done,
+which risks remain, and when it should be reviewed again. Grunnmur is a small tool for
+that follow-up, for a small business or a home lab. ISO 27001 adds the management
+system around it (how security is governed), so the app connects the two.
+
+## What it does
+
+The app was built in six versions:
+
+| Version | Content |
+|---------|---------|
+| v1 | The 21 principles in 4 categories, each with status, notes, ISO 27001 reference, GDPR tag and an example |
+| v2 | Risk register: likelihood × impact (1–5), treatment, review date, linked to a principle (ISO 27001 6.1) |
+| v3 | The 93 ISO/IEC 27002:2022 controls in 4 themes, with NSM's own mapping to the principles |
+| v4 | ISO 27001 clauses 4–10 in the Plan-Do-Check-Act cycle, plus a statement of applicability (SoA) for the 93 controls |
+| v5 | NSM's 118 measures with status, sorted by NSM's priority groups; residual risk and heat maps before and after measures; NSM measures suggested on the risk form |
+| v6 | A print-friendly report of everything on one page (print or save as PDF from the browser), and this README in English and Norwegian |
 
 A thin banner at the top of every page shows NSM's national cyber risk level
-(nasjonalt cyberrisikonivå). It is copied by hand from NSM's announcement, with
-date and link, in `cyber_level.py`: there is no open API, so update it when NSM
-changes the level. The about page (`/om`) explains what Grunnmur adds to NSM's
-advice and Cybersjekk.
+(nasjonalt cyberrisikonivå), with date and source.
+
+## How it works
+
+```
+                    templates/ (Jinja) + static/ (CSS, JS)
+                                  │
+            ┌─────────────────────┴─────────────────────┐
+   Local:   Flask (app.py) + SQLite (db.py)     build.py renders every page
+            data saved in grunnmur.db           with STATIC_SITE on, into docs/
+                                                         │
+                                       GitHub Pages: static HTML, and the
+                                       visitor's data in their own browser
+                                       (localStorage, static-mode.js)
+```
+
+- **Locally** the app is a normal Flask app with an SQLite database.
+- **Publicly** GitHub Pages can only host static files. `build.py` asks Flask for every
+  page and saves the HTML to `docs/`, with empty data. In that version small scripts
+  save each visitor's answers in their own browser. Nothing is sent to a server, and
+  my local database is never part of the build.
+- The same templates are used in both versions, so they look and work the same.
+- Risk levels are calculated in Python (`risks.py`). The same rules are sent to the
+  browser as JSON, so the static version calculates exactly the same.
+
+## Sources and honesty
+
+- **NSM:** the principle titles and the measure headings are copied exactly from NSM,
+  with source and date. The full text stays on nsm.no, and every principle and measure
+  links there.
+- **NSM ↔ ISO 27002 mapping and priorities:** NSM's own, from NSM's spreadsheet of
+  measures. Only numbers are copied. NSM notes that the mapping is a judgement and
+  rarely 1:1.
+- **ISO:** the standards are copyrighted, so no ISO text is included. Only clause and
+  control numbers are used, with short titles in my own words.
+- **Examples:** written for this app, not taken from NSM or ISO.
+- **Cyber risk level:** copied by hand from NSM's announcement into `cyber_level.py`.
+  NSM has no open API, so it has to be updated by hand when NSM changes the level.
+
+## Limitations
+
+- Not an official service, and not connected to NSM. It does not replace NSM's advice,
+  Cybersjekk or an audit.
+- One user, no login. It is meant for one person or a small team on one machine.
+- On the public version the data lives only in that browser. Clearing the browser's
+  data deletes it, and there is no export or import of the data yet.
 
 ## Running it
 
@@ -34,14 +88,7 @@ python3 -m venv .venv
 
 Then open <http://127.0.0.1:5050>.
 
-## Public version (GitHub Pages)
-
-Live: <https://ulaskorhan.github.io/grc-grunnmur/>
-
-GitHub Pages can only host static files, so `build.py` renders the same Flask
-templates into `docs/` with empty progress. On that version, `static/static-mode.js`
-saves each visitor's answers in their own browser (localStorage). Nothing is sent
-to a server, and my local database is never part of the build.
+## Building the public version
 
 After changing templates, styles or data, rebuild and commit `docs/`:
 
@@ -50,25 +97,27 @@ After changing templates, styles or data, rebuild and commit `docs/`:
 git add docs && git commit -m "Rebuild GitHub Pages site"
 ```
 
+For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
+`python3 -m http.server 8000 --directory docs`.
+
 ## Files
 
-- `app.py`: Flask routes (homepage, category page, saving a principle)
-- `db.py`: SQLite setup plus reading and writing progress
-- `nsm_data.py`: the 4 categories and 21 principles, copied from NSM's website
-- `build.py`: builds the static GitHub Pages version into `docs/`
-- `static/static-mode.js`: browser storage for the GitHub Pages version (principles, measures, ISO 27001 clauses and SoA, one storage key each)
-- `static/risk-tools.js`: v5: heat map filter and NSM suggestions on the risk pages (both versions)
-- `risks.py`: v2 risk logic: 1-5 scales, score = likelihood × impact, levels (Lav 1-4, Middels 5-9, Høy 10-16, Kritisk 20-25), validation
-- `static/static-risks.js`: the risk register on the GitHub Pages version (browser storage)
-- `cyber_level.py`: NSM's national cyber risk level for the banner (updated by hand)
-- `nsm_iso_mapping.py`: NSM's own mapping of its 118 measures to ISO/IEC 27002:2022 controls, plus NSM's priority group (numbers only, from NSM's measures spreadsheet)
-- `iso27002.py`: the 93 ISO/IEC 27002 controls with short titles in my own words, and lookups in both directions (principle → controls, control → principles)
-- `nsm_measures.py`: v5: NSM's 118 measure headings (copied exactly from NSM's spreadsheet) with NSM's priority groups
-- `iso27001.py`: v4: ISO 27001 clauses 4–10 with short titles in my own words, PDCA phases, links to the risk register and SoA, and one example per requirement
-- `examples.py`: one home lab example per principle, behind the "Eksempel" button (written for this app, not NSM text)
-- `templates/`: HTML pages (Jinja)
-- `static/style.css`: the minimalist styling
+- `app.py`: Flask routes for every page
+- `db.py`: SQLite tables and reading and writing (progress, risks, clauses, SoA, measures)
+- `nsm_data.py`: NSM's 4 categories and 21 principles
+- `nsm_measures.py`: NSM's 118 measure headings and priority groups
+- `nsm_iso_mapping.py`: NSM's mapping from measures to ISO 27002 controls (numbers only)
+- `iso27002.py`: the 93 controls with short titles in my own words
+- `iso27001.py`: clauses 4–10, PDCA phases and one example per requirement
+- `risks.py`: risk scales, levels, validation, residual risk and heat maps
+- `examples.py`: one home lab example per principle
+- `cyber_level.py`: NSM's national cyber risk level (updated by hand)
+- `build.py`: builds the static version into `docs/`
+- `templates/`: the HTML pages (Jinja)
+- `static/style.css`: the styling, mobile first, with dark mode and print styles
+- `static/static-mode.js`: browser storage for principles, measures, clauses and SoA (public version)
+- `static/static-risks.js`: the risk register in the browser (public version)
+- `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
+- `static/report.js`: fills the report from the browser (public version)
 
-The ISO 27001 references are entered by the user. No ISO text is included: only
-control numbers, with short titles written in my own words. The NSM ↔ ISO 27002
-links are NSM's, not mine. NSM notes they are a judgement and rarely 1:1.
+Built with Python, Flask and SQLite. No JavaScript framework.
