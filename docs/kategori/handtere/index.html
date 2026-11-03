@@ -37,19 +37,23 @@
            used to underline the section the user is in. -->
       <nav class="main-nav" aria-label="Hovedmeny">
         <a href="/grc-grunnmur/"
-           aria-current="page">Prinsipper</a>
+           aria-current="page">NSM</a>
         <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
+        <!-- On the smallest phones "ISO " is hidden, so the links read 27001 / 27002 -->
+        <a href="/grc-grunnmur/styringssystem"
+           ><span class="nav-iso">ISO </span>27001</a>
         <a href="/grc-grunnmur/iso27002"
-           >ISO<span class="nav-long"> 27002</span></a>
+           ><span class="nav-iso">ISO </span>27002</a>
         <a href="/grc-grunnmur/om"
            >Om</a>
       </nav>
-      <span class="version-pill">v3</span>
+      <span class="version-pill">v4</span>
     </div>
   </header>
 
-  <main class="wrap">
+  <!-- data-store tells static-mode.js which browser storage key this page uses -->
+  <main class="wrap" >
     
 <a href="/grc-grunnmur/" class="back">← Oversikt</a>
 
@@ -86,7 +90,7 @@
 
   
   
-  <details class="principle is-ikke_startet" id="p4.1" >
+  <details class="principle item is-ikke_startet" id="p4.1" >
     <summary>
       <span class="p-number">4.1</span>
       <span class="p-title">Forbered virksomheten på håndtering av hendelser</span>
@@ -193,7 +197,7 @@
 
   
   
-  <details class="principle is-ikke_startet" id="p4.2" >
+  <details class="principle item is-ikke_startet" id="p4.2" >
     <summary>
       <span class="p-number">4.2</span>
       <span class="p-title">Vurder og klassifiser hendelser</span>
@@ -291,7 +295,7 @@
 
   
   
-  <details class="principle is-ikke_startet" id="p4.3" >
+  <details class="principle item is-ikke_startet" id="p4.3" >
     <summary>
       <span class="p-number">4.3</span>
       <span class="p-title">Kontroller og håndter hendelser</span>
@@ -386,7 +390,7 @@
 
   
   
-  <details class="principle is-ikke_startet" id="p4.4" >
+  <details class="principle item is-ikke_startet" id="p4.4" >
     <summary>
       <span class="p-number">4.4</span>
       <span class="p-title">Evaluer og lær av hendelser</span>
@@ -496,16 +500,18 @@
        </p>
   </footer>
 
-  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into a closed <details>:
-       open it so the target is visible. Some browsers do this on their own; this makes it work everywhere. -->
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into closed <details>:
+       open the target and every <details> around it, so it is visible.
+       Some browsers do this on their own; this makes it work everywhere. -->
   <script>
     function openFromHash() {
       var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      var details = target && (target.closest("details") || target);
-      if (details && details.tagName === "DETAILS") {
-        details.open = true;
-        target.scrollIntoView();
+      if (!target) return;
+      for (var el = target; el; el = el.parentElement.closest("details")) {
+        if (el.tagName === "DETAILS") el.open = true;
+        if (!el.parentElement) break;
       }
+      target.scrollIntoView();
     }
     openFromHash();
     window.addEventListener("hashchange", openFromHash);

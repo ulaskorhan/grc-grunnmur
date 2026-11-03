@@ -1,0 +1,1636 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <title>Styringssystem · Grunnmur</title>
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+</head>
+<body>
+  <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
+       Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026. Les mer hos NSM.">
+    <span class="wrap cyber-inner">
+      <span class="cyber-dot" aria-hidden="true"></span>
+      <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
+      <strong class="cyber-value">HØYT</strong>
+      <!-- The 5 levels as small bars; the ones up to the current level are filled -->
+      <span class="cyber-scale" aria-hidden="true">
+        <i class="on" title="Svært lavt"></i><i class="on" title="Lavt"></i><i class="on" title="Moderat"></i><i class="on" title="Høyt"></i><i class="" title="Ekstremt høyt"></i>
+      </span>
+      <span class="cyber-source">NSM · 27.10.2026 <span aria-hidden="true">↗</span></span>
+    </span>
+  </a>
+
+  <!-- Sticky header: stays at the top while scrolling -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/grc-grunnmur/" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">Grunnmur</span>
+      </a>
+      <!-- Main menu. request.endpoint is the name of the current page's function,
+           used to underline the section the user is in. -->
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/grc-grunnmur/"
+           >NSM</a>
+        <a href="/grc-grunnmur/risikoer"
+           >Risikoer</a>
+        <!-- On the smallest phones "ISO " is hidden, so the links read 27001 / 27002 -->
+        <a href="/grc-grunnmur/styringssystem"
+           aria-current="page"><span class="nav-iso">ISO </span>27001</a>
+        <a href="/grc-grunnmur/iso27002"
+           ><span class="nav-iso">ISO </span>27002</a>
+        <a href="/grc-grunnmur/om"
+           >Om</a>
+      </nav>
+      <span class="version-pill">v4</span>
+    </div>
+  </header>
+
+  <!-- data-store tells static-mode.js which browser storage key this page uses -->
+  <main class="wrap" data-store="grunnmur-isms">
+    
+<!-- Header: intro, overall ring and a count per status (data-ids is used by static-mode.js) -->
+<section class="cat-head isms-head" data-ids="4.1 4.2 4.3 4.4 5.1 5.2 5.3 6.1.1 6.1.2 6.1.3 6.2 6.3 7.1 7.2 7.3 7.4 7.5 8.1 8.2 8.3 9.1 9.2 9.3 10.1 10.2">
+  <div class="cat-title">
+    <p class="eyebrow">Versjon 4 · ISO/IEC 27001:2022</p>
+    <h1>Styringssystem</h1>
+    <p class="lead">Kapittel 4–10 er kravene til selve styringen: hvem som har ansvar,
+       hvordan risiko vurderes, og hvordan arbeidet følges opp og forbedres.</p>
+    <div class="chips">
+      <span class="chip chip-implementert"><span data-count="implementert">0</span> implementert</span>
+      <span class="chip chip-delvis"><span data-count="delvis">0</span> delvis</span>
+      <span class="chip"><span data-count="ikke_startet">25</span> ikke startet</span>
+    </div>
+  </div>
+  <div class="ring ring-sm" style="--p: 0" role="img" aria-label="0 prosent">
+    <div class="ring-inner"><strong><span class="js-pct">0</span><small>%</small></strong></div>
+  </div>
+</section>
+
+<!-- The PDCA cycle: one card per phase, linking to its first clause -->
+<nav class="pdca" aria-label="PDCA-faser">
+  
+  <a class="pdca-card" href="#kap4" data-ids="4.1 4.2 4.3 4.4 5.1 5.2 5.3 6.1.1 6.1.2 6.1.3 6.2 6.3 7.1 7.2 7.3 7.4 7.5">
+    <span class="pdca-step">1</span>
+    <strong>Planlegge</strong>
+    <span class="muted">Kapittel 4–7</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: 0%"></span></span>
+    <span class="pdca-pct"><span class="js-pct">0</span> %</span>
+  </a>
+  
+  <a class="pdca-card" href="#kap8" data-ids="8.1 8.2 8.3">
+    <span class="pdca-step">2</span>
+    <strong>Utføre</strong>
+    <span class="muted">Kapittel 8</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: 0%"></span></span>
+    <span class="pdca-pct"><span class="js-pct">0</span> %</span>
+  </a>
+  
+  <a class="pdca-card" href="#kap9" data-ids="9.1 9.2 9.3">
+    <span class="pdca-step">3</span>
+    <strong>Kontrollere</strong>
+    <span class="muted">Kapittel 9</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: 0%"></span></span>
+    <span class="pdca-pct"><span class="js-pct">0</span> %</span>
+  </a>
+  
+  <a class="pdca-card" href="#kap10" data-ids="10.1 10.2">
+    <span class="pdca-step">4</span>
+    <strong>Forbedre</strong>
+    <span class="muted">Kapittel 10</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: 0%"></span></span>
+    <span class="pdca-pct"><span class="js-pct">0</span> %</span>
+  </a>
+  
+</nav>
+
+<p class="hint muted">Titlene er korte beskrivelser med egne ord, ikke tekst fra standarden.
+   Trykk på et krav for å åpne det.</p>
+
+
+<section class="clause" id="kap4">
+  <h2><span class="cat-number">4</span> Organisasjonens kontekst</h2>
+  <div class="principles">
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c4.1" >
+      <summary>
+        <span class="p-number">4.1</span>
+        <span class="p-title">Forstå virksomheten og omgivelsene</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Skriv ned hva som er viktig å beskytte (familiebilder, kundedata, hjemmeserveren) og hva som påvirker det, f.eks. at mye kjører i skyen og at nivået for cyberrisiko er høyt.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/4.1">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c4.2" >
+      <summary>
+        <span class="p-number">4.2</span>
+        <span class="p-title">Interessenter og deres krav</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>List opp hvem som har krav eller forventninger: kunder, Datatilsynet (GDPR), leverandøren av nettskyen og familien som bruker nettverket.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/4.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c4.3" >
+      <summary>
+        <span class="p-number">4.3</span>
+        <span class="p-title">Omfanget av styringssystemet</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Avgrens hva styringssystemet dekker, f.eks. «hjemmelab, NAS og to laptoper, men ikke jobbmaskinen», og skriv ned hvorfor.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/4.3">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c4.4" >
+      <summary>
+        <span class="p-number">4.4</span>
+        <span class="p-title">Etablere og forbedre styringssystemet</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Bestem hvordan arbeidet skal gå i ring: planlegge, gjøre, sjekke og forbedre. Denne appen er et enkelt eksempel på et slikt system.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/4.4">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+  </div>
+</section>
+
+<section class="clause" id="kap5">
+  <h2><span class="cat-number">5</span> Lederskap</h2>
+  <div class="principles">
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c5.1" >
+      <summary>
+        <span class="p-number">5.1</span>
+        <span class="p-title">Ledelsens engasjement</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Den som bestemmer (deg selv eller daglig leder) setter av tid og penger til sikkerhet og følger opp at det blir gjort.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/5.1">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c5.2" >
+      <summary>
+        <span class="p-number">5.2</span>
+        <span class="p-title">Sikkerhetspolicy</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>En halv side om hva du vil oppnå: f.eks. «MFA overalt, sikkerhetskopi hver natt, oppdateringer innen 14 dager». Signer og datér den.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/5.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c5.3" >
+      <summary>
+        <span class="p-number">5.3</span>
+        <span class="p-title">Roller, ansvar og myndighet</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Avklar hvem som eier hva: hvem har ansvar for ruteren, sikkerhetskopiene og hvem som får varsel ved en hendelse.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/5.3">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+  </div>
+</section>
+
+<section class="clause" id="kap6">
+  <h2><span class="cat-number">6</span> Planlegging</h2>
+  <div class="principles">
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c6.1.1" >
+      <summary>
+        <span class="p-number">6.1.1</span>
+        <span class="p-title">Risikoer og muligheter</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Tenk gjennom hva som kan gå galt eller bli bedre før du setter mål, f.eks. løsepengevirus på NAS eller muligheten til å automatisere oppdateringer.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/6.1.1">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c6.1.2" >
+      <summary>
+        <span class="p-number">6.1.2</span>
+        <span class="p-title">Risikovurdering</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Bestem én fast metode for å vurdere risiko, f.eks. sannsynlighet × konsekvens på skala 1–5, slik at vurderingene kan sammenlignes over tid.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/6.1.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <a href="/grc-grunnmur/risikoer">Risikoregisteret →</a>
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c6.1.3" >
+      <summary>
+        <span class="p-number">6.1.3</span>
+        <span class="p-title">Risikobehandling og anvendelseserklæring</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Velg behandling for hver risiko (redusere, akseptere, unngå, overføre) og marker hvilke ISO 27002-kontroller som gjelder i anvendelseserklæringen.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/6.1.3">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <a href="/grc-grunnmur/risikoer">Risikoregisteret →</a>
+            
+            <a href="/grc-grunnmur/iso27002">Anvendelseserklæring (SoA) →</a>
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c6.2" >
+      <summary>
+        <span class="p-number">6.2</span>
+        <span class="p-title">Sikkerhetsmål og plan for å nå dem</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Sett målbare mål, f.eks. «100 % av kontoene har MFA innen mars» og «gjenoppretting testet hvert kvartal», med ansvarlig og frist.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/6.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c6.3" >
+      <summary>
+        <span class="p-number">6.3</span>
+        <span class="p-title">Planlegging av endringer</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Før store endringer, som ny brannmur eller flytting til skyen, planlegg dem og vurder hva som kan gå galt underveis.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/6.3">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+  </div>
+</section>
+
+<section class="clause" id="kap7">
+  <h2><span class="cat-number">7</span> Støtte</h2>
+  <div class="principles">
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c7.1" >
+      <summary>
+        <span class="p-number">7.1</span>
+        <span class="p-title">Ressurser</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Sørg for nok tid, penger og utstyr, f.eks. en ekstra disk til sikkerhetskopier og et par timer i måneden til vedlikehold.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/7.1">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c7.2" >
+      <summary>
+        <span class="p-number">7.2</span>
+        <span class="p-title">Kompetanse</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Finn ut hva du må kunne og lær det, f.eks. et kurs i nettverkssikkerhet. Ta vare på kursbevis som dokumentasjon.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/7.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c7.3" >
+      <summary>
+        <span class="p-number">7.3</span>
+        <span class="p-title">Bevissthet</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Alle som bruker systemene skal vite hvorfor reglene finnes, f.eks. en kort prat med familien om phishing og passordhåndterer.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/7.3">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c7.4" >
+      <summary>
+        <span class="p-number">7.4</span>
+        <span class="p-title">Kommunikasjon</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Bestem hva som skal kommuniseres, til hvem og når, f.eks. hvem som varsles ved et innbrudd og hvordan.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/7.4">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c7.5" >
+      <summary>
+        <span class="p-number">7.5</span>
+        <span class="p-title">Dokumentert informasjon</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Hold policy, risikovurderinger og logger samlet ett sted med versjon og dato, f.eks. i et privat Git-repo.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/7.5">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+  </div>
+</section>
+
+<section class="clause" id="kap8">
+  <h2><span class="cat-number">8</span> Drift</h2>
+  <div class="principles">
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c8.1" >
+      <summary>
+        <span class="p-number">8.1</span>
+        <span class="p-title">Planlegging og styring av driften</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Gjennomfør det som er planlagt og hold styr på endringer, f.eks. en enkel endringslogg for ruteren og serveren.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/8.1">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c8.2" >
+      <summary>
+        <span class="p-number">8.2</span>
+        <span class="p-title">Gjennomføre risikovurderinger</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Gå gjennom risikoene med jevne mellomrom og etter store endringer, f.eks. hvert halvår og etter at ny tjeneste er åpnet mot internett.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/8.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <a href="/grc-grunnmur/risikoer">Risikoregisteret →</a>
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c8.3" >
+      <summary>
+        <span class="p-number">8.3</span>
+        <span class="p-title">Gjennomføre risikobehandling</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Gjennomfør tiltakene i risikobehandlingsplanen og noter hva som er gjort og når, f.eks. «MFA på e-post aktivert 12.03».</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/8.3">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <a href="/grc-grunnmur/risikoer">Risikoregisteret →</a>
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+  </div>
+</section>
+
+<section class="clause" id="kap9">
+  <h2><span class="cat-number">9</span> Evaluering av ytelse</h2>
+  <div class="principles">
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c9.1" >
+      <summary>
+        <span class="p-number">9.1</span>
+        <span class="p-title">Overvåking, måling og evaluering</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Bestem hva som måles og hvor ofte, f.eks. andel enheter med siste oppdatering og om nattens sikkerhetskopi gikk bra.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/9.1">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c9.2" >
+      <summary>
+        <span class="p-number">9.2</span>
+        <span class="p-title">Internrevisjon</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Sjekk en gang i året om du faktisk følger egne regler, gjerne med en sjekkliste. Noter funn som avvik.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/9.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c9.3" >
+      <summary>
+        <span class="p-number">9.3</span>
+        <span class="p-title">Ledelsens gjennomgang</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Én gang i året: se på mål, hendelser, risikoer og revisjonsfunn, og bestem hva som skal endres. Skriv et kort referat.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/9.3">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+  </div>
+</section>
+
+<section class="clause" id="kap10">
+  <h2><span class="cat-number">10</span> Forbedring</h2>
+  <div class="principles">
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c10.1" >
+      <summary>
+        <span class="p-number">10.1</span>
+        <span class="p-title">Kontinuerlig forbedring</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Bruk funn, hendelser og målinger til å gjøre systemet litt bedre hver gang, f.eks. automatisere noe som ofte glipper.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/10.1">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+    
+    
+    <details class="principle item is-ikke_startet" id="c10.2" >
+      <summary>
+        <span class="p-number">10.2</span>
+        <span class="p-title">Avvik og korrigerende tiltak</span>
+        <span class="p-meta">
+          <span class="status status-ikke_startet">Ikke startet</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>Når noe ikke er som det skal (f.eks. en feilet sikkerhetskopi): rett det, finn årsaken, gjør et tiltak så det ikke skjer igjen, og noter det.</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="/grc-grunnmur/styringssystem/10.2">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              
+              <label class="seg-ikke_startet">
+                <input type="radio" name="status" value="ikke_startet" checked>
+                <span>Ikke startet</span>
+              </label>
+              
+              <label class="seg-delvis">
+                <input type="radio" name="status" value="delvis" >
+                <span>Delvis</span>
+              </label>
+              
+              <label class="seg-implementert">
+                <input type="radio" name="status" value="implementert" >
+                <span>Implementert</span>
+              </label>
+              
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet"></textarea>
+          </label>
+
+          <div class="form-footer">
+            
+            <span class="saved" hidden>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  
+  </div>
+</section>
+
+
+  </main>
+
+  <footer class="wrap site-footer">
+    <p><a href="/grc-grunnmur/om">Om Grunnmur</a> ·
+       Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       </p>
+  </footer>
+
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into closed <details>:
+       open the target and every <details> around it, so it is visible.
+       Some browsers do this on their own; this makes it work everywhere. -->
+  <script>
+    function openFromHash() {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (!target) return;
+      for (var el = target; el; el = el.parentElement.closest("details")) {
+        if (el.tagName === "DETAILS") el.open = true;
+        if (!el.parentElement) break;
+      }
+      target.scrollIntoView();
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  </script>
+
+  
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
+  
+</body>
+</html>
