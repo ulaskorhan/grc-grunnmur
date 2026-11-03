@@ -38,6 +38,8 @@
       <nav class="main-nav" aria-label="Hovedmeny">
         <a href="/grc-grunnmur/"
            aria-current="page">NSM</a>
+        <a href="/grc-grunnmur/tiltak"
+           >Tiltak</a>
         <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
         <!-- On the smallest phones "ISO " is hidden, so the links read 27001 / 27002 -->
@@ -48,7 +50,7 @@
         <a href="/grc-grunnmur/om"
            >Om</a>
       </nav>
-      <span class="version-pill">v4</span>
+      <span class="version-pill">v5</span>
     </div>
   </header>
 
@@ -174,17 +176,17 @@
 </section>
 
 <!-- Link to the newest part of the app (version 4) -->
-<a class="feature-banner" href="/grc-grunnmur/styringssystem">
-  <span class="badge">Nytt i v4</span>
-  <span><strong>ISO 27001 styringssystem</strong>
-        <span class="muted">Kapittel 4–10 i PDCA-sirkelen, og en anvendelseserklæring for de 93 kontrollene.</span></span>
+<a class="feature-banner" href="/grc-grunnmur/tiltak">
+  <span class="badge">Nytt i v5</span>
+  <span><strong>NSMs 118 tiltak og varmekart</strong>
+        <span class="muted">Status per tiltak etter NSMs prioritering, og risiko før og etter tiltak.</span></span>
   <span class="arrow" aria-hidden="true">→</span>
 </a>
 
 <!-- Roadmap: a stepper that shows the app grows version by version -->
 <section class="roadmap">
   <div class="section-head">
-    <h2>Versjon 4 av 6</h2>
+    <h2>Versjon 5 av 6</h2>
     <p class="muted">Appen starter enkelt og blir mer detaljert for hver versjon.
        Versjonene er utviklingssteg: nye deler blir tilgjengelige når de er ferdig bygget.</p>
   </div>
@@ -214,7 +216,7 @@
       </div>
     </li>
     
-    <li class="step active">
+    <li class="step done">
       <span class="step-dot">4</span>
       <div>
         <strong>ISO 27001 styringssystem</strong>
@@ -222,7 +224,7 @@
       </div>
     </li>
     
-    <li class="step planned">
+    <li class="step active">
       <span class="step-dot">5</span>
       <div>
         <strong>Tiltak og varmekart</strong>
@@ -273,6 +275,9 @@
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
   <script src="/grc-grunnmur/static/static-mode.js"></script>
   
+  
+
+  <!-- Scripts a page needs in both versions (Flask and GitHub Pages), after the static ones -->
   
 </body>
 </html>

@@ -38,6 +38,8 @@
       <nav class="main-nav" aria-label="Hovedmeny">
         <a href="/grc-grunnmur/"
            aria-current="page">NSM</a>
+        <a href="/grc-grunnmur/tiltak"
+           >Tiltak</a>
         <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
         <!-- On the smallest phones "ISO " is hidden, so the links read 27001 / 27002 -->
@@ -48,7 +50,7 @@
         <a href="/grc-grunnmur/om"
            >Om</a>
       </nav>
-      <span class="version-pill">v4</span>
+      <span class="version-pill">v5</span>
     </div>
   </header>
 
@@ -90,7 +92,9 @@
 
   
   
-  <details class="principle item is-ikke_startet" id="p4.1" >
+  
+  <details class="principle item is-ikke_startet" id="p4.1"
+           >
     <summary>
       <span class="p-number">4.1</span>
       <span class="p-title">Forbered virksomheten på håndtering av hendelser</span>
@@ -192,12 +196,307 @@
       </div>
     </section>
     
+
+    <!-- v5: NSM's measures for this principle, each with its own status.
+         data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
+    
+    <section class="measures" data-store="grunnmur-measures" data-ids="4.1.1 4.1.2 4.1.3 4.1.4 4.1.5 4.1.6">
+      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 6 implementert</span></h3>
+      <div class="measure-list">
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.1.1" >
+  <summary>
+    <span class="control-id">4.1.1</span>
+    <span class="control-title">Etabler et planverk for hendelseshåndtering</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.1.1">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.1.2" >
+  <summary>
+    <span class="control-id">4.1.2</span>
+    <span class="control-title">Gjennomfør en analyse av virksomhetskritiske effekter</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.1.2">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.1.3" >
+  <summary>
+    <span class="control-id">4.1.3</span>
+    <span class="control-title">Utarbeid rolle- og ansvarsbeskrivelse for personell som skal involveres i hendelseshåndtering</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.1.3">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.1.4" >
+  <summary>
+    <span class="control-id">4.1.4</span>
+    <span class="control-title">Utarbeid avtaler med relevante tredjeparter</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.1.4">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.1.5" >
+  <summary>
+    <span class="control-id">4.1.5</span>
+    <span class="control-title">Fastsett hvilke kommunikasjonskanaler som skal benyttes i forbindelse med hendelser</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.1.5">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.1.6" >
+  <summary>
+    <span class="control-id">4.1.6</span>
+    <span class="control-title">Test og øv på planer jevnlig slik at disse er godt innøvd</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.1.6">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+      </div>
+    </section>
     </div>
   </details>
 
   
   
-  <details class="principle item is-ikke_startet" id="p4.2" >
+  
+  <details class="principle item is-ikke_startet" id="p4.2"
+           >
     <summary>
       <span class="p-number">4.2</span>
       <span class="p-title">Vurder og klassifiser hendelser</span>
@@ -290,12 +589,166 @@
       </div>
     </section>
     
+
+    <!-- v5: NSM's measures for this principle, each with its own status.
+         data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
+    
+    <section class="measures" data-store="grunnmur-measures" data-ids="4.2.1 4.2.2 4.2.3">
+      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 3 implementert</span></h3>
+      <div class="measure-list">
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.2.1" >
+  <summary>
+    <span class="control-id">4.2.1</span>
+    <span class="control-title">Gjennomgå loggdata og samle relevante data om hendelsen for å oppnå et godt beslutningsgrunnlag</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.2.1">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.2.2" >
+  <summary>
+    <span class="control-id">4.2.2</span>
+    <span class="control-title">Avgjør alvorlighetsgrad for hendelsen</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.2.2">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.2.3" >
+  <summary>
+    <span class="control-id">4.2.3</span>
+    <span class="control-title">Informer relevante interesseparter</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.2.3">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+      </div>
+    </section>
     </div>
   </details>
 
   
   
-  <details class="principle item is-ikke_startet" id="p4.3" >
+  
+  <details class="principle item is-ikke_startet" id="p4.3"
+           >
     <summary>
       <span class="p-number">4.3</span>
       <span class="p-title">Kontroller og håndter hendelser</span>
@@ -385,12 +838,307 @@
       </div>
     </section>
     
+
+    <!-- v5: NSM's measures for this principle, each with its own status.
+         data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
+    
+    <section class="measures" data-store="grunnmur-measures" data-ids="4.3.1 4.3.2 4.3.3 4.3.4 4.3.5 4.3.6">
+      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 6 implementert</span></h3>
+      <div class="measure-list">
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.3.1" >
+  <summary>
+    <span class="control-id">4.3.1</span>
+    <span class="control-title">Kartlegg omfang og påvirkning på forretningsprosesser</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.3.1">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.3.2" >
+  <summary>
+    <span class="control-id">4.3.2</span>
+    <span class="control-title">Undersøk om hendelsen er under kontroll og gjennomfør nødvendige reaktive tiltak</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.3.2">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.3.3" >
+  <summary>
+    <span class="control-id">4.3.3</span>
+    <span class="control-title">Loggfør alle aktiviteter, resultater og relevante avgjørelser</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.3.3">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.3.4" >
+  <summary>
+    <span class="control-id">4.3.4</span>
+    <span class="control-title">Iverksett gjenopprettingsplan i løpet av, eller i etterkant av hendelsen</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.3.4">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.3.5" >
+  <summary>
+    <span class="control-id">4.3.5</span>
+    <span class="control-title">Koordiner og kommuniser med interne og eksterne interessenter underveis i hendelseshåndteringen</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.3.5">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.3.6" >
+  <summary>
+    <span class="control-id">4.3.6</span>
+    <span class="control-title">Gjennomfør nødvendige aktiviteter i etterkant av hendelsen</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.3.6">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+      </div>
+    </section>
     </div>
   </details>
 
   
   
-  <details class="principle item is-ikke_startet" id="p4.4" >
+  
+  <details class="principle item is-ikke_startet" id="p4.4"
+           >
     <summary>
       <span class="p-number">4.4</span>
       <span class="p-title">Evaluer og lær av hendelser</span>
@@ -474,6 +1222,205 @@
       </div>
     </section>
     
+
+    <!-- v5: NSM's measures for this principle, each with its own status.
+         data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
+    
+    <section class="measures" data-store="grunnmur-measures" data-ids="4.4.1 4.4.2 4.4.3 4.4.4">
+      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 4 implementert</span></h3>
+      <div class="measure-list">
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.4.1" >
+  <summary>
+    <span class="control-id">4.4.1</span>
+    <span class="control-title">Identifiser erfaringer og læringspunkter («lessons learned») fra hendelser</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.4.1">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.4.2" >
+  <summary>
+    <span class="control-id">4.4.2</span>
+    <span class="control-title">Kartlegg og gjennomgå identifiserte, kompromitterte sikkerhetstiltak</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.4.2">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.4.3" >
+  <summary>
+    <span class="control-id">4.4.3</span>
+    <span class="control-title">Vurdere effektiviteten av prosesser, prosedyrer, rapporteringsformater og organisatoriske strukturer med tanke på å respondere på hendelser</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.4.3">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+        
+<details class="control measure item is-ikke_startet" id="t4.4.4" >
+  <summary>
+    <span class="control-id">4.4.4</span>
+    <span class="control-title">Kommuniser og del erfaringsresultatene med (relevante) interessenter</span>
+    <span class="control-meta">
+      
+      <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
+      <span class="status status-ikke_startet">Ikke startet</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="/grc-grunnmur/tiltak/4.4.4">
+      <input type="hidden" name="back" value="kategori">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          
+          <label class="seg-ikke_startet">
+            <input type="radio" name="status" value="ikke_startet" checked>
+            <span>Ikke startet</span>
+          </label>
+          
+          <label class="seg-delvis">
+            <input type="radio" name="status" value="delvis" >
+            <span>Delvis</span>
+          </label>
+          
+          <label class="seg-implementert">
+            <input type="radio" name="status" value="implementert" >
+            <span>Implementert</span>
+          </label>
+          
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
+      </label>
+      <div class="form-footer">
+        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" hidden>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+        
+      </div>
+    </section>
     </div>
   </details>
 
@@ -521,6 +1468,9 @@
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
   <script src="/grc-grunnmur/static/static-mode.js"></script>
   
+  
+
+  <!-- Scripts a page needs in both versions (Flask and GitHub Pages), after the static ones -->
   
 </body>
 </html>
