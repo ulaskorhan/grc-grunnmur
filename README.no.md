@@ -19,7 +19,7 @@ sikkerhet styres), så appen kobler de to.
 
 ## Hva den gjør
 
-Appen er bygget i seks versjoner:
+Appen er bygget i sju versjoner:
 
 | Versjon | Innhold |
 |---------|---------|
@@ -29,6 +29,7 @@ Appen er bygget i seks versjoner:
 | v4 | ISO 27001 kapittel 4–10 i PDCA-sirkelen, og en anvendelseserklæring (SoA) for de 93 kontrollene |
 | v5 | NSMs 118 tiltak med status, sortert etter NSMs prioriteringsgrupper; restrisiko og varmekart før og etter tiltak; NSMs tiltak som forslag i risikoskjemaet |
 | v6 | En utskriftsvennlig rapport med alt på én side (skriv ut eller lagre som PDF fra nettleseren), og denne README-en på engelsk og norsk |
+| v7 | Eksport og import av alle data som én JSON-fil, i begge versjonene, som backup eller for å flytte data mellom lokal og offentlig versjon |
 
 Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med dato og kilde.
 
@@ -52,6 +53,10 @@ Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med 
   hver besøkendes svar i deres egen nettleser. Ingenting sendes til en server, og min
   lokale database kommer aldri med i byggingen.
 - Begge versjonene bruker de samme malene, så de ser like ut og virker likt.
+- Eksport og import bruker samme JSON-format i begge versjonene (beskrevet i `backup.py`).
+  En importert fil sjekkes helt før noe lagres, med de samme reglene som skjemaene.
+  Er én verdi feil, endres ingenting. Ved import velger brukeren å erstatte alt eller
+  slå sammen. Sammenslåing legger aldri til en risiko som finnes fra før.
 - Risikonivåene regnes ut i Python (`risks.py`). De samme reglene sendes til
   nettleseren som JSON, så den statiske versjonen regner helt likt.
 
@@ -73,7 +78,8 @@ Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med 
   Cybersjekk eller en revisjon.
 - Én bruker, ingen innlogging. Den er laget for én person eller et lite team på én maskin.
 - I den offentlige versjonen finnes dataene bare i den nettleseren. Sletter du nettleserens
-  data, forsvinner de, og det finnes ikke eksport eller import av data ennå.
+  data, forsvinner de, så eksporter en fil av og til som backup.
+- Den eksporterte filen har notatene dine som vanlig tekst. Den er ikke kryptert.
 
 ## Kjøre den
 
@@ -100,7 +106,8 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 ## Filer
 
 - `app.py`: Flask-rutene for alle sidene
-- `db.py`: SQLite-tabeller, lesing og lagring (fremdrift, risikoer, kapittelkrav, SoA, tiltak)
+- `db.py`: SQLite-tabeller, lesing og lagring (fremdrift, risikoer, kapittelkrav, SoA, tiltak), og lagring av en import
+- `backup.py`: JSON-formatet, eksport og sjekken av en importert fil
 - `nsm_data.py`: NSMs 4 kategorier og 21 prinsipper
 - `nsm_measures.py`: NSMs 118 tiltaksoverskrifter og prioriteringsgrupper
 - `nsm_iso_mapping.py`: NSMs kobling fra tiltak til ISO 27002-kontroller (bare numre)
@@ -116,5 +123,6 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/static-risks.js`: risikoregisteret i nettleseren (offentlig versjon)
 - `static/risk-tools.js`: filter i varmekartet og forslag fra NSM (begge versjoner)
 - `static/report.js`: fyller rapporten fra nettleseren (offentlig versjon)
+- `static/data.js`: eksport og import i nettleseren (offentlig versjon), og bekreftelsen før erstatning (begge)
 
 Bygget med Python, Flask og SQLite. Uten JavaScript-rammeverk.

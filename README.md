@@ -19,7 +19,7 @@ system around it (how security is governed), so the app connects the two.
 
 ## What it does
 
-The app was built in six versions:
+The app was built in seven versions:
 
 | Version | Content |
 |---------|---------|
@@ -29,6 +29,7 @@ The app was built in six versions:
 | v4 | ISO 27001 clauses 4–10 in the Plan-Do-Check-Act cycle, plus a statement of applicability (SoA) for the 93 controls |
 | v5 | NSM's 118 measures with status, sorted by NSM's priority groups; residual risk and heat maps before and after measures; NSM measures suggested on the risk form |
 | v6 | A print-friendly report of everything on one page (print or save as PDF from the browser), and this README in English and Norwegian |
+| v7 | Export and import of all data as one JSON file, in both versions, so data can be backed up or moved between the local and the public version |
 
 A thin banner at the top of every page shows NSM's national cyber risk level
 (nasjonalt cyberrisikonivå), with date and source.
@@ -53,6 +54,10 @@ A thin banner at the top of every page shows NSM's national cyber risk level
   save each visitor's answers in their own browser. Nothing is sent to a server, and
   my local database is never part of the build.
 - The same templates are used in both versions, so they look and work the same.
+- Export and import use one JSON format in both versions (described in `backup.py`).
+  An imported file is checked completely before anything is saved, with the same rules
+  as the forms. If one value is wrong, nothing changes. On import the user chooses to
+  replace everything or to merge; a merge never adds a risk that is already there.
 - Risk levels are calculated in Python (`risks.py`). The same rules are sent to the
   browser as JSON, so the static version calculates exactly the same.
 
@@ -76,7 +81,8 @@ A thin banner at the top of every page shows NSM's national cyber risk level
   Cybersjekk or an audit.
 - One user, no login. It is meant for one person or a small team on one machine.
 - On the public version the data lives only in that browser. Clearing the browser's
-  data deletes it, and there is no export or import of the data yet.
+  data deletes it, so export a file now and then as a backup.
+- The exported file holds your notes as plain text. It is not encrypted.
 
 ## Running it
 
@@ -103,7 +109,8 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 ## Files
 
 - `app.py`: Flask routes for every page
-- `db.py`: SQLite tables and reading and writing (progress, risks, clauses, SoA, measures)
+- `db.py`: SQLite tables and reading and writing (progress, risks, clauses, SoA, measures), and saving an import
+- `backup.py`: the JSON file format, export, and the checks on an imported file
 - `nsm_data.py`: NSM's 4 categories and 21 principles
 - `nsm_measures.py`: NSM's 118 measure headings and priority groups
 - `nsm_iso_mapping.py`: NSM's mapping from measures to ISO 27002 controls (numbers only)
@@ -119,5 +126,6 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/static-risks.js`: the risk register in the browser (public version)
 - `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
 - `static/report.js`: fills the report from the browser (public version)
+- `static/data.js`: export and import in the browser (public version), and the confirmation before replacing (both)
 
 Built with Python, Flask and SQLite. No JavaScript framework.
