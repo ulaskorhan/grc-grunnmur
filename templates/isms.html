@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Styringssystem · Grunnmur{% endblock %}
+{% block main_attrs %}data-store="grunnmur-isms"{% endblock %}
+
+{% block content %}
+<!-- Header: intro, overall ring and a count per status (data-ids is used by static-mode.js) -->
+<section class="cat-head isms-head" data-ids="{{ all_ids|join(' ') }}">
+  <div class="cat-title">
+    <p class="eyebrow">Versjon 4 · ISO/IEC 27001:2022</p>
+    <h1>Styringssystem</h1>
+    <p class="lead">Kapittel 4–10 er kravene til selve styringen: hvem som har ansvar,
+       hvordan risiko vurderes, og hvordan arbeidet følges opp og forbedres.</p>
+    <div class="chips">
+      <span class="chip chip-implementert"><span data-count="implementert">{{ counts.implementert }}</span> implementert</span>
+      <span class="chip chip-delvis"><span data-count="delvis">{{ counts.delvis }}</span> delvis</span>
+      <span class="chip"><span data-count="ikke_startet">{{ counts.ikke_startet }}</span> ikke startet</span>
+    </div>
+  </div>
+  <div class="ring ring-sm" style="--p: {{ overall }}" role="img" aria-label="{{ overall }} prosent">
+    <div class="ring-inner"><strong><span class="js-pct">{{ overall }}</span><small>%</small></strong></div>
+  </div>
+</section>
+
+<!-- The PDCA cycle: one card per phase, linking to its first clause -->
+<nav class="pdca" aria-label="PDCA-faser">
+  {% for phase in phases %}
+  <a class="pdca-card" href="#kap{{ phase.clauses[0] }}" data-ids="{{ phase.ids|join(' ') }}">
+    <span class="pdca-step">{{ loop.index }}</span>
+    <strong>{{ phase.name }}</strong>
+    <span class="muted">Kapittel {{ phase.clauses[0] }}{% if phase.clauses|length > 1 %}–{{ phase.clauses[-1] }}{% endif %}</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: {{ phase.percent }}%"></span></span>
+    <span class="pdca-pct"><span class="js-pct">{{ phase.percent }}</span> %</span>
+  </a>
+  {% endfor %}
+</nav>
+
+<p class="hint muted">Titlene er korte beskrivelser med egne ord, ikke tekst fra standarden.
+   Trykk på et krav for å åpne det.</p>
+
+{% for clause in clauses %}
+<section class="clause" id="kap{{ clause.number }}">
+  <h2><span class="cat-number">{{ clause.number }}</span> {{ clause.name }}</h2>
+  <div class="principles">
+  {% for number, title in clause["items"] %}
+    {% set row = rows.get(number) %}
+    {% set status = row.status if row else 'ikke_startet' %}
+    <details class="principle item is-{{ status }}" id="c{{ number }}" {% if number == open_id %}open{% endif %}>
+      <summary>
+        <span class="p-number">{{ number }}</span>
+        <span class="p-title">{{ title }}</span>
+        <span class="p-meta">
+          <span class="status status-{{ status }}">{{ statuses[status] }}</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </summary>
+
+      <div class="p-body">
+        <aside class="example-panel">
+          <details class="example">
+            <summary>💡 Eksempel</summary>
+            <p>{{ examples[number] }}</p>
+            <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
+          </details>
+        </aside>
+
+        <form method="post" action="{{ url_for('save_isms', item_id=number) }}">
+          <fieldset class="segmented">
+            <legend>Status</legend>
+            <div class="seg-options">
+              {% for key, label in statuses.items() %}
+              <label class="seg-{{ key }}">
+                <input type="radio" name="status" value="{{ key }}" {% if key == status %}checked{% endif %}>
+                <span>{{ label }}</span>
+              </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+
+          <label class="field">Notater og bevis
+            <textarea name="notes" rows="3" placeholder="F.eks. policy signert 01.02, ligger i Git-repoet">{{ row.notes if row else '' }}</textarea>
+          </label>
+
+          <div class="form-footer">
+            {% for endpoint, text in links.get(number, []) %}
+            <a href="{{ url_for(endpoint) }}">{{ text }} →</a>
+            {% endfor %}
+            <span class="saved" {% if number != open_id %}hidden{% endif %}>✓ Lagret</span>
+            <button type="submit">Lagre</button>
+          </div>
+        </form>
+      </div>
+    </details>
+  {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

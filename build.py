@@ -53,6 +53,7 @@ def main():
     save_page(client, "/risikoer", OUT / "risikoer" / "index.html")
     save_page(client, "/risikoer/ny", OUT / "risikoer" / "ny" / "index.html")
     save_page(client, "/iso27002", OUT / "iso27002" / "index.html")
+    save_page(client, "/styringssystem", OUT / "styringssystem" / "index.html")
     save_page(client, "/om", OUT / "om" / "index.html")
 
     shutil.copytree(Path(__file__).parent / "static", OUT / "static")

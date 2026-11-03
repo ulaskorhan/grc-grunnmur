@@ -416,13 +416,17 @@ button:active { transform: scale(0.98); }
   font-size: 0.9rem; font-weight: 500; color: var(--muted); text-decoration: none;
 }
 .main-nav a[aria-current="page"] { color: var(--text); background: var(--track); }
-/* Not enough room on the smallest phones for logo text, 3 menu links and the pill:
-   keep the logo mark (the link still says "Grunnmur" to screen readers) and tighten the menu. */
+/* Phones: the 5 menu links get their own row under the logo.
+   overflow-x is a safety net: the row scrolls sideways instead of breaking the page. */
+@media (max-width: 639px) {
+  .header-inner { flex-wrap: wrap; height: auto; padding-top: 8px; row-gap: 2px; }
+  .version-pill { margin-left: auto; }
+  .main-nav { order: 3; width: 100%; margin: 0 -8px; padding-bottom: 6px; overflow-x: auto; scrollbar-width: none; }
+  .principle, .control { scroll-margin-top: 112px; }   /* the header is taller here */
+}
 @media (max-width: 400px) {
-  .version-pill { display: none; }
-  .logo-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .nav-iso { display: none; }           /* "ISO 27001" becomes "27001" */
   .main-nav a { padding: 6px 8px; }
-  .nav-long { display: none; }          /* "ISO 27002" becomes "ISO" */
 }
 
 /* Small pill label, e.g. "Nytt i v2" */
@@ -522,23 +526,63 @@ button:active { transform: scale(0.98); }
 
 .themes { display: grid; gap: 10px; }
 .theme { border-left-color: var(--accent-2); scroll-margin-top: 72px; }
-.controls { list-style: none; margin: 0; padding: 4px 0; }
-.control {
-  display: grid; grid-template-columns: 3em 1fr; gap: 4px 10px;
-  padding: 10px 16px; border-top: 1px solid var(--border);
-  scroll-margin-top: 72px;
-}
+/* Each control is a <details>: the summary is the row, the body holds the SoA form (v4) */
+.controls { padding: 4px 0; }
+.control { border-top: 1px solid var(--border); scroll-margin-top: 72px; }
 .control:first-child { border-top: 0; }
+.control > summary {
+  display: grid; grid-template-columns: 3em 1fr; gap: 4px 10px;
+  padding: 10px 16px; cursor: pointer; list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.control > summary::-webkit-details-marker { display: none; }
 .control-id { font-weight: 600; color: var(--accent-text); font-variant-numeric: tabular-nums; }
 .control-title { min-width: 0; overflow-wrap: anywhere; }
-.control-nsm { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.8rem; }
-.control-nsm .chip { text-decoration: none; background: var(--accent-soft); color: var(--accent-text); }
-.control.is-unlinked .control-title { color: var(--muted); }
-.control:target { background: color-mix(in srgb, var(--accent) 10%, transparent); }   /* the control a link pointed to */
+.control-meta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 0.8rem; }
+.control-meta .chip { text-decoration: none; background: var(--accent-soft); color: var(--accent-text); }
+.control.no-nsm .control-title { color: var(--muted); }
+.control[open] > summary { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.control:target > summary { background: color-mix(in srgb, var(--accent) 12%, transparent); }   /* the control a link pointed to */
+.control-body { padding: 12px 16px 16px; }
 @media (min-width: 640px) {
   .theme-boxes { grid-template-columns: repeat(4, 1fr); }
-  .control { grid-template-columns: 3em 1fr auto; align-items: center; }
-  .control-nsm { grid-column: auto; justify-content: flex-end; }
+  .control > summary { grid-template-columns: 3em 1fr auto; align-items: center; }
+  .control-meta { grid-column: auto; justify-content: flex-end; }
+  .control-body { padding-left: calc(16px + 3em + 10px); }
+}
+
+/* ---------- 6g. ISO 27001 styringssystem and SoA (v4) ---------- */
+.isms-head { grid-template-columns: 1fr; margin-top: 24px; }   /* no icon on this page */
+.isms-head .lead { margin-bottom: 12px; }
+
+/* The PDCA cycle: 2 × 2 on phones, 4 in a row on wider screens */
+.pdca { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0 4px; }
+.pdca-card {
+  display: grid; gap: 4px; padding: 14px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--surface); box-shadow: var(--shadow);
+  color: var(--text); text-decoration: none; font-size: 0.8rem; min-width: 0;
+}
+.pdca-card strong { font-size: 1rem; }
+.pdca-card .bar { margin-top: 6px; }
+.pdca-step {
+  display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent-text); font-weight: 700; font-size: 0.75rem;
+}
+.pdca-pct { color: var(--muted); }
+@media (hover: hover) { .pdca-card:hover { border-color: var(--accent); } }
+
+.clause { margin-top: 28px; scroll-margin-top: 72px; }
+.clause h2 { font-size: 1.15rem; margin: 0 0 10px; }
+
+/* SoA answers: "Gjelder" in teal, "Gjelder ikke" in neutral grey with a strike-through look */
+.status-gjelder { background: var(--accent-soft); color: var(--accent-text); }
+.status-gjelder_ikke { background: var(--track); color: var(--muted); text-decoration: line-through; }
+.seg-gjelder input:checked + span { color: var(--accent-text); }
+.soa-summary { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 12px; font-size: 0.85rem; }
+
+@media (min-width: 640px) {
+  .isms-head { grid-template-columns: 1fr auto; }
+  .pdca { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ---------- 6c. Risk register (v2) ---------- */

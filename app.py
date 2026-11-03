@@ -11,6 +11,10 @@ Pages:
   /risikoer/<id>        v2: edit one risk (POST saves it)
   /risikoer/<id>/slett  v2: delete one risk (POST)
   /iso27002             v3: the 93 ISO/IEC 27002 controls and NSM's links to them
+                        v4: plus the statement of applicability (SoA) per control
+  /iso27002/soa/<nr>    v4: saves the SoA answer for one control (POST)
+  /styringssystem       v4: ISO 27001 clauses 4-10, grouped Plan-Do-Check-Act
+  /styringssystem/<nr>  v4: saves one requirement (POST)
   /om                   about page: background, and what Grunnmur adds to NSM's advice
 """
 
@@ -19,6 +23,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 import cyber_level
 import db
 import examples
+import iso27001
 import iso27002
 import nsm_data
 import risks
@@ -39,11 +44,11 @@ ROADMAP = [
     (1, "Grunnprinsipper", "Status, notater, ISO-referanse og personvern per prinsipp"),
     (2, "Risikoregister", "Sannsynlighet × konsekvens, behandling og kobling til NSM og ISO 27001 6.1"),
     (3, "ISO/IEC 27002", "De 93 kontrollene og NSMs egen kobling til grunnprinsippene"),
-    (4, "ISO 27001 styringssystem", "Kapittel 4–10: kontekst, ledelse, planlegging og forbedring"),
+    (4, "ISO 27001 styringssystem", "Kapittel 4–10 i PDCA-sirkelen og anvendelseserklæring (SoA)"),
     (5, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
     (6, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
 ]
-CURRENT_VERSION = 3
+CURRENT_VERSION = 4
 
 
 @app.context_processor
@@ -66,6 +71,19 @@ def load_progress():
     if app.config["STATIC_SITE"]:
         return {}
     return db.get_all_progress()
+
+
+def load_statuses(table):
+    """Like load_progress(), for the v4 tables "isms" and "soa": empty in static mode."""
+    if app.config["STATIC_SITE"]:
+        return {}
+    return db.get_statuses(table)
+
+
+def percent_done(item_ids, rows):
+    """Progress (0-100) over a list of ids, with the same scoring as the principles."""
+    points = sum(SCORE[rows[i]["status"]] for i in item_ids if i in rows)
+    return round(100 * points / len(item_ids))
 
 
 def category_progress(category, progress):
@@ -125,6 +143,11 @@ def home():
 @app.route("/iso27002")
 def iso_page():
     themes = iso27002.themes_with_controls()
+    soa = load_statuses("soa")
+    # How many controls have each SoA answer; controls with no saved row are "ikke_vurdert".
+    soa_counts = {key: 0 for key in db.SOA_STATUSES}
+    for control_id in iso27002.CONTROLS:
+        soa_counts[soa[control_id]["status"] if control_id in soa else "ikke_vurdert"] += 1
     return render_template(
         "iso27002.html",
         themes=themes,
@@ -133,7 +156,65 @@ def iso_page():
         # Principle number -> category id, to link each principle to its category page
         category_of={number: c["id"] for c in nsm_data.CATEGORIES
                      for number, _title, _link in c["principles"]},
+        soa=soa,
+        soa_counts=soa_counts,
+        soa_statuses=db.SOA_STATUSES,
+        open_id=request.args.get("apen", ""),
     )
+
+
+@app.route("/iso27002/soa/<control_id>", methods=["POST"])
+def save_soa(control_id):
+    if control_id not in iso27002.CONTROLS:
+        abort(404)
+    db.save_status("soa", control_id,
+                   status=request.form.get("status", "ikke_vurdert"),
+                   notes=request.form.get("notes", ""))
+    return redirect(url_for("iso_page", apen=control_id) + "#k" + control_id)
+
+
+# ---------- v4: ISO 27001 management system (clauses 4-10) ----------
+
+@app.route("/styringssystem")
+def isms_page():
+    rows = load_statuses("isms")
+    all_ids = [number for clause in iso27001.CLAUSES for number, _title in clause["items"]]
+    clauses = {clause["number"]: clause for clause in iso27001.CLAUSES}
+
+    # One card per PDCA phase, with its progress
+    phases = []
+    for phase_id, name, clause_numbers in iso27001.PHASES:
+        ids = [number for n in clause_numbers for number, _title in clauses[n]["items"]]
+        phases.append({"id": phase_id, "name": name, "clauses": clause_numbers,
+                       "ids": ids, "percent": percent_done(ids, rows)})
+
+    counts = {key: 0 for key in db.STATUSES}
+    for number in all_ids:
+        counts[rows[number]["status"] if number in rows else "ikke_startet"] += 1
+
+    return render_template(
+        "isms.html",
+        clauses=iso27001.CLAUSES,
+        phases=phases,
+        rows=rows,
+        all_ids=all_ids,
+        overall=percent_done(all_ids, rows),
+        counts=counts,
+        statuses=db.STATUSES,
+        links=iso27001.LINKS,
+        examples=iso27001.EXAMPLES,
+        open_id=request.args.get("apen", ""),
+    )
+
+
+@app.route("/styringssystem/<item_id>", methods=["POST"])
+def save_isms(item_id):
+    if item_id not in iso27001.ITEM_IDS:
+        abort(404)
+    db.save_status("isms", item_id,
+                   status=request.form.get("status", "ikke_startet"),
+                   notes=request.form.get("notes", ""))
+    return redirect(url_for("isms_page", apen=item_id) + "#c" + item_id)
 
 
 @app.route("/om")

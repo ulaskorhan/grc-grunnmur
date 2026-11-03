@@ -34,7 +34,7 @@
 {% for number, title, link in category.principles %}
   {% set row = progress.get(number) %}
   {% set status = row.status if row else 'ikke_startet' %}
-  <details class="principle is-{{ status }}" id="p{{ number }}" {% if number == open_id %}open{% endif %}>
+  <details class="principle item is-{{ status }}" id="p{{ number }}" {% if number == open_id %}open{% endif %}>
     <summary>
       <span class="p-number">{{ number }}</span>
       <span class="p-title">{{ title }}</span>
