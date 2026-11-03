@@ -124,5 +124,6 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/risk-tools.js`: filter i varmekartet og forslag fra NSM (begge versjoner)
 - `static/report.js`: fyller rapporten fra nettleseren (offentlig versjon)
 - `static/data.js`: eksport og import i nettleseren (offentlig versjon), og bekreftelsen før erstatning (begge)
+- `static/favicon.svg`, `static/og-image.png`: ikonet i fanen og bildet som vises når lenken deles
 
 Bygget med Python, Flask og SQLite. Uten JavaScript-rammeverk.

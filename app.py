@@ -49,6 +49,9 @@ app.config["STATIC_SITE"] = False
 # v7: refuse uploads larger than this, before Flask reads them (see too_large below)
 app.config["MAX_CONTENT_LENGTH"] = backup.MAX_BYTES
 
+# The public address. Link previews (og:image) need a full URL, not a relative path.
+SITE_URL = "https://ulaskorhan.github.io/grc-grunnmur"
+
 # How much each status counts towards the progress score (0-100 %).
 SCORE = {"ikke_startet": 0, "delvis": 0.5, "implementert": 1}
 
@@ -73,6 +76,7 @@ def add_template_globals():
         "static_site": app.config["STATIC_SITE"],
         "current_version": CURRENT_VERSION,
         "cyber": cyber_level.for_template(),
+        "site_url": SITE_URL,
     }
 
 

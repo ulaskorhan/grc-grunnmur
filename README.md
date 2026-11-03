@@ -127,5 +127,6 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
 - `static/report.js`: fills the report from the browser (public version)
 - `static/data.js`: export and import in the browser (public version), and the confirmation before replacing (both)
+- `static/favicon.svg`, `static/og-image.png`: the tab icon and the picture shown when the link is shared
 
 Built with Python, Flask and SQLite. No JavaScript framework.
