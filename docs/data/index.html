@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <title>Data · Grunnmur</title>
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+</head>
+<body>
+  <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
+       Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026. Les mer hos NSM.">
+    <span class="wrap cyber-inner">
+      <span class="cyber-dot" aria-hidden="true"></span>
+      <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
+      <strong class="cyber-value">HØYT</strong>
+      <!-- The 5 levels as small bars; the ones up to the current level are filled -->
+      <span class="cyber-scale" aria-hidden="true">
+        <i class="on" title="Svært lavt"></i><i class="on" title="Lavt"></i><i class="on" title="Moderat"></i><i class="on" title="Høyt"></i><i class="" title="Ekstremt høyt"></i>
+      </span>
+      <span class="cyber-source">NSM · 27.10.2026 <span aria-hidden="true">↗</span></span>
+    </span>
+  </a>
+
+  <!-- Sticky header: stays at the top while scrolling -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/grc-grunnmur/" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">Grunnmur</span>
+      </a>
+      <!-- Main menu. request.endpoint is the name of the current page's function,
+           used to underline the section the user is in. -->
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/grc-grunnmur/"
+           >NSM</a>
+        <a href="/grc-grunnmur/tiltak"
+           >Tiltak</a>
+        <a href="/grc-grunnmur/risikoer"
+           >Risikoer</a>
+        <!-- On the smallest phones "ISO " is hidden, so the links read 27001 / 27002 -->
+        <a href="/grc-grunnmur/styringssystem"
+           ><span class="nav-iso">ISO </span>27001</a>
+        <a href="/grc-grunnmur/iso27002"
+           ><span class="nav-iso">ISO </span>27002</a>
+        <a href="/grc-grunnmur/rapport"
+           >Rapport</a>
+        <a href="/grc-grunnmur/om"
+           >Om</a>
+      </nav>
+      <span class="version-pill">v7</span>
+    </div>
+  </header>
+
+  <!-- data-store tells static-mode.js which browser storage key this page uses -->
+  <main class="wrap" >
+    
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Versjon 7 · Data</p>
+    <h1>Eksport og import</h1>
+    <p class="lead">Ta vare på alt du har lagt inn som én fil, eller flytt det mellom
+       den lokale og den offentlige versjonen av Grunnmur.</p>
+  </div>
+</section>
+
+<!-- Result of an import. Flask fills these after the redirect; on GitHub Pages data.js does. -->
+<p class="form-success" id="import-result" role="status" hidden>
+  
+</p>
+<p class="form-error" id="import-error" role="alert" hidden></p>
+
+<div class="about data-page">
+  <!-- 1. What is saved now. data-saved="..." is filled by data.js on GitHub Pages. -->
+  <section class="about-section">
+    <h2>Det du har lagret</h2>
+    <ul class="data-counts">
+      
+      <li><strong data-saved="progress">0</strong> <span>Grunnprinsipper</span></li>
+      
+      <li><strong data-saved="measures">0</strong> <span>Tiltak</span></li>
+      
+      <li><strong data-saved="isms">0</strong> <span>Styringssystem</span></li>
+      
+      <li><strong data-saved="soa">0</strong> <span>SoA</span></li>
+      
+      <li><strong data-saved="risks">0</strong> <span>Risikoer</span></li>
+      
+    </ul>
+    <p class="muted data-note">Tallene viser hvor mange prinsipper, tiltak, krav og kontroller
+       du har lagret noe på, og hvor mange risikoer du har.
+       Dataene ligger i denne nettleseren.</p>
+  </section>
+
+  <!-- 2. Export -->
+  <section class="about-section">
+    <h2>Eksporter</h2>
+    <p>Last ned alt som én JSON-fil: status og notater for grunnprinsipper, tiltak,
+       styringssystem og SoA, og hele risikoregisteret.</p>
+    
+    <button type="button" class="inline-button" id="export-data">Last ned JSON-fil</button>
+    
+    <p class="muted data-note">Filen inneholder notatene dine som vanlig tekst. Oppbevar den like
+       trygt som annen dokumentasjon om sikkerheten din.</p>
+  </section>
+
+  <!-- 3. Import. The user chooses what happens to the data that is already saved. -->
+  <section class="about-section">
+    <h2>Importer</h2>
+    <form method="post" enctype="multipart/form-data" id="import-form"
+          action="#" data-static>
+      <label class="field">JSON-fil eksportert fra Grunnmur
+        <input type="file" name="file" accept=".json,application/json" required>
+      </label>
+
+      <!-- No choice is ticked from the start, so the user must decide -->
+      <fieldset class="choices">
+        <legend>Hva skal skje med det du har lagret nå?</legend>
+        <label class="choice">
+          <input type="radio" name="mode" value="erstatt" required>
+          <span><strong>Erstatt alt</strong>
+                <span class="muted">Alt du har lagret nå slettes, og innholdet i filen tar over.</span></span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="mode" value="sammen">
+          <span><strong>Slå sammen</strong>
+                <span class="muted">Det som står i filen, overskriver det samme prinsippet, tiltaket,
+                kravet eller kontrollen. Resten beholdes. Risikoene i filen legges til, unntatt
+                de som er helt like en du har fra før.</span></span>
+        </label>
+      </fieldset>
+
+      <div class="form-footer">
+        <button type="submit">Importer</button>
+      </div>
+    </form>
+    <p class="muted data-note">Filen sjekkes med de samme reglene som skjemaene i appen før noe lagres.
+       Er én verdi feil, endres ingenting.</p>
+  </section>
+</div>
+
+<!-- The rules for data.js: which numbers and statuses exist (from backup.py) -->
+<script id="backup-rules" type="application/json">{"app": "grunnmur", "format": 1, "labels": {"isms": "Styringssystem", "measures": "Tiltak", "progress": "Grunnprinsipper", "risks": "Risikoer", "soa": "SoA"}, "max_bytes": 1000000, "risk": {"principles": ["1.1", "1.2", "1.3", "2.1", "2.10", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.1", "3.2", "3.3", "3.4", "4.1", "4.2", "4.3", "4.4"], "statuses": ["apen", "under_behandling", "lukket"], "treatments": ["redusere", "akseptere", "unnga", "overfore"]}, "sections": {"isms": {"ids": ["10.1", "10.2", "4.1", "4.2", "4.3", "4.4", "5.1", "5.2", "5.3", "6.1.1", "6.1.2", "6.1.3", "6.2", "6.3", "7.1", "7.2", "7.3", "7.4", "7.5", "8.1", "8.2", "8.3", "9.1", "9.2", "9.3"], "statuses": ["ikke_startet", "delvis", "implementert"]}, "measures": {"ids": ["1.1.1", "1.1.2", "1.1.3", "1.1.4", "1.1.5", "1.1.6", "1.2.1", "1.2.2", "1.2.3", "1.2.4", "1.3.1", "1.3.2", "1.3.3", "2.1.1", "2.1.10", "2.1.2", "2.1.3", "2.1.4", "2.1.5", "2.1.6", "2.1.7", "2.1.8", "2.1.9", "2.10.1", "2.10.2", "2.10.3", "2.10.4", "2.2.1", "2.2.2", "2.2.3", "2.2.4", "2.2.5", "2.2.6", "2.2.7", "2.3.1", "2.3.10", "2.3.2", "2.3.3", "2.3.4", "2.3.5", "2.3.6", "2.3.7", "2.3.8", "2.3.9", "2.4.1", "2.4.2", "2.4.3", "2.4.4", "2.5.1", "2.5.2", "2.5.3", "2.5.4", "2.5.5", "2.5.6", "2.5.7", "2.5.8", "2.6.1", "2.6.2", "2.6.3", "2.6.4", "2.6.5", "2.6.6", "2.6.7", "2.7.1", "2.7.2", "2.7.3", "2.7.4", "2.7.5", "2.8.1", "2.8.2", "2.8.3", "2.8.4", "2.9.1", "2.9.2", "2.9.3", "2.9.4", "3.1.1", "3.1.2", "3.1.3", "3.2.1", "3.2.2", "3.2.3", "3.2.4", "3.2.5", "3.2.6", "3.2.7", "3.3.1", "3.3.2", "3.3.3", "3.3.4", "3.3.5", "3.3.6", "3.3.7", "3.4.1", "3.4.2", "3.4.3", "3.4.4", "3.4.5", "3.4.6", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.1.5", "4.1.6", "4.2.1", "4.2.2", "4.2.3", "4.3.1", "4.3.2", "4.3.3", "4.3.4", "4.3.5", "4.3.6", "4.4.1", "4.4.2", "4.4.3", "4.4.4"], "statuses": ["ikke_startet", "delvis", "implementert"]}, "progress": {"ids": ["1.1", "1.2", "1.3", "2.1", "2.10", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.1", "3.2", "3.3", "3.4", "4.1", "4.2", "4.3", "4.4"], "statuses": ["ikke_startet", "delvis", "implementert"]}, "soa": {"ids": ["5.1", "5.10", "5.11", "5.12", "5.13", "5.14", "5.15", "5.16", "5.17", "5.18", "5.19", "5.2", "5.20", "5.21", "5.22", "5.23", "5.24", "5.25", "5.26", "5.27", "5.28", "5.29", "5.3", "5.30", "5.31", "5.32", "5.33", "5.34", "5.35", "5.36", "5.37", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "7.1", "7.10", "7.11", "7.12", "7.13", "7.14", "7.2", "7.3", "7.4", "7.5", "7.6", "7.7", "7.8", "7.9", "8.1", "8.10", "8.11", "8.12", "8.13", "8.14", "8.15", "8.16", "8.17", "8.18", "8.19", "8.2", "8.20", "8.21", "8.22", "8.23", "8.24", "8.25", "8.26", "8.27", "8.28", "8.29", "8.3", "8.30", "8.31", "8.32", "8.33", "8.34", "8.4", "8.5", "8.6", "8.7", "8.8", "8.9"], "statuses": ["ikke_vurdert", "gjelder", "gjelder_ikke"]}}}</script>
+
+  </main>
+
+  <footer class="wrap site-footer">
+    <p><a href="/grc-grunnmur/om">Om Grunnmur</a> ·
+       <a href="/grc-grunnmur/data">Eksport og import</a> ·
+       Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
+       
+       Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
+       <button type="button" class="link-button" id="clear-data">Slett mine data</button>
+       </p>
+  </footer>
+
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into closed <details>:
+       open the target and every <details> around it, so it is visible.
+       Some browsers do this on their own; this makes it work everywhere. -->
+  <script>
+    function openFromHash() {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (!target) return;
+      for (var el = target; el; el = el.parentElement.closest("details")) {
+        if (el.tagName === "DETAILS") el.open = true;
+        if (!el.parentElement) break;
+      }
+      target.scrollIntoView();
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  </script>
+
+  
+  <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  
+  
+
+  <!-- Scripts a page needs in both versions (Flask and GitHub Pages), after the static ones -->
+  
+<script src="/grc-grunnmur/static/data.js"></script>
+
+</body>
+</html>
