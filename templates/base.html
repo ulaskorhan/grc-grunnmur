@@ -40,6 +40,8 @@
            {% if request.endpoint in ('home', 'category_page') %}aria-current="page"{% endif %}>Prinsipper</a>
         <a href="{{ url_for('risk_list') }}"
            {% if request.endpoint and request.endpoint.startswith('risk') %}aria-current="page"{% endif %}>Risikoer</a>
+        <a href="{{ url_for('iso_page') }}"
+           {% if request.endpoint == 'iso_page' %}aria-current="page"{% endif %}>ISO<span class="nav-long"> 27002</span></a>
         <a href="{{ url_for('about') }}"
            {% if request.endpoint == 'about' %}aria-current="page"{% endif %}>Om</a>
       </nav>
@@ -61,6 +63,21 @@
        Data lagres kun lokalt på din maskin.
        {% endif %}</p>
   </footer>
+
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into a closed <details>:
+       open it so the target is visible. Some browsers do this on their own; this makes it work everywhere. -->
+  <script>
+    function openFromHash() {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var details = target && (target.closest("details") || target);
+      if (details && details.tagName === "DETAILS") {
+        details.open = true;
+        target.scrollIntoView();
+      }
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  </script>
 
   {% if static_site %}
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->

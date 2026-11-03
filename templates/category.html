@@ -95,6 +95,19 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    {% if iso_controls[number] %}
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        {% for cid in iso_controls[number] %}
+        <a class="control-chip" href="{{ url_for('iso_page') }}#k{{ cid }}"
+           title="{{ iso_titles[cid] }}"><b>{{ cid }}</b> {{ iso_titles[cid] }}</a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
     </div>
   </details>
 {% endfor %}

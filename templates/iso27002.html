@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}ISO/IEC 27002 · Grunnmur{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Versjon 3 · ISO/IEC 27002:2022</p>
+    <h1>ISO/IEC 27002</h1>
+    <p class="lead">93 sikkerhetskontroller i fire temaer. ISO 27001 vedlegg A lister de samme
+       kontrollene, og ISO 27002 gir veiledningen. Her ser du hvilke NSM kobler til grunnprinsippene.</p>
+  </div>
+</section>
+
+<!-- Coverage: how many controls NSM links to at least one principle, in total and per theme -->
+<section class="iso-summary" aria-label="Kobling til NSM">
+  <div class="iso-total">
+    <strong>{{ covered }}<small> av {{ total }}</small></strong>
+    <span class="muted">kontroller har kobling til NSMs grunnprinsipper</span>
+  </div>
+  <div class="theme-boxes">
+    {% for theme in themes %}
+    <a class="theme-box" href="#{{ theme.id }}">
+      <span class="muted">{{ theme.number }} · {{ theme.name }}</span>
+      <strong>{{ theme.covered }}<small> / {{ theme.controls|length }}</small></strong>
+      <span class="bar" aria-hidden="true">
+        <span class="bar-fill" style="width: {{ (100 * theme.covered / theme.controls|length)|round|int }}%"></span>
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<p class="iso-note muted">Koblingen er NSMs egen, fra
+  <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/stotteprodukter/stotteprodukter-til-nsms-grunnprinsipper-for-ikt-sikkerhet"
+     rel="noopener">NSMs regneark med tiltak</a>. NSM påpeker at den bygger på skjønn og sjelden er 1:1.
+  En koblet kontroll har relevant eller utdypende informasjon, og er ikke det samme kravet.
+  Titlene er korte beskrivelser med egne ord, ikke tekst fra standarden.</p>
+
+<!-- One <details> per theme, closed until clicked (same pattern as the principles) -->
+<div class="themes">
+{% for theme in themes %}
+  <details class="principle theme" id="{{ theme.id }}">
+    <summary>
+      <span class="p-number">{{ theme.number }}</span>
+      <span class="p-title">{{ theme.name }}</span>
+      <span class="p-meta">
+        <span class="muted">{{ theme.controls|length }} kontroller</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+    <ul class="controls">
+      {% for control in theme.controls %}
+      <li class="control{% if not control.principles %} is-unlinked{% endif %}" id="k{{ control.id }}">
+        <span class="control-id">{{ control.id }}</span>
+        <span class="control-title">{{ control.title }}</span>
+        <span class="control-nsm">
+          {% for number in control.principles %}
+          <a class="chip" href="{{ url_for('category_page', category_id=category_of[number]) }}#p{{ number }}"
+             title="NSM-prinsipp {{ number }}">NSM {{ number }}</a>
+          {% else %}
+          <span class="muted">Ingen NSM-kobling</span>
+          {% endfor %}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+  </details>
+{% endfor %}
+</div>
+
+{% endblock %}

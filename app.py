@@ -10,6 +10,7 @@ Pages:
   /risikoer/ny          v2: form for a new risk
   /risikoer/<id>        v2: edit one risk (POST saves it)
   /risikoer/<id>/slett  v2: delete one risk (POST)
+  /iso27002             v3: the 93 ISO/IEC 27002 controls and NSM's links to them
   /om                   about page: background, and what Grunnmur adds to NSM's advice
 """
 
@@ -18,6 +19,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 import cyber_level
 import db
 import examples
+import iso27002
 import nsm_data
 import risks
 
@@ -36,11 +38,12 @@ SCORE = {"ikke_startet": 0, "delvis": 0.5, "implementert": 1}
 ROADMAP = [
     (1, "Grunnprinsipper", "Status, notater, ISO-referanse og personvern per prinsipp"),
     (2, "Risikoregister", "Sannsynlighet × konsekvens, behandling og kobling til NSM og ISO 27001 6.1"),
-    (3, "ISO 27001 styringssystem", "Kapittel 4–10 og kobling mellom NSM-prinsipper og Annex A"),
-    (4, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
-    (5, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
+    (3, "ISO/IEC 27002", "De 93 kontrollene og NSMs egen kobling til grunnprinsippene"),
+    (4, "ISO 27001 styringssystem", "Kapittel 4–10: kontekst, ledelse, planlegging og forbedring"),
+    (5, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
+    (6, "Eksport og portefølje", "Eksport av data og ferdig presentasjon"),
 ]
-CURRENT_VERSION = 2
+CURRENT_VERSION = 3
 
 
 @app.context_processor
@@ -119,6 +122,20 @@ def home():
     )
 
 
+@app.route("/iso27002")
+def iso_page():
+    themes = iso27002.themes_with_controls()
+    return render_template(
+        "iso27002.html",
+        themes=themes,
+        total=len(iso27002.CONTROLS),
+        covered=sum(theme["covered"] for theme in themes),
+        # Principle number -> category id, to link each principle to its category page
+        category_of={number: c["id"] for c in nsm_data.CATEGORIES
+                     for number, _title, _link in c["principles"]},
+    )
+
+
 @app.route("/om")
 def about():
     return render_template("about.html", source_url=nsm_data.SOURCE_URL,
@@ -146,6 +163,10 @@ def category_page(category_id):
         percent=category_progress(category, progress),
         counts=status_counts(category, progress),
         examples=examples.EXAMPLES,
+        # v3: NSM's ISO 27002 controls per principle, e.g. {"2.3": ["5.21", "8.1", ...]}
+        iso_controls={number: iso27002.controls_for_principle(number)
+                      for number, _title, _link in category["principles"]},
+        iso_titles=iso27002.CONTROLS,
         previous_category=previous_category,
         next_category=next_category,
         statuses=db.STATUSES,
