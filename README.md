@@ -3,15 +3,16 @@
 A small personal GRC (Governance, Risk and Compliance) app, in Norwegian, built on
 [NSM Grunnprinsipper for IKT-sikkerhet v2.1](https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/).
 
-It starts simple and grows one version at a time:
+It starts simple and grows one version at a time (6 versions):
 
 | Version | Content | Status |
 |---------|---------|--------|
 | v1 | Control tracker: 4 categories, 21 principles, status, notes, ISO 27001 reference, GDPR tag, examples | Done |
 | v2 | Risk register (likelihood × impact, treatment), linked to NSM principles and ISO 27001 clause 6.1 | Done |
-| v3 | ISO 27001 management system: clauses 4–10, plus a view linking NSM principles to Annex A controls | Planned |
-| v4 | NSM measures (tiltak) under each principle, plus a risk heatmap | Planned |
-| v5 | Export, English/Norwegian README, screenshots | Planned |
+| v3 | ISO/IEC 27002:2022: the 93 controls in 4 themes, with NSM's own mapping to the principles | Done |
+| v4 | ISO 27001 management system: clauses 4–10 | Planned |
+| v5 | NSM measures (tiltak) under each principle, plus a risk heatmap | Planned |
+| v6 | Export, English/Norwegian README, screenshots | Planned |
 
 NSM gives the technical baseline (what to do); ISO 27001 adds the management
 system (how security is governed). ISO text is copyrighted, so only clause and
@@ -59,8 +60,12 @@ git add docs && git commit -m "Rebuild GitHub Pages site"
 - `risks.py`: v2 risk logic: 1-5 scales, score = likelihood × impact, levels (Lav 1-4, Middels 5-9, Høy 10-16, Kritisk 20-25), validation
 - `static/static-risks.js`: the risk register on the GitHub Pages version (browser storage)
 - `cyber_level.py`: NSM's national cyber risk level for the banner (updated by hand)
+- `nsm_iso_mapping.py`: NSM's own mapping of its 118 measures to ISO/IEC 27002:2022 controls, plus NSM's priority group (numbers only, from NSM's measures spreadsheet)
+- `iso27002.py`: the 93 ISO/IEC 27002 controls with short titles in my own words, and lookups in both directions (principle → controls, control → principles)
 - `examples.py`: one home lab example per principle, behind the "Eksempel" button (written for this app, not NSM text)
 - `templates/`: HTML pages (Jinja)
 - `static/style.css`: the minimalist styling
 
-The ISO 27001 references are entered by the user. No ISO text is included.
+The ISO 27001 references are entered by the user. No ISO text is included: only
+control numbers, with short titles written in my own words. The NSM ↔ ISO 27002
+links are NSM's, not mine. NSM notes they are a judgement and rarely 1:1.
