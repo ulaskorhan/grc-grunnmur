@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Data · Grunnmur{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Versjon 7 · Data</p>
+    <h1>Eksport og import</h1>
+    <p class="lead">Ta vare på alt du har lagt inn som én fil, eller flytt det mellom
+       den lokale og den offentlige versjonen av Grunnmur.</p>
+  </div>
+</section>
+
+<!-- Result of an import. Flask fills these after the redirect; on GitHub Pages data.js does. -->
+<p class="form-success" id="import-result" role="status" {% if not imported %}hidden{% endif %}>
+  {% if imported == 'erstatt' %}✓ Importert. Dataene er erstattet med innholdet i filen.
+  {% elif imported == 'sammen' %}✓ Importert og slått sammen. {{ added }} {{ 'ny risiko' if added == 1 else 'nye risikoer' }} lagt til.{% endif %}
+</p>
+<p class="form-error" id="import-error" role="alert" {% if not error %}hidden{% endif %}>{{ error or '' }}</p>
+
+<div class="about data-page">
+  <!-- 1. What is saved now. data-saved="..." is filled by data.js on GitHub Pages. -->
+  <section class="about-section">
+    <h2>Det du har lagret</h2>
+    <ul class="data-counts">
+      {% for key, label in labels.items() %}
+      <li><strong data-saved="{{ key }}">{{ saved[key] if saved else 0 }}</strong> <span>{{ label }}</span></li>
+      {% endfor %}
+    </ul>
+    <p class="muted data-note">Tallene viser hvor mange prinsipper, tiltak, krav og kontroller
+       du har lagret noe på, og hvor mange risikoer du har.
+       {% if static_site %}Dataene ligger i denne nettleseren.{% else %}Dataene ligger i den lokale databasen.{% endif %}</p>
+  </section>
+
+  <!-- 2. Export -->
+  <section class="about-section">
+    <h2>Eksporter</h2>
+    <p>Last ned alt som én JSON-fil: status og notater for grunnprinsipper, tiltak,
+       styringssystem og SoA, og hele risikoregisteret.</p>
+    {% if static_site %}
+    <button type="button" class="inline-button" id="export-data">Last ned JSON-fil</button>
+    {% else %}
+    <a class="button" href="{{ url_for('data_export') }}">Last ned JSON-fil</a>
+    {% endif %}
+    <p class="muted data-note">Filen inneholder notatene dine som vanlig tekst. Oppbevar den like
+       trygt som annen dokumentasjon om sikkerheten din.</p>
+  </section>
+
+  <!-- 3. Import. The user chooses what happens to the data that is already saved. -->
+  <section class="about-section">
+    <h2>Importer</h2>
+    <form method="post" enctype="multipart/form-data" id="import-form"
+          action="{{ '#' if static_site else url_for('data_import') }}" {% if static_site %}data-static{% endif %}>
+      <label class="field">JSON-fil eksportert fra Grunnmur
+        <input type="file" name="file" accept=".json,application/json" required>
+      </label>
+
+      <!-- No choice is ticked from the start, so the user must decide -->
+      <fieldset class="choices">
+        <legend>Hva skal skje med det du har lagret nå?</legend>
+        <label class="choice">
+          <input type="radio" name="mode" value="erstatt" required>
+          <span><strong>Erstatt alt</strong>
+                <span class="muted">Alt du har lagret nå slettes, og innholdet i filen tar over.</span></span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="mode" value="sammen">
+          <span><strong>Slå sammen</strong>
+                <span class="muted">Det som står i filen, overskriver det samme prinsippet, tiltaket,
+                kravet eller kontrollen. Resten beholdes. Risikoene i filen legges til, unntatt
+                de som er helt like en du har fra før.</span></span>
+        </label>
+      </fieldset>
+
+      <div class="form-footer">
+        <button type="submit">Importer</button>
+      </div>
+    </form>
+    <p class="muted data-note">Filen sjekkes med de samme reglene som skjemaene i appen før noe lagres.
+       Er én verdi feil, endres ingenting.</p>
+  </section>
+</div>
+
+<!-- The rules for data.js: which numbers and statuses exist (from backup.py) -->
+<script id="backup-rules" type="application/json">{{ rules|tojson }}</script>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='data.js') }}"></script>
+{% endblock %}

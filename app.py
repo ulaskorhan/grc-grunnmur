@@ -18,13 +18,18 @@ Pages:
   /tiltak               v5: NSM's 118 measures, in NSM's priority groups
   /tiltak/<nr>          v5: saves the status of one measure (POST)
   /rapport              v6: a print-friendly report of everything above (save as PDF from the browser)
+  /data                 v7: export and import of all data as one JSON file
+  /data/eksport         v7: downloads the JSON file
+  /data/import  (POST)  v7: reads an uploaded JSON file, then replaces or merges the data
   /om                   about page: background, and what Grunnmur adds to NSM's advice
 """
 
+import json
 from datetime import date
 
 from flask import Flask, abort, redirect, render_template, request, url_for
 
+import backup
 import cyber_level
 import db
 import examples
@@ -41,6 +46,8 @@ app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 # STATIC_SITE is switched on by build.py when it makes the GitHub Pages version.
 # In that mode no data is read from the database, and the browser saves progress instead.
 app.config["STATIC_SITE"] = False
+# v7: refuse uploads larger than this, before Flask reads them (see too_large below)
+app.config["MAX_CONTENT_LENGTH"] = backup.MAX_BYTES
 
 # How much each status counts towards the progress score (0-100 %).
 SCORE = {"ikke_startet": 0, "delvis": 0.5, "implementert": 1}
@@ -53,8 +60,9 @@ ROADMAP = [
     (4, "ISO 27001 styringssystem", "Kapittel 4–10 i PDCA-sirkelen og anvendelseserklæring (SoA)"),
     (5, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
     (6, "Rapport og portefølje", "Utskriftsvennlig rapport og README på engelsk og norsk"),
+    (7, "Eksport og import", "Alle data som én JSON-fil, også mellom lokal og offentlig versjon"),
 ]
-CURRENT_VERSION = 6
+CURRENT_VERSION = 7
 
 
 @app.context_processor
@@ -327,6 +335,72 @@ def report():
         labels={**db.STATUSES, **db.SOA_STATUSES},   # every status label, for report.js
         **risk_overview(),
     )
+
+
+# ---------- v7: export and import ----------
+
+# The two choices on the import form: what happens to the data that is already saved
+IMPORT_MODES = {"erstatt": True, "sammen": False}    # value = replace?
+
+
+def render_data_page(error=None, status=200):
+    """The Data page. In static mode the counts are empty, and data.js fills them in."""
+    if app.config["STATIC_SITE"]:
+        saved = None
+    else:
+        saved = backup.counts(backup.export_data())
+    page = render_template(
+        "data.html",
+        labels=backup.LABELS,
+        saved=saved,
+        error=error,
+        # After an import: which choice was used, and how many risks were added (only known values are shown)
+        imported=request.args.get("importert") if request.args.get("importert") in IMPORT_MODES else "",
+        added=request.args.get("nye", 0, type=int),
+        rules=backup.rules_for_browser(),
+    )
+    return page, status
+
+
+@app.route("/data")
+def data_page():
+    return render_data_page()
+
+
+@app.route("/data/eksport")
+def data_export():
+    """Download all data as grunnmur-YYYY-MM-DD.json."""
+    data = backup.export_data()
+    body = json.dumps(data, ensure_ascii=False, indent=2)    # ensure_ascii=False keeps æ, ø and å readable
+    return app.response_class(body, mimetype="application/json", headers={
+        "Content-Disposition": f"attachment; filename=grunnmur-{data['exported']}.json"})
+
+
+@app.route("/data/import", methods=["POST"])
+def data_import():
+    mode = request.form.get("mode", "")
+    if mode not in IMPORT_MODES:
+        return render_data_page("Velg om dataene skal erstattes eller slås sammen.", 400)
+    upload = request.files.get("file")
+    if not upload or not upload.filename:
+        return render_data_page("Velg en fil å importere.", 400)
+    try:
+        parsed = json.loads(upload.read().decode("utf-8"))
+    except (UnicodeDecodeError, ValueError):
+        return render_data_page("Filen er ikke gyldig JSON.", 400)
+
+    data, error = backup.clean(parsed)
+    if error:
+        return render_data_page(error + " Ingenting er endret.", 400)
+    added = db.import_all(data, replace=IMPORT_MODES[mode])
+    # Post/Redirect/Get, like the other forms: a refresh will not import the file again
+    return redirect(url_for("data_page", importert=mode, nye=added))
+
+
+@app.errorhandler(413)
+def too_large(_error):
+    """MAX_CONTENT_LENGTH was passed: show the Data page with a message instead of an error page."""
+    return render_data_page("Filen er for stor (over 1 MB). Ingenting er endret.", 413)
 
 
 @app.route("/om")

@@ -808,6 +808,42 @@ button:active { transform: scale(0.98); }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }   /* keep the heat map colours */
 }
 
+/* ---------- 6j. Export and import (v7) ---------- */
+.form-success {
+  padding: 12px 16px; border-radius: 10px;
+  background: var(--accent-soft); color: var(--accent-text); font-weight: 500;
+}
+.data-page { margin-top: 16px; }
+.data-note { font-size: 0.85rem; margin-top: 12px !important; }
+.inline-button { width: auto; order: 0; }
+/* Five counts: 2 per row on phones, 5 in a row on wider screens */
+.data-counts {
+  list-style: none; padding: 0 !important; margin: 0;
+  display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 8px !important;
+}
+.data-counts li {
+  display: grid; padding: 10px 12px; border-radius: 10px;
+  background: var(--bg); border: 1px solid var(--border); font-size: 0.8rem; color: var(--muted);
+}
+.data-counts strong { font-size: 1.4rem; line-height: 1.2; color: var(--text); }
+.data-page input[type="file"] { padding: 8px; }
+/* The two import choices: a visible radio button with a title and an explanation */
+.choices { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 8px; }
+.choices legend { font-size: 0.85rem; font-weight: 500; color: var(--muted); padding: 0; margin-bottom: 6px; }
+.choice {
+  display: flex; gap: 12px; align-items: flex-start; cursor: pointer;
+  padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg);
+}
+.choice:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.choice input { width: 18px; height: 18px; margin: 2px 0 0; padding: 0; flex-shrink: 0; accent-color: var(--accent); }
+.choice > span { display: grid; gap: 2px; font-size: 0.95rem; }
+.choice .muted { font-size: 0.85rem; line-height: 1.45; }
+
+@media (min-width: 640px) {
+  .data-counts { grid-template-columns: repeat(5, 1fr); }
+  .data-page .form-footer button { width: auto; }
+}
+
 /* ---------- 7. Tablet and up (≥ 640px) ---------- */
 @media (min-width: 640px) {
   .cards { grid-template-columns: repeat(2, 1fr); gap: 16px; }   /* the 2 × 2 grid */

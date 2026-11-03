@@ -3,7 +3,7 @@
 The NSM principles themselves live in nsm_data.py (they never change at runtime).
 This file only stores what the user adds: status, notes, ISO reference, GDPR flag,
 the risk register (v2), ISO 27001 clause status and the statement of applicability (v4),
-and the status of NSM's measures (v5).
+and the status of NSM's measures (v5). import_all() saves an imported file (v7).
 """
 
 import sqlite3
@@ -115,18 +115,23 @@ def save_progress(principle_id, status, notes, iso_ref, gdpr):
     if status not in STATUSES:
         status = "ikke_startet"
     with connect() as conn:
-        conn.execute(
-            """
-            INSERT INTO progress (principle_id, status, notes, iso_ref, gdpr)
-            VALUES (?, ?, ?, ?, ?)
-            ON CONFLICT(principle_id) DO UPDATE SET
-                status = excluded.status,
-                notes = excluded.notes,
-                iso_ref = excluded.iso_ref,
-                gdpr = excluded.gdpr
-            """,
-            (principle_id, status, notes.strip(), iso_ref.strip(), 1 if gdpr else 0),
-        )
+        _upsert_progress(conn, principle_id, status, notes, iso_ref, gdpr)
+
+
+def _upsert_progress(conn, principle_id, status, notes, iso_ref, gdpr):
+    """The SQL for save_progress, on an open connection (import_all uses it too)."""
+    conn.execute(
+        """
+        INSERT INTO progress (principle_id, status, notes, iso_ref, gdpr)
+        VALUES (?, ?, ?, ?, ?)
+        ON CONFLICT(principle_id) DO UPDATE SET
+            status = excluded.status,
+            notes = excluded.notes,
+            iso_ref = excluded.iso_ref,
+            gdpr = excluded.gdpr
+        """,
+        (principle_id, status, notes.strip(), iso_ref.strip(), 1 if gdpr else 0),
+    )
 
 
 # ---------- v2: risk register ----------
@@ -156,11 +161,15 @@ def get_risk(risk_id):
 
 def add_risk(data):
     """Insert a new risk. data is the dictionary from risks.read_form()."""
+    with connect() as conn:
+        _insert_risk(conn, data)
+
+
+def _insert_risk(conn, data):
     columns = ", ".join(RISK_FIELDS)
     placeholders = ", ".join("?" for _ in RISK_FIELDS)
-    with connect() as conn:
-        conn.execute(f"INSERT INTO risks ({columns}) VALUES ({placeholders})",
-                     [data[field] for field in RISK_FIELDS])
+    conn.execute(f"INSERT INTO risks ({columns}) VALUES ({placeholders})",
+                 [data[field] for field in RISK_FIELDS])
 
 
 def update_risk(risk_id, data):
@@ -206,12 +215,56 @@ def save_status(table, item_id, status, notes):
     if status not in allowed:
         status = next(iter(allowed))       # the first status is the default
     with connect() as conn:
-        conn.execute(
-            f"""
-            INSERT INTO {table} (item_id, status, notes) VALUES (?, ?, ?)
-            ON CONFLICT(item_id) DO UPDATE SET
-                status = excluded.status,
-                notes = excluded.notes
-            """,
-            (item_id, status, notes.strip()),
-        )
+        _upsert_status(conn, table, item_id, status, notes)
+
+
+def _upsert_status(conn, table, item_id, status, notes):
+    """The SQL for save_status, on an open connection (import_all uses it too)."""
+    conn.execute(
+        f"""
+        INSERT INTO {table} (item_id, status, notes) VALUES (?, ?, ?)
+        ON CONFLICT(item_id) DO UPDATE SET
+            status = excluded.status,
+            notes = excluded.notes
+        """,
+        (item_id, status, notes.strip()),
+    )
+
+
+# ---------- v7: import ----------
+
+def import_all(data, replace):
+    """Save a checked import file (see backup.clean) in one transaction.
+
+    replace=True:  delete everything first, so the file becomes the new data.
+    replace=False: merge. Rows in the file overwrite the same id; rows that are
+                   only in the database stay. Risks from the file are added,
+                   except one that is exactly like a saved risk, so importing
+                   the same file twice does not give every risk twice.
+    Returns how many risks were added.
+
+    "with connect()" commits at the end, or rolls everything back on an error,
+    so an import is never left half done.
+    """
+    with connect() as conn:
+        if replace:
+            for table in ("progress", "risks", "isms", "soa", "measures"):
+                conn.execute(f"DELETE FROM {table}")
+        for principle_id, row in data["progress"].items():
+            _upsert_progress(conn, principle_id, row["status"], row["notes"],
+                             row["iso_ref"], row["gdpr"])
+        for table in STATUS_TABLES:
+            for item_id, row in data[table].items():
+                _upsert_status(conn, table, item_id, row["status"], row["notes"])
+
+        # Each saved risk as a tuple of its values, to spot exact copies
+        columns = ", ".join(RISK_FIELDS)
+        saved = {tuple(row) for row in conn.execute(f"SELECT {columns} FROM risks")}
+        added = 0
+        for risk in data["risks"]:
+            values = tuple(int(risk[f]) if f == "gdpr" else risk[f] for f in RISK_FIELDS)
+            if values in saved:
+                continue
+            _insert_risk(conn, risk)
+            added += 1
+    return added

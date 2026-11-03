@@ -65,7 +65,9 @@
                 eller en hjemmelab.</span></li>
       <li><strong>Dine data er dine</strong>
           <span>{% if static_site %}Alt lagres i din egen nettleser. Ingenting sendes til en server.
-                {% else %}Alt lagres lokalt på din maskin.{% endif %}</span></li>
+                {% else %}Alt lagres lokalt på din maskin.{% endif %}
+                Med <a href="{{ url_for('data_page') }}">eksport og import</a> kan du ta vare på alt
+                som én fil, og flytte det mellom den lokale og den offentlige versjonen.</span></li>
     </ul>
   </section>
 
