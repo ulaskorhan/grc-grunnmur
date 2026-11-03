@@ -2,7 +2,8 @@
 
 The NSM principles themselves live in nsm_data.py (they never change at runtime).
 This file only stores what the user adds: status, notes, ISO reference, GDPR flag,
-the risk register (v2), ISO 27001 clause status and the statement of applicability (v4).
+the risk register (v2), ISO 27001 clause status and the statement of applicability (v4),
+and the status of NSM's measures (v5).
 """
 
 import sqlite3
@@ -80,6 +81,22 @@ def init_db():
             )
             """
         )
+        # v5: status per NSM measure (tiltak), e.g. "2.6.4"
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS measures (
+                item_id TEXT PRIMARY KEY,
+                status  TEXT NOT NULL DEFAULT 'ikke_startet',
+                notes   TEXT NOT NULL DEFAULT ''
+            )
+            """
+        )
+        # v5: residual risk = likelihood and impact after the measures (NULL = not assessed yet).
+        # A database made by v2-v4 lacks these columns, so they are added if missing.
+        columns = [row["name"] for row in conn.execute("PRAGMA table_info(risks)")]
+        for column in ("residual_likelihood", "residual_impact"):
+            if column not in columns:
+                conn.execute(f"ALTER TABLE risks ADD COLUMN {column} INTEGER")
 
 
 def get_all_progress():
@@ -119,7 +136,8 @@ def save_progress(principle_id, status, notes, iso_ref, gdpr):
 # safe because the names come from this code, never from the user. All values
 # still go through ? placeholders, which protects against SQL injection.
 RISK_FIELDS = ["title", "description", "likelihood", "impact", "treatment",
-               "actions", "principle_id", "status", "review_date", "gdpr"]
+               "actions", "principle_id", "status", "review_date", "gdpr",
+               "residual_likelihood", "residual_impact"]
 
 
 def get_all_risks():
@@ -167,14 +185,14 @@ SOA_STATUSES = {
     "gjelder_ikke": "Gjelder ikke",
 }
 
-# The two tables have the same columns (item_id, status, notes), so they share
+# These tables have the same columns (item_id, status, notes), so they share
 # the functions below. The table name is checked against this fixed list before
 # it is put into the SQL, so user input can never choose a table.
-STATUS_TABLES = {"isms": STATUSES, "soa": SOA_STATUSES}
+STATUS_TABLES = {"isms": STATUSES, "soa": SOA_STATUSES, "measures": STATUSES}
 
 
 def get_statuses(table):
-    """Return {item_id: row} for every saved row in "isms" or "soa"."""
+    """Return {item_id: row} for every saved row in "isms", "soa" or "measures"."""
     assert table in STATUS_TABLES
     with connect() as conn:
         rows = conn.execute(f"SELECT * FROM {table}").fetchall()
@@ -182,7 +200,7 @@ def get_statuses(table):
 
 
 def save_status(table, item_id, status, notes):
-    """Insert or update one row in "isms" or "soa" (an upsert, like save_progress)."""
+    """Insert or update one row in "isms", "soa" or "measures" (an upsert, like save_progress)."""
     assert table in STATUS_TABLES
     allowed = STATUS_TABLES[table]
     if status not in allowed:
