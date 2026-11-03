@@ -4,15 +4,22 @@
     - On GitHub Pages it is rendered once, empty, inside a <template> element,
       and static-risks.js copies it for every risk saved in the browser.
   The data-field attributes tell the JavaScript which element shows which value.
+  data-before / data-after (v5) name the row's cell in the heat maps, e.g. "3-4",
+  so clicking a cell can show only its risks. Closed risks are in neither map.
 #}
 {% macro risk_row(r, edit_url) -%}
-<li class="risk level-{{ r.level }}{% if r.status == 'lukket' %} is-closed{% endif %}">
+{% set open = r.status != 'lukket' %}
+<li class="risk level-{{ r.level }}{% if not open %} is-closed{% endif %}"
+    data-before="{{ '%s-%s'|format(r.likelihood, r.impact) if open else '' }}"
+    data-after="{{ '%s-%s'|format(r.residual_likelihood, r.residual_impact) if open and r.residual_score else '' }}">
   <a class="risk-link" href="{{ edit_url }}">
     <span class="score" data-field="score" title="Sannsynlighet × konsekvens">{{ r.score }}</span>
     <span class="risk-main">
       <span class="risk-title" data-field="title">{{ r.title }}</span>
       <span class="risk-meta">
         <span class="level-tag" data-field="level_label">{{ r.level_label }}</span>
+        <span class="level-tag residual level-{{ r.residual_level or 'lav' }}" data-field="residual"
+              title="Restrisiko etter tiltak" {% if not r.residual_score %}hidden{% endif %}>Etter tiltak {{ r.residual_score or "" }}</span>
         <span class="chip" data-field="treatment_label">{{ r.treatment_label }}</span>
         <span class="chip" data-field="status_label">{{ r.status_label }}</span>
         <span class="chip" data-field="principle" {% if not r.principle_id %}hidden{% endif %}>NSM {{ r.principle_id }}</span>

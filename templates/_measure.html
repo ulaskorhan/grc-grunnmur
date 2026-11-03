@@ -1,0 +1,47 @@
+{#
+  One NSM measure (tiltak) as a row that opens to a small status form (v5).
+  Used in two places: under each principle on the category pages, and on the Tiltak page.
+    m         the measure from nsm_measures.measure(): id, title, principle, priority
+    row       the saved row, or None
+    back      "kategori" or "tiltak": where Flask returns after saving
+    link      the principle's page on nsm.no, which has NSM's full description
+    principle a link to the principle on its category page (Tiltak page only), or None
+#}
+{% macro measure_item(m, row, statuses, back, open_id, link, principle=None) -%}
+{% set status = row.status if row else 'ikke_startet' %}
+<details class="control measure item is-{{ status }}" id="t{{ m.id }}" {% if m.id == open_id %}open{% endif %}>
+  <summary>
+    <span class="control-id">{{ m.id }}</span>
+    <span class="control-title">{{ m.title }}</span>
+    <span class="control-meta">
+      {% if principle %}<a class="chip" href="{{ principle }}" title="NSM-prinsipp {{ m.principle }}">NSM {{ m.principle }}</a>{% endif %}
+      <span class="prio prio-{{ m.priority }}" title="NSMs prioriteringsgruppe">Prioritet {{ m.priority }}</span>
+      <span class="status status-{{ status }}">{{ statuses[status] }}</span>
+    </span>
+  </summary>
+  <div class="control-body">
+    <form method="post" action="{{ url_for('save_measure', measure_id=m.id) }}">
+      <input type="hidden" name="back" value="{{ back }}">
+      <fieldset class="segmented">
+        <legend>Status</legend>
+        <div class="seg-options">
+          {% for key, label in statuses.items() %}
+          <label class="seg-{{ key }}">
+            <input type="radio" name="status" value="{{ key }}" {% if key == status %}checked{% endif %}>
+            <span>{{ label }}</span>
+          </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+      <label class="field">Notater
+        <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?">{{ row.notes if row else '' }}</textarea>
+      </label>
+      <div class="form-footer">
+        <a href="{{ link }}" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="saved" {% if m.id != open_id %}hidden{% endif %}>✓ Lagret</span>
+        <button type="submit">Lagre</button>
+      </div>
+    </form>
+  </div>
+</details>
+{%- endmacro %}

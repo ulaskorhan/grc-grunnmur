@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% from "_measure.html" import measure_item %}
+
+{% block title %}Tiltak · Grunnmur{% endblock %}
+{% block main_attrs %}data-store="grunnmur-measures"{% endblock %}
+
+{% block content %}
+<!-- Header: overall ring and a count per status over all 118 measures (data-ids is used by static-mode.js) -->
+<section class="cat-head isms-head" data-ids="{{ all_ids|join(' ') }}">
+  <div class="cat-title">
+    <p class="eyebrow">Versjon 5 · NSMs grunnprinsipper v{{ nsm_version }}</p>
+    <h1>Tiltak</h1>
+    <p class="lead">De {{ all_ids|length }} tiltakene under NSMs 21 grunnprinsipper, sortert etter
+       NSMs egen prioritering. Start med gruppe 1.</p>
+    <div class="chips">
+      <span class="chip chip-implementert"><span data-count="implementert">{{ counts.implementert }}</span> implementert</span>
+      <span class="chip chip-delvis"><span data-count="delvis">{{ counts.delvis }}</span> delvis</span>
+      <span class="chip"><span data-count="ikke_startet">{{ counts.ikke_startet }}</span> ikke startet</span>
+    </div>
+  </div>
+  <div class="ring ring-sm" style="--p: {{ overall }}" role="img" aria-label="{{ overall }} prosent">
+    <div class="ring-inner"><strong><span class="js-pct">{{ overall }}</span><small>%</small></strong></div>
+  </div>
+</section>
+
+<!-- One card per NSM priority group, with its progress -->
+<nav class="pdca prio-cards" aria-label="Prioriteringsgrupper">
+  {% for group in groups %}
+  <a class="pdca-card" href="#gruppe{{ group.number }}" data-ids="{{ group.ids|join(' ') }}">
+    <span class="pdca-step prio-{{ group.number }}">{{ group.number }}</span>
+    <strong>{{ group.label }}</strong>
+    <span class="muted">{{ group.name }} · {{ group.measures|length }} tiltak</span>
+    <span class="bar" aria-hidden="true"><span class="bar-fill" style="width: {{ group.percent }}%"></span></span>
+    <span class="pdca-pct"><span class="js-pct">{{ group.percent }}</span> %</span>
+  </a>
+  {% endfor %}
+</nav>
+
+<p class="iso-note muted">Tiltaksoverskriftene og prioriteringen er NSMs egne, fra
+  <a href="{{ sheet_url }}" rel="noopener">NSMs regneark med tiltak</a>. Ifølge NSM er mangel på
+  tiltakene i gruppe 1 ofte årsaken til vellykkede angrep. Gruppe 2 og 3 bygger mer på skjønn,
+  og bør vurderes ut fra egen situasjon. Hvert tiltak lenker til den fulle beskrivelsen hos NSM.</p>
+
+<p class="hint muted">Trykk på et tiltak for å sette status. Tiltakene vises også under hvert prinsipp.</p>
+
+<!-- One <details> per group. Group 1 starts open. -->
+<div class="themes">
+{% for group in groups %}
+  <details class="principle theme" id="gruppe{{ group.number }}" {% if group.number == 1 %}open{% endif %}>
+    <summary>
+      <span class="p-number">{{ group.number }}</span>
+      <span class="p-title">{{ group.label }} · {{ group.name }}</span>
+      <span class="p-meta">
+        <span class="muted">{{ group.measures|length }} tiltak</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </span>
+    </summary>
+    <div class="controls">
+      {% for m in group.measures %}
+      {{ measure_item(m, rows.get(m.id), statuses, 'tiltak', open_id, links[m.principle],
+                      url_for('category_page', category_id=category_of[m.principle]) ~ '#p' ~ m.principle) }}
+      {% endfor %}
+    </div>
+  </details>
+{% endfor %}
+</div>
+{% endblock %}

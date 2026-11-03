@@ -25,6 +25,7 @@
          <strong>Behandling:</strong> {{ example.treatment }}<br>
          <strong>NSM:</strong> {{ example.principle }}</p>
       <p><strong>Tiltak:</strong> {{ example.actions }}</p>
+      <p><strong>Etter tiltak:</strong> {{ example.residual }}</p>
       <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM eller ISO.</p>
     </details>
   </aside>
@@ -76,6 +77,30 @@
                 placeholder="Hva gjør du, eller planlegger du å gjøre?">{{ risk.actions }}</textarea>
     </label>
 
+    <!-- v5: residual risk = the same two scales once the measures are in place.
+         "–" means not assessed yet. -->
+    <fieldset class="segmented residual-set">
+      <legend>Etter tiltak (restrisiko)</legend>
+      <p class="scale-hint">Hvor stor er risikoen når tiltakene er på plass? La stå på «–» hvis du ikke har vurdert det ennå.</p>
+      {% for name, legend in [('residual_likelihood', 'Sannsynlighet'), ('residual_impact', 'Konsekvens')] %}
+      <div class="residual-row">
+        <div class="residual-label">{{ legend }}</div>
+        <div class="seg-options seg-6">
+          <label title="Ikke vurdert">
+            <input type="radio" name="{{ name }}" value="" {% if not risk[name] %}checked{% endif %}>
+            <span>–</span>
+          </label>
+          {% for value in range(1, 6) %}
+          <label>
+            <input type="radio" name="{{ name }}" value="{{ value }}" {% if risk[name] == value %}checked{% endif %}>
+            <span>{{ value }}</span>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </fieldset>
+
     <!-- The NSM principle that best reduces this risk, grouped by category -->
     <label class="field">Koblet NSM-prinsipp
       <select name="principle_id">
@@ -89,6 +114,26 @@
         {% endfor %}
       </select>
     </label>
+
+    <!-- v5: suggestions = NSM's measures under the chosen principle, most urgent first.
+         All 21 lists are in the page; risk-tools.js shows the one that matches the menu. -->
+    <div class="suggestions" aria-live="polite">
+      <p class="suggest-empty" data-principle="" {% if risk.principle_id %}hidden{% endif %}>
+        Velg et prinsipp, så foreslår Grunnmur tiltak fra NSM.</p>
+      {% for number, items in suggestions.items() %}
+      <div class="suggest" data-principle="{{ number }}" {% if risk.principle_id != number %}hidden{% endif %}>
+        <p class="suggest-head"><strong>Forslag fra NSM</strong> · tiltak under {{ number }}, de mest prioriterte først</p>
+        <ul>
+          {% for m in items %}
+          <li><span class="prio prio-{{ m.priority }}">Prioritet {{ m.priority }}</span>
+              <a href="{{ url_for('measures_page') }}#t{{ m.id }}">{{ m.id }} {{ m.title }}</a></li>
+          {% endfor %}
+        </ul>
+        <p class="suggest-note">NSM mener tiltakene i prioritet 1 gir størst effekt. Skriv det du velger
+           i «Tiltak» over, og følg opp statusen på tiltakssiden.</p>
+      </div>
+      {% endfor %}
+    </div>
 
     <fieldset class="segmented">
       <legend>Status</legend>
@@ -127,6 +172,10 @@
       onsubmit="return confirm('Slette denne risikoen?')">
   <button type="submit" class="danger-button">Slett risiko</button>
 </form>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='risk-tools.js') }}"></script>
 {% endblock %}
 
 {% block static_scripts %}

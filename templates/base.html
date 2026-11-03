@@ -38,6 +38,8 @@
       <nav class="main-nav" aria-label="Hovedmeny">
         <a href="{{ url_for('home') }}"
            {% if request.endpoint in ('home', 'category_page') %}aria-current="page"{% endif %}>NSM</a>
+        <a href="{{ url_for('measures_page') }}"
+           {% if request.endpoint == 'measures_page' %}aria-current="page"{% endif %}>Tiltak</a>
         <a href="{{ url_for('risk_list') }}"
            {% if request.endpoint and request.endpoint.startswith('risk') %}aria-current="page"{% endif %}>Risikoer</a>
         <!-- On the smallest phones "ISO " is hidden, so the links read 27001 / 27002 -->
@@ -90,5 +92,8 @@
   <script src="{{ url_for('static', filename='static-mode.js') }}"></script>
   {% block static_scripts %}{% endblock %}
   {% endif %}
+
+  <!-- Scripts a page needs in both versions (Flask and GitHub Pages), after the static ones -->
+  {% block page_scripts %}{% endblock %}
 </body>
 </html>

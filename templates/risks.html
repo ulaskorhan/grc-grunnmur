@@ -1,12 +1,42 @@
 {% extends "base.html" %}
 {% from "_risk_row.html" import risk_row %}
 
+{#
+  v5: one 5 × 5 heat map. Likelihood runs up the side (5 at the top), impact along the bottom.
+  Each cell is a button: clicking it shows only the risks in that cell (risk-tools.js).
+  The colour comes from the level of likelihood × impact, the number is how many risks sit there.
+#}
+{% macro heat_map(grid, name, title) -%}
+<figure class="heat-map" aria-label="{{ title }}">
+  <figcaption>{{ title }}</figcaption>
+  <div class="heat-body">
+    <span class="axis axis-y">Sannsynlighet</span>
+    <div class="heat-grid">
+      {% for row in grid %}
+        <span class="axis-n">{{ row[0].likelihood }}</span>
+        {% for cell in row %}
+        <button type="button" class="cell level-{{ cell.level }}" data-map="{{ name }}"
+                data-cell="{{ cell.likelihood }}-{{ cell.impact }}" aria-pressed="false"
+                aria-label="Sannsynlighet {{ cell.likelihood }}, konsekvens {{ cell.impact }}: {{ cell.count }} risikoer"
+                {% if not cell.count %}disabled{% endif %}>
+          <span data-cell-count>{{ cell.count or '' }}</span>
+        </button>
+        {% endfor %}
+      {% endfor %}
+      <span></span>
+      {% for impact in range(1, 6) %}<span class="axis-n">{{ impact }}</span>{% endfor %}
+    </div>
+  </div>
+  <span class="axis axis-x">Konsekvens</span>
+</figure>
+{%- endmacro %}
+
 {% block title %}Risikoregister · Grunnmur{% endblock %}
 
 {% block content %}
 <section class="page-head">
   <div>
-    <p class="eyebrow">Versjon 2 · ISO 27001 6.1</p>
+    <p class="eyebrow">Versjon 2 og 5 · ISO 27001 6.1</p>
     <h1>Risikoregister</h1>
     <p class="lead">Hva kan gå galt, hvor sannsynlig er det, og hvor ille blir det?
        Risiko = sannsynlighet × konsekvens.</p>
@@ -23,6 +53,21 @@
   </div>
   {% endfor %}
 </div>
+
+<!-- v5: heat maps before and after the measures (closed risks are left out) -->
+<section class="heat-maps" aria-label="Varmekart">
+  {{ heat_map(map_before, 'before', 'Før tiltak') }}
+  {{ heat_map(map_after, 'after', 'Etter tiltak (restrisiko)') }}
+</section>
+<p class="heat-note muted">
+  <span id="missing-residual" data-count="{{ missing_residual }}" {% if not missing_residual %}hidden{% endif %}>
+    Åpne risikoer uten restrisiko: <strong data-missing>{{ missing_residual }}</strong>. De vises bare i «Før tiltak».</span>
+  Trykk på en rute for å se risikoene i den.
+</p>
+<p class="heat-filter" id="heat-filter" hidden>
+  <span id="heat-filter-text"></span>
+  <button type="button" class="link-button" id="heat-filter-clear">Vis alle</button>
+</p>
 
 <!-- Shown when there are no risks yet -->
 <div class="empty-state" id="empty-state" {% if items %}hidden{% endif %}>
@@ -44,6 +89,10 @@
 <!-- Empty row that static-risks.js copies for each risk saved in the browser -->
 <template id="risk-row-template">{{ risk_row(placeholder, '#') }}</template>
 {% endif %}
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='risk-tools.js') }}"></script>
 {% endblock %}
 
 {% block static_scripts %}
