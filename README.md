@@ -11,7 +11,7 @@ It starts simple and grows one version at a time (6 versions):
 | v2 | Risk register (likelihood × impact, treatment), linked to NSM principles and ISO 27001 clause 6.1 | Done |
 | v3 | ISO/IEC 27002:2022: the 93 controls in 4 themes, with NSM's own mapping to the principles | Done |
 | v4 | ISO 27001 management system: clauses 4–10 in the PDCA cycle, plus a statement of applicability (SoA) for the 93 controls | Done |
-| v5 | NSM measures (tiltak) under each principle, plus a risk heatmap | Planned |
+| v5 | NSM's 118 measures (tiltak) with status, under each principle and on a page sorted by NSM's priority; residual risk and two heat maps (before/after measures); suggested NSM measures on the risk form | Done |
 | v6 | Export, English/Norwegian README, screenshots | Planned |
 
 NSM gives the technical baseline (what to do); ISO 27001 adds the management
@@ -56,12 +56,14 @@ git add docs && git commit -m "Rebuild GitHub Pages site"
 - `db.py`: SQLite setup plus reading and writing progress
 - `nsm_data.py`: the 4 categories and 21 principles, copied from NSM's website
 - `build.py`: builds the static GitHub Pages version into `docs/`
-- `static/static-mode.js`: browser storage for the GitHub Pages version (principles, ISO 27001 clauses and SoA, one storage key each)
+- `static/static-mode.js`: browser storage for the GitHub Pages version (principles, measures, ISO 27001 clauses and SoA, one storage key each)
+- `static/risk-tools.js`: v5: heat map filter and NSM suggestions on the risk pages (both versions)
 - `risks.py`: v2 risk logic: 1-5 scales, score = likelihood × impact, levels (Lav 1-4, Middels 5-9, Høy 10-16, Kritisk 20-25), validation
 - `static/static-risks.js`: the risk register on the GitHub Pages version (browser storage)
 - `cyber_level.py`: NSM's national cyber risk level for the banner (updated by hand)
 - `nsm_iso_mapping.py`: NSM's own mapping of its 118 measures to ISO/IEC 27002:2022 controls, plus NSM's priority group (numbers only, from NSM's measures spreadsheet)
 - `iso27002.py`: the 93 ISO/IEC 27002 controls with short titles in my own words, and lookups in both directions (principle → controls, control → principles)
+- `nsm_measures.py`: v5: NSM's 118 measure headings (copied exactly from NSM's spreadsheet) with NSM's priority groups
 - `iso27001.py`: v4: ISO 27001 clauses 4–10 with short titles in my own words, PDCA phases, links to the risk register and SoA, and one example per requirement
 - `examples.py`: one home lab example per principle, behind the "Eksempel" button (written for this app, not NSM text)
 - `templates/`: HTML pages (Jinja)
