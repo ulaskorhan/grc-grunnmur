@@ -101,6 +101,10 @@ function buildRow(risk, editUrl) {
   row.querySelector('[data-field="treatment_label"]').textContent = risk.treatment_label;
   row.querySelector('[data-field="status_label"]').textContent = risk.status_label;
 
+  const actions = row.querySelector('[data-field="actions"]');   // only visible in the report (v6)
+  actions.textContent = "Tiltak: " + (risk.actions || "");
+  actions.hidden = !risk.actions;
+
   const residual = row.querySelector('[data-field="residual"]');
   residual.hidden = !risk.residual_score;
   if (risk.residual_score) {
