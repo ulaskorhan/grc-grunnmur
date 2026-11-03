@@ -7,6 +7,21 @@
   <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
   <title>{% block title %}Grunnmur{% endblock %}</title>
+  <meta name="description" content="Et lite verktøy for å følge opp IKT-sikkerheten med NSMs grunnprinsipper, risikoregister og ISO 27001. Personlig prosjekt, ikke tilknyttet NSM.">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <!-- Link preview on LinkedIn, Slack, Teams and in messages (Open Graph).
+       The image is static/og-image.png, 1200 × 630 px. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Grunnmur">
+  <meta property="og:locale" content="nb_NO">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="Følg opp IKT-sikkerheten med NSMs grunnprinsipper, tiltak, risikoregister, ISO 27001 og ISO 27002. Personlig prosjekt, ikke tilknyttet NSM.">
+  <meta property="og:image" content="{{ site_url }}/static/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Grunnmur: følg opp IKT-sikkerheten med NSMs grunnprinsipper">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -42,13 +57,14 @@
            {% if request.endpoint == 'measures_page' %}aria-current="page"{% endif %}>Tiltak</a>
         <a href="{{ url_for('risk_list') }}"
            {% if request.endpoint and request.endpoint.startswith('risk') %}aria-current="page"{% endif %}>Risikoer</a>
-        <!-- On the smallest phones "ISO " is hidden, so the links read 27001 / 27002 -->
         <a href="{{ url_for('isms_page') }}"
-           {% if request.endpoint == 'isms_page' %}aria-current="page"{% endif %}><span class="nav-iso">ISO </span>27001</a>
+           {% if request.endpoint == 'isms_page' %}aria-current="page"{% endif %}>ISO 27001</a>
         <a href="{{ url_for('iso_page') }}"
-           {% if request.endpoint == 'iso_page' %}aria-current="page"{% endif %}><span class="nav-iso">ISO </span>27002</a>
+           {% if request.endpoint == 'iso_page' %}aria-current="page"{% endif %}>ISO 27002</a>
         <a href="{{ url_for('report') }}"
            {% if request.endpoint == 'report' %}aria-current="page"{% endif %}>Rapport</a>
+        <a href="{{ url_for('data_page') }}"
+           {% if request.endpoint == 'data_page' %}aria-current="page"{% endif %}>Data</a>
         <a href="{{ url_for('about') }}"
            {% if request.endpoint == 'about' %}aria-current="page"{% endif %}>Om</a>
       </nav>

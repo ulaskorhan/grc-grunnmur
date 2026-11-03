@@ -416,18 +416,21 @@ button:active { transform: scale(0.98); }
   font-size: 0.9rem; font-weight: 500; color: var(--muted); text-decoration: none;
 }
 .main-nav a[aria-current="page"] { color: var(--text); background: var(--track); }
-/* Phones and small tablets: the 7 menu links get their own row under the logo
-   (side by side they need about 760px). overflow-x is a safety net: the row
-   scrolls sideways instead of breaking the page. */
-@media (max-width: 759px) {
-  .header-inner { flex-wrap: wrap; height: auto; padding-top: 8px; row-gap: 2px; }
+/* Phones and small tablets: the 8 menu links (side by side they need about 860px)
+   go under the logo as a 4 × 2 grid, so every link is visible without scrolling.
+   The header is then too tall to stay at the top, so here it scrolls away with the page. */
+@media (max-width: 879px) {
+  .site-header { position: static; }
+  .header-inner { flex-wrap: wrap; height: auto; padding-top: 8px; row-gap: 4px; }
   .version-pill { margin-left: auto; }
-  .main-nav { order: 3; width: 100%; margin: 0 -8px; padding-bottom: 6px; overflow-x: auto; scrollbar-width: none; }
-  .principle, .control { scroll-margin-top: 112px; }   /* the header is taller here */
+  .main-nav {
+    order: 3; width: 100%; margin: 0 0 8px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+  }
+  .main-nav a { text-align: center; padding: 7px 2px; font-size: 0.85rem; }
 }
-@media (max-width: 400px) {
-  .nav-iso { display: none; }           /* "ISO 27001" becomes "27001" */
-  .main-nav a { padding: 6px 8px; }
+@media (max-width: 360px) {
+  .main-nav a { font-size: 0.78rem; }
 }
 
 /* Small pill label, e.g. "Nytt i v2" */
