@@ -40,10 +40,12 @@
            >Prinsipper</a>
         <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
+        <a href="/grc-grunnmur/iso27002"
+           >ISO<span class="nav-long"> 27002</span></a>
         <a href="/grc-grunnmur/om"
            aria-current="page">Om</a>
       </nav>
-      <span class="version-pill">v2</span>
+      <span class="version-pill">v3</span>
     </div>
   </header>
 
@@ -94,9 +96,9 @@
       <li><strong>Risikoregister</strong>
           <span>Sannsynlighet × konsekvens, behandling og neste gjennomgang,
                 koblet til prinsippet som reduserer risikoen.</span></li>
-      <li><strong>Bro til ISO 27001 og GDPR</strong>
-          <span>Felt for ISO 27001-referanse og et personvernmerke, slik at samme arbeid
-                kan brukes i et styringssystem.</span></li>
+      <li><strong>Bro til ISO 27001, ISO 27002 og GDPR</strong>
+          <span>NSMs egen kobling til de 93 kontrollene i ISO/IEC 27002 vises under hvert prinsipp,
+                sammen med felt for ISO-referanse og et personvernmerke.</span></li>
       <li><strong>Konkrete eksempler</strong>
           <span>Et praktisk eksempel under hvert prinsipp, skrevet for et lite miljø
                 eller en hjemmelab.</span></li>
@@ -138,6 +140,21 @@
        <button type="button" class="link-button" id="clear-data">Slett mine data</button>
        </p>
   </footer>
+
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into a closed <details>:
+       open it so the target is visible. Some browsers do this on their own; this makes it work everywhere. -->
+  <script>
+    function openFromHash() {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var details = target && (target.closest("details") || target);
+      if (details && details.tagName === "DETAILS") {
+        details.open = true;
+        target.scrollIntoView();
+      }
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  </script>
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->

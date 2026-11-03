@@ -40,10 +40,12 @@
            >Prinsipper</a>
         <a href="/grc-grunnmur/risikoer"
            aria-current="page">Risikoer</a>
+        <a href="/grc-grunnmur/iso27002"
+           >ISO<span class="nav-long"> 27002</span></a>
         <a href="/grc-grunnmur/om"
            >Om</a>
       </nav>
-      <span class="version-pill">v2</span>
+      <span class="version-pill">v3</span>
     </div>
   </header>
 
@@ -314,6 +316,21 @@
        <button type="button" class="link-button" id="clear-data">Slett mine data</button>
        </p>
   </footer>
+
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into a closed <details>:
+       open it so the target is visible. Some browsers do this on their own; this makes it work everywhere. -->
+  <script>
+    function openFromHash() {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var details = target && (target.closest("details") || target);
+      if (details && details.tagName === "DETAILS") {
+        details.open = true;
+        target.scrollIntoView();
+      }
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  </script>
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->

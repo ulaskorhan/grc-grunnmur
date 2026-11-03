@@ -40,10 +40,12 @@
            aria-current="page">Prinsipper</a>
         <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
+        <a href="/grc-grunnmur/iso27002"
+           >ISO<span class="nav-long"> 27002</span></a>
         <a href="/grc-grunnmur/om"
            >Om</a>
       </nav>
-      <span class="version-pill">v2</span>
+      <span class="version-pill">v3</span>
     </div>
   </header>
 
@@ -155,6 +157,49 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.1"
+           title="Sikkerhetspolicyer"><b>5.1</b> Sikkerhetspolicyer</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.2"
+           title="Roller og ansvar for sikkerhet"><b>5.2</b> Roller og ansvar for sikkerhet</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.3"
+           title="Atskillelse av oppgaver"><b>5.3</b> Atskillelse av oppgaver</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.4"
+           title="Ledelsens ansvar"><b>5.4</b> Ledelsens ansvar</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.9"
+           title="Oversikt over informasjon og eiendeler"><b>5.9</b> Oversikt over informasjon og eiendeler</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.29"
+           title="Sikkerhet under avbrudd"><b>5.29</b> Sikkerhet under avbrudd</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.31"
+           title="Lovpålagte og avtalefestede krav"><b>5.31</b> Lovpålagte og avtalefestede krav</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.32"
+           title="Immaterielle rettigheter"><b>5.32</b> Immaterielle rettigheter</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.34"
+           title="Personvern og personopplysninger"><b>5.34</b> Personvern og personopplysninger</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.36"
+           title="Etterlevelse av policyer og regler"><b>5.36</b> Etterlevelse av policyer og regler</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.8"
+           title="Håndtering av tekniske sårbarheter"><b>8.8</b> Håndtering av tekniske sårbarheter</a>
+        
+      </div>
+    </section>
+    
     </div>
   </details>
 
@@ -231,6 +276,22 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.9"
+           title="Oversikt over informasjon og eiendeler"><b>5.9</b> Oversikt over informasjon og eiendeler</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.10"
+           title="Akseptabel bruk av informasjon og eiendeler"><b>5.10</b> Akseptabel bruk av informasjon og eiendeler</a>
+        
+      </div>
+    </section>
+    
     </div>
   </details>
 
@@ -307,6 +368,28 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.2"
+           title="Roller og ansvar for sikkerhet"><b>5.2</b> Roller og ansvar for sikkerhet</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.15"
+           title="Tilgangsstyring"><b>5.15</b> Tilgangsstyring</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.16"
+           title="Identitetsforvaltning"><b>5.16</b> Identitetsforvaltning</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k6.7"
+           title="Fjernarbeid"><b>6.7</b> Fjernarbeid</a>
+        
+      </div>
+    </section>
+    
     </div>
   </details>
 
@@ -332,6 +415,21 @@
        <button type="button" class="link-button" id="clear-data">Slett mine data</button>
        </p>
   </footer>
+
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into a closed <details>:
+       open it so the target is visible. Some browsers do this on their own; this makes it work everywhere. -->
+  <script>
+    function openFromHash() {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var details = target && (target.closest("details") || target);
+      if (details && details.tagName === "DETAILS") {
+        details.open = true;
+        target.scrollIntoView();
+      }
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  </script>
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->

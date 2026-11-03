@@ -411,6 +411,7 @@ button:active { transform: scale(0.98); }
 .header-inner { gap: 12px; }
 .main-nav { display: flex; gap: 4px; margin-left: auto; }
 .main-nav a {
+  white-space: nowrap;
   padding: 6px 10px; border-radius: 8px;
   font-size: 0.9rem; font-weight: 500; color: var(--muted); text-decoration: none;
 }
@@ -421,6 +422,7 @@ button:active { transform: scale(0.98); }
   .version-pill { display: none; }
   .logo-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .main-nav a { padding: 6px 8px; }
+  .nav-long { display: none; }          /* "ISO 27002" becomes "ISO" */
 }
 
 /* Small pill label, e.g. "Nytt i v2" */
@@ -490,6 +492,54 @@ button:active { transform: scale(0.98); }
 .adds li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); }
 .adds li span { color: var(--muted); font-size: 0.9rem; }
 @media (min-width: 640px) { .adds { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- 6f. ISO/IEC 27002 (v3) ---------- */
+/* Under each principle: NSM's linked controls as small chips */
+.iso-links h3 { font-size: 0.85rem; font-weight: 600; margin: 0 0 8px; }
+.control-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.control-chip {
+  display: inline-flex; gap: 6px; align-items: baseline; max-width: 100%;
+  padding: 4px 10px; border-radius: 8px; font-size: 0.8rem;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text); text-decoration: none;
+}
+.control-chip b { color: var(--accent-text); font-variant-numeric: tabular-nums; }
+@media (hover: hover) { .control-chip:hover { border-color: var(--accent); } }
+
+/* The ISO page: total, 4 theme boxes, and the control lists */
+.iso-summary { display: grid; gap: 12px; margin-bottom: 12px; }
+.iso-total { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.iso-total strong { font-size: 2.2rem; line-height: 1; letter-spacing: -0.02em; }
+.iso-total small, .theme-box small { font-size: 0.5em; color: var(--muted); font-weight: 500; }
+.theme-boxes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.theme-box {
+  display: grid; gap: 6px; padding: 12px 14px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--surface); box-shadow: var(--shadow);
+  color: var(--text); text-decoration: none; font-size: 0.8rem; min-width: 0;
+}
+.theme-box strong { font-size: 1.5rem; line-height: 1.1; }
+@media (hover: hover) { .theme-box:hover { border-color: var(--accent); } }
+.iso-note { font-size: 0.8rem; margin: 0 0 20px; max-width: 46em; }
+
+.themes { display: grid; gap: 10px; }
+.theme { border-left-color: var(--accent-2); scroll-margin-top: 72px; }
+.controls { list-style: none; margin: 0; padding: 4px 0; }
+.control {
+  display: grid; grid-template-columns: 3em 1fr; gap: 4px 10px;
+  padding: 10px 16px; border-top: 1px solid var(--border);
+  scroll-margin-top: 72px;
+}
+.control:first-child { border-top: 0; }
+.control-id { font-weight: 600; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.control-title { min-width: 0; overflow-wrap: anywhere; }
+.control-nsm { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.8rem; }
+.control-nsm .chip { text-decoration: none; background: var(--accent-soft); color: var(--accent-text); }
+.control.is-unlinked .control-title { color: var(--muted); }
+.control:target { background: color-mix(in srgb, var(--accent) 10%, transparent); }   /* the control a link pointed to */
+@media (min-width: 640px) {
+  .theme-boxes { grid-template-columns: repeat(4, 1fr); }
+  .control { grid-template-columns: 3em 1fr auto; align-items: center; }
+  .control-nsm { grid-column: auto; justify-content: flex-end; }
+}
 
 /* ---------- 6c. Risk register (v2) ---------- */
 .page-head {
@@ -616,6 +666,7 @@ button:active { transform: scale(0.98); }
   .p-body { grid-template-columns: 1fr 280px; gap: 24px; padding: 20px; align-items: start; }
   .example-panel { grid-column: 2; grid-row: 1; position: sticky; top: 72px; }
   .p-body form { grid-column: 1; grid-row: 1; }
+  .p-body .iso-links { grid-column: 1; }
 }
 
 /* Respect users who have turned off animations in their system settings */

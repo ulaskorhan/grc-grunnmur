@@ -40,10 +40,12 @@
            aria-current="page">Prinsipper</a>
         <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
+        <a href="/grc-grunnmur/iso27002"
+           >ISO<span class="nav-long"> 27002</span></a>
         <a href="/grc-grunnmur/om"
            >Om</a>
       </nav>
-      <span class="version-pill">v2</span>
+      <span class="version-pill">v3</span>
     </div>
   </header>
 
@@ -155,6 +157,37 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.5"
+           title="Kontakt med myndigheter"><b>5.5</b> Kontakt med myndigheter</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.6"
+           title="Kontakt med faggrupper og nettverk"><b>5.6</b> Kontakt med faggrupper og nettverk</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.19"
+           title="Sikkerhet i leverandørforhold"><b>5.19</b> Sikkerhet i leverandørforhold</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.24"
+           title="Planlegging for hendelseshåndtering"><b>5.24</b> Planlegging for hendelseshåndtering</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.29"
+           title="Sikkerhet under avbrudd"><b>5.29</b> Sikkerhet under avbrudd</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.30"
+           title="IKT-beredskap for kontinuitet"><b>5.30</b> IKT-beredskap for kontinuitet</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k6.3"
+           title="Sikkerhetsbevissthet og opplæring"><b>6.3</b> Sikkerhetsbevissthet og opplæring</a>
+        
+      </div>
+    </section>
+    
     </div>
   </details>
 
@@ -231,6 +264,28 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.25"
+           title="Vurdering av sikkerhetshendelser"><b>5.25</b> Vurdering av sikkerhetshendelser</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.26"
+           title="Respons på sikkerhetshendelser"><b>5.26</b> Respons på sikkerhetshendelser</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.15"
+           title="Logging"><b>8.15</b> Logging</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.16"
+           title="Overvåking av aktivitet"><b>8.16</b> Overvåking av aktivitet</a>
+        
+      </div>
+    </section>
+    
     </div>
   </details>
 
@@ -307,6 +362,25 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.25"
+           title="Vurdering av sikkerhetshendelser"><b>5.25</b> Vurdering av sikkerhetshendelser</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.26"
+           title="Respons på sikkerhetshendelser"><b>5.26</b> Respons på sikkerhetshendelser</a>
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.28"
+           title="Innsamling av bevis"><b>5.28</b> Innsamling av bevis</a>
+        
+      </div>
+    </section>
+    
     </div>
   </details>
 
@@ -383,6 +457,19 @@
         <button type="submit">Lagre</button>
       </div>
     </form>
+
+    <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
+    
+    <section class="iso-links">
+      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <div class="control-chips">
+        
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.27"
+           title="Læring etter hendelser"><b>5.27</b> Læring etter hendelser</a>
+        
+      </div>
+    </section>
+    
     </div>
   </details>
 
@@ -408,6 +495,21 @@
        <button type="button" class="link-button" id="clear-data">Slett mine data</button>
        </p>
   </footer>
+
+  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into a closed <details>:
+       open it so the target is visible. Some browsers do this on their own; this makes it work everywhere. -->
+  <script>
+    function openFromHash() {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var details = target && (target.closest("details") || target);
+      if (details && details.tagName === "DETAILS") {
+        details.open = true;
+        target.scrollIntoView();
+      }
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  </script>
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
