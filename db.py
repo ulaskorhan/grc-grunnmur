@@ -1,7 +1,8 @@
 """Database layer: stores the user's progress for each NSM principle in SQLite.
 
 The NSM principles themselves live in nsm_data.py (they never change at runtime).
-This file only stores what the user adds: status, notes, ISO reference, GDPR flag.
+This file only stores what the user adds: status, notes, ISO reference, GDPR flag,
+the risk register (v2), ISO 27001 clause status and the statement of applicability (v4).
 """
 
 import sqlite3
@@ -56,6 +57,26 @@ def init_db():
                 status       TEXT NOT NULL DEFAULT 'apen',
                 review_date  TEXT NOT NULL DEFAULT '',  -- YYYY-MM-DD, or empty
                 gdpr         INTEGER NOT NULL DEFAULT 0
+            )
+            """
+        )
+        # v4: status per ISO 27001 requirement (clauses 4-10), e.g. "6.1.2"
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS isms (
+                item_id TEXT PRIMARY KEY,
+                status  TEXT NOT NULL DEFAULT 'ikke_startet',
+                notes   TEXT NOT NULL DEFAULT ''
+            )
+            """
+        )
+        # v4: statement of applicability (SoA): does each ISO 27002 control apply, and why?
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS soa (
+                item_id TEXT PRIMARY KEY,                    -- control, e.g. "8.13"
+                status  TEXT NOT NULL DEFAULT 'ikke_vurdert',
+                notes   TEXT NOT NULL DEFAULT ''             -- the justification
             )
             """
         )
@@ -135,3 +156,44 @@ def update_risk(risk_id, data):
 def delete_risk(risk_id):
     with connect() as conn:
         conn.execute("DELETE FROM risks WHERE id = ?", (risk_id,))
+
+
+# ---------- v4: ISO 27001 clauses and the statement of applicability ----------
+
+# The SoA statuses: does an ISO 27002 control apply to us?
+SOA_STATUSES = {
+    "ikke_vurdert": "Ikke vurdert",
+    "gjelder": "Gjelder",
+    "gjelder_ikke": "Gjelder ikke",
+}
+
+# The two tables have the same columns (item_id, status, notes), so they share
+# the functions below. The table name is checked against this fixed list before
+# it is put into the SQL, so user input can never choose a table.
+STATUS_TABLES = {"isms": STATUSES, "soa": SOA_STATUSES}
+
+
+def get_statuses(table):
+    """Return {item_id: row} for every saved row in "isms" or "soa"."""
+    assert table in STATUS_TABLES
+    with connect() as conn:
+        rows = conn.execute(f"SELECT * FROM {table}").fetchall()
+    return {row["item_id"]: row for row in rows}
+
+
+def save_status(table, item_id, status, notes):
+    """Insert or update one row in "isms" or "soa" (an upsert, like save_progress)."""
+    assert table in STATUS_TABLES
+    allowed = STATUS_TABLES[table]
+    if status not in allowed:
+        status = next(iter(allowed))       # the first status is the default
+    with connect() as conn:
+        conn.execute(
+            f"""
+            INSERT INTO {table} (item_id, status, notes) VALUES (?, ?, ?)
+            ON CONFLICT(item_id) DO UPDATE SET
+                status = excluded.status,
+                notes = excluded.notes
+            """,
+            (item_id, status, notes.strip()),
+        )
