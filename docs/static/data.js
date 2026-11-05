@@ -1,5 +1,5 @@
 /*
-  data.js: export and import on the Data page (v7). Loaded in both versions.
+  data.js: export and import on the Data page (v7, incidents from v8). Loaded in both versions.
 
   Flask:        the server does the work (backup.py). This script only asks
                 "are you sure?" before "Erstatt alt" deletes what is saved.
@@ -14,11 +14,14 @@
 const DATA_KEYS = {
   progress: "grunnmur-progress", measures: "grunnmur-measures",
   isms: "grunnmur-isms", soa: "grunnmur-soa", risks: "grunnmur-risks",
+  incidents: "grunnmur-incidents",
 };
 // The risk fields in the file (the same list as db.RISK_FIELDS)
 const RISK_TEXT = ["title", "description", "treatment", "actions", "principle_id", "status", "review_date"];
 const RISK_NUMBERS = ["likelihood", "impact", "residual_likelihood", "residual_impact"];
 const RISK_FIELDS = RISK_TEXT.concat(RISK_NUMBERS, ["gdpr"]);
+// v8: the incident fields in the file (the same list as backup.INCIDENT_TEXT, plus risk and gdpr)
+const INCIDENT_TEXT = ["date", "title", "description", "severity", "status", "principle_id", "lessons"];
 
 const importForm = document.getElementById("import-form");
 const isStatic = importForm.hasAttribute("data-static");
@@ -46,10 +49,10 @@ function today() {
   return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
 
-// A risk's values in a fixed order, as text: two risks with the same text are exact copies
-function fingerprint(risk) {
-  return JSON.stringify(RISK_FIELDS.map(function (field) {
-    return risk[field] === undefined ? null : risk[field];
+// A row's values in a fixed order, as text: two rows with the same text are exact copies
+function fingerprint(row, fields) {
+  return JSON.stringify(fields.map(function (field) {
+    return row[field] === undefined ? null : row[field];
   }));
 }
 
@@ -77,6 +80,16 @@ function exportData() {
     item.gdpr = Boolean(risk.gdpr);
     return item;
   });
+  // v8: incidents, with the linked risk as its place in the risk list above (see backup.py)
+  const place = {};
+  readKey(DATA_KEYS.risks, []).forEach(function (risk, index) { place[risk.id] = index; });
+  data.incidents = readKey(DATA_KEYS.incidents, []).map(function (incident) {
+    const item = {};
+    INCIDENT_TEXT.forEach(function (field) { item[field] = incident[field] || ""; });
+    item.risk = incident.risk_id in place ? place[incident.risk_id] : null;
+    item.gdpr = Boolean(incident.gdpr);
+    return item;
+  });
 
   // A temporary link to the file, clicked once, so the browser downloads it
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -94,7 +107,7 @@ function exportData() {
 // Returns [cleanData, null] or [null, "Norwegian message"]
 function cleanBackup(data) {
   if (!isObject(data) || data.app !== rules.app) return [null, "Filen er ikke en eksport fra Grunnmur."];
-  if (data.format !== rules.format) return [null, "Filen har et format denne versjonen av Grunnmur ikke kjenner."];
+  if (!rules.reads.includes(data.format)) return [null, "Filen har et format denne versjonen av Grunnmur ikke kjenner."];
 
   const result = {};
   for (const name of Object.keys(rules.sections)) {
@@ -128,7 +141,48 @@ function cleanBackup(data) {
     if (error) return [null, "Risiko nr. " + (i + 1) + ": " + error];
     result.risks.push(risk);
   }
+
+  // v8: incidents. A format 1 file has none, so a missing list counts as empty.
+  const incidents = data.incidents === undefined ? [] : data.incidents;
+  if (!Array.isArray(incidents)) return [null, "Avvik: feil oppbygning i filen."];
+  result.incidents = [];
+  for (let i = 0; i < incidents.length; i++) {
+    const [incident, error] = cleanIncident(incidents[i], result.risks.length);
+    if (error) return [null, "Avvik nr. " + (i + 1) + ": " + error];
+    result.incidents.push(incident);
+  }
   return [result, null];
+}
+
+// One incident, with the same checks as incidents.read_form() in Python
+function cleanIncident(item, riskCount) {
+  if (!isObject(item)) return [null, "feil oppbygning i filen."];
+  const incident = {};
+  for (const field of INCIDENT_TEXT) {
+    const value = item[field] === undefined ? "" : item[field];
+    if (typeof value !== "string") return [null, "«" + field + "» må være tekst."];
+    incident[field] = value;
+  }
+  const risk = item.risk === undefined ? null : item.risk;
+  if (risk !== null && !Number.isInteger(risk)) return [null, "«risk» må være et tall eller null."];
+  incident.risk = risk;
+  incident.title = incident.title.trim().slice(0, 200);
+  incident.date = incident.date.trim();
+  incident.description = incident.description.trim();
+  incident.lessons = incident.lessons.trim();
+  incident.gdpr = item.gdpr === true;
+
+  if (!incident.title) return [null, "Avviket må ha en tittel."];
+  const day = new Date(incident.date + "T00:00:00Z");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(incident.date) || isNaN(day) ||
+      day.toISOString().slice(0, 10) !== incident.date) {
+    return [null, "Velg datoen avviket ble oppdaget."];
+  }
+  if (!rules.incident.severities.includes(incident.severity)) return [null, "Velg en gyldig alvorlighet."];
+  if (!rules.incident.statuses.includes(incident.status)) return [null, "Velg en gyldig status."];
+  if (incident.principle_id && !rules.risk.principles.includes(incident.principle_id)) return [null, "Ukjent NSM-prinsipp."];
+  if (risk !== null && (risk < 0 || risk >= riskCount)) return [null, "Ukjent risiko."];
+  return [incident, null];
 }
 
 // One risk, with the same checks as risks.read_form() in Python
@@ -181,25 +235,47 @@ function cleanRisk(item) {
 
 // ---------- 3. Saving an imported file: the same rules as db.import_all() ----------
 
-// Returns how many risks were added, or null if the browser would not save
+// Returns {risks, incidents}: how many were added, or null if the browser would not save
 function importData(data, replace) {
   const updates = {};                          // storage key -> new value
   ["progress", "measures", "isms", "soa"].forEach(function (name) {
     // Merge: rows in the file overwrite the same id, the rest stays
     updates[DATA_KEYS[name]] = Object.assign(replace ? {} : readKey(DATA_KEYS[name], {}), data[name]);
   });
+  const newId = function (n) { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6) + n; };
   const list = replace ? [] : readKey(DATA_KEYS.risks, []);
-  const saved = new Set(list.map(fingerprint));
+  const saved = {};                            // fingerprint -> id of a saved risk
+  list.forEach(function (risk) { saved[fingerprint(risk, RISK_FIELDS)] = risk.id; });
+  const riskIds = [];                          // the browser id of each risk in the file, in order
   let added = 0;
   data.risks.forEach(function (risk) {
-    if (saved.has(fingerprint(risk))) return;  // exactly like a risk that is already saved
-    // A new browser id, like newId() in static-risks.js
-    list.push(Object.assign({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6) + added }, risk));
+    const key = fingerprint(risk, RISK_FIELDS);
+    if (key in saved) {                        // exactly like a risk that is already saved
+      riskIds.push(saved[key]);
+      return;
+    }
+    const id = newId(added);
+    riskIds.push(id);
+    list.push(Object.assign({ id: id }, risk));
     added += 1;
   });
   updates[DATA_KEYS.risks] = list;
 
-  // Write all five keys. If one fails (storage full or blocked), put the old values back,
+  // v8: incidents, with the link turned from a place in the file into a browser id
+  const INCIDENT_FIELDS = INCIDENT_TEXT.concat(["risk_id", "gdpr"]);
+  const incidents = replace ? [] : readKey(DATA_KEYS.incidents, []);
+  const savedIncidents = new Set(incidents.map(function (item) { return fingerprint(item, INCIDENT_FIELDS); }));
+  let addedIncidents = 0;
+  data.incidents.forEach(function (incident) {
+    const item = Object.assign({}, incident, { risk_id: incident.risk === null ? null : riskIds[incident.risk] });
+    delete item.risk;
+    if (savedIncidents.has(fingerprint(item, INCIDENT_FIELDS))) return;
+    incidents.push(Object.assign({ id: newId("i" + addedIncidents) }, item));
+    addedIncidents += 1;
+  });
+  updates[DATA_KEYS.incidents] = incidents;
+
+  // Write all six keys. If one fails (storage full or blocked), put the old values back,
   // so the import is never left half done.
   const before = {};
   try {
@@ -214,7 +290,7 @@ function importData(data, replace) {
     } catch (ignored) { /* storage is blocked, nothing was saved */ }
     return null;
   }
-  return added;
+  return { risks: added, incidents: addedIncidents };
 }
 
 // ---------- 4. What is saved now ----------
@@ -263,7 +339,8 @@ importForm.addEventListener("submit", function (event) {
     }
     showMessage(replace
       ? "✓ Importert. Dataene er erstattet med innholdet i filen."
-      : "✓ Importert og slått sammen. " + added + (added === 1 ? " ny risiko" : " nye risikoer") + " lagt til.", false);
+      : "✓ Importert og slått sammen. " + added.risks + (added.risks === 1 ? " ny risiko" : " nye risikoer") +
+        " og " + added.incidents + " nye avvik lagt til.", false);
     importForm.reset();
     updateCounts();
   });

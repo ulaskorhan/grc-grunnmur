@@ -227,7 +227,14 @@ function setupForm() {
     if (event.defaultPrevented) return;
     event.preventDefault();
     const list = loadRisks().filter(function (item) { return item.id !== editId; });
-    if (saveRisks(list)) location.href = form.dataset.listUrl;
+    if (!saveRisks(list)) return;
+    // v8: incidents linked to this risk keep their data, but lose the link (like db.delete_risk)
+    try {
+      const incidents = JSON.parse(localStorage.getItem("grunnmur-incidents")) || [];
+      incidents.forEach(function (item) { if (item.risk_id === editId) item.risk_id = null; });
+      localStorage.setItem("grunnmur-incidents", JSON.stringify(incidents));
+    } catch (error) { /* storage blocked: the risk was not deleted either */ }
+    location.href = form.dataset.listUrl;
   });
 }
 
