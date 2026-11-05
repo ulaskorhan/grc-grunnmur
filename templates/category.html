@@ -52,14 +52,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     {% if examples.get(number) %}
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>{{ examples[number] }}</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     {% endif %}
 
     <form method="post" action="{{ url_for('save_principle', principle_id=number) }}">
@@ -102,7 +102,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     {% if iso_controls[number] %}
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         {% for cid in iso_controls[number] %}
         <a class="control-chip" href="{{ url_for('iso_page') }}#k{{ cid }}"
@@ -116,8 +116,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     {% set ms = measures[number] %}
     <section class="measures" data-store="grunnmur-measures" data-ids="{{ ms|map(attribute='id')|join(' ') }}">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">{{ measure_done[number] }}</span>
-          av {{ ms|length }} implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">{{ measure_done[number] }}</span>
+          av {{ ms|length }} implementert</span></h2>
       <div class="measure-list">
         {% for m in ms %}
         {{ measure_item(m, measure_rows.get(m.id), statuses, 'kategori', open_id, base ~ link) }}

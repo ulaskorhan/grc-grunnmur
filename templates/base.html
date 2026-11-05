@@ -27,6 +27,10 @@
 <body>
   <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
        Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <!-- Keyboard users can jump past the banner and menu (WCAG 2.4.1). Visible only when focused. -->
+  <a class="skip-link" href="#innhold">Hopp til innholdet</a>
+
+  <div role="region" aria-label="Nasjonalt cyberrisikonivå">
   <a class="cyber-banner{% if cyber.elevated %} is-elevated{% endif %}" href="{{ cyber.source_url }}"
      rel="noopener" aria-label="Nasjonalt cyberrisikonivå: {{ cyber.current }}. Satt av NSM {{ cyber.set_on }}, sist kontrollert {{ cyber.checked }}. Les mer hos NSM.">
     <span class="wrap cyber-inner">
@@ -43,6 +47,8 @@
         · sjekket {{ cyber.checked[:5] }}<span class="cyber-year">{{ cyber.checked[5:] }}</span> <span aria-hidden="true">↗</span></span>
     </span>
   </a>
+
+  </div>
 
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
@@ -76,7 +82,7 @@
   </header>
 
   <!-- data-store tells static-mode.js which browser storage key this page uses -->
-  <main class="wrap" {% block main_attrs %}{% endblock %}>
+  <main class="wrap" id="innhold" tabindex="-1" {% block main_attrs %}{% endblock %}>
     {% block content %}{% endblock %}
   </main>
 

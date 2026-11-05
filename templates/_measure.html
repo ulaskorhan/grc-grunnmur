@@ -14,7 +14,8 @@
     <span class="control-id">{{ m.id }}</span>
     <span class="control-title">{{ m.title }}</span>
     <span class="control-meta">
-      {% if principle %}<a class="chip" href="{{ principle }}" title="NSM-prinsipp {{ m.principle }}">NSM {{ m.principle }}</a>{% endif %}
+      {# A plain label, not a link: a link inside the clickable row confuses screen readers (WCAG 4.1.2) #}
+      {% if principle %}<span class="chip" title="NSM-prinsipp {{ m.principle }}">NSM {{ m.principle }}</span>{% endif %}
       <span class="prio prio-{{ m.priority }}" title="NSMs prioriteringsgruppe">Prioritet {{ m.priority }}</span>
       <span class="status status-{{ status }}">{{ statuses[status] }}</span>
     </span>
@@ -37,7 +38,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?">{{ row.notes if row else '' }}</textarea>
       </label>
       <div class="form-footer">
-        <a href="{{ link }}" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          {% if principle %}<a href="{{ principle }}">NSM-prinsipp {{ m.principle }}</a>{% endif %}
+          <a href="{{ link }}" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" {% if m.id != open_id %}hidden{% endif %}>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>

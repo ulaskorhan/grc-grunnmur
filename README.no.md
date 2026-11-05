@@ -59,6 +59,9 @@ forfalt eller skal skje innen 30 dager.
   En importert fil sjekkes helt før noe lagres, med de samme reglene som skjemaene.
   Er én verdi feil, endres ingenting. Ved import velger brukeren å erstatte alt eller
   slå sammen. Sammenslåing legger aldri til en risiko som finnes fra før.
+- Universell utforming: alle sider er sjekket med axe-core mot WCAG 2.2 AA, i lys og mørk
+  modus og med data i alle tilstander. Det finnes en «Hopp til innholdet»-lenke, synlig
+  tastaturfokus, tekstkontrast på minst 4,5:1, og ingen lenker inni de klikkbare radene.
 - Risikonivåene regnes ut i Python (`risks.py`). De samme reglene sendes til
   nettleseren som JSON, så den statiske versjonen regner helt likt.
 

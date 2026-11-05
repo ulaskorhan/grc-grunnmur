@@ -73,9 +73,9 @@
           <span class="control-id">{{ control.id }}</span>
           <span class="control-title">{{ control.title }}</span>
           <span class="control-meta">
+            {# Plain labels, not links: the links are inside the opened row (WCAG 4.1.2) #}
             {% for number in control.principles %}
-            <a class="chip" href="{{ url_for('category_page', category_id=category_of[number]) }}#p{{ number }}"
-               title="NSM-prinsipp {{ number }}">NSM {{ number }}</a>
+            <span class="chip" title="NSM-prinsipp {{ number }}">NSM {{ number }}</span>
             {% else %}
             <span class="muted">Ingen NSM-kobling</span>
             {% endfor %}
@@ -83,6 +83,13 @@
           </span>
         </summary>
         <div class="control-body">
+          {% if control.principles %}
+          <p class="control-links">NSMs kobling:
+            {% for number in control.principles %}
+            <a href="{{ url_for('category_page', category_id=category_of[number]) }}#p{{ number }}">prinsipp {{ number }}</a>{{ ',' if not loop.last }}
+            {% endfor %}
+          </p>
+          {% endif %}
           <form method="post" action="{{ url_for('save_soa', control_id=control.id) }}">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>

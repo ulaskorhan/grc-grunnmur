@@ -59,6 +59,9 @@ The homepage lists open risks whose review is overdue or due within 30 days.
   An imported file is checked completely before anything is saved, with the same rules
   as the forms. If one value is wrong, nothing changes. On import the user chooses to
   replace everything or to merge; a merge never adds a risk that is already there.
+- Accessibility: every page was checked with axe-core against WCAG 2.2 AA, in light and dark
+  mode and with data in every state. There is a skip link, visible keyboard focus, text
+  contrast of at least 4.5:1, and no links inside the clickable rows.
 - Risk levels are calculated in Python (`risks.py`). The same rules are sent to the
   browser as JSON, so the static version calculates exactly the same.
 

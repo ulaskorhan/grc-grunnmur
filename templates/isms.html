@@ -56,13 +56,13 @@
       </summary>
 
       <div class="p-body">
-        <aside class="example-panel">
+        <div class="example-panel">
           <details class="example">
             <summary>💡 Eksempel</summary>
             <p>{{ examples[number] }}</p>
             <p class="example-note">Eget eksempel for en liten virksomhet eller hjemmelab, ikke tekst fra ISO.</p>
           </details>
-        </aside>
+        </div>
 
         <form method="post" action="{{ url_for('save_isms', item_id=number) }}">
           <fieldset class="segmented">
