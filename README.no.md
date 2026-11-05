@@ -70,7 +70,10 @@ Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med 
   bruker bare kapittel- og kontrollnumre, med korte titler skrevet med egne ord.
 - **Eksempler:** skrevet for denne appen, ikke hentet fra NSM eller ISO.
 - **Cyberrisikonivå:** skrevet inn for hånd fra NSMs kunngjøring i `cyber_level.py`.
-  NSM har ikke et åpent API, så nivået må oppdateres for hånd når NSM endrer det.
+  NSM har ikke et åpent API. Hver tredje dag leser en GitHub Action (`check_cyber_level.py`)
+  NSMs nyhetsfeed: er det ingen ny kunngjøring, oppdateres datoen for siste kontroll og
+  siden bygges på nytt; er det en ny, åpnes en issue, og nivået endres for hånd etter at
+  NSMs tekst er lest. Nivået blir aldri gjettet ut fra en overskrift.
 
 ## Begrensninger
 
@@ -100,6 +103,8 @@ Etter endringer i maler, stil eller data: bygg på nytt og commit `docs/`:
 git add docs && git commit -m "Rebuild GitHub Pages site"
 ```
 
+Sjekken av cyberrisikonivået committer også til `main`, så kjør `git pull` før du pusher.
+
 For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 `python3 -m http.server 8000 --directory docs`.
 
@@ -116,6 +121,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `risks.py`: risikoskalaer, nivåer, validering, restrisiko og varmekart
 - `examples.py`: ett hjemmelab-eksempel per prinsipp
 - `cyber_level.py`: NSMs nasjonale cyberrisikonivå (oppdateres for hånd)
+- `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: sjekken av NSMs nyhetsfeed hver tredje dag
 - `build.py`: bygger den statiske versjonen i `docs/`
 - `templates/`: HTML-sidene (Jinja)
 - `static/style.css`: stilen, mobil først, med mørk modus og utskriftsstil

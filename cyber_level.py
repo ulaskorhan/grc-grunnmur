@@ -3,7 +3,11 @@
 This is NOT live data. NSM has no open API for the level, and GitHub Pages cannot
 fetch nsm.no from the browser. So the value is copied by hand from NSM's own
 announcement, together with the date and a link, and must be updated when NSM
-changes the level. CHECKED says when I last compared it with nsm.no.
+changes the level.
+
+check_cyber_level.py reads NSM's news feed every third day (a GitHub Action).
+If there is no new announcement it sets CHECKED to that day; if there is one,
+it opens an issue and the level is changed here by hand.
 """
 
 # NSM's five levels, lowest first. NSM describes MODERAT as the normal state.
@@ -11,7 +15,7 @@ SCALE = ["Svært lavt", "Lavt", "Moderat", "Høyt", "Ekstremt høyt"]
 
 CURRENT = "Høyt"                  # must be one of SCALE
 SET_ON = "27.10.2026"             # the date NSM raised the level
-CHECKED = "29.10.2026"            # the date I last checked nsm.no
+CHECKED = "05.11.2026"            # last compared with NSM (set by check_cyber_level.py)
 SOURCE_URL = "https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
 
 

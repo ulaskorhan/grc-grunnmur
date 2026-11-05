@@ -73,7 +73,10 @@ A thin banner at the top of every page shows NSM's national cyber risk level
   control numbers are used, with short titles in my own words.
 - **Examples:** written for this app, not taken from NSM or ISO.
 - **Cyber risk level:** copied by hand from NSM's announcement into `cyber_level.py`.
-  NSM has no open API, so it has to be updated by hand when NSM changes the level.
+  NSM has no open API. Every third day a GitHub Action (`check_cyber_level.py`) reads
+  NSM's news feed: if there is no new announcement it updates the "last checked" date
+  and rebuilds the site; if there is one, it opens an issue and the level is changed by
+  hand after reading NSM's text. The level is never guessed from a headline.
 
 ## Limitations
 
@@ -103,6 +106,8 @@ After changing templates, styles or data, rebuild and commit `docs/`:
 git add docs && git commit -m "Rebuild GitHub Pages site"
 ```
 
+The check of the cyber risk level also commits to `main`, so run `git pull` before pushing.
+
 For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 `python3 -m http.server 8000 --directory docs`.
 
@@ -119,6 +124,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `risks.py`: risk scales, levels, validation, residual risk and heat maps
 - `examples.py`: one home lab example per principle
 - `cyber_level.py`: NSM's national cyber risk level (updated by hand)
+- `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: the check of NSM's news feed every third day
 - `build.py`: builds the static version into `docs/`
 - `templates/`: the HTML pages (Jinja)
 - `static/style.css`: the styling, mobile first, with dark mode and print styles
