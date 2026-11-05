@@ -39,6 +39,25 @@
   </div>
 </section>
 
+<!-- Reminders: open risks with a review that is overdue or due soon (risks.reminders).
+     Hidden when there is nothing to follow up. On GitHub Pages, reminders.js fills it. -->
+<section class="reminders" id="reminders" aria-labelledby="reminders-title"
+         data-days="{{ reminder_days }}" data-max="5" data-edit-url="{{ url_for('risk_new') }}"
+         {% if not reminders %}hidden{% endif %}>
+  <h2 id="reminders-title">Trenger oppfølging</h2>
+  <ul class="reminder-list">
+    {% for r in reminders[:5] %}
+    <li{% if r.days < 0 %} class="is-overdue"{% endif %}>
+      <a href="{{ url_for('risk_edit', risk_id=r.id) }}">
+        <strong>{{ r.title }}</strong> <span>{{ r.when }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <a class="reminder-more" href="{{ url_for('risk_list') }}" {% if reminders|length <= 5 %}hidden{% endif %}>
+    Se alle {{ reminders|length }} i risikoregisteret →</a>
+</section>
+
 <!-- The 4 categories in a 2 × 2 grid (one column on phones) -->
 <section class="cards" id="kategorier" aria-label="Kategorier">
   {% for card in cards %}
@@ -85,4 +104,8 @@
   </ul>
 </aside>
 </div>
+{% endblock %}
+
+{% block static_scripts %}
+<script src="{{ url_for('static', filename='reminders.js') }}"></script>
 {% endblock %}

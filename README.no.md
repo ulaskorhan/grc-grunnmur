@@ -31,7 +31,9 @@ Appen er bygget i sju versjoner:
 | v6 | En utskriftsvennlig rapport med alt på én side (skriv ut eller lagre som PDF fra nettleseren), og denne README-en på engelsk og norsk |
 | v7 | Eksport og import av alle data som én JSON-fil, i begge versjonene, som backup eller for å flytte data mellom lokal og offentlig versjon |
 
-Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med dato og kilde.
+Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med datoen NSM satte
+det og datoen det sist ble kontrollert. Forsiden viser åpne risikoer der gjennomgangen er
+forfalt eller skal skje innen 30 dager.
 
 ## Slik virker den
 
@@ -129,6 +131,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/static-risks.js`: risikoregisteret i nettleseren (offentlig versjon)
 - `static/risk-tools.js`: filter i varmekartet og forslag fra NSM (begge versjoner)
 - `static/report.js`: fyller rapporten fra nettleseren (offentlig versjon)
+- `static/reminders.js`: påminnelsene om gjennomgang på forsiden (offentlig versjon)
 - `static/data.js`: eksport og import i nettleseren (offentlig versjon), og bekreftelsen før erstatning (begge)
 - `static/favicon.svg`, `static/og-image.png`: ikonet i fanen og bildet som vises når lenken deles
 

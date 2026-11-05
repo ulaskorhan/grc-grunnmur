@@ -154,6 +154,39 @@ def enrich(risk, today=None):
     return item
 
 
+# The homepage reminds about reviews that are overdue or due within this many days.
+REMINDER_DAYS = 30
+
+
+def reminders(risks, today=None):
+    """Open risks whose review is overdue or due within REMINDER_DAYS, soonest first.
+
+    Each item gets "days": days until the review (negative = overdue),
+    and "when": the same as Norwegian text. static/reminders.js does the same in the browser.
+    """
+    today = today or date.today()
+    found = []
+    for risk in risks:
+        if not risk["review_date"] or risk["status"] == "lukket":
+            continue
+        days = (date.fromisoformat(risk["review_date"]) - today).days
+        if days <= REMINDER_DAYS:
+            found.append({"id": risk["id"], "title": risk["title"], "days": days,
+                          "when": reminder_text(days)})
+    return sorted(found, key=lambda item: item["days"])
+
+
+def reminder_text(days):
+    """E.g. "Forfalt for 3 dager siden", "Gjennomgås i dag", "Gjennomgås om 12 dager"."""
+    if days < 0:
+        return f"Forfalt for {-days} {'dag' if days == -1 else 'dager'} siden"
+    if days == 0:
+        return "Gjennomgås i dag"
+    if days == 1:
+        return "Gjennomgås i morgen"
+    return f"Gjennomgås om {days} dager"
+
+
 def sort_key(item):
     """Closed risks last, then highest score first, then alphabetical."""
     return (item["status"] == "lukket", -item["score"], item["title"].lower())

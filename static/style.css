@@ -246,6 +246,26 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
 }
 .hero-note { margin: 14px 0 0; font-size: 0.85rem; color: var(--muted); }
 
+/* "Trenger oppfølging": risks to review soon. Orange edge; overdue rows in red. */
+.reminders {
+  margin: 24px 0 0; padding: 16px 20px;
+  border: 1px solid var(--border); border-left: 4px solid var(--partial);
+  border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
+}
+.reminders h2 { font-size: 1rem; margin: 0 0 4px; }
+.reminder-list { list-style: none; padding: 0; margin: 0; display: grid; }
+.reminder-list a {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px;
+  padding: 8px 0; border-top: 1px solid var(--border);
+  color: var(--text); text-decoration: none;
+}
+.reminder-list li:first-child a { border-top: 0; }
+.reminder-list strong { font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+.reminder-list span { font-size: 0.85rem; color: var(--partial-text); white-space: nowrap; }
+.reminder-list .is-overdue span { color: var(--critical-text); font-weight: 600; }
+@media (hover: hover) { .reminder-list a:hover strong { color: var(--accent-text); } }
+.reminder-more { display: inline-block; margin-top: 6px; font-size: 0.85rem; }
+
 /* Main part and side column. One column on phones: the side column comes last. */
 .home-layout { display: grid; }
 .home-main { min-width: 0; }      /* lets the main column shrink instead of overflowing */

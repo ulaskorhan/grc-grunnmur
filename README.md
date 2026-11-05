@@ -32,7 +32,8 @@ The app was built in seven versions:
 | v7 | Export and import of all data as one JSON file, in both versions, so data can be backed up or moved between the local and the public version |
 
 A thin banner at the top of every page shows NSM's national cyber risk level
-(nasjonalt cyberrisikonivå), with date and source.
+(nasjonalt cyberrisikonivå), with the date NSM set it and the date it was last checked.
+The homepage lists open risks whose review is overdue or due within 30 days.
 
 ## How it works
 
@@ -132,6 +133,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/static-risks.js`: the risk register in the browser (public version)
 - `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
 - `static/report.js`: fills the report from the browser (public version)
+- `static/reminders.js`: the review reminders on the homepage (public version)
 - `static/data.js`: export and import in the browser (public version), and the confirmation before replacing (both)
 - `static/favicon.svg`, `static/og-image.png`: the tab icon and the picture shown when the link is shared
 

@@ -158,8 +158,12 @@ def home():
     total = sum(len(c["principles"]) for c in nsm_data.CATEGORIES)
     points = sum(SCORE[row["status"]] for row in progress.values())
     overall = round(100 * points / total)
+    # Risks to review soon. Empty in static mode: static/reminders.js fills it from the browser.
+    rows = [] if app.config["STATIC_SITE"] else db.get_all_risks()
     return render_template(
         "home.html",
+        reminders=risks.reminders(rows),
+        reminder_days=risks.REMINDER_DAYS,
         cards=cards,
         overall=overall,
         implemented=implemented,
