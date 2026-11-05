@@ -4,3 +4,4 @@ __pycache__/
 
 # The local database holds your personal progress, so it is not committed
 grunnmur.db
+.pytest_cache/

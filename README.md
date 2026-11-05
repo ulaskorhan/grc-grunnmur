@@ -98,6 +98,18 @@ python3 -m venv .venv
 
 Then open <http://127.0.0.1:5050>.
 
+## Tests
+
+```bash
+.venv/bin/pip install -r requirements-dev.txt
+.venv/bin/pytest -q
+```
+
+The tests in `tests/` check the risk rules and reminders, export and import, that every
+page loads, that user text is escaped, that the public build never contains local data,
+and the cyber level check (without going online). Each test gets its own empty database.
+A GitHub Action (`.github/workflows/tests.yml`) runs them on every push.
+
 ## Building the public version
 
 After changing templates, styles or data, rebuild and commit `docs/`:
@@ -127,6 +139,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `cyber_level.py`: NSM's national cyber risk level (updated by hand)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: the check of NSM's news feed every third day
 - `build.py`: builds the static version into `docs/`
+- `tests/`: the pytest tests; `requirements-dev.txt` adds pytest
 - `templates/`: the HTML pages (Jinja)
 - `static/style.css`: the styling, mobile first, with dark mode and print styles
 - `static/static-mode.js`: browser storage for principles, measures, clauses and SoA (public version)
