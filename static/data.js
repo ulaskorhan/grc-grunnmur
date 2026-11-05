@@ -14,7 +14,7 @@
 const DATA_KEYS = {
   progress: "grunnmur-progress", measures: "grunnmur-measures",
   isms: "grunnmur-isms", soa: "grunnmur-soa", risks: "grunnmur-risks",
-  incidents: "grunnmur-incidents",
+  incidents: "grunnmur-incidents", history: "grunnmur-history",
 };
 // The risk fields in the file (the same list as db.RISK_FIELDS)
 const RISK_TEXT = ["title", "description", "treatment", "actions", "principle_id", "status", "review_date"];
@@ -90,6 +90,12 @@ function exportData() {
     item.gdpr = Boolean(incident.gdpr);
     return item;
   });
+  // v9: progress history, oldest first
+  data.history = readKey(DATA_KEYS.history, []).map(function (row) {
+    const item = { date: row.date };
+    rules.history_fields.forEach(function (field) { item[field] = row[field]; });
+    return item;
+  });
 
   // A temporary link to the file, clicked once, so the browser downloads it
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -151,7 +157,36 @@ function cleanBackup(data) {
     if (error) return [null, "Avvik nr. " + (i + 1) + ": " + error];
     result.incidents.push(incident);
   }
+
+  // v9: progress history, one row per day (the same checks as backup._history_error)
+  const days = data.history === undefined ? [] : data.history;
+  if (!Array.isArray(days)) return [null, "Historikk: feil oppbygning i filen."];
+  result.history = [];
+  for (let i = 0; i < days.length; i++) {
+    const [row, error] = cleanDay(days[i], result.history);
+    if (error) return [null, "Historikk nr. " + (i + 1) + ": " + error];
+    result.history.push(row);
+  }
   return [result, null];
+}
+
+function cleanDay(item, seen) {
+  if (!isObject(item) || typeof item.date !== "string") return [null, "feil oppbygning i filen."];
+  const day = new Date(item.date + "T00:00:00Z");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(item.date) || isNaN(day) || day.toISOString().slice(0, 10) !== item.date) {
+    return [null, "ugyldig dato."];
+  }
+  if (seen.some(function (row) { return row.date === item.date; })) return [null, "samme dato to ganger."];
+  const row = { date: item.date };
+  for (const field of rules.history_fields) {
+    const highest = ["principles", "measures", "isms", "soa"].includes(field) ? 100 : 100000;
+    const value = item[field];
+    if (!Number.isInteger(value) || value < 0 || value > highest) {
+      return [null, "«" + field + "» må være et tall fra 0 til " + highest + "."];
+    }
+    row[field] = value;
+  }
+  return [row, null];
 }
 
 // One incident, with the same checks as incidents.read_form() in Python
@@ -275,7 +310,15 @@ function importData(data, replace) {
   });
   updates[DATA_KEYS.incidents] = incidents;
 
-  // Write all six keys. If one fails (storage full or blocked), put the old values back,
+  // v9: history. A day in the file replaces the same day already saved.
+  const fileDays = new Set(data.history.map(function (row) { return row.date; }));
+  const history = (replace ? [] : readKey(DATA_KEYS.history, []))
+    .filter(function (row) { return !fileDays.has(row.date); })
+    .concat(data.history)
+    .sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+  updates[DATA_KEYS.history] = history;
+
+  // Write all seven keys. If one fails (storage full or blocked), put the old values back,
   // so the import is never left half done.
   const before = {};
   try {

@@ -19,7 +19,7 @@ system around it (how security is governed), so the app connects the two.
 
 ## What it does
 
-The app was built in eight versions:
+The app was built in nine versions:
 
 | Version | Content |
 |---------|---------|
@@ -31,6 +31,7 @@ The app was built in eight versions:
 | v6 | A print-friendly report of everything on one page (print or save as PDF from the browser), and this README in English and Norwegian |
 | v7 | Export and import of all data as one JSON file, in both versions, so data can be backed up or moved between the local and the public version |
 | v8 | Incident log: date, severity and status, linked to a principle and a risk, with corrective action and lessons (ISO 27001 10.2, ISO 27002 5.24–5.28) and a flag for personal data breaches (GDPR art. 33) |
+| v9 | Progress history: one row per day with changes (four percentages, open risks and incidents), shown in the report as a line chart with a table |
 
 A thin banner at the top of every page shows NSM's national cyber risk level
 (nasjonalt cyberrisikonivå), with the date NSM set it and the date it was last checked.
@@ -63,6 +64,9 @@ The homepage lists open risks whose review is overdue or due within 30 days, and
 - Accessibility: every page was checked with axe-core against WCAG 2.2 AA, in light and dark
   mode and with data in every state. There is a skip link, visible keyboard focus, text
   contrast of at least 4.5:1, and no links inside the clickable rows.
+- Progress history: Flask notes today's numbers after every saved form (one `after_request`
+  hook); the public version notes them when a page opens or is left. Both keep at most one
+  row per day, and skip a day whose numbers equal the last one.
 - Risk levels are calculated in Python (`risks.py`). The same rules are sent to the
   browser as JSON, so the static version calculates exactly the same.
 
@@ -109,7 +113,7 @@ Then open <http://127.0.0.1:5050>.
 .venv/bin/pytest -q
 ```
 
-The tests in `tests/` check the risk rules and reminders, the incident log, export and import, that every
+The tests in `tests/` check the risk rules and reminders, the incident log, the history, export and import, that every
 page loads, that user text is escaped, that the public build never contains local data,
 and the cyber level check (without going online). Each test gets its own empty database.
 A GitHub Action (`.github/workflows/tests.yml`) runs them on every push.
@@ -150,6 +154,8 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/static-mode.js`: browser storage for principles, measures, clauses and SoA (public version)
 - `static/static-risks.js`: the risk register in the browser (public version)
 - `static/static-incidents.js`: the incident log in the browser (public version)
+- `static/static-history.js`: notes the progress history in the browser (public version)
+- `static/history.js`: the history graph and table in the report (both versions)
 - `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
 - `static/report.js`: fills the report from the browser (public version)
 - `static/reminders.js`: the review reminders on the homepage (public version)

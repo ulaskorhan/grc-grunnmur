@@ -19,7 +19,7 @@ sikkerhet styres), så appen kobler de to.
 
 ## Hva den gjør
 
-Appen er bygget i åtte versjoner:
+Appen er bygget i ni versjoner:
 
 | Versjon | Innhold |
 |---------|---------|
@@ -31,6 +31,7 @@ Appen er bygget i åtte versjoner:
 | v6 | En utskriftsvennlig rapport med alt på én side (skriv ut eller lagre som PDF fra nettleseren), og denne README-en på engelsk og norsk |
 | v7 | Eksport og import av alle data som én JSON-fil, i begge versjonene, som backup eller for å flytte data mellom lokal og offentlig versjon |
 | v8 | Avvikslogg: dato, alvorlighet og status, koblet til et prinsipp og en risiko, med tiltak og læring (ISO 27001 10.2, ISO 27002 5.24–5.28) og et merke for brudd på personopplysningssikkerheten (GDPR art. 33) |
+| v9 | Fremdriftshistorikk: én rad per dag med endringer (fire prosenter, åpne risikoer og avvik), vist i rapporten som et linjediagram med tabell |
 
 Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med datoen NSM satte
 det og datoen det sist ble kontrollert. Forsiden viser åpne risikoer der gjennomgangen er
@@ -63,6 +64,9 @@ forfalt eller skal skje innen 30 dager, og åpne avvik.
 - Universell utforming: alle sider er sjekket med axe-core mot WCAG 2.2 AA, i lys og mørk
   modus og med data i alle tilstander. Det finnes en «Hopp til innholdet»-lenke, synlig
   tastaturfokus, tekstkontrast på minst 4,5:1, og ingen lenker inni de klikkbare radene.
+- Fremdriftshistorikk: Flask noterer dagens tall etter hvert lagrede skjema (én `after_request`-
+  krok); den offentlige versjonen noterer dem når en side åpnes eller forlates. Begge har
+  høyst én rad per dag, og hopper over en dag med de samme tallene som den forrige.
 - Risikonivåene regnes ut i Python (`risks.py`). De samme reglene sendes til
   nettleseren som JSON, så den statiske versjonen regner helt likt.
 
@@ -107,7 +111,7 @@ python3 -m venv .venv
 .venv/bin/pytest -q
 ```
 
-Testene i `tests/` sjekker risikoreglene og påminnelsene, avviksloggen, eksport og import, at alle sider
+Testene i `tests/` sjekker risikoreglene og påminnelsene, avviksloggen, historikken, eksport og import, at alle sider
 lastes, at tekst fra brukeren escapes, at den offentlige versjonen aldri inneholder lokale
 data, og sjekken av cyberrisikonivået (uten å gå på nett). Hver test får sin egen tomme
 database. En GitHub Action (`.github/workflows/tests.yml`) kjører dem ved hver push.
@@ -148,6 +152,8 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/static-mode.js`: lagring i nettleseren for prinsipper, tiltak, kapittelkrav og SoA (offentlig versjon)
 - `static/static-risks.js`: risikoregisteret i nettleseren (offentlig versjon)
 - `static/static-incidents.js`: avviksloggen i nettleseren (offentlig versjon)
+- `static/static-history.js`: noterer fremdriftshistorikken i nettleseren (offentlig versjon)
+- `static/history.js`: grafen og tabellen over historikken i rapporten (begge versjoner)
 - `static/risk-tools.js`: filter i varmekartet og forslag fra NSM (begge versjoner)
 - `static/report.js`: fyller rapporten fra nettleseren (offentlig versjon)
 - `static/reminders.js`: påminnelsene om gjennomgang på forsiden (offentlig versjon)

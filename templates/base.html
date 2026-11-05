@@ -120,6 +120,9 @@
   {% if static_site %}
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
   <script src="{{ url_for('static', filename='static-mode.js') }}"></script>
+  <!-- v9: notes today's numbers in the visitor's progress history -->
+  <script id="history-ids" type="application/json">{{ history_ids|tojson }}</script>
+  <script src="{{ url_for('static', filename='static-history.js') }}"></script>
   {% block static_scripts %}{% endblock %}
   {% endif %}
 

@@ -114,6 +114,20 @@ def init_db():
             )
             """
         )
+        # v9: progress history, at most one row per day (see record_history)
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS history (
+                date           TEXT PRIMARY KEY,        -- YYYY-MM-DD
+                principles     INTEGER NOT NULL,        -- % of NSM's principles (0-100)
+                measures       INTEGER NOT NULL,        -- % of NSM's measures
+                isms           INTEGER NOT NULL,        -- % of ISO 27001 clauses 4-10
+                soa            INTEGER NOT NULL,        -- % of the 93 controls assessed in the SoA
+                open_risks     INTEGER NOT NULL,
+                open_incidents INTEGER NOT NULL
+            )
+            """
+        )
 
 
 def get_all_progress():
@@ -303,7 +317,8 @@ def import_all(data, replace):
                    only in the database stay. Risks from the file are added,
                    except one that is exactly like a saved risk, so importing
                    the same file twice does not give every risk twice.
-                   v8: the same for incidents.
+                   v8: the same for incidents. v9: a day of history in the file
+                   replaces the same day in the database.
     In the file an incident points to a risk by its place in the file's risk list
     ("risk": 0 = the first risk), because ids differ between databases and browsers.
     Returns (risks added, incidents added).
@@ -313,7 +328,7 @@ def import_all(data, replace):
     """
     with connect() as conn:
         if replace:
-            for table in ("progress", "risks", "isms", "soa", "measures", "incidents"):
+            for table in ("progress", "risks", "isms", "soa", "measures", "incidents", "history"):
                 conn.execute(f"DELETE FROM {table}")
         for principle_id, row in data["progress"].items():
             _upsert_progress(conn, principle_id, row["status"], row["notes"],
@@ -346,4 +361,47 @@ def import_all(data, replace):
                 continue
             _insert_incident(conn, row)
             added_incidents += 1
+
+        # v9: history. A day in the file replaces the same day in the database.
+        for row in data["history"]:
+            _upsert_history(conn, row)
     return added, added_incidents
+
+
+# ---------- v9: progress history ----------
+
+HISTORY_FIELDS = ["principles", "measures", "isms", "soa", "open_risks", "open_incidents"]
+
+
+def get_history():
+    """Every saved day, oldest first."""
+    with connect() as conn:
+        rows = conn.execute("SELECT * FROM history ORDER BY date").fetchall()
+    return [dict(row) for row in rows]
+
+
+def record_history(day, values):
+    """Save today's numbers, at most one row per day.
+
+    Today's row is replaced each time. If the numbers are the same as on the last
+    earlier day, today's row is left out, so the graph only gets a new point on
+    days when something actually changed. static-history.js uses the same rule.
+    """
+    with connect() as conn:
+        _record_history(conn, day, values)
+
+
+def _record_history(conn, day, values):
+    conn.execute("DELETE FROM history WHERE date = ?", (day,))
+    last = conn.execute("SELECT * FROM history WHERE date < ? ORDER BY date DESC LIMIT 1", (day,)).fetchone()
+    if last and all(last[field] == values[field] for field in HISTORY_FIELDS):
+        return
+    _upsert_history(conn, {"date": day, **values})
+
+
+def _upsert_history(conn, row):
+    columns = ", ".join(["date"] + HISTORY_FIELDS)
+    placeholders = ", ".join("?" for _ in range(len(HISTORY_FIELDS) + 1))
+    conn.execute(f"INSERT OR REPLACE INTO history ({columns}) VALUES ({placeholders})",
+                 [row["date"]] + [row[field] for field in HISTORY_FIELDS])
+

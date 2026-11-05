@@ -29,7 +29,7 @@
       {% endfor %}
     </ul>
     <p class="muted data-note">Tallene viser hvor mange prinsipper, tiltak, krav og kontroller
-       du har lagret noe på, og hvor mange risikoer og avvik du har.
+       du har lagret noe på, hvor mange risikoer og avvik du har, og hvor mange dager historikken har.
        {% if static_site %}Dataene ligger i denne nettleseren.{% else %}Dataene ligger i den lokale databasen.{% endif %}</p>
   </section>
 
@@ -37,7 +37,7 @@
   <section class="about-section">
     <h2>Eksporter</h2>
     <p>Last ned alt som én JSON-fil: status og notater for grunnprinsipper, tiltak,
-       styringssystem og SoA, hele risikoregisteret og avviksloggen.</p>
+       styringssystem og SoA, hele risikoregisteret, avviksloggen og fremdriftshistorikken.</p>
     {% if static_site %}
     <button type="button" class="inline-button" id="export-data">Last ned JSON-fil</button>
     {% else %}

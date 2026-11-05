@@ -66,8 +66,9 @@ ROADMAP = [
     (6, "Rapport og portefølje", "Utskriftsvennlig rapport og README på engelsk og norsk"),
     (7, "Eksport og import", "Alle data som én JSON-fil, også mellom lokal og offentlig versjon"),
     (8, "Avvikslogg", "Hendelser og avvik med alvorlighet, kobling til risiko og læring (ISO 27001 10.2)"),
+    (9, "Fremdriftshistorikk", "Ett punkt per dag med endringer, vist som en graf i rapporten"),
 ]
-CURRENT_VERSION = 8
+CURRENT_VERSION = 9
 
 # The side column on the homepage: every part of the app, as (page function, name, text).
 SITE_MAP = [
@@ -77,7 +78,7 @@ SITE_MAP = [
     ("incident_list", "Avvikslogg", "Hendelser og avvik, og hva du lærte av dem"),
     ("isms_page", "ISO 27001", "Styringssystemet: kapittel 4–10 i PDCA-sirkelen"),
     ("iso_page", "ISO 27002", "De 93 kontrollene og anvendelseserklæringen (SoA)"),
-    ("report", "Rapport", "Alt samlet på én side, klar til utskrift eller PDF"),
+    ("report", "Rapport", "Alt samlet på én side, med utviklingen over tid"),
     ("data_page", "Data", "Eksport og import av alt som én JSON-fil"),
     ("about", "Om", "Bakgrunn, kilder og hva appen ikke er"),
 ]
@@ -92,6 +93,8 @@ def add_template_globals():
         "current_version": CURRENT_VERSION,
         "cyber": cyber_level.for_template(),
         "site_url": SITE_URL,
+        # v9: on GitHub Pages every page notes today's numbers (static-history.js), so it needs the ids
+        "history_ids": history_ids() if app.config["STATIC_SITE"] else None,
     }
 
 
@@ -310,6 +313,54 @@ def save_measure(measure_id):
     return redirect(url_for("measures_page", apen=measure_id) + "#t" + measure_id)
 
 
+# ---------- v9: progress history ----------
+
+def progress_snapshot():
+    """Today's numbers for the history: four percentages and two counts."""
+    ids = history_ids()
+    soa = load_statuses("soa")
+    assessed = sum(1 for control_id in ids["soa"]
+                   if control_id in soa and soa[control_id]["status"] != "ikke_vurdert")
+    return {
+        "principles": percent_done(ids["principles"], load_progress()),
+        "measures": percent_done(ids["measures"], load_statuses("measures")),
+        "isms": percent_done(ids["isms"], load_statuses("isms")),
+        "soa": round(100 * assessed / len(ids["soa"])),
+        "open_risks": sum(1 for risk in db.get_all_risks() if risk["status"] != "lukket"),
+        "open_incidents": sum(1 for item in db.get_all_incidents() if item["status"] != "lukket"),
+    }
+
+
+def history_ids():
+    """Every id each percentage is counted over, for static-history.js (the same lists as progress_snapshot)."""
+    return {
+        "principles": [number for c in nsm_data.CATEGORIES for number, _t, _l in c["principles"]],
+        "measures": list(nsm_measures.TITLES),
+        "isms": [number for clause in iso27001.CLAUSES for number, _title in clause["items"]],
+        "soa": list(iso27002.CONTROLS),
+    }
+
+
+@app.after_request
+def record_progress(response):
+    """After every form that saved something (a POST that redirects), note today's numbers.
+
+    One hook instead of a line in every route, so no form can forget it.
+    Never in static mode: the public build has no database, and visitors'
+    history is kept in their browser by static-history.js.
+    """
+    if request.method == "POST" and response.status_code in (302, 303) and not app.config["STATIC_SITE"]:
+        db.record_history(date.today().isoformat(), progress_snapshot())
+    return response
+
+
+# The four lines in the graph (key, label, short label at the line end),
+# and the two counts in its table and tooltip (key, label)
+HISTORY_SERIES = [("principles", "NSMs grunnprinsipper", "Prinsipper"), ("measures", "NSMs tiltak", "Tiltak"),
+                  ("isms", "ISO 27001", "ISO 27001"), ("soa", "SoA vurdert", "SoA")]
+HISTORY_COUNTS = [("open_risks", "Åpne risikoer"), ("open_incidents", "Åpne avvik")]
+
+
 # ---------- v6: report ----------
 
 @app.route("/rapport")
@@ -360,6 +411,10 @@ def report():
         labels={**db.STATUSES, **db.SOA_STATUSES},   # every status label, for report.js
         incidents=incident_overview()["items"],
         incident_config=incidents.config_for_browser(),
+        # v9: the saved days for the graph (empty in static mode; static-history.js has them)
+        history=[] if app.config["STATIC_SITE"] else db.get_history(),
+        history_series=HISTORY_SERIES,
+        history_counts=HISTORY_COUNTS,
         **risk_overview(),
     )
 

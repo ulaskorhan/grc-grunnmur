@@ -86,7 +86,7 @@ def test_export_and_import_keep_the_link_to_the_risk(client):
     add_risk_and_incident(client)
     client.post("/risikoer/ny", data={**RISK_FORM, "title": "En risiko til"})
     data = json.loads(client.get("/data/eksport").get_data(as_text=True))
-    assert data["format"] == 2
+    assert data["format"] == backup.FORMAT
     assert data["incidents"][0]["risk"] == 0          # the first risk in the file
 
     upload(client, data, "erstatt")                    # new ids in the database

@@ -25,6 +25,8 @@
   --critical: #dc2626;       /* red for risk level "Kritisk" */
   --critical-soft: #fee2e2;
   --critical-text: #991b1b;
+  /* v9: the four lines in the history graph (checked for colour blindness, adjacent pairs) */
+  --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.05);
   --radius: 16px;
 }
@@ -51,6 +53,7 @@
     --critical: #f87171;
     --critical-soft: #450a0a;
     --critical-text: #fca5a5;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
     --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
   }
 }
@@ -854,6 +857,33 @@ button:active { transform: scale(0.98); }
 }
 .risk.is-closed .incident-date { background: var(--track); color: var(--muted); }
 
+/* ---------- v9: progress history graph (report) ---------- */
+.history-legend { list-style: none; padding: 0; margin: 12px 0 8px; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.85rem; }
+.history-legend li { display: flex; align-items: center; gap: 6px; }
+.history-legend i, .history-tooltip i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; }
+.history-chart-wrap { position: relative; }
+.history-chart { width: 100%; border-radius: 8px; }
+.history-chart svg { display: block; overflow: visible; }
+.h-grid { stroke: var(--border); stroke-width: 1; }
+.h-axis { fill: var(--muted); font-size: 11px; }
+.h-label { fill: var(--text); font-size: 12px; font-weight: 500; }
+.h-leader { stroke: var(--muted); stroke-width: 1; }
+.h-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.h-dot { stroke: var(--surface); stroke-width: 2; }        /* a ring in the background colour where lines cross */
+.h-cross { stroke: var(--muted); stroke-width: 1; }
+.history-tooltip {
+  position: absolute; z-index: 2; pointer-events: none;
+  display: grid; gap: 2px; padding: 8px 10px; min-width: 170px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  box-shadow: var(--shadow); font-size: 0.8rem;
+}
+.history-tooltip span { display: flex; align-items: center; gap: 6px; }
+.history-table { margin-top: 12px; font-size: 0.85rem; }
+.history-table summary { cursor: pointer; color: var(--accent-text); }
+.table-scroll { overflow-x: auto; }                       /* the table scrolls on phones, the page does not */
+.history-table table { border-collapse: collapse; margin-top: 8px; width: 100%; }
+.history-table th, .history-table td { padding: 4px 10px 4px 0; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--border); }
+
 .risk-actions { display: none; }
 .report .risk-actions { display: block; font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
 .report .cell { cursor: default; pointer-events: none; }   /* no filter in the report */
@@ -868,7 +898,8 @@ button:active { transform: scale(0.98); }
   @page { margin: 16mm; }
   :root { --bg: #fff; --surface: #fff; --shadow: none; }
   body { background: #fff; font-size: 10.5pt; }
-  body::before, .cyber-banner, .site-header, .site-footer, .print-button { display: none !important; }
+  body::before, .cyber-banner, .site-header, .site-footer, .print-button, .history-tooltip { display: none !important; }
+  .history-body { break-inside: avoid; }
   .wrap { max-width: none; padding: 0; }
   .report-section { break-before: auto; }
   .report-section h2, .report-section h3 { break-after: avoid; }
@@ -886,7 +917,7 @@ button:active { transform: scale(0.98); }
 .data-page { margin-top: 16px; }
 .data-note { font-size: 0.85rem; margin-top: 12px !important; }
 .inline-button { width: auto; order: 0; }
-/* Five counts: 2 per row on phones, 5 in a row on wider screens */
+/* The counts: 2 per row on phones, 4 per row on wider screens */
 .data-counts {
   list-style: none; padding: 0 !important; margin: 0;
   display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 8px !important;
@@ -910,7 +941,7 @@ button:active { transform: scale(0.98); }
 .choice .muted { font-size: 0.85rem; line-height: 1.45; }
 
 @media (min-width: 640px) {
-  .data-counts { grid-template-columns: repeat(6, 1fr); }
+  .data-counts { grid-template-columns: repeat(4, 1fr); }
   .data-page .form-footer button { width: auto; }
 }
 

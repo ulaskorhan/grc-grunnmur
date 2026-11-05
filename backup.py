@@ -4,16 +4,18 @@ The same file format is used by the Flask version and the GitHub Pages version,
 so data can be moved between them, or kept as a backup:
 
     {
-      "app": "grunnmur", "format": 2, "exported": "2026-11-03",
+      "app": "grunnmur", "format": 3, "exported": "2026-11-03",
       "progress": { "2.6":   { "status": "delvis", "notes": "...", "iso_ref": "A.5.15", "gdpr": true } },
       "measures": { "2.6.4": { "status": "implementert", "notes": "..." } },
       "isms":     { "6.1.2": { "status": "delvis", "notes": "..." } },
       "soa":      { "8.13":  { "status": "gjelder", "notes": "Backup av NAS" } },
       "risks":    [ { "title": "...", "likelihood": 3, "impact": 4, ... } ],
-      "incidents": [ { "date": "2026-11-01", "title": "...", "risk": 0, ... } ]
+      "incidents": [ { "date": "2026-11-01", "title": "...", "risk": 0, ... } ],
+      "history":  [ { "date": "2026-11-01", "principles": 40, "measures": 12, ... } ]
     }
 
-Format 2 (v8) added "incidents". Files in format 1 are still accepted, with no incidents.
+Format 2 (v8) added "incidents", format 3 (v9) "history". Older files are still
+accepted; a part they do not have counts as empty.
 
 Risks have no id in the file: the ids differ between the database (1, 2, 3)
 and the browser ("lq3k9x2a"), so the importing side gives each risk a new one.
@@ -26,6 +28,7 @@ The browser version (static/data.js) does the same checks with the rules from
 rules_for_browser(), so both versions accept the same files.
 """
 
+import re
 from datetime import date
 
 import db
@@ -37,8 +40,8 @@ import nsm_measures
 import risks
 
 APP = "grunnmur"
-FORMAT = 2                      # raise this if the file format ever changes
-READS = (1, 2)                  # formats this version can import
+FORMAT = 3                      # raise this if the file format ever changes
+READS = (1, 2, 3)               # formats this version can import
 MAX_BYTES = 1_000_000           # 1 MB: far more than a full Grunnmur file needs
 
 # The four parts with one row per id: which ids exist, and which statuses are allowed.
@@ -50,7 +53,7 @@ SECTIONS = {
 }
 # Norwegian names for the parts, used in messages and on the Data page
 LABELS = {"progress": "Grunnprinsipper", "measures": "Tiltak", "isms": "Styringssystem",
-          "soa": "SoA", "risks": "Risikoer", "incidents": "Avvik"}
+          "soa": "SoA", "risks": "Risikoer", "incidents": "Avvik", "history": "Dager i historikken"}
 
 # The risk fields in the file, in this order
 RISK_TEXT = ["title", "description", "treatment", "actions", "principle_id", "status", "review_date"]
@@ -76,6 +79,7 @@ def export_data():
     # v8: incidents, with the linked risk as its place in the list above
     place = {risk["id"]: number for number, risk in enumerate(saved_risks)}
     data["incidents"] = [_incident_for_file(i, place) for i in db.get_all_incidents()]
+    data["history"] = db.get_history()          # v9: already plain rows, oldest first
     return data
 
 
@@ -150,6 +154,17 @@ def clean(data):
         if error:
             return None, f"Avvik nr. {number}: {error}"
         result["incidents"].append(incident)
+
+    # v9: progress history, one row per day
+    items = data.get("history", [])
+    if not isinstance(items, list):
+        return None, "Historikk: feil oppbygning i filen."
+    result["history"] = []
+    for number, item in enumerate(items, start=1):
+        error = _history_error(item, {row["date"] for row in result["history"]})
+        if error:
+            return None, f"Historikk nr. {number}: {error}"
+        result["history"].append({"date": item["date"], **{f: item[f] for f in db.HISTORY_FIELDS}})
     return result, None
 
 
@@ -199,6 +214,26 @@ def _clean_incident(item, risk_count):
     return incident, None
 
 
+def _history_error(item, seen):
+    """Check one day in the history. Returns a message, or None when it is valid."""
+    if not isinstance(item, dict) or not isinstance(item.get("date"), str):
+        return "feil oppbygning i filen."
+    try:
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", item["date"]):
+            raise ValueError
+        date.fromisoformat(item["date"])
+    except ValueError:
+        return "ugyldig dato."
+    if item["date"] in seen:
+        return "samme dato to ganger."
+    for field in db.HISTORY_FIELDS:
+        value = item.get(field)
+        highest = 100 if field in ("principles", "measures", "isms", "soa") else 100_000
+        if isinstance(value, bool) or not isinstance(value, int) or not 0 <= value <= highest:
+            return f"«{field}» må være et tall fra 0 til {highest}."
+    return None
+
+
 def counts(data):
     """How many rows each part has, e.g. {"progress": 4, ..., "risks": 2}."""
     return {name: len(data[name]) for name in LABELS}
@@ -217,4 +252,5 @@ def rules_for_browser():
         "risk": {"treatments": list(risks.TREATMENTS), "statuses": list(risks.STATUSES),
                  "principles": sorted(nsm_data.PRINCIPLE_IDS)},
         "incident": {"severities": list(incidents.SEVERITIES), "statuses": list(incidents.STATUSES)},
+        "history_fields": db.HISTORY_FIELDS,
     }

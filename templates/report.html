@@ -66,6 +66,40 @@
   </div>
 </section>
 
+<!-- v9: progress over time. history.js draws the graph and fills the table, in both versions. -->
+<section class="report-section history" id="history" {% if static_site %}data-static{% endif %}>
+  <h2>Utvikling over tid</h2>
+  <p class="muted report-note">Ett punkt per dag der noe ble endret. Prosentene regnes som på resten
+     av siden: delvis teller halvt. SoA viser hvor mange av de 93 kontrollene som er vurdert.</p>
+  <p class="muted report-empty" id="history-empty" {% if history %}hidden{% endif %}>Ingen historikk ennå.
+     Grafen fylles ut når du lagrer noe, med ett punkt per dag.</p>
+  <div class="history-body" {% if not history %}hidden{% endif %}>
+    <ul class="history-legend">
+      {% for key, label, _short in history_series %}
+      <li><i style="background: var(--series-{{ loop.index }})"></i>{{ label }}</li>
+      {% endfor %}
+    </ul>
+    <div class="history-chart-wrap">
+      <div class="history-chart" id="history-chart" tabindex="0" role="group"
+           aria-label="Graf over utviklingen. Bruk piltastene for å se hver dag, eller se tabellen under."></div>
+      <div class="history-tooltip" id="history-tooltip" aria-live="polite" hidden></div>
+    </div>
+    <details class="history-table">
+      <summary>Vis som tabell</summary>
+      <!-- tabindex: keyboard users can scroll the table sideways on a phone (WCAG 2.1.1) -->
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Utviklingen som tabell">
+        <table id="history-table">
+          <thead><tr><th scope="col">Dato</th>
+            {% for _key, label, _short in history_series %}<th scope="col">{{ label }}</th>{% endfor %}
+            {% for _key, label in history_counts %}<th scope="col">{{ label }}</th>{% endfor %}</tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+  <script id="history-data" type="application/json">{{ {"rows": history, "series": history_series, "counts": history_counts}|tojson }}</script>
+</section>
+
 <!-- 2. NSM's principles, all 21 -->
 <section class="report-section">
   <h2>NSMs grunnprinsipper</h2>
@@ -185,4 +219,8 @@
 <script id="incident-config" type="application/json">{{ incident_config|tojson }}</script>
 <script src="{{ url_for('static', filename='static-incidents.js') }}"></script>
 <script src="{{ url_for('static', filename='report.js') }}"></script>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='history.js') }}"></script>
 {% endblock %}
