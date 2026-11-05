@@ -87,7 +87,7 @@ body::before {
 /* Centred column with 16px side margin on phones */
 .wrap {
   width: 100%;
-  max-width: 1200px;   /* wide enough for the side column, narrow enough to read on big screens */
+  max-width: 1080px;   /* wide enough for the side column, narrow enough to read on big screens */
   margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left));   /* respects the iPhone notch */
   padding-right: max(16px, env(safe-area-inset-right));
