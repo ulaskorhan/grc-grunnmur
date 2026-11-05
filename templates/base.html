@@ -28,7 +28,7 @@
   <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
        Warning colours only when the level is above MODERAT, NSM's normal state. -->
   <a class="cyber-banner{% if cyber.elevated %} is-elevated{% endif %}" href="{{ cyber.source_url }}"
-     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: {{ cyber.current }}. Satt av NSM {{ cyber.set_on }}. Les mer hos NSM.">
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: {{ cyber.current }}. Satt av NSM {{ cyber.set_on }}, sist kontrollert {{ cyber.checked }}. Les mer hos NSM.">
     <span class="wrap cyber-inner">
       <span class="cyber-dot" aria-hidden="true"></span>
       <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
@@ -37,7 +37,10 @@
       <span class="cyber-scale" aria-hidden="true">
         {% for step in cyber.scale %}<i class="{{ 'on' if loop.index0 <= cyber.position }}" title="{{ step }}"></i>{% endfor %}
       </span>
-      <span class="cyber-source">NSM · {{ cyber.set_on }} <span aria-hidden="true">↗</span></span>
+      <!-- Two dates: when NSM set the level, and when the site last compared it with NSM.
+           The year is hidden on phones to keep the strip short (dates are DD.MM.YYYY). -->
+      <span class="cyber-source">Satt av NSM {{ cyber.set_on[:5] }}<span class="cyber-year">{{ cyber.set_on[5:] }}</span>
+        · sjekket {{ cyber.checked[:5] }}<span class="cyber-year">{{ cyber.checked[5:] }}</span> <span aria-hidden="true">↗</span></span>
     </span>
   </a>
 

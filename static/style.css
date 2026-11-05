@@ -142,6 +142,10 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
   color: var(--accent-text);
 }
 
+/* An eyebrow with several parts: lines break only between parts, and are balanced in length */
+.eyebrow-list { text-wrap: balance; }
+.eyebrow-list span { white-space: nowrap; }
+
 /* Icon in a tinted rounded square */
 .icon-box {
   display: inline-grid; place-items: center;
@@ -497,7 +501,7 @@ button:active { transform: scale(0.98); }
 .cyber-scale i.on { background: var(--cyber); }
 .cyber-source { margin-left: auto; white-space: nowrap; opacity: 0.85; }
 @media (hover: hover) { .cyber-banner:hover .cyber-source { text-decoration: underline; } }
-@media (max-width: 480px) { .cyber-scale { display: none; } }   /* keep the strip short on phones */
+@media (max-width: 480px) { .cyber-scale, .cyber-year { display: none; } }   /* keep the strip short on phones */
 
 /* ---------- 6e. About page ---------- */
 .about { display: grid; gap: 16px; margin-bottom: 8px; }
