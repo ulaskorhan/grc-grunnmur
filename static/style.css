@@ -274,6 +274,7 @@ main:focus { outline: none; }   /* main only gets focus from the skip link; no r
 .reminder-list .is-overdue span { color: var(--critical-text); font-weight: 600; }
 @media (hover: hover) { .reminder-list a:hover strong { color: var(--accent-text); } }
 .reminder-more { display: inline-block; margin-top: 6px; font-size: 0.85rem; }
+.reminder-more + .reminder-more { margin-left: 16px; }
 
 /* Main part and side column. One column on phones: the side column comes last. */
 .home-layout { display: grid; }
@@ -463,16 +464,16 @@ button:active { transform: scale(0.98); }
   font-size: 0.9rem; font-weight: 500; color: var(--muted); text-decoration: none;
 }
 .main-nav a[aria-current="page"] { color: var(--text); background: var(--track); }
-/* Phones and small tablets: the 8 menu links (side by side they need about 860px)
-   go under the logo as a 4 × 2 grid, so every link is visible without scrolling.
+/* Phones and tablets: the 9 menu links (side by side they need about 920px)
+   go under the logo as a 3 × 3 grid, so every link is visible without scrolling.
    The header is then too tall to stay at the top, so here it scrolls away with the page. */
-@media (max-width: 879px) {
+@media (max-width: 959px) {
   .site-header { position: static; }
   .header-inner { flex-wrap: wrap; height: auto; padding-top: 8px; row-gap: 4px; }
   .version-pill { margin-left: auto; }
   .main-nav {
     order: 3; width: 100%; margin: 0 0 8px;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
   }
   .main-nav a { text-align: center; padding: 7px 2px; font-size: 0.85rem; }
 }
@@ -845,6 +846,14 @@ button:active { transform: scale(0.98); }
 .report-groups li > span:last-child { text-align: right; color: var(--muted); }
 
 /* The planned measures of a risk: hidden on the risk page, shown in the report */
+/* v8: an incident row shows its date where a risk shows its score */
+.incident-date {
+  display: grid; place-items: center; flex-shrink: 0; min-width: 44px; padding: 0 8px; height: 44px;
+  border-radius: 10px; font-size: 0.8rem; font-weight: 700; font-variant-numeric: tabular-nums;
+  background: var(--level-soft); color: var(--level-text);
+}
+.risk.is-closed .incident-date { background: var(--track); color: var(--muted); }
+
 .risk-actions { display: none; }
 .report .risk-actions { display: block; font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
 .report .cell { cursor: default; pointer-events: none; }   /* no filter in the report */
@@ -901,7 +910,7 @@ button:active { transform: scale(0.98); }
 .choice .muted { font-size: 0.85rem; line-height: 1.45; }
 
 @media (min-width: 640px) {
-  .data-counts { grid-template-columns: repeat(5, 1fr); }
+  .data-counts { grid-template-columns: repeat(6, 1fr); }
   .data-page .form-footer button { width: auto; }
 }
 

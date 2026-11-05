@@ -66,6 +66,8 @@
            {% if request.endpoint == 'measures_page' %}aria-current="page"{% endif %}>Tiltak</a>
         <a href="{{ url_for('risk_list') }}"
            {% if request.endpoint and request.endpoint.startswith('risk') %}aria-current="page"{% endif %}>Risikoer</a>
+        <a href="{{ url_for('incident_list') }}"
+           {% if request.endpoint and request.endpoint.startswith('incident') %}aria-current="page"{% endif %}>Avvik</a>
         <a href="{{ url_for('isms_page') }}"
            {% if request.endpoint == 'isms_page' %}aria-current="page"{% endif %}>ISO 27001</a>
         <a href="{{ url_for('iso_page') }}"

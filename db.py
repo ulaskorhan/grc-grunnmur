@@ -97,6 +97,23 @@ def init_db():
         for column in ("residual_likelihood", "residual_impact"):
             if column not in columns:
                 conn.execute(f"ALTER TABLE risks ADD COLUMN {column} INTEGER")
+        # v8: the incident log. risk_id links to a risk; it is set to NULL when that risk is deleted.
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS incidents (
+                id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                date         TEXT NOT NULL,             -- YYYY-MM-DD, when it was discovered
+                title        TEXT NOT NULL,
+                description  TEXT NOT NULL DEFAULT '',
+                severity     TEXT NOT NULL,             -- lav / middels / hoy
+                status       TEXT NOT NULL DEFAULT 'apen',
+                principle_id TEXT NOT NULL DEFAULT '',
+                risk_id      INTEGER,                   -- linked risk, or NULL
+                gdpr         INTEGER NOT NULL DEFAULT 0, -- 1 = personal data breach
+                lessons      TEXT NOT NULL DEFAULT ''   -- corrective action and what was learned
+            )
+            """
+        )
 
 
 def get_all_progress():
@@ -168,8 +185,9 @@ def add_risk(data):
 def _insert_risk(conn, data):
     columns = ", ".join(RISK_FIELDS)
     placeholders = ", ".join("?" for _ in RISK_FIELDS)
-    conn.execute(f"INSERT INTO risks ({columns}) VALUES ({placeholders})",
-                 [data[field] for field in RISK_FIELDS])
+    # Returns the cursor, so import_all can read the new risk's id (lastrowid)
+    return conn.execute(f"INSERT INTO risks ({columns}) VALUES ({placeholders})",
+                        [data[field] for field in RISK_FIELDS])
 
 
 def update_risk(risk_id, data):
@@ -183,6 +201,50 @@ def update_risk(risk_id, data):
 def delete_risk(risk_id):
     with connect() as conn:
         conn.execute("DELETE FROM risks WHERE id = ?", (risk_id,))
+        # v8: incidents linked to this risk keep their data, but lose the link
+        conn.execute("UPDATE incidents SET risk_id = NULL WHERE risk_id = ?", (risk_id,))
+
+
+# ---------- v8: incident log ----------
+
+INCIDENT_FIELDS = ["date", "title", "description", "severity", "status",
+                   "principle_id", "risk_id", "gdpr", "lessons"]
+
+
+def get_all_incidents():
+    with connect() as conn:
+        rows = conn.execute("SELECT * FROM incidents").fetchall()
+    return [dict(row) for row in rows]
+
+
+def get_incident(incident_id):
+    with connect() as conn:
+        row = conn.execute("SELECT * FROM incidents WHERE id = ?", (incident_id,)).fetchone()
+    return dict(row) if row else None
+
+
+def add_incident(data):
+    with connect() as conn:
+        _insert_incident(conn, data)
+
+
+def _insert_incident(conn, data):
+    columns = ", ".join(INCIDENT_FIELDS)
+    placeholders = ", ".join("?" for _ in INCIDENT_FIELDS)
+    conn.execute(f"INSERT INTO incidents ({columns}) VALUES ({placeholders})",
+                 [data[field] for field in INCIDENT_FIELDS])
+
+
+def update_incident(incident_id, data):
+    assignments = ", ".join(f"{field} = ?" for field in INCIDENT_FIELDS)
+    with connect() as conn:
+        conn.execute(f"UPDATE incidents SET {assignments} WHERE id = ?",
+                     [data[field] for field in INCIDENT_FIELDS] + [incident_id])
+
+
+def delete_incident(incident_id):
+    with connect() as conn:
+        conn.execute("DELETE FROM incidents WHERE id = ?", (incident_id,))
 
 
 # ---------- v4: ISO 27001 clauses and the statement of applicability ----------
@@ -241,14 +303,17 @@ def import_all(data, replace):
                    only in the database stay. Risks from the file are added,
                    except one that is exactly like a saved risk, so importing
                    the same file twice does not give every risk twice.
-    Returns how many risks were added.
+                   v8: the same for incidents.
+    In the file an incident points to a risk by its place in the file's risk list
+    ("risk": 0 = the first risk), because ids differ between databases and browsers.
+    Returns (risks added, incidents added).
 
     "with connect()" commits at the end, or rolls everything back on an error,
     so an import is never left half done.
     """
     with connect() as conn:
         if replace:
-            for table in ("progress", "risks", "isms", "soa", "measures"):
+            for table in ("progress", "risks", "isms", "soa", "measures", "incidents"):
                 conn.execute(f"DELETE FROM {table}")
         for principle_id, row in data["progress"].items():
             _upsert_progress(conn, principle_id, row["status"], row["notes"],
@@ -257,14 +322,28 @@ def import_all(data, replace):
             for item_id, row in data[table].items():
                 _upsert_status(conn, table, item_id, row["status"], row["notes"])
 
-        # Each saved risk as a tuple of its values, to spot exact copies
+        # Each saved risk as a tuple of its values -> its id, to spot exact copies
         columns = ", ".join(RISK_FIELDS)
-        saved = {tuple(row) for row in conn.execute(f"SELECT {columns} FROM risks")}
+        saved = {tuple(row[1:]): row[0] for row in conn.execute(f"SELECT id, {columns} FROM risks")}
         added = 0
+        risk_ids = []                           # the database id of each risk in the file, in order
         for risk in data["risks"]:
             values = tuple(int(risk[f]) if f == "gdpr" else risk[f] for f in RISK_FIELDS)
             if values in saved:
+                risk_ids.append(saved[values])  # already saved: link incidents to that one
                 continue
-            _insert_risk(conn, risk)
+            risk_ids.append(_insert_risk(conn, risk).lastrowid)
             added += 1
-    return added
+
+        # v8: incidents, with the link turned from a place in the file into a database id
+        columns = ", ".join(INCIDENT_FIELDS)
+        saved = {tuple(row) for row in conn.execute(f"SELECT {columns} FROM incidents")}
+        added_incidents = 0
+        for incident in data["incidents"]:
+            row = {**incident, "risk_id": None if incident["risk"] is None else risk_ids[incident["risk"]]}
+            values = tuple(int(row[f]) if f == "gdpr" else row[f] for f in INCIDENT_FIELDS)
+            if values in saved:
+                continue
+            _insert_incident(conn, row)
+            added_incidents += 1
+    return added, added_incidents

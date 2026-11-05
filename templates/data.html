@@ -15,7 +15,7 @@
 <!-- Result of an import. Flask fills these after the redirect; on GitHub Pages data.js does. -->
 <p class="form-success" id="import-result" role="status" {% if not imported %}hidden{% endif %}>
   {% if imported == 'erstatt' %}✓ Importert. Dataene er erstattet med innholdet i filen.
-  {% elif imported == 'sammen' %}✓ Importert og slått sammen. {{ added }} {{ 'ny risiko' if added == 1 else 'nye risikoer' }} lagt til.{% endif %}
+  {% elif imported == 'sammen' %}✓ Importert og slått sammen. {{ added }} {{ 'ny risiko' if added == 1 else 'nye risikoer' }} og {{ added_incidents }} nye avvik lagt til.{% endif %}
 </p>
 <p class="form-error" id="import-error" role="alert" {% if not error %}hidden{% endif %}>{{ error or '' }}</p>
 
@@ -29,7 +29,7 @@
       {% endfor %}
     </ul>
     <p class="muted data-note">Tallene viser hvor mange prinsipper, tiltak, krav og kontroller
-       du har lagret noe på, og hvor mange risikoer du har.
+       du har lagret noe på, og hvor mange risikoer og avvik du har.
        {% if static_site %}Dataene ligger i denne nettleseren.{% else %}Dataene ligger i den lokale databasen.{% endif %}</p>
   </section>
 
@@ -37,7 +37,7 @@
   <section class="about-section">
     <h2>Eksporter</h2>
     <p>Last ned alt som én JSON-fil: status og notater for grunnprinsipper, tiltak,
-       styringssystem og SoA, og hele risikoregisteret.</p>
+       styringssystem og SoA, hele risikoregisteret og avviksloggen.</p>
     {% if static_site %}
     <button type="button" class="inline-button" id="export-data">Last ned JSON-fil</button>
     {% else %}
@@ -68,8 +68,8 @@
           <input type="radio" name="mode" value="sammen">
           <span><strong>Slå sammen</strong>
                 <span class="muted">Det som står i filen, overskriver det samme prinsippet, tiltaket,
-                kravet eller kontrollen. Resten beholdes. Risikoene i filen legges til, unntatt
-                de som er helt like en du har fra før.</span></span>
+                kravet eller kontrollen. Resten beholdes. Risikoene og avvikene i filen legges til,
+                unntatt de som er helt like noe du har fra før.</span></span>
         </label>
       </fieldset>
 

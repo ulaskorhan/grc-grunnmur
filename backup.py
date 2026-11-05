@@ -4,16 +4,21 @@ The same file format is used by the Flask version and the GitHub Pages version,
 so data can be moved between them, or kept as a backup:
 
     {
-      "app": "grunnmur", "format": 1, "exported": "2026-11-03",
+      "app": "grunnmur", "format": 2, "exported": "2026-11-03",
       "progress": { "2.6":   { "status": "delvis", "notes": "...", "iso_ref": "A.5.15", "gdpr": true } },
       "measures": { "2.6.4": { "status": "implementert", "notes": "..." } },
       "isms":     { "6.1.2": { "status": "delvis", "notes": "..." } },
       "soa":      { "8.13":  { "status": "gjelder", "notes": "Backup av NAS" } },
-      "risks":    [ { "title": "...", "likelihood": 3, "impact": 4, ... } ]
+      "risks":    [ { "title": "...", "likelihood": 3, "impact": 4, ... } ],
+      "incidents": [ { "date": "2026-11-01", "title": "...", "risk": 0, ... } ]
     }
+
+Format 2 (v8) added "incidents". Files in format 1 are still accepted, with no incidents.
 
 Risks have no id in the file: the ids differ between the database (1, 2, 3)
 and the browser ("lq3k9x2a"), so the importing side gives each risk a new one.
+For the same reason an incident points to a risk by its place in "risks"
+("risk": 0 = the first risk), or "risk": null for no link.
 
 A file is checked completely before anything is saved. One wrong value and
 nothing is imported, so a broken file can never leave half the data behind.
@@ -24,6 +29,7 @@ rules_for_browser(), so both versions accept the same files.
 from datetime import date
 
 import db
+import incidents
 import iso27001
 import iso27002
 import nsm_data
@@ -31,7 +37,8 @@ import nsm_measures
 import risks
 
 APP = "grunnmur"
-FORMAT = 1                      # raise this if the file format ever changes
+FORMAT = 2                      # raise this if the file format ever changes
+READS = (1, 2)                  # formats this version can import
 MAX_BYTES = 1_000_000           # 1 MB: far more than a full Grunnmur file needs
 
 # The four parts with one row per id: which ids exist, and which statuses are allowed.
@@ -43,11 +50,13 @@ SECTIONS = {
 }
 # Norwegian names for the parts, used in messages and on the Data page
 LABELS = {"progress": "Grunnprinsipper", "measures": "Tiltak", "isms": "Styringssystem",
-          "soa": "SoA", "risks": "Risikoer"}
+          "soa": "SoA", "risks": "Risikoer", "incidents": "Avvik"}
 
 # The risk fields in the file, in this order
 RISK_TEXT = ["title", "description", "treatment", "actions", "principle_id", "status", "review_date"]
 RISK_NUMBERS = ["likelihood", "impact", "residual_likelihood", "residual_impact"]
+# v8: the incident text fields in the file ("risk" and "gdpr" come after them)
+INCIDENT_TEXT = ["date", "title", "description", "severity", "status", "principle_id", "lessons"]
 
 
 # ---------- Export ----------
@@ -62,8 +71,20 @@ def export_data():
     for table in ("measures", "isms", "soa"):
         data[table] = {item_id: {"status": row["status"], "notes": row["notes"]}
                        for item_id, row in db.get_statuses(table).items()}
-    data["risks"] = [_risk_for_file(r) for r in db.get_all_risks()]
+    saved_risks = db.get_all_risks()
+    data["risks"] = [_risk_for_file(r) for r in saved_risks]
+    # v8: incidents, with the linked risk as its place in the list above
+    place = {risk["id"]: number for number, risk in enumerate(saved_risks)}
+    data["incidents"] = [_incident_for_file(i, place) for i in db.get_all_incidents()]
     return data
+
+
+def _incident_for_file(incident, place):
+    """An incident without its id, with "risk" as a place in the risk list (or None)."""
+    item = {field: incident[field] for field in INCIDENT_TEXT}
+    item["risk"] = place.get(incident["risk_id"])
+    item["gdpr"] = bool(incident["gdpr"])
+    return item
 
 
 def _risk_for_file(risk):
@@ -83,7 +104,7 @@ def clean(data):
     """
     if not isinstance(data, dict) or data.get("app") != APP:
         return None, "Filen er ikke en eksport fra Grunnmur."
-    if data.get("format") != FORMAT:
+    if data.get("format") not in READS:
         return None, "Filen har et format denne versjonen av Grunnmur ikke kjenner."
 
     result = {}
@@ -118,6 +139,17 @@ def clean(data):
         if error:
             return None, f"Risiko nr. {number}: {error}"
         result["risks"].append(risk)
+
+    # v8: incidents. A format 1 file has none, so a missing list counts as empty.
+    items = data.get("incidents", [])
+    if not isinstance(items, list):
+        return None, "Avvik: feil oppbygning i filen."
+    result["incidents"] = []
+    for number, item in enumerate(items, start=1):
+        incident, error = _clean_incident(item, len(result["risks"]))
+        if error:
+            return None, f"Avvik nr. {number}: {error}"
+        result["incidents"].append(incident)
     return result, None
 
 
@@ -143,6 +175,30 @@ def _clean_risk(item):
     return risks.read_form(form)
 
 
+def _clean_incident(item, risk_count):
+    """Check one incident with the same rules as the incident form (incidents.read_form)."""
+    if not isinstance(item, dict):
+        return None, "feil oppbygning i filen."
+    form = {}
+    for field in INCIDENT_TEXT:
+        value = item.get(field, "")
+        if not isinstance(value, str):
+            return None, f"«{field}» må være tekst."
+        form[field] = value
+    risk = item.get("risk")
+    if risk is not None and (isinstance(risk, bool) or not isinstance(risk, int)):
+        return None, "«risk» må være et tall eller null."
+    form["risk_id"] = "" if risk is None else str(risk)
+    if item.get("gdpr") is True:
+        form["gdpr"] = "on"
+    # The valid places are 0 .. number of risks in the file - 1
+    incident, error = incidents.read_form(form, set(range(risk_count)))
+    if error:
+        return None, error
+    incident["risk"] = incident.pop("risk_id")
+    return incident, None
+
+
 def counts(data):
     """How many rows each part has, e.g. {"progress": 4, ..., "risks": 2}."""
     return {name: len(data[name]) for name in LABELS}
@@ -157,6 +213,8 @@ def rules_for_browser():
         "labels": LABELS,
         "sections": {name: {"ids": sorted(ids), "statuses": list(statuses)}
                      for name, (ids, statuses) in SECTIONS.items()},
+        "reads": list(READS),
         "risk": {"treatments": list(risks.TREATMENTS), "statuses": list(risks.STATUSES),
                  "principles": sorted(nsm_data.PRINCIPLE_IDS)},
+        "incident": {"severities": list(incidents.SEVERITIES), "statuses": list(incidents.STATUSES)},
     }

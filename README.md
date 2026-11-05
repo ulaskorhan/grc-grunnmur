@@ -19,7 +19,7 @@ system around it (how security is governed), so the app connects the two.
 
 ## What it does
 
-The app was built in seven versions:
+The app was built in eight versions:
 
 | Version | Content |
 |---------|---------|
@@ -30,10 +30,11 @@ The app was built in seven versions:
 | v5 | NSM's 118 measures with status, sorted by NSM's priority groups; residual risk and heat maps before and after measures; NSM measures suggested on the risk form |
 | v6 | A print-friendly report of everything on one page (print or save as PDF from the browser), and this README in English and Norwegian |
 | v7 | Export and import of all data as one JSON file, in both versions, so data can be backed up or moved between the local and the public version |
+| v8 | Incident log: date, severity and status, linked to a principle and a risk, with corrective action and lessons (ISO 27001 10.2, ISO 27002 5.24–5.28) and a flag for personal data breaches (GDPR art. 33) |
 
 A thin banner at the top of every page shows NSM's national cyber risk level
 (nasjonalt cyberrisikonivå), with the date NSM set it and the date it was last checked.
-The homepage lists open risks whose review is overdue or due within 30 days.
+The homepage lists open risks whose review is overdue or due within 30 days, and open incidents.
 
 ## How it works
 
@@ -108,7 +109,7 @@ Then open <http://127.0.0.1:5050>.
 .venv/bin/pytest -q
 ```
 
-The tests in `tests/` check the risk rules and reminders, export and import, that every
+The tests in `tests/` check the risk rules and reminders, the incident log, export and import, that every
 page loads, that user text is escaped, that the public build never contains local data,
 and the cyber level check (without going online). Each test gets its own empty database.
 A GitHub Action (`.github/workflows/tests.yml`) runs them on every push.
@@ -130,7 +131,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 ## Files
 
 - `app.py`: Flask routes for every page
-- `db.py`: SQLite tables and reading and writing (progress, risks, clauses, SoA, measures), and saving an import
+- `db.py`: SQLite tables and reading and writing (progress, risks, clauses, SoA, measures, incidents), and saving an import
 - `backup.py`: the JSON file format, export, and the checks on an imported file
 - `nsm_data.py`: NSM's 4 categories and 21 principles
 - `nsm_measures.py`: NSM's 118 measure headings and priority groups
@@ -138,6 +139,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `iso27002.py`: the 93 controls with short titles in my own words
 - `iso27001.py`: clauses 4–10, PDCA phases and one example per requirement
 - `risks.py`: risk scales, levels, validation, residual risk and heat maps
+- `incidents.py`: the incident log's severities, statuses and form checks
 - `examples.py`: one home lab example per principle
 - `cyber_level.py`: NSM's national cyber risk level (updated by hand)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: the check of NSM's news feed every third day
@@ -147,6 +149,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/style.css`: the styling, mobile first, with dark mode and print styles
 - `static/static-mode.js`: browser storage for principles, measures, clauses and SoA (public version)
 - `static/static-risks.js`: the risk register in the browser (public version)
+- `static/static-incidents.js`: the incident log in the browser (public version)
 - `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
 - `static/report.js`: fills the report from the browser (public version)
 - `static/reminders.js`: the review reminders on the homepage (public version)

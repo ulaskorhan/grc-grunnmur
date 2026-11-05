@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from "_risk_row.html" import risk_row %}
+{% from "_incident_row.html" import incident_row %}
 {% from "_heat_map.html" import heat_map %}
 
 {% block title %}Rapport · Grunnmur{% endblock %}
@@ -29,7 +30,7 @@
   <div>
     <p class="eyebrow">Samlet oversikt</p>
     <h1>Sikkerhetsrapport</h1>
-    <p class="lead">Status for grunnprinsipper, tiltak, risikoer, styringssystem og
+    <p class="lead">Status for grunnprinsipper, tiltak, risikoer, avvik, styringssystem og
        anvendelseserklæring, samlet på én side.</p>
     <p class="report-meta muted">
       Laget <span data-today>{{ today }}</span> ·
@@ -121,6 +122,20 @@
   </ol>
 </section>
 
+<!-- v8: the incident log, with corrective action and lessons (ISO 27001 10.2) -->
+<section class="report-section">
+  <h2>Avvikslogg</h2>
+  <p class="muted report-empty" id="incident-empty" {% if incidents %}hidden{% endif %}>Ingen avvik registrert.</p>
+  <ol class="risk-list" id="incident-list" data-edit-url="{{ url_for('incident_new') }}">
+    {% for i in incidents %}
+      {{ incident_row(i, url_for('incident_edit', incident_id=i.id)) }}
+    {% endfor %}
+  </ol>
+  {% if static_site %}
+  <template id="incident-row-template">{{ incident_row({'severity': 'middels', 'status': 'apen'}, '#') }}</template>
+  {% endif %}
+</section>
+
 <!-- 5. ISO 27001 clauses 4-10 -->
 <section class="report-section" data-store="grunnmur-isms">
   <h2>Styringssystem (ISO 27001 kapittel 4–10)</h2>
@@ -167,5 +182,7 @@
 {% block static_scripts %}
 <script id="risk-config" type="application/json">{{ risk_config|tojson }}</script>
 <script src="{{ url_for('static', filename='static-risks.js') }}"></script>
+<script id="incident-config" type="application/json">{{ incident_config|tojson }}</script>
+<script src="{{ url_for('static', filename='static-incidents.js') }}"></script>
 <script src="{{ url_for('static', filename='report.js') }}"></script>
 {% endblock %}

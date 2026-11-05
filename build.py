@@ -56,6 +56,9 @@ def main():
     save_page(client, "/styringssystem", OUT / "styringssystem" / "index.html")
     save_page(client, "/tiltak", OUT / "tiltak" / "index.html")
     save_page(client, "/rapport", OUT / "rapport" / "index.html")
+    # v8: the incident log and its form (editing uses the form page with ?id=..., like risks)
+    save_page(client, "/avvik", OUT / "avvik" / "index.html")
+    save_page(client, "/avvik/ny", OUT / "avvik" / "ny" / "index.html")
     # v7: only the Data page. Export and import happen in the browser there (static/data.js).
     save_page(client, "/data", OUT / "data" / "index.html")
     save_page(client, "/om", OUT / "om" / "index.html")

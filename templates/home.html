@@ -39,11 +39,13 @@
   </div>
 </section>
 
-<!-- Reminders: open risks with a review that is overdue or due soon (risks.reminders).
+<!-- Reminders: open risks with a review that is overdue or due soon (risks.reminders),
+     and open incidents (v8, incidents.open_incidents). At most 5 of each.
      Hidden when there is nothing to follow up. On GitHub Pages, reminders.js fills it. -->
 <section class="reminders" id="reminders" aria-labelledby="reminders-title"
          data-days="{{ reminder_days }}" data-max="5" data-edit-url="{{ url_for('risk_new') }}"
-         {% if not reminders %}hidden{% endif %}>
+         data-incident-url="{{ url_for('incident_new') }}"
+         {% if not reminders and not open_incidents %}hidden{% endif %}>
   <h2 id="reminders-title">Trenger oppfølging</h2>
   <ul class="reminder-list">
     {% for r in reminders[:5] %}
@@ -53,9 +55,18 @@
       </a>
     </li>
     {% endfor %}
+    {% for i in open_incidents[:5] %}
+    <li{% if i.severity == 'hoy' %} class="is-overdue"{% endif %}>
+      <a href="{{ url_for('incident_edit', incident_id=i.id) }}">
+        <strong>{{ i.title }}</strong> <span>{{ i.when }}</span>
+      </a>
+    </li>
+    {% endfor %}
   </ul>
   <a class="reminder-more" href="{{ url_for('risk_list') }}" {% if reminders|length <= 5 %}hidden{% endif %}>
     Se alle {{ reminders|length }} i risikoregisteret →</a>
+  <a class="reminder-more" id="incident-more" href="{{ url_for('incident_list') }}" {% if open_incidents|length <= 5 %}hidden{% endif %}>
+    Se alle {{ open_incidents|length }} åpne avvik →</a>
 </section>
 
 <!-- The 4 categories in a 2 × 2 grid (one column on phones) -->
@@ -82,10 +93,10 @@
 </section>
 
 <!-- Link to the newest part of the app -->
-<a class="feature-banner" href="{{ url_for('data_page') }}">
-  <span class="badge">Nytt i v7</span>
-  <span><strong>Eksport og import</strong>
-        <span class="muted">Ta vare på alt som én fil, eller flytt det til en annen nettleser.</span></span>
+<a class="feature-banner" href="{{ url_for('incident_list') }}">
+  <span class="badge">Nytt i v8</span>
+  <span><strong>Avvikslogg</strong>
+        <span class="muted">Skriv ned hendelser og avvik, koble dem til en risiko, og hold på det du lærte.</span></span>
   <span class="arrow" aria-hidden="true">→</span>
 </a>
 

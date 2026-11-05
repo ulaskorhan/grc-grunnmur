@@ -33,6 +33,7 @@ import backup
 import cyber_level
 import db
 import examples
+import incidents
 import iso27001
 import iso27002
 import nsm_data
@@ -64,14 +65,16 @@ ROADMAP = [
     (5, "Tiltak og varmekart", "NSMs tiltak under hvert prinsipp og et risikovarmekart"),
     (6, "Rapport og portefølje", "Utskriftsvennlig rapport og README på engelsk og norsk"),
     (7, "Eksport og import", "Alle data som én JSON-fil, også mellom lokal og offentlig versjon"),
+    (8, "Avvikslogg", "Hendelser og avvik med alvorlighet, kobling til risiko og læring (ISO 27001 10.2)"),
 ]
-CURRENT_VERSION = 7
+CURRENT_VERSION = 8
 
 # The side column on the homepage: every part of the app, as (page function, name, text).
 SITE_MAP = [
     ("home", "NSMs grunnprinsipper", "21 prinsipper i 4 kategorier, med status og notater"),
     ("measures_page", "Tiltak", "NSMs 118 tiltak, sortert etter NSMs prioritering"),
     ("risk_list", "Risikoregister", "Risikoer før og etter tiltak, med varmekart"),
+    ("incident_list", "Avvikslogg", "Hendelser og avvik, og hva du lærte av dem"),
     ("isms_page", "ISO 27001", "Styringssystemet: kapittel 4–10 i PDCA-sirkelen"),
     ("iso_page", "ISO 27002", "De 93 kontrollene og anvendelseserklæringen (SoA)"),
     ("report", "Rapport", "Alt samlet på én side, klar til utskrift eller PDF"),
@@ -158,11 +161,13 @@ def home():
     total = sum(len(c["principles"]) for c in nsm_data.CATEGORIES)
     points = sum(SCORE[row["status"]] for row in progress.values())
     overall = round(100 * points / total)
-    # Risks to review soon. Empty in static mode: static/reminders.js fills it from the browser.
+    # Risks to review soon, and open incidents (v8).
+    # Empty in static mode: static/reminders.js fills them from the browser.
     rows = [] if app.config["STATIC_SITE"] else db.get_all_risks()
     return render_template(
         "home.html",
         reminders=risks.reminders(rows),
+        open_incidents=incidents.open_incidents(incident_overview()["items"]),
         reminder_days=risks.REMINDER_DAYS,
         cards=cards,
         overall=overall,
@@ -353,6 +358,8 @@ def report():
         statuses=db.STATUSES,
         soa_statuses=db.SOA_STATUSES,
         labels={**db.STATUSES, **db.SOA_STATUSES},   # every status label, for report.js
+        incidents=incident_overview()["items"],
+        incident_config=incidents.config_for_browser(),
         **risk_overview(),
     )
 
@@ -374,9 +381,11 @@ def render_data_page(error=None, status=200):
         labels=backup.LABELS,
         saved=saved,
         error=error,
-        # After an import: which choice was used, and how many risks were added (only known values are shown)
+        # After an import: which choice was used, and how many risks and incidents were added
+        # (only known values are shown)
         imported=request.args.get("importert") if request.args.get("importert") in IMPORT_MODES else "",
         added=request.args.get("nye", 0, type=int),
+        added_incidents=request.args.get("nye_avvik", 0, type=int),
         rules=backup.rules_for_browser(),
     )
     return page, status
@@ -412,9 +421,9 @@ def data_import():
     data, error = backup.clean(parsed)
     if error:
         return render_data_page(error + " Ingenting er endret.", 400)
-    added = db.import_all(data, replace=IMPORT_MODES[mode])
+    added, added_incidents = db.import_all(data, replace=IMPORT_MODES[mode])
     # Post/Redirect/Get, like the other forms: a refresh will not import the file again
-    return redirect(url_for("data_page", importert=mode, nye=added))
+    return redirect(url_for("data_page", importert=mode, nye=added, nye_avvik=added_incidents))
 
 
 @app.errorhandler(413)
@@ -582,6 +591,73 @@ def risk_edit(risk_id):
 def risk_delete(risk_id):
     db.delete_risk(risk_id)
     return redirect(url_for("risk_list"))
+
+
+# ---------- v8: incident log ----------
+
+def incident_overview():
+    """Every incident with its labels, sorted: open first, then newest. Empty in static mode."""
+    if app.config["STATIC_SITE"]:
+        return {"items": [], "risk_titles": {}}
+    risk_titles = {risk["id"]: risk["title"] for risk in db.get_all_risks()}
+    items = [incidents.enrich(row, risk_titles) for row in db.get_all_incidents()]
+    return {"items": sorted(items, key=incidents.sort_key), "risk_titles": risk_titles}
+
+
+def render_incident_form(incident, incident_id=None, error=None):
+    """Show the new/edit form. incident_id is None for a new incident."""
+    return render_template(
+        "incident_form.html",
+        incident=incident,
+        incident_id=incident_id,
+        error=error,
+        categories=nsm_data.CATEGORIES,
+        severities=incidents.SEVERITIES,
+        statuses=incidents.STATUSES,
+        example=incidents.EXAMPLE,
+        gdpr_note=incidents.GDPR_NOTE,
+        # The risks to link to, by title. On GitHub Pages static-incidents.js fills the menu.
+        risk_titles=incident_overview()["risk_titles"],
+    )
+
+
+@app.route("/avvik")
+def incident_list():
+    return render_template("incidents.html", items=incident_overview()["items"],
+                           gdpr_note=incidents.GDPR_NOTE,
+                           incident_config=incidents.config_for_browser())
+
+
+@app.route("/avvik/ny", methods=["GET", "POST"])
+def incident_new():
+    if request.method == "POST":
+        data, error = incidents.read_form(request.form, set(incident_overview()["risk_titles"]))
+        if error:
+            return render_incident_form(data, error=error), 400
+        db.add_incident(data)
+        return redirect(url_for("incident_list"))
+    # A new incident starts with today's date
+    return render_incident_form({**incidents.DEFAULTS, "date": date.today().isoformat()})
+
+
+@app.route("/avvik/<int:incident_id>", methods=["GET", "POST"])
+def incident_edit(incident_id):
+    incident = db.get_incident(incident_id)
+    if incident is None:
+        abort(404)
+    if request.method == "POST":
+        data, error = incidents.read_form(request.form, set(incident_overview()["risk_titles"]))
+        if error:
+            return render_incident_form(data, incident_id, error), 400
+        db.update_incident(incident_id, data)
+        return redirect(url_for("incident_list"))
+    return render_incident_form(incident, incident_id)
+
+
+@app.route("/avvik/<int:incident_id>/slett", methods=["POST"])
+def incident_delete(incident_id):
+    db.delete_incident(incident_id)
+    return redirect(url_for("incident_list"))
 
 
 if __name__ == "__main__":

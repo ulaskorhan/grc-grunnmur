@@ -1,0 +1,28 @@
+{#
+  One row in the incident log (v8). Used like _risk_row.html:
+    - Flask fills it in for every incident in the database.
+    - On GitHub Pages it is rendered once, empty, inside a <template> element,
+      and static-incidents.js copies it for every incident saved in the browser.
+  The severity keys (lav, middels, hoy) are the same as three risk levels,
+  so the row reuses the risk colours: level-hoy is orange, and so on.
+#}
+{% macro incident_row(i, edit_url) -%}
+<li class="risk incident level-{{ i.severity }}{% if i.status == 'lukket' %} is-closed{% endif %}">
+  <a class="risk-link" href="{{ edit_url }}">
+    <span class="incident-date" data-field="date_label" title="Dato oppdaget">{{ i.date_label }}</span>
+    <span class="risk-main">
+      <span class="risk-title" data-field="title">{{ i.title }}</span>
+      <span class="risk-meta">
+        <span class="level-tag" data-field="severity_label">{{ i.severity_label }}</span>
+        <span class="chip" data-field="status_label">{{ i.status_label }}</span>
+        <span class="chip" data-field="principle" {% if not i.principle_id %}hidden{% endif %}>NSM {{ i.principle_id }}</span>
+        <span class="chip" data-field="risk_title" {% if not i.risk_title %}hidden{% endif %}>Risiko: {{ i.risk_title }}</span>
+        <span class="tag" data-field="gdpr" {% if not i.gdpr %}hidden{% endif %}>Personopplysningsbrudd</span>
+      </span>
+      <!-- Only shown in the report, like the measures on a risk -->
+      <span class="risk-actions" data-field="lessons" {% if not i.lessons %}hidden{% endif %}>Tiltak og læring: {{ i.lessons }}</span>
+    </span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+</li>
+{%- endmacro %}

@@ -19,7 +19,7 @@ sikkerhet styres), så appen kobler de to.
 
 ## Hva den gjør
 
-Appen er bygget i sju versjoner:
+Appen er bygget i åtte versjoner:
 
 | Versjon | Innhold |
 |---------|---------|
@@ -30,10 +30,11 @@ Appen er bygget i sju versjoner:
 | v5 | NSMs 118 tiltak med status, sortert etter NSMs prioriteringsgrupper; restrisiko og varmekart før og etter tiltak; NSMs tiltak som forslag i risikoskjemaet |
 | v6 | En utskriftsvennlig rapport med alt på én side (skriv ut eller lagre som PDF fra nettleseren), og denne README-en på engelsk og norsk |
 | v7 | Eksport og import av alle data som én JSON-fil, i begge versjonene, som backup eller for å flytte data mellom lokal og offentlig versjon |
+| v8 | Avvikslogg: dato, alvorlighet og status, koblet til et prinsipp og en risiko, med tiltak og læring (ISO 27001 10.2, ISO 27002 5.24–5.28) og et merke for brudd på personopplysningssikkerheten (GDPR art. 33) |
 
 Et tynt banner øverst på hver side viser NSMs nasjonale cyberrisikonivå, med datoen NSM satte
 det og datoen det sist ble kontrollert. Forsiden viser åpne risikoer der gjennomgangen er
-forfalt eller skal skje innen 30 dager.
+forfalt eller skal skje innen 30 dager, og åpne avvik.
 
 ## Slik virker den
 
@@ -106,7 +107,7 @@ python3 -m venv .venv
 .venv/bin/pytest -q
 ```
 
-Testene i `tests/` sjekker risikoreglene og påminnelsene, eksport og import, at alle sider
+Testene i `tests/` sjekker risikoreglene og påminnelsene, avviksloggen, eksport og import, at alle sider
 lastes, at tekst fra brukeren escapes, at den offentlige versjonen aldri inneholder lokale
 data, og sjekken av cyberrisikonivået (uten å gå på nett). Hver test får sin egen tomme
 database. En GitHub Action (`.github/workflows/tests.yml`) kjører dem ved hver push.
@@ -128,7 +129,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 ## Filer
 
 - `app.py`: Flask-rutene for alle sidene
-- `db.py`: SQLite-tabeller, lesing og lagring (fremdrift, risikoer, kapittelkrav, SoA, tiltak), og lagring av en import
+- `db.py`: SQLite-tabeller, lesing og lagring (fremdrift, risikoer, kapittelkrav, SoA, tiltak, avvik), og lagring av en import
 - `backup.py`: JSON-formatet, eksport og sjekken av en importert fil
 - `nsm_data.py`: NSMs 4 kategorier og 21 prinsipper
 - `nsm_measures.py`: NSMs 118 tiltaksoverskrifter og prioriteringsgrupper
@@ -136,6 +137,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `iso27002.py`: de 93 kontrollene med korte titler med egne ord
 - `iso27001.py`: kapittel 4–10, PDCA-faser og ett eksempel per krav
 - `risks.py`: risikoskalaer, nivåer, validering, restrisiko og varmekart
+- `incidents.py`: avviksloggens alvorlighet, statuser og sjekk av skjemaet
 - `examples.py`: ett hjemmelab-eksempel per prinsipp
 - `cyber_level.py`: NSMs nasjonale cyberrisikonivå (oppdateres for hånd)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: sjekken av NSMs nyhetsfeed hver tredje dag
@@ -145,6 +147,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/style.css`: stilen, mobil først, med mørk modus og utskriftsstil
 - `static/static-mode.js`: lagring i nettleseren for prinsipper, tiltak, kapittelkrav og SoA (offentlig versjon)
 - `static/static-risks.js`: risikoregisteret i nettleseren (offentlig versjon)
+- `static/static-incidents.js`: avviksloggen i nettleseren (offentlig versjon)
 - `static/risk-tools.js`: filter i varmekartet og forslag fra NSM (begge versjoner)
 - `static/report.js`: fyller rapporten fra nettleseren (offentlig versjon)
 - `static/reminders.js`: påminnelsene om gjennomgang på forsiden (offentlig versjon)
