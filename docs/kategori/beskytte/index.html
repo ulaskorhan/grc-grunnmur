@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
   <title>Beskytte og opprettholde · Grunnmur</title>
   <meta name="description" content="Et lite verktøy for å følge opp IKT-sikkerheten med NSMs grunnprinsipper, risikoregister og ISO 27001. Personlig prosjekt, ikke tilknyttet NSM.">
-  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+  <link rel="icon" href="/grc-grunnmur/static/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/grc-grunnmur/static/apple-touch-icon.png">
   <!-- Link preview on LinkedIn, Slack, Teams and in messages (Open Graph).
        The image is static/og-image.png, 1200 × 630 px. -->
   <meta property="og:type" content="website">
@@ -22,7 +22,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Grunnmur: følg opp IKT-sikkerheten med NSMs grunnprinsipper">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
 </head>
 <body>
   <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
@@ -47,28 +47,28 @@
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
     <div class="wrap header-inner">
-      <a href="/" class="logo">
+      <a href="/grc-grunnmur/" class="logo">
         <span class="logo-mark" aria-hidden="true"></span>
         <span class="logo-text">Grunnmur</span>
       </a>
       <!-- Main menu. request.endpoint is the name of the current page's function,
            used to underline the section the user is in. -->
       <nav class="main-nav" aria-label="Hovedmeny">
-        <a href="/"
+        <a href="/grc-grunnmur/"
            aria-current="page">NSM</a>
-        <a href="/tiltak"
+        <a href="/grc-grunnmur/tiltak"
            >Tiltak</a>
-        <a href="/risikoer"
+        <a href="/grc-grunnmur/risikoer"
            >Risikoer</a>
-        <a href="/styringssystem"
+        <a href="/grc-grunnmur/styringssystem"
            >ISO 27001</a>
-        <a href="/iso27002"
+        <a href="/grc-grunnmur/iso27002"
            >ISO 27002</a>
-        <a href="/rapport"
+        <a href="/grc-grunnmur/rapport"
            >Rapport</a>
-        <a href="/data"
+        <a href="/grc-grunnmur/data"
            >Data</a>
-        <a href="/om"
+        <a href="/grc-grunnmur/om"
            >Om</a>
       </nav>
       <span class="version-pill">v7</span>
@@ -78,7 +78,7 @@
   <!-- data-store tells static-mode.js which browser storage key this page uses -->
   <main class="wrap" >
     
-<a href="/" class="back">← Oversikt</a>
+<a href="/grc-grunnmur/" class="back">← Oversikt</a>
 
 <!-- Category header: icon, name, small ring and a count per status -->
 <section class="cat-head" data-ids="2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 ">
@@ -140,7 +140,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.1">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.1">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -193,55 +193,55 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k5.8"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.8"
            title="Sikkerhet i prosjekter"><b>5.8</b> Sikkerhet i prosjekter</a>
         
-        <a class="control-chip" href="/iso27002#k5.19"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.19"
            title="Sikkerhet i leverandørforhold"><b>5.19</b> Sikkerhet i leverandørforhold</a>
         
-        <a class="control-chip" href="/iso27002#k5.20"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.20"
            title="Sikkerhet i leverandøravtaler"><b>5.20</b> Sikkerhet i leverandøravtaler</a>
         
-        <a class="control-chip" href="/iso27002#k5.21"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.21"
            title="Sikkerhet i IKT-leverandørkjeden"><b>5.21</b> Sikkerhet i IKT-leverandørkjeden</a>
         
-        <a class="control-chip" href="/iso27002#k5.22"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.22"
            title="Oppfølging og endring av leverandørtjenester"><b>5.22</b> Oppfølging og endring av leverandørtjenester</a>
         
-        <a class="control-chip" href="/iso27002#k5.23"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.23"
            title="Sikker bruk av skytjenester"><b>5.23</b> Sikker bruk av skytjenester</a>
         
-        <a class="control-chip" href="/iso27002#k8.4"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.4"
            title="Tilgang til kildekode"><b>8.4</b> Tilgang til kildekode</a>
         
-        <a class="control-chip" href="/iso27002#k8.19"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.19"
            title="Installasjon av programvare i drift"><b>8.19</b> Installasjon av programvare i drift</a>
         
-        <a class="control-chip" href="/iso27002#k8.21"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.21"
            title="Sikkerhet i nettverkstjenester"><b>8.21</b> Sikkerhet i nettverkstjenester</a>
         
-        <a class="control-chip" href="/iso27002#k8.25"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.25"
            title="Sikker utviklingslivssyklus"><b>8.25</b> Sikker utviklingslivssyklus</a>
         
-        <a class="control-chip" href="/iso27002#k8.26"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.26"
            title="Sikkerhetskrav til applikasjoner"><b>8.26</b> Sikkerhetskrav til applikasjoner</a>
         
-        <a class="control-chip" href="/iso27002#k8.27"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.27"
            title="Sikker systemarkitektur"><b>8.27</b> Sikker systemarkitektur</a>
         
-        <a class="control-chip" href="/iso27002#k8.28"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.28"
            title="Sikker koding"><b>8.28</b> Sikker koding</a>
         
-        <a class="control-chip" href="/iso27002#k8.29"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.29"
            title="Sikkerhetstesting i utvikling og godkjenning"><b>8.29</b> Sikkerhetstesting i utvikling og godkjenning</a>
         
-        <a class="control-chip" href="/iso27002#k8.30"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.30"
            title="Utsatt utvikling"><b>8.30</b> Utsatt utvikling</a>
         
-        <a class="control-chip" href="/iso27002#k8.31"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.31"
            title="Atskilte utviklings-, test- og produksjonsmiljøer"><b>8.31</b> Atskilte utviklings-, test- og produksjonsmiljøer</a>
         
-        <a class="control-chip" href="/iso27002#k8.33"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.33"
            title="Testdata"><b>8.33</b> Testdata</a>
         
       </div>
@@ -268,7 +268,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -315,7 +315,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -362,7 +362,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -409,7 +409,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -456,7 +456,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.5">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.5">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -503,7 +503,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.6">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.6">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -550,7 +550,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.7">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.7">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -597,7 +597,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.8">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.8">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -644,7 +644,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.9">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.9">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -691,7 +691,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.1.10">
+    <form method="post" action="/grc-grunnmur/tiltak/2.1.10">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -760,7 +760,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.2">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.2">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -813,34 +813,34 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k5.15"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.15"
            title="Tilgangsstyring"><b>5.15</b> Tilgangsstyring</a>
         
-        <a class="control-chip" href="/iso27002#k5.21"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.21"
            title="Sikkerhet i IKT-leverandørkjeden"><b>5.21</b> Sikkerhet i IKT-leverandørkjeden</a>
         
-        <a class="control-chip" href="/iso27002#k5.29"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.29"
            title="Sikkerhet under avbrudd"><b>5.29</b> Sikkerhet under avbrudd</a>
         
-        <a class="control-chip" href="/iso27002#k8.1"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.1"
            title="Brukerenheter"><b>8.1</b> Brukerenheter</a>
         
-        <a class="control-chip" href="/iso27002#k8.2"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.2"
            title="Privilegerte tilganger"><b>8.2</b> Privilegerte tilganger</a>
         
-        <a class="control-chip" href="/iso27002#k8.3"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.3"
            title="Begrensning av tilgang til informasjon"><b>8.3</b> Begrensning av tilgang til informasjon</a>
         
-        <a class="control-chip" href="/iso27002#k8.14"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.14"
            title="Redundans"><b>8.14</b> Redundans</a>
         
-        <a class="control-chip" href="/iso27002#k8.20"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.20"
            title="Nettverkssikkerhet"><b>8.20</b> Nettverkssikkerhet</a>
         
-        <a class="control-chip" href="/iso27002#k8.22"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.22"
            title="Segmentering av nettverk"><b>8.22</b> Segmentering av nettverk</a>
         
-        <a class="control-chip" href="/iso27002#k8.27"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.27"
            title="Sikker systemarkitektur"><b>8.27</b> Sikker systemarkitektur</a>
         
       </div>
@@ -867,7 +867,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.2.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.2.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -914,7 +914,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.2.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.2.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -961,7 +961,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.2.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.2.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1008,7 +1008,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.2.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.2.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1055,7 +1055,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.2.5">
+    <form method="post" action="/grc-grunnmur/tiltak/2.2.5">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1102,7 +1102,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.2.6">
+    <form method="post" action="/grc-grunnmur/tiltak/2.2.6">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1149,7 +1149,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.2.7">
+    <form method="post" action="/grc-grunnmur/tiltak/2.2.7">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1218,7 +1218,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.3">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.3">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1271,34 +1271,34 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k5.21"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.21"
            title="Sikkerhet i IKT-leverandørkjeden"><b>5.21</b> Sikkerhet i IKT-leverandørkjeden</a>
         
-        <a class="control-chip" href="/iso27002#k5.37"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.37"
            title="Dokumenterte driftsrutiner"><b>5.37</b> Dokumenterte driftsrutiner</a>
         
-        <a class="control-chip" href="/iso27002#k8.1"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.1"
            title="Brukerenheter"><b>8.1</b> Brukerenheter</a>
         
-        <a class="control-chip" href="/iso27002#k8.2"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.2"
            title="Privilegerte tilganger"><b>8.2</b> Privilegerte tilganger</a>
         
-        <a class="control-chip" href="/iso27002#k8.7"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.7"
            title="Vern mot skadevare"><b>8.7</b> Vern mot skadevare</a>
         
-        <a class="control-chip" href="/iso27002#k8.8"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.8"
            title="Håndtering av tekniske sårbarheter"><b>8.8</b> Håndtering av tekniske sårbarheter</a>
         
-        <a class="control-chip" href="/iso27002#k8.9"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.9"
            title="Konfigurasjonsstyring"><b>8.9</b> Konfigurasjonsstyring</a>
         
-        <a class="control-chip" href="/iso27002#k8.17"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.17"
            title="Klokkesynkronisering"><b>8.17</b> Klokkesynkronisering</a>
         
-        <a class="control-chip" href="/iso27002#k8.19"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.19"
            title="Installasjon av programvare i drift"><b>8.19</b> Installasjon av programvare i drift</a>
         
-        <a class="control-chip" href="/iso27002#k8.22"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.22"
            title="Segmentering av nettverk"><b>8.22</b> Segmentering av nettverk</a>
         
       </div>
@@ -1325,7 +1325,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1372,7 +1372,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1419,7 +1419,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1466,7 +1466,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1513,7 +1513,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.5">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.5">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1560,7 +1560,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.6">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.6">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1607,7 +1607,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.7">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.7">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1654,7 +1654,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.8">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.8">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1701,7 +1701,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.9">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.9">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1748,7 +1748,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.3.10">
+    <form method="post" action="/grc-grunnmur/tiltak/2.3.10">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1817,7 +1817,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.4">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.4">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1870,28 +1870,28 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k7.12"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k7.12"
            title="Sikring av kabler"><b>7.12</b> Sikring av kabler</a>
         
-        <a class="control-chip" href="/iso27002#k8.1"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.1"
            title="Brukerenheter"><b>8.1</b> Brukerenheter</a>
         
-        <a class="control-chip" href="/iso27002#k8.9"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.9"
            title="Konfigurasjonsstyring"><b>8.9</b> Konfigurasjonsstyring</a>
         
-        <a class="control-chip" href="/iso27002#k8.15"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.15"
            title="Logging"><b>8.15</b> Logging</a>
         
-        <a class="control-chip" href="/iso27002#k8.16"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.16"
            title="Overvåking av aktivitet"><b>8.16</b> Overvåking av aktivitet</a>
         
-        <a class="control-chip" href="/iso27002#k8.20"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.20"
            title="Nettverkssikkerhet"><b>8.20</b> Nettverkssikkerhet</a>
         
-        <a class="control-chip" href="/iso27002#k8.21"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.21"
            title="Sikkerhet i nettverkstjenester"><b>8.21</b> Sikkerhet i nettverkstjenester</a>
         
-        <a class="control-chip" href="/iso27002#k8.22"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.22"
            title="Segmentering av nettverk"><b>8.22</b> Segmentering av nettverk</a>
         
       </div>
@@ -1918,7 +1918,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.4.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.4.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -1965,7 +1965,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.4.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.4.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2012,7 +2012,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.4.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.4.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2059,7 +2059,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.4.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.4.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2128,7 +2128,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.5">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.5">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2181,37 +2181,37 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k5.14"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.14"
            title="Overføring av informasjon"><b>5.14</b> Overføring av informasjon</a>
         
-        <a class="control-chip" href="/iso27002#k5.19"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.19"
            title="Sikkerhet i leverandørforhold"><b>5.19</b> Sikkerhet i leverandørforhold</a>
         
-        <a class="control-chip" href="/iso27002#k5.23"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.23"
            title="Sikker bruk av skytjenester"><b>5.23</b> Sikker bruk av skytjenester</a>
         
-        <a class="control-chip" href="/iso27002#k6.7"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k6.7"
            title="Fjernarbeid"><b>6.7</b> Fjernarbeid</a>
         
-        <a class="control-chip" href="/iso27002#k8.1"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.1"
            title="Brukerenheter"><b>8.1</b> Brukerenheter</a>
         
-        <a class="control-chip" href="/iso27002#k8.7"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.7"
            title="Vern mot skadevare"><b>8.7</b> Vern mot skadevare</a>
         
-        <a class="control-chip" href="/iso27002#k8.8"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.8"
            title="Håndtering av tekniske sårbarheter"><b>8.8</b> Håndtering av tekniske sårbarheter</a>
         
-        <a class="control-chip" href="/iso27002#k8.9"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.9"
            title="Konfigurasjonsstyring"><b>8.9</b> Konfigurasjonsstyring</a>
         
-        <a class="control-chip" href="/iso27002#k8.20"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.20"
            title="Nettverkssikkerhet"><b>8.20</b> Nettverkssikkerhet</a>
         
-        <a class="control-chip" href="/iso27002#k8.22"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.22"
            title="Segmentering av nettverk"><b>8.22</b> Segmentering av nettverk</a>
         
-        <a class="control-chip" href="/iso27002#k8.23"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.23"
            title="Filtrering av nettrafikk"><b>8.23</b> Filtrering av nettrafikk</a>
         
       </div>
@@ -2238,7 +2238,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2285,7 +2285,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2332,7 +2332,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2379,7 +2379,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2426,7 +2426,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.5">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.5">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2473,7 +2473,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.6">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.6">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2520,7 +2520,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.7">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.7">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2567,7 +2567,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.5.8">
+    <form method="post" action="/grc-grunnmur/tiltak/2.5.8">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2636,7 +2636,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.6">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.6">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2689,28 +2689,28 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k5.15"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.15"
            title="Tilgangsstyring"><b>5.15</b> Tilgangsstyring</a>
         
-        <a class="control-chip" href="/iso27002#k5.16"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.16"
            title="Identitetsforvaltning"><b>5.16</b> Identitetsforvaltning</a>
         
-        <a class="control-chip" href="/iso27002#k5.17"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.17"
            title="Autentiseringsinformasjon"><b>5.17</b> Autentiseringsinformasjon</a>
         
-        <a class="control-chip" href="/iso27002#k5.18"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.18"
            title="Tilgangsrettigheter"><b>5.18</b> Tilgangsrettigheter</a>
         
-        <a class="control-chip" href="/iso27002#k7.7"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k7.7"
            title="Ryddig pult og låst skjerm"><b>7.7</b> Ryddig pult og låst skjerm</a>
         
-        <a class="control-chip" href="/iso27002#k8.2"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.2"
            title="Privilegerte tilganger"><b>8.2</b> Privilegerte tilganger</a>
         
-        <a class="control-chip" href="/iso27002#k8.3"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.3"
            title="Begrensning av tilgang til informasjon"><b>8.3</b> Begrensning av tilgang til informasjon</a>
         
-        <a class="control-chip" href="/iso27002#k8.5"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.5"
            title="Sikker autentisering"><b>8.5</b> Sikker autentisering</a>
         
       </div>
@@ -2737,7 +2737,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.6.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.6.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2784,7 +2784,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.6.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.6.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2831,7 +2831,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.6.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.6.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2878,7 +2878,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.6.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.6.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2925,7 +2925,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.6.5">
+    <form method="post" action="/grc-grunnmur/tiltak/2.6.5">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -2972,7 +2972,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.6.6">
+    <form method="post" action="/grc-grunnmur/tiltak/2.6.6">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3019,7 +3019,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.6.7">
+    <form method="post" action="/grc-grunnmur/tiltak/2.6.7">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3088,7 +3088,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.7">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.7">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3141,13 +3141,13 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k5.12"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.12"
            title="Klassifisering av informasjon"><b>5.12</b> Klassifisering av informasjon</a>
         
-        <a class="control-chip" href="/iso27002#k5.14"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.14"
            title="Overføring av informasjon"><b>5.14</b> Overføring av informasjon</a>
         
-        <a class="control-chip" href="/iso27002#k8.24"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.24"
            title="Bruk av kryptografi"><b>8.24</b> Bruk av kryptografi</a>
         
       </div>
@@ -3174,7 +3174,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.7.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.7.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3221,7 +3221,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.7.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.7.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3268,7 +3268,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.7.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.7.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3315,7 +3315,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.7.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.7.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3362,7 +3362,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.7.5">
+    <form method="post" action="/grc-grunnmur/tiltak/2.7.5">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3431,7 +3431,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.8">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.8">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3484,13 +3484,13 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k5.14"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k5.14"
            title="Overføring av informasjon"><b>5.14</b> Overføring av informasjon</a>
         
-        <a class="control-chip" href="/iso27002#k8.9"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.9"
            title="Konfigurasjonsstyring"><b>8.9</b> Konfigurasjonsstyring</a>
         
-        <a class="control-chip" href="/iso27002#k8.21"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.21"
            title="Sikkerhet i nettverkstjenester"><b>8.21</b> Sikkerhet i nettverkstjenester</a>
         
       </div>
@@ -3517,7 +3517,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.8.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.8.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3564,7 +3564,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.8.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.8.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3611,7 +3611,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.8.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.8.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3658,7 +3658,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.8.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.8.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3727,7 +3727,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.9">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.9">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3780,7 +3780,7 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k8.13"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.13"
            title="Sikkerhetskopiering"><b>8.13</b> Sikkerhetskopiering</a>
         
       </div>
@@ -3807,7 +3807,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.9.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.9.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3854,7 +3854,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.9.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.9.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3901,7 +3901,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.9.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.9.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -3948,7 +3948,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.9.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.9.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -4017,7 +4017,7 @@
     </aside>
     
 
-    <form method="post" action="/prinsipp/2.10">
+    <form method="post" action="/grc-grunnmur/prinsipp/2.10">
       <!-- Status as three buttons (radio inputs) instead of a dropdown: one tap on a phone -->
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -4070,13 +4070,13 @@
       <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
       <div class="control-chips">
         
-        <a class="control-chip" href="/iso27002#k8.8"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.8"
            title="Håndtering av tekniske sårbarheter"><b>8.8</b> Håndtering av tekniske sårbarheter</a>
         
-        <a class="control-chip" href="/iso27002#k8.19"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.19"
            title="Installasjon av programvare i drift"><b>8.19</b> Installasjon av programvare i drift</a>
         
-        <a class="control-chip" href="/iso27002#k8.32"
+        <a class="control-chip" href="/grc-grunnmur/iso27002#k8.32"
            title="Endringshåndtering"><b>8.32</b> Endringshåndtering</a>
         
       </div>
@@ -4103,7 +4103,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.10.1">
+    <form method="post" action="/grc-grunnmur/tiltak/2.10.1">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -4150,7 +4150,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.10.2">
+    <form method="post" action="/grc-grunnmur/tiltak/2.10.2">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -4197,7 +4197,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.10.3">
+    <form method="post" action="/grc-grunnmur/tiltak/2.10.3">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -4244,7 +4244,7 @@
     </span>
   </summary>
   <div class="control-body">
-    <form method="post" action="/tiltak/2.10.4">
+    <form method="post" action="/grc-grunnmur/tiltak/2.10.4">
       <input type="hidden" name="back" value="kategori">
       <fieldset class="segmented">
         <legend>Status</legend>
@@ -4288,10 +4288,10 @@
 
 <!-- Previous / next category -->
 <nav class="pager" aria-label="Andre kategorier">
-  <a href="/kategori/identifisere">
+  <a href="/grc-grunnmur/kategori/identifisere">
     <span class="muted">← Forrige</span>1. Identifisere og kartlegge
   </a>
-  <a href="/kategori/oppdage" class="pager-next">
+  <a href="/grc-grunnmur/kategori/oppdage" class="pager-next">
     <span class="muted">Neste →</span>3. Oppdage
   </a>
 </nav>
@@ -4299,8 +4299,8 @@
   </main>
 
   <footer class="wrap site-footer">
-    <p><a href="/om">Om Grunnmur</a> ·
-       <a href="/data">Eksport og import</a> ·
+    <p><a href="/grc-grunnmur/om">Om Grunnmur</a> ·
+       <a href="/grc-grunnmur/data">Eksport og import</a> ·
        Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
        
        Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
@@ -4327,7 +4327,7 @@
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
-  <script src="/static/static-mode.js"></script>
+  <script src="/grc-grunnmur/static/static-mode.js"></script>
   
   
 

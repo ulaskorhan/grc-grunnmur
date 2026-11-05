@@ -57,7 +57,8 @@ function enrich(risk, config) {
   const level = levelOf(score, config);
   const hasResidual = Boolean(risk.residual_likelihood && risk.residual_impact);
   const residualScore = hasResidual ? risk.residual_likelihood * risk.residual_impact : null;
-  const today = new Date().toISOString().slice(0, 10);   // "YYYY-MM-DD"
+  const now = new Date();                                // today's local date as "YYYY-MM-DD"
+  const today = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
   return Object.assign({}, risk, {
     score: score,
     level: level[0],
