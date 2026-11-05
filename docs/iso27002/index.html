@@ -27,6 +27,10 @@
 <body>
   <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
        Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <!-- Keyboard users can jump past the banner and menu (WCAG 2.4.1). Visible only when focused. -->
+  <a class="skip-link" href="#innhold">Hopp til innholdet</a>
+
+  <div role="region" aria-label="Nasjonalt cyberrisikonivå">
   <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
      rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026, sist kontrollert 05.11.2026. Les mer hos NSM.">
     <span class="wrap cyber-inner">
@@ -43,6 +47,8 @@
         · sjekket 05.11<span class="cyber-year">.2026</span> <span aria-hidden="true">↗</span></span>
     </span>
   </a>
+
+  </div>
 
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
@@ -76,7 +82,7 @@
   </header>
 
   <!-- data-store tells static-mode.js which browser storage key this page uses -->
-  <main class="wrap" data-store="grunnmur-soa" data-default="ikke_vurdert">
+  <main class="wrap" id="innhold" tabindex="-1" data-store="grunnmur-soa" data-default="ikke_vurdert">
     
 <section class="page-head">
   <div>
@@ -176,13 +182,20 @@
           <span class="control-title">Sikkerhetspolicyer</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.1">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -226,16 +239,24 @@
           <span class="control-title">Roller og ansvar for sikkerhet</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.3"
-               title="NSM-prinsipp 1.3">NSM 1.3</a>
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
+            
+            <span class="chip" title="NSM-prinsipp 1.3">NSM 1.3</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.3">prinsipp 1.3</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.2">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -279,13 +300,20 @@
           <span class="control-title">Atskillelse av oppgaver</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.3">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -329,13 +357,20 @@
           <span class="control-title">Ledelsens ansvar</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.4">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -379,13 +414,20 @@
           <span class="control-title">Kontakt med myndigheter</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.1"
-               title="NSM-prinsipp 4.1">NSM 4.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 4.1">NSM 4.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.1">prinsipp 4.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.5">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -429,13 +471,20 @@
           <span class="control-title">Kontakt med faggrupper og nettverk</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.1"
-               title="NSM-prinsipp 4.1">NSM 4.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 4.1">NSM 4.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.1">prinsipp 4.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.6">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -479,13 +528,20 @@
           <span class="control-title">Trusselinformasjon</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.3"
-               title="NSM-prinsipp 3.3">NSM 3.3</a>
+            
+            <span class="chip" title="NSM-prinsipp 3.3">NSM 3.3</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.3">prinsipp 3.3</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.7">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -529,13 +585,20 @@
           <span class="control-title">Sikkerhet i prosjekter</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.8">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -579,16 +642,24 @@
           <span class="control-title">Oversikt over informasjon og eiendeler</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.2"
-               title="NSM-prinsipp 1.2">NSM 1.2</a>
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
+            
+            <span class="chip" title="NSM-prinsipp 1.2">NSM 1.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.2">prinsipp 1.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.9">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -632,13 +703,20 @@
           <span class="control-title">Akseptabel bruk av informasjon og eiendeler</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.2"
-               title="NSM-prinsipp 1.2">NSM 1.2</a>
+            
+            <span class="chip" title="NSM-prinsipp 1.2">NSM 1.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.2">prinsipp 1.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.10">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -682,12 +760,14 @@
           <span class="control-title">Tilbakelevering av eiendeler</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.11">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -731,13 +811,20 @@
           <span class="control-title">Klassifisering av informasjon</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.7"
-               title="NSM-prinsipp 2.7">NSM 2.7</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.7">NSM 2.7</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.7">prinsipp 2.7</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.12">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -781,12 +868,14 @@
           <span class="control-title">Merking av informasjon</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.13">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -830,19 +919,28 @@
           <span class="control-title">Overføring av informasjon</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.7"
-               title="NSM-prinsipp 2.7">NSM 2.7</a>
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.8"
-               title="NSM-prinsipp 2.8">NSM 2.8</a>
+            <span class="chip" title="NSM-prinsipp 2.7">NSM 2.7</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.8">NSM 2.8</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.7">prinsipp 2.7</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.8">prinsipp 2.8</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.14">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -886,19 +984,28 @@
           <span class="control-title">Tilgangsstyring</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.3"
-               title="NSM-prinsipp 1.3">NSM 1.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
+            <span class="chip" title="NSM-prinsipp 1.3">NSM 1.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.3">prinsipp 1.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.15">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -942,16 +1049,24 @@
           <span class="control-title">Identitetsforvaltning</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.3"
-               title="NSM-prinsipp 1.3">NSM 1.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            <span class="chip" title="NSM-prinsipp 1.3">NSM 1.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.3">prinsipp 1.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.16">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -995,13 +1110,20 @@
           <span class="control-title">Autentiseringsinformasjon</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.17">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1045,13 +1167,20 @@
           <span class="control-title">Tilgangsrettigheter</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.18">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1095,19 +1224,28 @@
           <span class="control-title">Sikkerhet i leverandørforhold</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.1"
-               title="NSM-prinsipp 4.1">NSM 4.1</a>
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.1">NSM 4.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.1">prinsipp 4.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.19">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1151,13 +1289,20 @@
           <span class="control-title">Sikkerhet i leverandøravtaler</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.20">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1201,19 +1346,28 @@
           <span class="control-title">Sikkerhet i IKT-leverandørkjeden</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.21">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1257,13 +1411,20 @@
           <span class="control-title">Oppfølging og endring av leverandørtjenester</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.22">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1307,16 +1468,24 @@
           <span class="control-title">Sikker bruk av skytjenester</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.23">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1360,16 +1529,24 @@
           <span class="control-title">Planlegging for hendelseshåndtering</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.3"
-               title="NSM-prinsipp 3.3">NSM 3.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.1"
-               title="NSM-prinsipp 4.1">NSM 4.1</a>
+            <span class="chip" title="NSM-prinsipp 3.3">NSM 3.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.1">NSM 4.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.3">prinsipp 3.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.1">prinsipp 4.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.24">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1413,19 +1590,28 @@
           <span class="control-title">Vurdering av sikkerhetshendelser</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.3"
-               title="NSM-prinsipp 3.3">NSM 3.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.2"
-               title="NSM-prinsipp 4.2">NSM 4.2</a>
+            <span class="chip" title="NSM-prinsipp 3.3">NSM 3.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.3"
-               title="NSM-prinsipp 4.3">NSM 4.3</a>
+            <span class="chip" title="NSM-prinsipp 4.2">NSM 4.2</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.3">NSM 4.3</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.3">prinsipp 3.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.2">prinsipp 4.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.3">prinsipp 4.3</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.25">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1469,19 +1655,28 @@
           <span class="control-title">Respons på sikkerhetshendelser</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.3"
-               title="NSM-prinsipp 3.3">NSM 3.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.2"
-               title="NSM-prinsipp 4.2">NSM 4.2</a>
+            <span class="chip" title="NSM-prinsipp 3.3">NSM 3.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.3"
-               title="NSM-prinsipp 4.3">NSM 4.3</a>
+            <span class="chip" title="NSM-prinsipp 4.2">NSM 4.2</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.3">NSM 4.3</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.3">prinsipp 3.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.2">prinsipp 4.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.3">prinsipp 4.3</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.26">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1525,16 +1720,24 @@
           <span class="control-title">Læring etter hendelser</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.3"
-               title="NSM-prinsipp 3.3">NSM 3.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.4"
-               title="NSM-prinsipp 4.4">NSM 4.4</a>
+            <span class="chip" title="NSM-prinsipp 3.3">NSM 3.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.4">NSM 4.4</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.3">prinsipp 3.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.4">prinsipp 4.4</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.27">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1578,16 +1781,24 @@
           <span class="control-title">Innsamling av bevis</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.2"
-               title="NSM-prinsipp 3.2">NSM 3.2</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.3"
-               title="NSM-prinsipp 4.3">NSM 4.3</a>
+            <span class="chip" title="NSM-prinsipp 3.2">NSM 3.2</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.3">NSM 4.3</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.2">prinsipp 3.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.3">prinsipp 4.3</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.28">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1631,19 +1842,28 @@
           <span class="control-title">Sikkerhet under avbrudd</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.1"
-               title="NSM-prinsipp 4.1">NSM 4.1</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.1">NSM 4.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.1">prinsipp 4.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.29">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1687,16 +1907,24 @@
           <span class="control-title">IKT-beredskap for kontinuitet</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.4"
-               title="NSM-prinsipp 3.4">NSM 3.4</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.1"
-               title="NSM-prinsipp 4.1">NSM 4.1</a>
+            <span class="chip" title="NSM-prinsipp 3.4">NSM 3.4</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.1">NSM 4.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.4">prinsipp 3.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.1">prinsipp 4.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.30">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1740,13 +1968,20 @@
           <span class="control-title">Lovpålagte og avtalefestede krav</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.31">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1790,13 +2025,20 @@
           <span class="control-title">Immaterielle rettigheter</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.32">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1840,12 +2082,14 @@
           <span class="control-title">Beskyttelse av arkiv og registre</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.33">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1889,13 +2133,20 @@
           <span class="control-title">Personvern og personopplysninger</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.34">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1939,12 +2190,14 @@
           <span class="control-title">Uavhengig gjennomgang av sikkerheten</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.35">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -1988,16 +2241,24 @@
           <span class="control-title">Etterlevelse av policyer og regler</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.2"
-               title="NSM-prinsipp 3.2">NSM 3.2</a>
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
+            
+            <span class="chip" title="NSM-prinsipp 3.2">NSM 3.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.2">prinsipp 3.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.36">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2041,13 +2302,20 @@
           <span class="control-title">Dokumenterte driftsrutiner</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/5.37">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2105,12 +2373,14 @@
           <span class="control-title">Bakgrunnssjekk</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.1">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2154,12 +2424,14 @@
           <span class="control-title">Ansettelsesvilkår</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.2">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2203,13 +2475,20 @@
           <span class="control-title">Sikkerhetsbevissthet og opplæring</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.1"
-               title="NSM-prinsipp 4.1">NSM 4.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 4.1">NSM 4.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.1">prinsipp 4.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.3">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2253,12 +2532,14 @@
           <span class="control-title">Disiplinærprosess</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.4">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2302,12 +2583,14 @@
           <span class="control-title">Ansvar etter avsluttet eller endret ansettelse</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.5">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2351,12 +2634,14 @@
           <span class="control-title">Taushetserklæringer</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.6">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2400,16 +2685,24 @@
           <span class="control-title">Fjernarbeid</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.3"
-               title="NSM-prinsipp 1.3">NSM 1.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 1.3">NSM 1.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.3">prinsipp 1.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.7">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2453,12 +2746,14 @@
           <span class="control-title">Rapportering av sikkerhetshendelser</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/6.8">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2516,12 +2811,14 @@
           <span class="control-title">Fysiske sikkerhetssoner</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.1">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2565,12 +2862,14 @@
           <span class="control-title">Fysisk adgangskontroll</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.2">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2614,12 +2913,14 @@
           <span class="control-title">Sikring av kontorer og rom</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.3">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2663,12 +2964,14 @@
           <span class="control-title">Fysisk overvåking</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.4">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2712,12 +3015,14 @@
           <span class="control-title">Vern mot fysiske og miljømessige trusler</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.5">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2761,12 +3066,14 @@
           <span class="control-title">Arbeid i sikrede områder</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.6">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2810,13 +3117,20 @@
           <span class="control-title">Ryddig pult og låst skjerm</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.7">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2860,12 +3174,14 @@
           <span class="control-title">Plassering og beskyttelse av utstyr</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.8">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2909,12 +3225,14 @@
           <span class="control-title">Sikkerhet for utstyr utenfor lokalene</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.9">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -2958,12 +3276,14 @@
           <span class="control-title">Lagringsmedier</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.10">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3007,12 +3327,14 @@
           <span class="control-title">Strøm og annen infrastruktur</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.11">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3056,13 +3378,20 @@
           <span class="control-title">Sikring av kabler</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.12">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3106,12 +3435,14 @@
           <span class="control-title">Vedlikehold av utstyr</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.13">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3155,12 +3486,14 @@
           <span class="control-title">Sikker avhending og gjenbruk av utstyr</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/7.14">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3218,22 +3551,32 @@
           <span class="control-title">Brukerenheter</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.1">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3277,19 +3620,28 @@
           <span class="control-title">Privilegerte tilganger</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.2">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3333,16 +3685,24 @@
           <span class="control-title">Begrensning av tilgang til informasjon</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.3">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3386,13 +3746,20 @@
           <span class="control-title">Tilgang til kildekode</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.4">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3436,13 +3803,20 @@
           <span class="control-title">Sikker autentisering</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.6"
-               title="NSM-prinsipp 2.6">NSM 2.6</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.6">NSM 2.6</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.6">prinsipp 2.6</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.5">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3486,12 +3860,14 @@
           <span class="control-title">Kapasitetsstyring</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.6">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3535,19 +3911,28 @@
           <span class="control-title">Vern mot skadevare</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.1"
-               title="NSM-prinsipp 3.1">NSM 3.1</a>
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
+            
+            <span class="chip" title="NSM-prinsipp 3.1">NSM 3.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.1">prinsipp 3.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.7">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3591,28 +3976,40 @@
           <span class="control-title">Håndtering av tekniske sårbarheter</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/identifisere#p1.1"
-               title="NSM-prinsipp 1.1">NSM 1.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
+            <span class="chip" title="NSM-prinsipp 1.1">NSM 1.1</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.10"
-               title="NSM-prinsipp 2.10">NSM 2.10</a>
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.1"
-               title="NSM-prinsipp 3.1">NSM 3.1</a>
+            <span class="chip" title="NSM-prinsipp 2.10">NSM 2.10</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.4"
-               title="NSM-prinsipp 3.4">NSM 3.4</a>
+            <span class="chip" title="NSM-prinsipp 3.1">NSM 3.1</span>
+            
+            <span class="chip" title="NSM-prinsipp 3.4">NSM 3.4</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/identifisere#p1.1">prinsipp 1.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.10">prinsipp 2.10</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.1">prinsipp 3.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.4">prinsipp 3.4</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.8">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3656,22 +4053,32 @@
           <span class="control-title">Konfigurasjonsstyring</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.8"
-               title="NSM-prinsipp 2.8">NSM 2.8</a>
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.8">NSM 2.8</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.8">prinsipp 2.8</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.9">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3715,12 +4122,14 @@
           <span class="control-title">Sletting av informasjon</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.10">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3764,12 +4173,14 @@
           <span class="control-title">Maskering av data</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.11">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3813,12 +4224,14 @@
           <span class="control-title">Hindring av datalekkasje</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.12">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3862,13 +4275,20 @@
           <span class="control-title">Sikkerhetskopiering</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.9"
-               title="NSM-prinsipp 2.9">NSM 2.9</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.9">NSM 2.9</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.9">prinsipp 2.9</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.13">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3912,13 +4332,20 @@
           <span class="control-title">Redundans</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.14">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -3962,22 +4389,32 @@
           <span class="control-title">Logging</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.2"
-               title="NSM-prinsipp 3.2">NSM 3.2</a>
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.3"
-               title="NSM-prinsipp 3.3">NSM 3.3</a>
+            <span class="chip" title="NSM-prinsipp 3.2">NSM 3.2</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.2"
-               title="NSM-prinsipp 4.2">NSM 4.2</a>
+            <span class="chip" title="NSM-prinsipp 3.3">NSM 3.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.2">NSM 4.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.2">prinsipp 3.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.3">prinsipp 3.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.2">prinsipp 4.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.15">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4021,25 +4458,36 @@
           <span class="control-title">Overvåking av aktivitet</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.2"
-               title="NSM-prinsipp 3.2">NSM 3.2</a>
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.3"
-               title="NSM-prinsipp 3.3">NSM 3.3</a>
+            <span class="chip" title="NSM-prinsipp 3.2">NSM 3.2</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.4"
-               title="NSM-prinsipp 3.4">NSM 3.4</a>
+            <span class="chip" title="NSM-prinsipp 3.3">NSM 3.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/handtere#p4.2"
-               title="NSM-prinsipp 4.2">NSM 4.2</a>
+            <span class="chip" title="NSM-prinsipp 3.4">NSM 3.4</span>
+            
+            <span class="chip" title="NSM-prinsipp 4.2">NSM 4.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.2">prinsipp 3.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.3">prinsipp 3.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.4">prinsipp 3.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/handtere#p4.2">prinsipp 4.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.16">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4083,16 +4531,24 @@
           <span class="control-title">Klokkesynkronisering</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.2"
-               title="NSM-prinsipp 3.2">NSM 3.2</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 3.2">NSM 3.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.2">prinsipp 3.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.17">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4136,12 +4592,14 @@
           <span class="control-title">Bruk av privilegerte verktøy</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.18">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4185,19 +4643,28 @@
           <span class="control-title">Installasjon av programvare i drift</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.10"
-               title="NSM-prinsipp 2.10">NSM 2.10</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.10">NSM 2.10</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.10">prinsipp 2.10</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.19">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4241,19 +4708,28 @@
           <span class="control-title">Nettverkssikkerhet</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.20">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4297,19 +4773,28 @@
           <span class="control-title">Sikkerhet i nettverkstjenester</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.8"
-               title="NSM-prinsipp 2.8">NSM 2.8</a>
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.8">NSM 2.8</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.8">prinsipp 2.8</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.21">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4353,22 +4838,32 @@
           <span class="control-title">Segmentering av nettverk</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.3"
-               title="NSM-prinsipp 2.3">NSM 2.3</a>
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.4"
-               title="NSM-prinsipp 2.4">NSM 2.4</a>
+            <span class="chip" title="NSM-prinsipp 2.3">NSM 2.3</span>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            <span class="chip" title="NSM-prinsipp 2.4">NSM 2.4</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.3">prinsipp 2.3</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.4">prinsipp 2.4</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.22">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4412,13 +4907,20 @@
           <span class="control-title">Filtrering av nettrafikk</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.5"
-               title="NSM-prinsipp 2.5">NSM 2.5</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.5">NSM 2.5</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.5">prinsipp 2.5</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.23">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4462,13 +4964,20 @@
           <span class="control-title">Bruk av kryptografi</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.7"
-               title="NSM-prinsipp 2.7">NSM 2.7</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.7">NSM 2.7</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.7">prinsipp 2.7</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.24">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4512,13 +5021,20 @@
           <span class="control-title">Sikker utviklingslivssyklus</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.25">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4562,13 +5078,20 @@
           <span class="control-title">Sikkerhetskrav til applikasjoner</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.26">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4612,16 +5135,24 @@
           <span class="control-title">Sikker systemarkitektur</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.2"
-               title="NSM-prinsipp 2.2">NSM 2.2</a>
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
+            
+            <span class="chip" title="NSM-prinsipp 2.2">NSM 2.2</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.2">prinsipp 2.2</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.27">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4665,13 +5196,20 @@
           <span class="control-title">Sikker koding</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.28">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4715,16 +5253,24 @@
           <span class="control-title">Sikkerhetstesting i utvikling og godkjenning</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
             
-            <a class="chip" href="/grc-grunnmur/kategori/oppdage#p3.4"
-               title="NSM-prinsipp 3.4">NSM 3.4</a>
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
+            
+            <span class="chip" title="NSM-prinsipp 3.4">NSM 3.4</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>,
+            
+            <a href="/grc-grunnmur/kategori/oppdage#p3.4">prinsipp 3.4</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.29">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4768,13 +5314,20 @@
           <span class="control-title">Utsatt utvikling</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.30">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4818,13 +5371,20 @@
           <span class="control-title">Atskilte utviklings-, test- og produksjonsmiljøer</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.31">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4868,13 +5428,20 @@
           <span class="control-title">Endringshåndtering</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.10"
-               title="NSM-prinsipp 2.10">NSM 2.10</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.10">NSM 2.10</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.10">prinsipp 2.10</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.32">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4918,13 +5485,20 @@
           <span class="control-title">Testdata</span>
           <span class="control-meta">
             
-            <a class="chip" href="/grc-grunnmur/kategori/beskytte#p2.1"
-               title="NSM-prinsipp 2.1">NSM 2.1</a>
+            
+            <span class="chip" title="NSM-prinsipp 2.1">NSM 2.1</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
+          <p class="control-links">NSMs kobling:
+            
+            <a href="/grc-grunnmur/kategori/beskytte#p2.1">prinsipp 2.1</a>
+            
+          </p>
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.33">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>
@@ -4968,12 +5542,14 @@
           <span class="control-title">Beskyttelse av systemer under revisjonstesting</span>
           <span class="control-meta">
             
+            
             <span class="muted">Ingen NSM-kobling</span>
             
             <span class="status status-ikke_vurdert">Ikke vurdert</span>
           </span>
         </summary>
         <div class="control-body">
+          
           <form method="post" action="/grc-grunnmur/iso27002/soa/8.34">
             <fieldset class="segmented">
               <legend>Gjelder kontrollen for deg?</legend>

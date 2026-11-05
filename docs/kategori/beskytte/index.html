@@ -27,6 +27,10 @@
 <body>
   <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
        Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <!-- Keyboard users can jump past the banner and menu (WCAG 2.4.1). Visible only when focused. -->
+  <a class="skip-link" href="#innhold">Hopp til innholdet</a>
+
+  <div role="region" aria-label="Nasjonalt cyberrisikonivå">
   <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
      rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026, sist kontrollert 05.11.2026. Les mer hos NSM.">
     <span class="wrap cyber-inner">
@@ -43,6 +47,8 @@
         · sjekket 05.11<span class="cyber-year">.2026</span> <span aria-hidden="true">↗</span></span>
     </span>
   </a>
+
+  </div>
 
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
@@ -76,7 +82,7 @@
   </header>
 
   <!-- data-store tells static-mode.js which browser storage key this page uses -->
-  <main class="wrap" >
+  <main class="wrap" id="innhold" tabindex="-1" >
     
 <a href="/grc-grunnmur/" class="back">← Oversikt</a>
 
@@ -130,14 +136,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Før jeg kjøper nytt utstyr sjekker jeg at leverandøren gir sikkerhetsoppdateringer i flere år. Egen kode ligger på GitHub med Dependabot slått på, så sårbare avhengigheter blir varslet.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.1">
@@ -190,7 +196,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.8"
@@ -252,8 +258,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.1.1 2.1.2 2.1.3 2.1.4 2.1.5 2.1.6 2.1.7 2.1.8 2.1.9 2.1.10">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 10 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 10 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -262,6 +268,7 @@
     <span class="control-id">2.1.1</span>
     <span class="control-title">Integrer sikkerhet i virksomhetens prosess for anskaffelser</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -295,7 +302,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -309,6 +319,7 @@
     <span class="control-id">2.1.2</span>
     <span class="control-title">Kjøp moderne og oppdatert maskin- og programvare</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -342,7 +353,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -356,6 +370,7 @@
     <span class="control-id">2.1.3</span>
     <span class="control-title">Foretrekk IKT-produkter som er sertifiserte og evaluert av en tiltrodd tredjepart</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -389,7 +404,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -403,6 +421,7 @@
     <span class="control-id">2.1.4</span>
     <span class="control-title">Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -436,7 +455,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -450,6 +472,7 @@
     <span class="control-id">2.1.5</span>
     <span class="control-title">Benytt en metode for sikker utvikling av programvare</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -483,7 +506,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -497,6 +523,7 @@
     <span class="control-id">2.1.6</span>
     <span class="control-title">Benytt separate miljøer for utvikling, test og produksjon</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -530,7 +557,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -544,6 +574,7 @@
     <span class="control-id">2.1.7</span>
     <span class="control-title">Gjennomfør tilstrekkelig med testing gjennom hele utviklingsprosessen</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -577,7 +608,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -591,6 +625,7 @@
     <span class="control-id">2.1.8</span>
     <span class="control-title">Vedlikehold programvarekode som utvikles/benyttes i virksomheten</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -624,7 +659,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -638,6 +676,7 @@
     <span class="control-id">2.1.9</span>
     <span class="control-title">Ta ansvar for virksomhetens sikkerhet også ved tjenesteutsetting</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -671,7 +710,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -685,6 +727,7 @@
     <span class="control-id">2.1.10</span>
     <span class="control-title">Undersøk sikkerheten hos tjenesteleverandør ved tjenesteutsetting</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -718,7 +761,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-sikkerhet-i-anskaffelses-og-utviklingsprosesser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -750,14 +796,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Nettet er delt i soner: hovednett, gjestenett for IoT-enheter og et eget VLAN for labben. Lab-maskinene når ikke hovednettet. En enkel nettverkstegning ligger i dokumentasjonen.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.2">
@@ -810,7 +856,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.15"
@@ -851,8 +897,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.2.1 2.2.2 2.2.3 2.2.4 2.2.5 2.2.6 2.2.7">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 7 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 7 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -861,6 +907,7 @@
     <span class="control-id">2.2.1</span>
     <span class="control-title">Etabler og vedlikehold en helhetlig sikkerhetsarkitektur</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -894,7 +941,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -908,6 +958,7 @@
     <span class="control-id">2.2.2</span>
     <span class="control-title">Bygg IKT-systemet med IKT-produkter som fungerer godt sammen sikkerhetsmessig</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -941,7 +992,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -955,6 +1009,7 @@
     <span class="control-id">2.2.3</span>
     <span class="control-title">Del opp virksomhetens nettverk etter virksomhetens risikoprofil</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -988,7 +1043,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1002,6 +1060,7 @@
     <span class="control-id">2.2.4</span>
     <span class="control-title">Skill fysisk de mest kritiske del-nettverkene</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1035,7 +1094,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1049,6 +1111,7 @@
     <span class="control-id">2.2.5</span>
     <span class="control-title">Del opp domenearkitekturen iht. virksomhetens behov</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1082,7 +1145,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1096,6 +1162,7 @@
     <span class="control-id">2.2.6</span>
     <span class="control-title">Reguler tilgang til tjenester basert på kjennskap til både brukere og enhet</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1129,7 +1196,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1143,6 +1213,7 @@
     <span class="control-id">2.2.7</span>
     <span class="control-title">Etabler en robust og motstandsdyktig IKT-arkitektur</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1176,7 +1247,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-en-sikker-ikt-arkitektur/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1208,14 +1282,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Standardpassord er byttet på ruter og NAS. Unødvendige funksjoner som UPnP og WPS er slått av. Linux-serverne herdes med et Ansible-playbook basert på CIS Benchmark nivå 1.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.3">
@@ -1268,7 +1342,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.21"
@@ -1309,8 +1383,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.3.1 2.3.2 2.3.3 2.3.4 2.3.5 2.3.6 2.3.7 2.3.8 2.3.9 2.3.10">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 10 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 10 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -1319,6 +1393,7 @@
     <span class="control-id">2.3.1</span>
     <span class="control-title">Etabler et sentralt styrt regime for sikkerhetsoppdatering</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1352,7 +1427,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1366,6 +1444,7 @@
     <span class="control-id">2.3.2</span>
     <span class="control-title">Konfigurer klienter slik at kun kjent programvare kjører på dem</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1399,7 +1478,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1413,6 +1495,7 @@
     <span class="control-id">2.3.3</span>
     <span class="control-title">Deaktiver unødvendig funksjonalitet</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1446,7 +1529,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1460,6 +1546,7 @@
     <span class="control-id">2.3.4</span>
     <span class="control-title">Etabler og vedlikehold standard sikkerhetskonfigurasjoner</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1493,7 +1580,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1507,6 +1597,7 @@
     <span class="control-id">2.3.5</span>
     <span class="control-title">Verifiser at aktivert sikkerhetskonfigurasjon er i henhold til virksomhetens godkjente sikkerhetskonfigurasjon</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1540,7 +1631,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1554,6 +1648,7 @@
     <span class="control-id">2.3.6</span>
     <span class="control-title">Utfør all konfigurasjon, installasjon, og drift for øvrig på en trygg måte</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1587,7 +1682,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1601,6 +1699,7 @@
     <span class="control-id">2.3.7</span>
     <span class="control-title">Endre alle standardpassord på IKT-produktene før produksjonssetting</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1634,7 +1733,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1648,6 +1750,7 @@
     <span class="control-id">2.3.8</span>
     <span class="control-title">Ikke deaktiver kodebeskyttelsesfunksjoner</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1681,7 +1784,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1695,6 +1801,7 @@
     <span class="control-id">2.3.9</span>
     <span class="control-title">Etabler sikker tid i virksomheten</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1728,7 +1835,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1742,6 +1852,7 @@
     <span class="control-id">2.3.10</span>
     <span class="control-title">Reduser risiko med IoT-enheter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1775,7 +1886,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ivareta-en-sikker-konfigurasjon/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1807,14 +1921,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Brannmuren på ruteren blokkerer all innkommende trafikk. Ingen porter er åpne mot internett; fjerntilgang skjer kun via WireGuard VPN. Wi-Fi bruker WPA3.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.4">
@@ -1867,7 +1981,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k7.12"
@@ -1902,8 +2016,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.4.1 2.4.2 2.4.3 2.4.4">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 4 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 4 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -1912,6 +2026,7 @@
     <span class="control-id">2.4.1</span>
     <span class="control-title">Etabler tilgangskontroll på flest mulige nettverksporter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1945,7 +2060,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1959,6 +2077,7 @@
     <span class="control-id">2.4.2</span>
     <span class="control-title">Krypter alle trådløse og kablede forbindelser</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1992,7 +2111,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2006,6 +2128,7 @@
     <span class="control-id">2.4.3</span>
     <span class="control-title">Kartlegg fysisk tilgjengelighet for svitsjer og kabler</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2039,7 +2162,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2053,6 +2179,7 @@
     <span class="control-id">2.4.4</span>
     <span class="control-title">Aktiver brannmur på alle klienter og servere</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2086,7 +2213,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-virksomhetens-nettverk/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2118,14 +2248,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Lab-VLAN-et kan bare nå internett, ikke hovednettet. IoT-enheter er blokkert fra å kommunisere med laptop og NAS. DNS-oppslag filtreres gjennom Pi-hole.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.5">
@@ -2178,7 +2308,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.14"
@@ -2222,8 +2352,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.5.1 2.5.2 2.5.3 2.5.4 2.5.5 2.5.6 2.5.7 2.5.8">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 8 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 8 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -2232,6 +2362,7 @@
     <span class="control-id">2.5.1</span>
     <span class="control-title">Styr dataflyt mellom nettverks-soner</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2265,7 +2396,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2279,6 +2413,7 @@
     <span class="control-id">2.5.2</span>
     <span class="control-title">Begrens tilgangen til interne tjenester fra eksterne lokasjoner</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2312,7 +2447,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2326,6 +2464,7 @@
     <span class="control-id">2.5.3</span>
     <span class="control-title">Sperr all direkte-trafikk mellom klienter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2359,7 +2498,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2373,6 +2515,7 @@
     <span class="control-id">2.5.4</span>
     <span class="control-title">Isoler utstyr som er sårbart og har lav tillitt</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2406,7 +2549,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2420,6 +2566,7 @@
     <span class="control-id">2.5.5</span>
     <span class="control-title">Styr dataflyten til spesielt eksponerte tjenester</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2453,7 +2600,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2467,6 +2617,7 @@
     <span class="control-id">2.5.6</span>
     <span class="control-title">Beskytt spesielt kritiske tjenester med egen dataflyt</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2500,7 +2651,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2514,6 +2668,7 @@
     <span class="control-id">2.5.7</span>
     <span class="control-title">Ha kontroll på trafikk mellom virksomheten og samarbeidspartnere/ tjenesteleverandører</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2547,7 +2702,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2561,6 +2719,7 @@
     <span class="control-id">2.5.8</span>
     <span class="control-title">Styr all trafikk (ikke bare interne tjenester) til og fra forvaltede mobile klienter via virksomhetens nett</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2594,7 +2753,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/kontroller-dataflyt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2626,14 +2788,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>MFA er slått på for e-post, skylagring, GitHub og passordhåndtereren. Alle passord er unike og ligger i passordhåndtereren. Jeg bruker en vanlig konto til daglig og admin-kontoen bare ved behov.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.6">
@@ -2686,7 +2848,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.15"
@@ -2721,8 +2883,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.6.1 2.6.2 2.6.3 2.6.4 2.6.5 2.6.6 2.6.7">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 7 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 7 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -2731,6 +2893,7 @@
     <span class="control-id">2.6.1</span>
     <span class="control-title">Etabler retningslinjer for tilgangskontroll</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2764,7 +2927,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2778,6 +2944,7 @@
     <span class="control-id">2.6.2</span>
     <span class="control-title">Etabler en formell prosess for administrasjon av kontoer, tilganger og rettigheter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2811,7 +2978,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2825,6 +2995,7 @@
     <span class="control-id">2.6.3</span>
     <span class="control-title">Benytt et sentralisert og automatiserbart verktøy for å styre kontoer, tilganger og rettigheter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2858,7 +3029,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2872,6 +3046,7 @@
     <span class="control-id">2.6.4</span>
     <span class="control-title">Minimer rettigheter til sluttbrukere og spesialbrukere</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2905,7 +3080,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2919,6 +3097,7 @@
     <span class="control-id">2.6.5</span>
     <span class="control-title">Minimer rettigheter på drifts-kontoer</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2952,7 +3131,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -2966,6 +3148,7 @@
     <span class="control-id">2.6.6</span>
     <span class="control-title">Styr tilganger til enheter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -2999,7 +3182,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3013,6 +3199,7 @@
     <span class="control-id">2.6.7</span>
     <span class="control-title">Bruk multi-faktor autentisering</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3046,7 +3233,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/ha-kontroll-pa-identiteter-og-tilganger/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3078,14 +3268,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Disken på laptopen er kryptert (FileVault), og NAS-volumet er kryptert. Tjenestene i labben brukes kun over HTTPS eller SSH. Sikkerhetskopier i skyen krypteres før opplasting.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.7">
@@ -3138,7 +3328,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.12"
@@ -3158,8 +3348,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.7.1 2.7.2 2.7.3 2.7.4 2.7.5">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 5 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 5 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -3168,6 +3358,7 @@
     <span class="control-id">2.7.1</span>
     <span class="control-title">Etabler en strategi for håndtering av kryptografi i virksomheten</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3201,7 +3392,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3215,6 +3409,7 @@
     <span class="control-id">2.7.2</span>
     <span class="control-title">Aktiver kryptering i de tjenestene som tilbyr slik funksjonalitet</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3248,7 +3443,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3262,6 +3460,7 @@
     <span class="control-id">2.7.3</span>
     <span class="control-title">Krypter lagringsmedier som holder konfidensiell data og som lett kan mistes eller kompromitteres</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3295,7 +3494,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3309,6 +3511,7 @@
     <span class="control-id">2.7.4</span>
     <span class="control-title">Benytt kryptering når konfidensiell informasjon overføres eller når tilliten til informasjonskanalen er lav</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3342,7 +3545,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3356,6 +3562,7 @@
     <span class="control-id">2.7.5</span>
     <span class="control-title">Definer krav til sikringsnivå for ulike typer informasjon</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3389,7 +3596,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-data-i-ro-og-i-transitt/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3421,14 +3631,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Nettleseren oppdateres automatisk og har en reklameblokkering. E-postleverandøren filtrerer spam, og mitt eget domene har SPF, DKIM og DMARC satt opp.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.8">
@@ -3481,7 +3691,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.14"
@@ -3501,8 +3711,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.8.1 2.8.2 2.8.3 2.8.4">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 4 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 4 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -3511,6 +3721,7 @@
     <span class="control-id">2.8.1</span>
     <span class="control-title">Verifiser at innkommende e-post er fra en legitim avsender-adresse</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3544,7 +3755,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3558,6 +3772,7 @@
     <span class="control-id">2.8.2</span>
     <span class="control-title">Aktiver STARTTLS på virksomhetens e-postserver</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3591,7 +3806,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3605,6 +3823,7 @@
     <span class="control-id">2.8.3</span>
     <span class="control-title">Bruk kun støttede e-postklienter, nettlesere og programtillegg</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3638,7 +3857,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3652,6 +3874,7 @@
     <span class="control-id">2.8.4</span>
     <span class="control-title">Tillat kun virksomhetsgodkjente programtillegg</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3685,7 +3908,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/beskytt-e-post-og-nettleser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3717,14 +3943,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>3-2-1-backup: originalen på laptopen, én kopi på NAS og én kryptert kopi i skyen. Gjenoppretting testes hvert kvartal ved å hente tilbake en mappe og sjekke at filene åpner.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.9">
@@ -3777,7 +4003,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k8.13"
@@ -3791,8 +4017,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.9.1 2.9.2 2.9.3 2.9.4">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 4 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 4 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -3801,6 +4027,7 @@
     <span class="control-id">2.9.1</span>
     <span class="control-title">Legg en plan for regelmessig sikkerhetskopiering av alle virksomhetsdata</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3834,7 +4061,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3848,6 +4078,7 @@
     <span class="control-id">2.9.2</span>
     <span class="control-title">Inkluder sikkerhetskopier av programvare</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3881,7 +4112,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3895,6 +4129,7 @@
     <span class="control-id">2.9.3</span>
     <span class="control-title">Test sikkerhetskopier regelmessig</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3928,7 +4163,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -3942,6 +4180,7 @@
     <span class="control-id">2.9.4</span>
     <span class="control-title">Beskytt sikkerhetskopier mot tilsiktet og utilsiktet sletting, manipulering og avlesning</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -3975,7 +4214,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/etabler-evne-til-gjenoppretting-av-data/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -4007,14 +4249,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Endringer i labben føres i en enkel endringslogg: hva, når, hvorfor og hvordan rulle tilbake. Ansible-oppsettet ligger i Git, så en endring kan reverseres.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/2.10">
@@ -4067,7 +4309,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k8.8"
@@ -4087,8 +4329,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="2.10.1 2.10.2 2.10.3 2.10.4">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 4 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 4 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -4097,6 +4339,7 @@
     <span class="control-id">2.10.1</span>
     <span class="control-title">Integrer sikkerhet i virksomhetens prosess for endringshåndtering</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -4130,7 +4373,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -4144,6 +4390,7 @@
     <span class="control-id">2.10.2</span>
     <span class="control-title">Involver nødvendig IKT-sikkerhetspersonell i forbindelse med endringer</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -4177,7 +4424,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -4191,6 +4441,7 @@
     <span class="control-id">2.10.3</span>
     <span class="control-title">Gjennomfør nødvendig endring, konfigurering og testing av påvirkede sikkerhetsfunksjoner</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -4224,7 +4475,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -4238,6 +4492,7 @@
     <span class="control-id">2.10.4</span>
     <span class="control-title">Integrer sikkerhet i virksomhetens prosess for hasteendringer</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -4271,7 +4526,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/beskytte-og-opprettholde/integrer-sikkerhet-i-prosess-for-endringshandtering/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>

@@ -27,6 +27,10 @@
 <body>
   <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
        Warning colours only when the level is above MODERAT, NSM's normal state. -->
+  <!-- Keyboard users can jump past the banner and menu (WCAG 2.4.1). Visible only when focused. -->
+  <a class="skip-link" href="#innhold">Hopp til innholdet</a>
+
+  <div role="region" aria-label="Nasjonalt cyberrisikonivå">
   <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
      rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026, sist kontrollert 05.11.2026. Les mer hos NSM.">
     <span class="wrap cyber-inner">
@@ -43,6 +47,8 @@
         · sjekket 05.11<span class="cyber-year">.2026</span> <span aria-hidden="true">↗</span></span>
     </span>
   </a>
+
+  </div>
 
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
@@ -76,7 +82,7 @@
   </header>
 
   <!-- data-store tells static-mode.js which browser storage key this page uses -->
-  <main class="wrap" >
+  <main class="wrap" id="innhold" tabindex="-1" >
     
 <a href="/grc-grunnmur/" class="back">← Oversikt</a>
 
@@ -130,14 +136,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>En hendelsesplan på én side: hvem jeg kontakter (bank, e-postleverandør), hvordan jeg isolerer en enhet og hvor sikkerhetskopiene ligger. Planen finnes også utskrevet.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/4.1">
@@ -190,7 +196,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.5"
@@ -222,8 +228,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="4.1.1 4.1.2 4.1.3 4.1.4 4.1.5 4.1.6">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 6 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 6 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -232,6 +238,7 @@
     <span class="control-id">4.1.1</span>
     <span class="control-title">Etabler et planverk for hendelseshåndtering</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-1" title="NSMs prioriteringsgruppe">Prioritet 1</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -265,7 +272,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -279,6 +289,7 @@
     <span class="control-id">4.1.2</span>
     <span class="control-title">Gjennomfør en analyse av virksomhetskritiske effekter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -312,7 +323,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -326,6 +340,7 @@
     <span class="control-id">4.1.3</span>
     <span class="control-title">Utarbeid rolle- og ansvarsbeskrivelse for personell som skal involveres i hendelseshåndtering</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-2" title="NSMs prioriteringsgruppe">Prioritet 2</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -359,7 +374,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -373,6 +391,7 @@
     <span class="control-id">4.1.4</span>
     <span class="control-title">Utarbeid avtaler med relevante tredjeparter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -406,7 +425,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -420,6 +442,7 @@
     <span class="control-id">4.1.5</span>
     <span class="control-title">Fastsett hvilke kommunikasjonskanaler som skal benyttes i forbindelse med hendelser</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -453,7 +476,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -467,6 +493,7 @@
     <span class="control-id">4.1.6</span>
     <span class="control-title">Test og øv på planer jevnlig slik at disse er godt innøvd</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -500,7 +527,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/forbered-virksomheten-pa-handtering-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -532,14 +562,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Tre nivåer: Lav (phishing-e-post uten klikk), Middels (skadevare på én enhet) og Høy (kompromittert konto med personopplysninger, mulig avvik etter GDPR).</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/4.2">
@@ -592,7 +622,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.25"
@@ -615,8 +645,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="4.2.1 4.2.2 4.2.3">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 3 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 3 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -625,6 +655,7 @@
     <span class="control-id">4.2.1</span>
     <span class="control-title">Gjennomgå loggdata og samle relevante data om hendelsen for å oppnå et godt beslutningsgrunnlag</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -658,7 +689,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -672,6 +706,7 @@
     <span class="control-id">4.2.2</span>
     <span class="control-title">Avgjør alvorlighetsgrad for hendelsen</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -705,7 +740,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -719,6 +757,7 @@
     <span class="control-id">4.2.3</span>
     <span class="control-title">Informer relevante interesseparter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -752,7 +791,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/vurder-og-klassifiser-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -784,14 +826,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Ved mistanke om innbrudd: koble enheten fra nettet, bytt passord fra en annen ren enhet, sjekk innloggingshistorikken og gjenopprett fra backup om nødvendig.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/4.3">
@@ -844,7 +886,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.25"
@@ -864,8 +906,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="4.3.1 4.3.2 4.3.3 4.3.4 4.3.5 4.3.6">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 6 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 6 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -874,6 +916,7 @@
     <span class="control-id">4.3.1</span>
     <span class="control-title">Kartlegg omfang og påvirkning på forretningsprosesser</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -907,7 +950,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -921,6 +967,7 @@
     <span class="control-id">4.3.2</span>
     <span class="control-title">Undersøk om hendelsen er under kontroll og gjennomfør nødvendige reaktive tiltak</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -954,7 +1001,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -968,6 +1018,7 @@
     <span class="control-id">4.3.3</span>
     <span class="control-title">Loggfør alle aktiviteter, resultater og relevante avgjørelser</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1001,7 +1052,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1015,6 +1069,7 @@
     <span class="control-id">4.3.4</span>
     <span class="control-title">Iverksett gjenopprettingsplan i løpet av, eller i etterkant av hendelsen</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1048,7 +1103,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1062,6 +1120,7 @@
     <span class="control-id">4.3.5</span>
     <span class="control-title">Koordiner og kommuniser med interne og eksterne interessenter underveis i hendelseshåndteringen</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1095,7 +1154,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1109,6 +1171,7 @@
     <span class="control-id">4.3.6</span>
     <span class="control-title">Gjennomfør nødvendige aktiviteter i etterkant av hendelsen</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1142,7 +1205,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/kontroller-og-handter-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1174,14 +1240,14 @@
          (on the right on wide screens, at the top on phones) -->
     <div class="p-body">
     
-    <aside class="example-panel">
+    <div class="example-panel">
       <!-- Another <details>: the "Eksempel" button opens it, no JavaScript needed -->
       <details class="example">
         <summary>💡 Eksempel</summary>
         <p>Etter hver hendelse skriver jeg et kort notat: hva skjedde, hva fungerte og hva jeg endrer. Deretter oppdateres hendelsesplanen og denne trackeren.</p>
         <p class="example-note">Eget eksempel for en hjemmelab, ikke tekst fra NSM.</p>
       </details>
-    </aside>
+    </div>
     
 
     <form method="post" action="/grc-grunnmur/prinsipp/4.4">
@@ -1234,7 +1300,7 @@
     <!-- v3: the ISO 27002 controls NSM links to this principle's measures (NSM's own table) -->
     
     <section class="iso-links">
-      <h3>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h3>
+      <h2>ISO/IEC 27002:2022 <span class="muted">· NSMs kobling</span></h2>
       <div class="control-chips">
         
         <a class="control-chip" href="/grc-grunnmur/iso27002#k5.27"
@@ -1248,8 +1314,8 @@
          data-store: on GitHub Pages they are saved under their own key, apart from the principle. -->
     
     <section class="measures" data-store="grunnmur-measures" data-ids="4.4.1 4.4.2 4.4.3 4.4.4">
-      <h3>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
-          av 4 implementert</span></h3>
+      <h2>NSMs tiltak <span class="muted">· <span data-count="implementert">0</span>
+          av 4 implementert</span></h2>
       <div class="measure-list">
         
         
@@ -1258,6 +1324,7 @@
     <span class="control-id">4.4.1</span>
     <span class="control-title">Identifiser erfaringer og læringspunkter («lessons learned») fra hendelser</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1291,7 +1358,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1305,6 +1375,7 @@
     <span class="control-id">4.4.2</span>
     <span class="control-title">Kartlegg og gjennomgå identifiserte, kompromitterte sikkerhetstiltak</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1338,7 +1409,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1352,6 +1426,7 @@
     <span class="control-id">4.4.3</span>
     <span class="control-title">Vurdere effektiviteten av prosesser, prosedyrer, rapporteringsformater og organisatoriske strukturer med tanke på å respondere på hendelser</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1385,7 +1460,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
@@ -1399,6 +1477,7 @@
     <span class="control-id">4.4.4</span>
     <span class="control-title">Kommuniser og del erfaringsresultatene med (relevante) interessenter</span>
     <span class="control-meta">
+      
       
       <span class="prio prio-3" title="NSMs prioriteringsgruppe">Prioritet 3</span>
       <span class="status status-ikke_startet">Ikke startet</span>
@@ -1432,7 +1511,10 @@
         <textarea name="notes" rows="2" placeholder="Hva er gjort, og hvor ligger beviset?"></textarea>
       </label>
       <div class="form-footer">
-        <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        <span class="footer-links">
+          
+          <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/handtere-og-gjenopprette/evaluer-og-laer-av-hendelser/" target="_blank" rel="noopener">Full beskrivelse hos NSM ↗</a>
+        </span>
         <span class="saved" hidden>✓ Lagret</span>
         <button type="submit">Lagre</button>
       </div>
