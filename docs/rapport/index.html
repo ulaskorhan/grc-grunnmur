@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
   <title>Rapport · Grunnmur</title>
   <meta name="description" content="Et lite verktøy for å følge opp IKT-sikkerheten med NSMs grunnprinsipper, risikoregister og ISO 27001. Personlig prosjekt, ikke tilknyttet NSM.">
-  <link rel="icon" href="/grc-grunnmur/static/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/grc-grunnmur/static/apple-touch-icon.png">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
   <!-- Link preview on LinkedIn, Slack, Teams and in messages (Open Graph).
        The image is static/og-image.png, 1200 × 630 px. -->
   <meta property="og:type" content="website">
@@ -22,13 +22,13 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Grunnmur: følg opp IKT-sikkerheten med NSMs grunnprinsipper">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/grc-grunnmur/static/style.css">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <!-- NSM's national cyber risk level, copied by hand from nsm.no (see cyber_level.py).
        Warning colours only when the level is above MODERAT, NSM's normal state. -->
   <a class="cyber-banner is-elevated" href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
-     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026. Les mer hos NSM.">
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: Høyt. Satt av NSM 27.10.2026, sist kontrollert 05.11.2026. Les mer hos NSM.">
     <span class="wrap cyber-inner">
       <span class="cyber-dot" aria-hidden="true"></span>
       <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
@@ -37,35 +37,38 @@
       <span class="cyber-scale" aria-hidden="true">
         <i class="on" title="Svært lavt"></i><i class="on" title="Lavt"></i><i class="on" title="Moderat"></i><i class="on" title="Høyt"></i><i class="" title="Ekstremt høyt"></i>
       </span>
-      <span class="cyber-source">NSM · 27.10.2026 <span aria-hidden="true">↗</span></span>
+      <!-- Two dates: when NSM set the level, and when the site last compared it with NSM.
+           The year is hidden on phones to keep the strip short (dates are DD.MM.YYYY). -->
+      <span class="cyber-source">Satt av NSM 27.10<span class="cyber-year">.2026</span>
+        · sjekket 05.11<span class="cyber-year">.2026</span> <span aria-hidden="true">↗</span></span>
     </span>
   </a>
 
   <!-- Sticky header: stays at the top while scrolling -->
   <header class="site-header">
     <div class="wrap header-inner">
-      <a href="/grc-grunnmur/" class="logo">
+      <a href="/" class="logo">
         <span class="logo-mark" aria-hidden="true"></span>
         <span class="logo-text">Grunnmur</span>
       </a>
       <!-- Main menu. request.endpoint is the name of the current page's function,
            used to underline the section the user is in. -->
       <nav class="main-nav" aria-label="Hovedmeny">
-        <a href="/grc-grunnmur/"
+        <a href="/"
            >NSM</a>
-        <a href="/grc-grunnmur/tiltak"
+        <a href="/tiltak"
            >Tiltak</a>
-        <a href="/grc-grunnmur/risikoer"
+        <a href="/risikoer"
            >Risikoer</a>
-        <a href="/grc-grunnmur/styringssystem"
+        <a href="/styringssystem"
            >ISO 27001</a>
-        <a href="/grc-grunnmur/iso27002"
+        <a href="/iso27002"
            >ISO 27002</a>
-        <a href="/grc-grunnmur/rapport"
+        <a href="/rapport"
            aria-current="page">Rapport</a>
-        <a href="/grc-grunnmur/data"
+        <a href="/data"
            >Data</a>
-        <a href="/grc-grunnmur/om"
+        <a href="/om"
            >Om</a>
       </nav>
       <span class="version-pill">v7</span>
@@ -2122,7 +2125,7 @@
     Lukkede risikoer er ikke med i kartene.
   </p>
   <p class="muted report-empty" id="empty-state" >Ingen risikoer registrert.</p>
-  <ol class="risk-list" id="risk-list" data-edit-url="/grc-grunnmur/risikoer/ny">
+  <ol class="risk-list" id="risk-list" data-edit-url="/risikoer/ny">
     
   </ol>
 </section>
@@ -3529,8 +3532,8 @@
   </main>
 
   <footer class="wrap site-footer">
-    <p><a href="/grc-grunnmur/om">Om Grunnmur</a> ·
-       <a href="/grc-grunnmur/data">Eksport og import</a> ·
+    <p><a href="/om">Om Grunnmur</a> ·
+       <a href="/data">Eksport og import</a> ·
        Bygget på <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>.
        
        Data lagres kun lokalt i din nettleser, ingenting sendes til en server.
@@ -3557,11 +3560,11 @@
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->
-  <script src="/grc-grunnmur/static/static-mode.js"></script>
+  <script src="/static/static-mode.js"></script>
   
 <script id="risk-config" type="application/json">{"levels": [["kritisk", "Kritisk", 20], ["hoy", "H\u00f8y", 10], ["middels", "Middels", 5], ["lav", "Lav", 1]], "statuses": {"apen": "\u00c5pen", "lukket": "Lukket", "under_behandling": "Under behandling"}, "treatments": {"akseptere": "Akseptere", "overfore": "Overf\u00f8re", "redusere": "Redusere", "unnga": "Unng\u00e5"}}</script>
-<script src="/grc-grunnmur/static/static-risks.js"></script>
-<script src="/grc-grunnmur/static/report.js"></script>
+<script src="/static/static-risks.js"></script>
+<script src="/static/report.js"></script>
 
   
 
