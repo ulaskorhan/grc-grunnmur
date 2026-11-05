@@ -228,31 +228,45 @@ h1, h2 { letter-spacing: -0.02em; line-height: 1.2; }
 }
 .card:active { transform: scale(0.99); }
 
-/* Roadmap stepper: vertical on phones, horizontal on wider screens */
-.roadmap { margin: 48px 0 16px; }
-.section-head h2 { font-size: 1.2rem; margin: 0 0 4px; }
-.section-head p { margin: 0; font-size: 0.9rem; }
-.stepper { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 0; }
-.step { position: relative; display: flex; gap: 14px; padding-bottom: 20px; }
-.step p { margin: 2px 0 0; font-size: 0.85rem; }
-/* The connecting line between dots */
-.step:not(:last-child)::after {
-  content: ""; position: absolute;
-  left: 15px; top: 34px; bottom: 2px; width: 2px;
-  background: var(--border);
-}
-.step-dot {
+/* "How to start": three numbered steps under the intro.
+   The number is drawn with ::before, so the text and links in each step flow normally. */
+.how-to { list-style: none; counter-reset: step; padding: 0; margin: 18px 0 0; display: grid; gap: 8px; }
+.how-to li { counter-increment: step; position: relative; padding-left: 34px; line-height: 1.5; }
+.how-to li::before { content: counter(step); position: absolute; left: 0; top: 0; }
+/* The round gradient number, used by the steps and by the version list on the About page */
+.how-to li::before, .version-dot {
   display: grid; place-items: center; flex-shrink: 0;
-  width: 32px; height: 32px; border-radius: 50%;
-  font-size: 0.85rem; font-weight: 700;
-  background: var(--surface); border: 2px solid var(--border); color: var(--muted);
-}
-.step.active .step-dot, .step.done .step-dot {
+  width: 24px; height: 24px; border-radius: 50%;
+  font-size: 0.75rem; font-weight: 700; color: #fff;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  border-color: transparent; color: #fff;
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent);
 }
-.step.planned > div { opacity: 0.6; }
+.hero-note { margin: 14px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+/* Main part and side column. One column on phones: the side column comes last. */
+.home-layout { display: grid; }
+.home-main { min-width: 0; }      /* lets the main column shrink instead of overflowing */
+.home-side {
+  margin: 24px 0 8px; padding: 20px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); box-shadow: var(--shadow);
+}
+.home-side h2 { font-size: 1.05rem; margin: 0 0 6px; }
+/* One link per part of the app, separated by thin lines */
+.site-map { list-style: none; padding: 0; margin: 0; display: grid; column-gap: 24px; }
+.site-map a {
+  display: grid; gap: 2px; padding: 10px 0;
+  border-top: 1px solid var(--border);
+  color: var(--text); text-decoration: none;
+}
+.site-map li:first-child a { border-top: 0; }
+.site-map strong { font-size: 0.95rem; font-weight: 600; }
+.site-map .muted { font-size: 0.82rem; line-height: 1.4; }
+@media (hover: hover) { .site-map a:hover strong { color: var(--accent-text); } }
+/* Tablets: the list in two columns, so the box is not very tall */
+@media (min-width: 640px) and (max-width: 859px) {
+  .site-map { grid-template-columns: 1fr 1fr; }
+  .site-map li:nth-child(2) a { border-top: 0; }
+}
 
 /* ---------- 6. Category page ---------- */
 .back { display: inline-block; margin-top: 20px; font-size: 0.9rem; text-decoration: none; padding: 6px 0; }
@@ -500,6 +514,10 @@ button:active { transform: scale(0.98); }
 .adds li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); }
 .adds li span { color: var(--muted); font-size: 0.9rem; }
 @media (min-width: 640px) { .adds { grid-template-columns: 1fr 1fr; } }
+/* "Bygget i 7 versjoner": number, name and a short line per version */
+.versions { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.versions li { display: flex; gap: 12px; align-items: flex-start; }
+.versions .muted { display: block; font-size: 0.9rem; }
 
 /* ---------- 6f. ISO/IEC 27002 (v3) ---------- */
 /* Under each principle: NSM's linked controls as small chips */
@@ -868,13 +886,10 @@ button:active { transform: scale(0.98); }
   .saved:not([hidden]) + button { margin-left: 0; }
 }
 
-/* ---------- 8. Desktop (≥ 860px): horizontal roadmap, example panel on the right ---------- */
+/* ---------- 8. Desktop (≥ 860px): side column on the homepage, example panel on the right ---------- */
 @media (min-width: 860px) {
-  .stepper { grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; }   /* one column per version, however many */
-  .step { flex-direction: column; gap: 10px; padding-bottom: 0; }
-  .step:not(:last-child)::after {           /* the line now runs sideways */
-    left: 40px; right: -4px; top: 15px; bottom: auto; width: auto; height: 2px;
-  }
+  .home-layout { grid-template-columns: minmax(0, 1fr) 250px; gap: 32px; align-items: start; }
+  .home-side { margin-top: 56px; }          /* level with the top of the hero */
   .p-body { grid-template-columns: 1fr 280px; gap: 24px; padding: 20px; align-items: start; }
   .example-panel { grid-column: 2; grid-row: 1; position: sticky; top: 72px; }
   .p-body form { grid-column: 1; grid-row: 1; }
