@@ -81,6 +81,17 @@
     </ul>
   </section>
 
+  <!-- The app was built step by step; each version added one part -->
+  <section class="about-section">
+    <h2>Bygget i {{ roadmap|length }} versjoner</h2>
+    <ol class="versions">
+      {% for number, name, text in roadmap %}
+      <li><span class="version-dot">{{ number }}</span>
+          <span><strong>{{ name }}</strong> <span class="muted">{{ text }}</span></span></li>
+      {% endfor %}
+    </ol>
+  </section>
+
   <section class="about-section">
     <h2>Prosjektet</h2>
     <p>Grunnmur er et personlig læringsprosjekt innen styring, risiko og etterlevelse (GRC),

@@ -3,7 +3,7 @@
 Run with:  .venv/bin/python app.py   and open http://127.0.0.1:5050
 
 Pages:
-  /                     homepage: the 4 categories with progress, plus the roadmap
+  /                     homepage: short intro, the 4 categories with progress, and a list of every part
   /kategori/<id>        one category: its principles, collapsed until clicked
   /prinsipp/<nr> (POST) saves the form for one principle
   /risikoer             v2: the risk register, highest risk first
@@ -55,7 +55,7 @@ SITE_URL = "https://ulaskorhan.github.io/grc-grunnmur"
 # How much each status counts towards the progress score (0-100 %).
 SCORE = {"ikke_startet": 0, "delvis": 0.5, "implementert": 1}
 
-# The version plan shown on the homepage, so users know the app will grow.
+# The versions the app was built in, shown on the About page.
 ROADMAP = [
     (1, "Grunnprinsipper", "Status, notater, ISO-referanse og personvern per prinsipp"),
     (2, "Risikoregister", "Sannsynlighet × konsekvens, behandling og kobling til NSM og ISO 27001 6.1"),
@@ -66,6 +66,18 @@ ROADMAP = [
     (7, "Eksport og import", "Alle data som én JSON-fil, også mellom lokal og offentlig versjon"),
 ]
 CURRENT_VERSION = 7
+
+# The side column on the homepage: every part of the app, as (page function, name, text).
+SITE_MAP = [
+    ("home", "NSMs grunnprinsipper", "21 prinsipper i 4 kategorier, med status og notater"),
+    ("measures_page", "Tiltak", "NSMs 118 tiltak, sortert etter NSMs prioritering"),
+    ("risk_list", "Risikoregister", "Risikoer før og etter tiltak, med varmekart"),
+    ("isms_page", "ISO 27001", "Styringssystemet: kapittel 4–10 i PDCA-sirkelen"),
+    ("iso_page", "ISO 27002", "De 93 kontrollene og anvendelseserklæringen (SoA)"),
+    ("report", "Rapport", "Alt samlet på én side, klar til utskrift eller PDF"),
+    ("data_page", "Data", "Eksport og import av alt som én JSON-fil"),
+    ("about", "Om", "Bakgrunn, kilder og hva appen ikke er"),
+]
 
 
 @app.context_processor
@@ -152,7 +164,7 @@ def home():
         overall=overall,
         implemented=implemented,
         total=total,
-        roadmap=ROADMAP,
+        site_map=SITE_MAP,
         source_url=nsm_data.SOURCE_URL,
         nsm_version=nsm_data.VERSION,
     )
@@ -410,7 +422,7 @@ def too_large(_error):
 @app.route("/om")
 def about():
     return render_template("about.html", source_url=nsm_data.SOURCE_URL,
-                           nsm_version=nsm_data.VERSION)
+                           nsm_version=nsm_data.VERSION, roadmap=ROADMAP)
 
 
 @app.route("/kategori/<category_id>")
