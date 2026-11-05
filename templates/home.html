@@ -72,7 +72,7 @@
 
 <!-- Side column: every part of the app, one line each -->
 <aside class="home-side" aria-labelledby="side-title">
-  <h2 id="side-title">Hva finner du her</h2>
+  <h2 id="side-title">Hva finner du her:</h2>
   <ul class="site-map">
     {% for endpoint, name, text in site_map %}
     <li><a href="{{ url_for(endpoint) }}{{ '#kategorier' if endpoint == 'home' }}">
