@@ -571,7 +571,7 @@ button:active { transform: scale(0.98); }
 .features a:hover strong { color: var(--accent-text); text-decoration: underline; }
 .features .muted { display: block; font-size: 0.9rem; }
 @media (min-width: 640px) { .features { grid-template-columns: 1fr 1fr; } }
-.about-me { border-left: 4px solid var(--accent); }
+.about-project { border-left: 4px solid var(--accent); }
 .sources { list-style: none; padding-left: 0 !important; }
 .sources li { display: grid; gap: 2px; }
 .sources .muted { font-size: 0.9rem; }
