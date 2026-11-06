@@ -550,10 +550,31 @@ button:active { transform: scale(0.98); }
 .about-section p:last-child, .about-section ul:last-child { margin-bottom: 0; }
 .about-section ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
 .about-alert { border-left: 4px solid var(--critical); }
-.adds { list-style: none; padding: 0 !important; display: grid; gap: 12px; }
-.adds li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); }
-.adds li span { color: var(--muted); font-size: 0.9rem; }
-@media (min-width: 640px) { .adds { grid-template-columns: 1fr 1fr; } }
+.about-section h3 { font-size: 0.95rem; margin: 0 0 8px; }
+/* "Er" and "er ikke" side by side from tablet width, one under the other on phones */
+.about-pair { display: grid; gap: 20px; }
+@media (min-width: 640px) { .about-pair { grid-template-columns: 1fr 1fr; } }
+.about-ticks, .about-crosses { list-style: none; padding-left: 0 !important; }
+.about-ticks li, .about-crosses li { position: relative; padding-left: 26px; }
+.about-ticks li::before, .about-crosses li::before {
+  position: absolute; left: 0; top: 0.1em; width: 18px; height: 18px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 0.7rem; font-weight: 700;
+}
+.about-ticks li::before { content: "✓"; background: var(--accent-soft); color: var(--accent-text); }
+.about-crosses li::before { content: "✕"; background: var(--track); color: var(--text); }
+/* The features: small cards with an icon, two per row on wider screens (10 cards = 5 even rows) */
+.features { list-style: none; padding: 0 !important; display: grid; gap: 12px; }
+.features li { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 12px;
+               background: var(--bg); border: 1px solid var(--border); }
+.features .icon-box { flex: none; }
+.features a { display: block; margin-bottom: 2px; color: var(--text); text-decoration: none; }
+.features a:hover strong { color: var(--accent-text); text-decoration: underline; }
+.features .muted { display: block; font-size: 0.9rem; }
+@media (min-width: 640px) { .features { grid-template-columns: 1fr 1fr; } }
+.about-me { border-left: 4px solid var(--accent); }
+.sources { list-style: none; padding-left: 0 !important; }
+.sources li { display: grid; gap: 2px; }
+.sources .muted { font-size: 0.9rem; }
 /* "Bygget i 7 versjoner": number, name and a short line per version */
 .versions { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .versions li { display: flex; gap: 12px; align-items: flex-start; }

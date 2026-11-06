@@ -91,90 +91,232 @@
   <div>
     <p class="eyebrow">Om Grunnmur</p>
     <h1>Fra råd til oppfølging</h1>
-    <p class="lead">Grunnmur er et lite verktøy for å følge opp egen IKT-sikkerhet med
+    <p class="lead">Grunnmur er et lite, uavhengig verktøy for å følge opp egen IKT-sikkerhet med
        NSMs grunnprinsipper som utgangspunkt.</p>
   </div>
 </section>
 
 <div class="about">
-  <!-- Why the topic matters right now: the current national level -->
-  <section class="about-section about-alert">
-    <h2>Nasjonalt cyberrisikonivå: høyt</h2>
-    <p>NSM satte det nasjonale cyberrisikonivået til <strong>HØYT</strong>
-       27.10.2026. Skalaen har fem nivåer: svært lavt, lavt, moderat, høyt, ekstremt høyt.
-       Moderat er normaltilstanden. Det var første gang NSM publiserte nivået åpent.</p>
-    <p>Ved høyt nivå ber NSM virksomheter om å iverksette forebyggende tiltak straks,
-       blant annet å følge de 21 grunnprinsippene for IKT-sikkerhet.</p>
-    <p class="muted">Nivået på denne siden skrives inn for hånd fra NSMs kunngjøring. Hver tredje dag
-       sjekkes NSMs nyhetsfeed automatisk for nye kunngjøringer (sist kontrollert 05.11.2026).
-       Sjekk alltid <a href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt" rel="noopener">NSMs egen kunngjøring</a>
-       for gjeldende nivå.</p>
+  <!-- In short: what the site is and is not, side by side. First on the page,
+       so no one takes it for an official NSM service. -->
+  <section class="about-section" aria-labelledby="kort">
+    <h2 id="kort">Kort fortalt</h2>
+    <div class="about-pair">
+      <div>
+        <h3>Grunnmur er</h3>
+        <ul class="about-ticks">
+          <li>Et gratis verktøy for å følge opp informasjonssikkerheten i en liten virksomhet eller hjemmelab.</li>
+          <li>Bygget på NSMs offentlige grunnprinsipper og tiltak, med NSMs egen kobling til ISO 27002.</li>
+          <li>Uten innlogging. Alt lagres i din egen nettleser.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Grunnmur er ikke</h3>
+        <ul class="about-crosses">
+          <li>En offisiell tjeneste, og ikke tilknyttet NSM.</li>
+          <li>En erstatning for NSMs råd, Cybersjekk eller en revisjon. Bruk dem sammen.</li>
+          <li>En kopi av ISO-standardene. ISO-tekst er opphavsrettsbeskyttet, så bare kapittel- og kontrollnumre er brukt.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <section class="about-section">
-    <h2>Bakgrunn</h2>
+  <section class="about-section" aria-labelledby="hvorfor">
+    <h2 id="hvorfor">Hvorfor Grunnmur finnes</h2>
     <p>NSMs <a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/" rel="noopener">grunnprinsipper for IKT-sikkerhet
        (v2.1)</a> er 21 prinsipper i fire kategorier: identifisere og kartlegge,
        beskytte og opprettholde, oppdage, og håndtere og gjenopprette. De sier
-       <em>hva</em> en virksomhet bør gjøre. NSM tilbyr også
-       <a href="https://cybersjekk.no" rel="noopener">Cybersjekk</a>, en selvevaluering
-       som gir en rask oversikt og forslag til prioriterte tiltak.</p>
+       <em>hva</em> en virksomhet bør gjøre, og NSMs
+       <a href="https://cybersjekk.no" rel="noopener">Cybersjekk</a> gir en rask selvevaluering.</p>
     <p>Etter at rådene er lest og sjekklisten er fylt ut, gjenstår arbeidet:
        hvem gjør hva, hva er gjort, hvilke risikoer gjenstår, og når skal det
        vurderes på nytt? Det er dette Grunnmur er laget for.</p>
   </section>
 
-  <section class="about-section">
-    <h2>Hva Grunnmur legger til</h2>
-    <ul class="adds">
-      <li><strong>Status over tid</strong>
-          <span>Ikke startet, delvis eller implementert per prinsipp, med egne notater
-                og fremdrift per kategori.</span></li>
-      <li><strong>Tiltak etter NSMs prioritering</strong>
-          <span>Alle 118 tiltakene med status, under hvert prinsipp og samlet i NSMs tre
-                prioriteringsgrupper, så det er lett å se hva som haster mest.</span></li>
-      <li><strong>Risikoregister og varmekart</strong>
-          <span>Sannsynlighet × konsekvens før og etter tiltak, vist i to varmekart.
-                Hver risiko kobles til et prinsipp og får NSMs tiltak som forslag.</span></li>
-      <li><strong>Bro til ISO 27001, ISO 27002 og GDPR</strong>
-          <span>NSMs egen kobling til de 93 kontrollene i ISO/IEC 27002 vises under hvert prinsipp,
-                sammen med felt for ISO-referanse og et personvernmerke.</span></li>
-      <li><strong>Styringssystem etter ISO 27001</strong>
-          <span>Kapittel 4–10 med status og bevis, gruppert i PDCA-sirkelen, og en
-                anvendelseserklæring (SoA) der hver kontroll får «gjelder» eller «gjelder ikke» med begrunnelse.</span></li>
-      <li><strong>Rapport</strong>
-          <span>En samlet sikkerhetsrapport med status, varmekart og anvendelseserklæring,
-                klar til å skrive ut eller lagre som PDF.</span></li>
-      <li><strong>Konkrete eksempler</strong>
-          <span>Et praktisk eksempel under hvert prinsipp, skrevet for et lite miljø
-                eller en hjemmelab.</span></li>
-      <li><strong>Avvikslogg</strong>
-          <span>Hendelser og avvik med alvorlighet og status, koblet til et prinsipp og en risiko,
-                med tiltak og læring (ISO 27001 10.2) og et merke for brudd på personopplysningssikkerheten.</span></li>
-      <li><strong>Utvikling over tid</strong>
-          <span>Hver dag du endrer noe, lagres prosentene for prinsipper, tiltak, ISO 27001 og SoA,
-                og antall åpne risikoer og avvik. Rapporten viser det som en graf og en tabell.</span></li>
-      <li><strong>Dine data er dine</strong>
-          <span>Alt lagres i din egen nettleser. Ingenting sendes til en server.
-                
-                Med <a href="/grc-grunnmur/data">eksport og import</a> kan du ta vare på alt
-                som én fil, og flytte det mellom den lokale og den offentlige versjonen.</span></li>
+  <!-- Why the topic matters right now: the current national level -->
+  <section class="about-section about-alert" aria-labelledby="niva">
+    <h2 id="niva">Nasjonalt cyberrisikonivå: høyt</h2>
+    <p>NSM satte det nasjonale cyberrisikonivået til <strong>HØYT</strong>
+       27.10.2026. Skalaen har fem nivåer: svært lavt, lavt, moderat, høyt, ekstremt høyt.
+       Moderat er normaltilstanden. Det var første gang NSM publiserte nivået åpent.
+       Ved høyt nivå ber NSM virksomheter om å iverksette forebyggende tiltak straks,
+       blant annet å følge de 21 grunnprinsippene.</p>
+    <p class="muted">Nivået i banneret skrives inn for hånd fra NSMs kunngjøring. Hver tredje dag
+       sjekkes NSMs nyhetsfeed automatisk for nye kunngjøringer (sist kontrollert 05.11.2026).
+       Sjekk alltid <a href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt" rel="noopener">NSMs egen kunngjøring</a>
+       for gjeldende nivå.</p>
+  </section>
+
+  <!-- The features as a grid of small cards; each heading links to the page it describes -->
+  <section class="about-section" aria-labelledby="funksjoner">
+    <h2 id="funksjoner">Hva du kan gjøre</h2>
+    <ul class="features">
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>                        
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/"><strong>Status per prinsipp</strong></a>
+          <span class="muted">Ikke startet, delvis eller implementert, med egne notater og fremdrift per kategori.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M4 6l1.5 1.5L8 5M4 12l1.5 1.5L8 11M4 18l1.5 1.5L8 17M11 6h9M11 12h9M11 18h9"/> 
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/tiltak"><strong>Tiltak etter NSMs prioritering</strong></a>
+          <span class="muted">Alle 118 tiltakene med status, sortert i NSMs tre prioriteringsgrupper.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/> 
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/risikoer"><strong>Risikoregister og varmekart</strong></a>
+          <span class="muted">Sannsynlighet × konsekvens før og etter tiltak, med NSMs tiltak som forslag.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>                          
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/avvik"><strong>Avvikslogg</strong></a>
+          <span class="muted">Hendelser med alvorlighet, status og læring (ISO 27001 10.2), og et GDPR-merke.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>                          
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/styringssystem"><strong>Styringssystem etter ISO 27001</strong></a>
+          <span class="muted">Kapittel 4–10 med status og bevis, gruppert i PDCA-sirkelen.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/> 
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/iso27002"><strong>Bro til ISO 27002</strong></a>
+          <span class="muted">NSMs egen kobling til de 93 kontrollene, og en anvendelseserklæring (SoA).</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>                 
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/rapport"><strong>Rapport</strong></a>
+          <span class="muted">Alt samlet på én side, klar til å skrive ut eller lagre som PDF.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>                             
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/rapport#history"><strong>Utvikling over tid</strong></a>
+          <span class="muted">Én måling per dag med endringer, vist som graf og tabell i rapporten.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/> 
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/"><strong>Konkrete eksempler</strong></a>
+          <span class="muted">Et praktisk eksempel under hvert prinsipp, skrevet for et lite miljø.</span>
+        </span>
+      </li>
+      
+      <li>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  
+    <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/> 
+  
+</svg></span>
+        <span>
+          <a href="/grc-grunnmur/data"><strong>Dine data er dine</strong></a>
+          <span class="muted">Ingenting sendes til en server. Eksporter og importer alt som én fil.</span>
+        </span>
+      </li>
+      
     </ul>
   </section>
 
-  <section class="about-section">
-    <h2>Hva Grunnmur ikke er</h2>
-    <ul>
-      <li>Ikke en offisiell tjeneste, og ikke tilknyttet NSM.</li>
-      <li>Ikke en erstatning for NSMs råd, Cybersjekk eller en revisjon. Bruk dem sammen.</li>
-      <li>Ingen ISO-tekst er gjengitt. ISO 27001 er opphavsrettsbeskyttet, så appen bruker
-          bare kapittel- og kontrollnumre.</li>
+  <!-- About the author. UTKAST: Ulas checks and corrects this text before it is published. -->
+  <section class="about-section about-me" aria-labelledby="om-meg">
+    <h2 id="om-meg">Om meg</h2>
+    <p>Jeg heter Ulas Korhan. Jeg bygde Grunnmur for å lære styring, risiko og etterlevelse (GRC)
+       i praksis: ikke bare lese NSMs råd og ISO-standardene, men bruke dem på noe konkret og
+       se hvordan oppfølgingen henger sammen, fra prinsipp og tiltak til risiko, avvik og rapport.</p>
+    <p>Prosjektet er bygget steg for steg i 9 versjoner med Python, Flask og SQLite.
+       Den offentlige versjonen er statiske sider på GitHub Pages. Prinsippene, tiltakene og
+       koblingen til ISO 27002 er hentet fra NSMs egne dokumenter.</p>
+    <p><a href="https://github.com/ulaskorhan/grc-grunnmur" rel="noopener">Kildekoden på GitHub</a></p>
+  </section>
+
+  <section class="about-section" aria-labelledby="kilder">
+    <h2 id="kilder">Kilder</h2>
+    <ul class="sources">
+      <li><a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/grunnprinsipper-for-ikt-sikkerhet/" rel="noopener">NSMs grunnprinsipper for IKT-sikkerhet v2.1</a>
+          <span class="muted">De 21 prinsippene og kategoriene.</span></li>
+      <li><a href="https://nsm.no/regelverk-og-hjelp/rad-og-anbefalinger/stotteprodukter/stotteprodukter-til-nsms-grunnprinsipper-for-ikt-sikkerhet" rel="noopener">NSMs regneark med tiltak</a>
+          <span class="muted">De 118 tiltakene, prioriteringen og koblingen til ISO/IEC 27002:2022.</span></li>
+      <li><a href="https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt" rel="noopener">NSMs kunngjøring om cyberrisikonivået</a>
+          <span class="muted">Nivået i banneret.</span></li>
+      <li><a href="https://cybersjekk.no" rel="noopener">Cybersjekk</a>
+          <span class="muted">NSMs selvevaluering, et godt sted å starte.</span></li>
+      <li><span><a href="https://www.iso.org/standard/27001" rel="noopener">ISO/IEC 27001</a> og
+          <a href="https://www.iso.org/standard/75652.html" rel="noopener">ISO/IEC 27002</a></span>
+          <span class="muted">Bare kapittel- og kontrollnumre er brukt.</span></li>
     </ul>
   </section>
 
   <!-- The app was built step by step; each version added one part -->
-  <section class="about-section">
-    <h2>Bygget i 9 versjoner</h2>
+  <section class="about-section" aria-labelledby="versjoner">
+    <h2 id="versjoner">Bygget i 9 versjoner</h2>
     <ol class="versions">
       
       <li><span class="version-dot">1</span>
@@ -205,14 +347,6 @@
           <span><strong>Fremdriftshistorikk</strong> <span class="muted">Ett punkt per dag med endringer, vist som en graf i rapporten</span></span></li>
       
     </ol>
-  </section>
-
-  <section class="about-section">
-    <h2>Prosjektet</h2>
-    <p>Grunnmur er et personlig læringsprosjekt innen styring, risiko og etterlevelse (GRC),
-       bygget med Python, Flask og SQLite. Den offentlige versjonen er statiske sider på
-       GitHub Pages. Kildekoden ligger på
-       <a href="https://github.com/ulaskorhan/grc-grunnmur" rel="noopener">GitHub</a>.</p>
   </section>
 </div>
 

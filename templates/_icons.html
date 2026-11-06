@@ -1,5 +1,5 @@
 {#
-  Simple line icons for the 4 NSM categories, drawn as inline SVG.
+  Simple line icons for the 4 NSM categories and the features on the About page, drawn as inline SVG.
   Usage:  {% from "_icons.html" import icon %}  then  {{ icon("beskytte") }}
   "currentColor" makes the icon take the text colour of its parent element.
 #}
@@ -14,6 +14,27 @@
     <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/> {# eye #}
   {% elif name == "handtere" %}
     <path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>                           {# circular arrow #}
+  {# The features on the About page #}
+  {% elif name == "status" %}
+    <circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>                        {# check in a circle #}
+  {% elif name == "tiltak" %}
+    <path d="M4 6l1.5 1.5L8 5M4 12l1.5 1.5L8 11M4 18l1.5 1.5L8 17M11 6h9M11 12h9M11 18h9"/> {# checklist #}
+  {% elif name == "risiko" %}
+    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/> {# heat map grid #}
+  {% elif name == "iso" %}
+    <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/> {# chain link #}
+  {% elif name == "isms" %}
+    <path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>                          {# layers #}
+  {% elif name == "rapport" %}
+    <path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>                 {# document #}
+  {% elif name == "eksempel" %}
+    <path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/> {# light bulb #}
+  {% elif name == "avvik" %}
+    <path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>                          {# warning triangle #}
+  {% elif name == "utvikling" %}
+    <path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>                             {# rising line #}
+  {% elif name == "data" %}
+    <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/> {# padlock #}
   {% endif %}
 </svg>
 {%- endmacro %}

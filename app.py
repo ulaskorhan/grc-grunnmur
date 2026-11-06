@@ -490,7 +490,8 @@ def too_large(_error):
 @app.route("/om")
 def about():
     return render_template("about.html", source_url=nsm_data.SOURCE_URL,
-                           nsm_version=nsm_data.VERSION, roadmap=ROADMAP)
+                           nsm_version=nsm_data.VERSION, sheet_url=nsm_measures.SOURCE_URL,
+                           roadmap=ROADMAP)
 
 
 @app.route("/kategori/<category_id>")
