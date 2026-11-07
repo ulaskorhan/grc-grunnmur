@@ -32,11 +32,10 @@
 
   <div role="region" aria-label="Nasjonalt cyberrisikonivå">
   <a class="cyber-banner{% if cyber.elevated %} is-elevated{% endif %}" href="{{ cyber.source_url }}"
-     rel="noopener" aria-label="Hentet fra NSM: nasjonalt cyberrisikonivå {{ cyber.current }}. Satt av NSM {{ cyber.set_on }}, sist kontrollert {{ cyber.checked }}. Les mer hos NSM.">
+     rel="noopener" aria-label="Nasjonalt cyberrisikonivå: {{ cyber.current }}. Kilde: NSM. Satt av NSM {{ cyber.set_on }}, sist kontrollert {{ cyber.checked }}. Les mer hos NSM.">
     <span class="wrap cyber-inner">
       <span class="cyber-dot" aria-hidden="true"></span>
-      <!-- "Hentet fra NSM" makes clear the level is quoted from NSM, not a message from this site -->
-      <span class="cyber-label"><span class="cyber-from">Hentet fra NSM:</span> Nasjonalt cyberrisikonivå</span>
+      <span class="cyber-label">Nasjonalt cyberrisikonivå</span>
       <strong class="cyber-value">{{ cyber.current|upper }}</strong>
       <!-- The 5 levels as small bars; the ones up to the current level are filled -->
       <span class="cyber-scale" aria-hidden="true">
@@ -44,7 +43,8 @@
       </span>
       <!-- Two dates: when NSM set the level, and when the site last compared it with NSM.
            The year is hidden on phones to keep the strip short (dates are DD.MM.YYYY). -->
-      <span class="cyber-source">Satt {{ cyber.set_on[:5] }}<span class="cyber-year">{{ cyber.set_on[5:] }}</span>
+      <!-- "Kilde: NSM" makes clear the level is quoted from NSM, not a message from this site -->
+      <span class="cyber-source">Kilde: NSM · satt {{ cyber.set_on[:5] }}<span class="cyber-year">{{ cyber.set_on[5:] }}</span>
         · sjekket {{ cyber.checked[:5] }}<span class="cyber-year">{{ cyber.checked[5:] }}</span> <span aria-hidden="true">↗</span></span>
     </span>
   </a>

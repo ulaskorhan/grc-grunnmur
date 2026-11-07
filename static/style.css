@@ -523,7 +523,6 @@ button:active { transform: scale(0.98); }
 /* One line on most screens; on narrow phones the source moves to its own line */
 .cyber-inner { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; min-height: 36px; padding-top: 6px; padding-bottom: 6px; }
 .cyber-label { font-weight: 500; }
-.cyber-from { font-weight: 400; }
 .cyber-value { letter-spacing: 0.06em; color: var(--cyber); }
 .is-elevated .cyber-value { color: var(--critical-text); }   /* darker red: readable on the pink strip */
 .cyber-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyber); flex: none; }
