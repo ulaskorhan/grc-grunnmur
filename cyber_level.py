@@ -15,7 +15,7 @@ SCALE = ["Svært lavt", "Lavt", "Moderat", "Høyt", "Ekstremt høyt"]
 
 CURRENT = "Høyt"                  # must be one of SCALE
 SET_ON = "27.10.2026"             # the date NSM raised the level
-CHECKED = "10.11.2026"            # last compared with NSM (set by check_cyber_level.py)
+CHECKED = "13.11.2026"            # last compared with NSM (set by check_cyber_level.py)
 SOURCE_URL = "https://nsm.no/aktuelt/nsm-hever-det-nasjonale-cyberrisikonivaet-til-hoyt"
 
 
