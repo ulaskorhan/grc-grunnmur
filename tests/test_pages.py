@@ -27,6 +27,17 @@ def test_reminder_shows_on_the_homepage(client):
     assert "Trenger oppfølging" in html and "Forfalt for" in html
 
 
+def test_wall_shows_each_principle_with_its_status(client, monkeypatch):
+    client.post("/prinsipp/1.1", data={"status": "delvis"})
+    html = client.get("/").get_data(as_text=True)
+    assert html.count("data-stone=") == 21                       # one stone per principle
+    assert 'class="stone is-delvis" data-stone="1.1"' in html
+    # The public build never shows my local status: every stone starts empty
+    monkeypatch.setitem(app.config, "STATIC_SITE", True)
+    html = client.get("/").get_data(as_text=True)
+    assert 'class="stone is-ikke_startet" data-stone="1.1"' in html
+
+
 @pytest.mark.parametrize("url", PAGES)
 def test_public_build_contains_no_local_data(client, monkeypatch, url):
     # Save something locally, then render the page the way build.py does.

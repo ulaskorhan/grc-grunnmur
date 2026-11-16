@@ -156,6 +156,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/static-incidents.js`: the incident log in the browser (public version)
 - `static/static-history.js`: notes the progress history in the browser (public version)
 - `static/history.js`: the history graph and table in the report (both versions)
+- `static/motion.js`: soft fade-in while scrolling (both versions; off with reduced motion)
 - `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
 - `static/report.js`: fills the report from the browser (public version)
 - `static/reminders.js`: the review reminders on the homepage (public version)

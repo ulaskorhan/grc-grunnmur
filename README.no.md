@@ -154,6 +154,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/static-incidents.js`: avviksloggen i nettleseren (offentlig versjon)
 - `static/static-history.js`: noterer fremdriftshistorikken i nettleseren (offentlig versjon)
 - `static/history.js`: grafen og tabellen over historikken i rapporten (begge versjoner)
+- `static/motion.js`: myk inntoning ved rulling (begge versjoner; av ved redusert bevegelse)
 - `static/risk-tools.js`: filter i varmekartet og forslag fra NSM (begge versjoner)
 - `static/report.js`: fyller rapporten fra nettleseren (offentlig versjon)
 - `static/reminders.js`: påminnelsene om gjennomgang på forsiden (offentlig versjon)

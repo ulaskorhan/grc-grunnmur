@@ -129,9 +129,18 @@ function updateItem(details) {
   if (tag) tag.hidden = !row.gdpr;
 }
 
+// The foundation wall on the homepage: colour each stone by its principle's saved status.
+function updateWall() {
+  const data = loadData("grunnmur-progress");
+  document.querySelectorAll("[data-stone]").forEach(function (stone) {
+    stone.className = "stone is-" + statusOf(data, stone.dataset.stone, "ikke_startet");
+  });
+}
+
 function renderAll() {
   document.querySelectorAll("details.item").forEach(updateItem);
   updateSummaries();
+  updateWall();
 }
 
 // Save an item when its form is submitted, instead of sending it to a server.

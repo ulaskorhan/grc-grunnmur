@@ -186,6 +186,8 @@ main:focus { outline: none; }   /* main only gets focus from the skip link; no r
 .ring-inner strong { font-size: 2rem; line-height: 1; letter-spacing: -0.03em; }
 .ring-inner small { font-size: 0.5em; margin-left: 2px; color: var(--muted); }
 .ring-inner > span {   /* only the caption under the number */ font-size: 0.7rem; color: var(--muted); margin-top: 4px; padding: 0 8px; }
+/* --p is registered as a number, so the ring can animate from 0 when the page opens (section 9) */
+@property --p { syntax: "<number>"; inherits: true; initial-value: 0; }
 .ring-sm { --size: 72px; }
 .ring-sm .ring-inner strong { font-size: 1.1rem; }
 
@@ -217,6 +219,23 @@ main:focus { outline: none; }   /* main only gets focus from the skip link; no r
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .lead { color: var(--muted); font-size: 1.05rem; margin: 0; max-width: 34em; }
+
+/* The foundation wall in the hero: one stone per principle, one row per category.
+   Rows have 4, 4, 10 and 3 stones of equal total width, so the joints fall like in a real wall. */
+.wall-box { width: 100%; max-width: 340px; flex-shrink: 0; }
+.wall-total { display: flex; align-items: baseline; gap: 10px; margin: 0 0 12px; }
+.wall-total strong { font-size: 2.6rem; line-height: 1; letter-spacing: -0.03em; }
+.wall-total small { font-size: 0.5em; margin-left: 2px; color: var(--muted); }
+.wall-total > span { font-size: 0.85rem; color: var(--muted); }
+.wall { display: grid; gap: 5px; padding-bottom: 6px; border-bottom: 3px solid var(--border); }   /* the line is the ground */
+.wall-row { display: flex; align-items: center; gap: 5px; }
+.wall-no { width: 14px; flex: none; font-size: 0.7rem; font-weight: 600; color: var(--muted); }
+.stone { flex: 1; height: 30px; border-radius: 7px; background: var(--track); }
+.stone.is-delvis { background: var(--partial); }
+.stone.is-implementert { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.wall-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 10px 0 0; font-size: 0.75rem; color: var(--muted); }
+.wall-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.wall-legend .stone { flex: none; width: 14px; height: 10px; border-radius: 3px; }
 
 /* Category cards: 1 column on phones, 2 × 2 from tablet width */
 .cards { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 32px 0; }
@@ -973,8 +992,7 @@ button:active { transform: scale(0.98); }
   .card { padding: 24px; }
 
   .hero { flex-direction: row; align-items: center; justify-content: space-between; padding-top: 56px; }
-  .ring-lg { --size: 168px; }
-  .ring-lg .ring-inner strong { font-size: 2.6rem; }
+  .wall-total strong { font-size: 3.2rem; }
 
   .cat-head { grid-template-columns: auto 1fr auto; }
   .cat-head .ring { grid-column: auto; display: grid; }
@@ -1003,3 +1021,24 @@ button:active { transform: scale(0.98); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* ---------- 9. Gentle motion ---------- */
+/* Only for visitors who have not asked for reduced motion. Nothing here carries
+   information: with the motion off, every page looks the same once it has loaded. */
+@media (prefers-reduced-motion: no-preference) {
+  /* The wall is built stone by stone, from the bottom row up */
+  .wall .stone {
+    animation: stone-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--r) * 140ms + var(--s) * 35ms);
+  }
+  /* Rings and bars fill from zero when the page opens */
+  .ring { animation: ring-in 0.9s ease-out both; }
+  .bar-fill { animation: bar-in 0.9s ease-out both; }
+  /* Fade in while scrolling: motion.js adds "reveal", then "is-visible" */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+  .reveal.is-visible { opacity: 1; transform: none; }
+}
+@keyframes stone-in { from { opacity: 0; transform: translateY(10px) scale(0.94); } }
+@keyframes ring-in { from { --p: 0; } }
+@keyframes bar-in { from { width: 0; } }
+@media print { .reveal { opacity: 1 !important; transform: none !important; } }

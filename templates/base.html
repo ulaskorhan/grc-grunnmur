@@ -129,6 +129,9 @@
   {% block static_scripts %}{% endblock %}
   {% endif %}
 
+  <!-- Gentle fade-in while scrolling, in both versions -->
+  <script src="{{ url_for('static', filename='motion.js') }}"></script>
+
   <!-- Scripts a page needs in both versions (Flask and GitHub Pages), after the static ones -->
   {% block page_scripts %}{% endblock %}
 </body>

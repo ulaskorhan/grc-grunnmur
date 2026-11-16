@@ -6,7 +6,7 @@
      On phones the side column comes after the main part. -->
 <div class="home-layout">
 <div class="home-main">
-<!-- Hero: short intro on the left, overall progress ring on the right -->
+<!-- Hero: short intro on the left, the foundation wall with overall progress on the right -->
 <!-- data-ids lists the principles this block summarises (used by static-mode.js) -->
 <section class="hero" data-ids="{% for c in cards %}{% for p in c.category.principles %}{{ p[0] }} {% endfor %}{% endfor %}">
   <div class="hero-text">
@@ -29,13 +29,32 @@
       {% if static_site %}Dataene lagres bare i din nettleser.{% else %}Dataene lagres i den lokale databasen.{% endif %}</p>
   </div>
 
-  <!-- The ring is a CSS conic-gradient. --p is the percentage it fills. -->
-  <div class="ring ring-lg" style="--p: {{ overall }}" role="img"
-       aria-label="Total fremdrift {{ overall }} prosent">
-    <div class="ring-inner">
+  <!-- The foundation wall ("grunnmur"): one stone per principle, one row per category.
+       Category 1 is the bottom row, so the wall is built from the ground up.
+       The wall is a picture of the numbers above it and of the cards below, so screen
+       readers skip it (aria-hidden) and read those instead.
+       --r and --s (row and stone number) only set the order the stones appear in. -->
+  <div class="wall-box">
+    <p class="wall-total">
       <strong><span class="js-pct">{{ overall }}</span><small>%</small></strong>
       <span><span data-count="implementert">{{ implemented }}</span> av {{ total }} implementert</span>
+    </p>
+    <div class="wall" aria-hidden="true">
+      {% for card in cards|reverse %}
+      <div class="wall-row" style="--r: {{ loop.revindex0 }}">
+        <span class="wall-no">{{ card.category.number }}</span>
+        {% for number, title, status in card.stones -%}
+        <span class="stone is-{{ status }}" data-stone="{{ number }}" style="--s: {{ loop.index0 }}"
+              title="{{ number }} {{ title }}"></span>
+        {%- endfor %}
+      </div>
+      {% endfor %}
     </div>
+    <p class="wall-legend" aria-hidden="true">
+      <span><i class="stone is-implementert"></i>Implementert</span>
+      <span><i class="stone is-delvis"></i>Delvis</span>
+      <span><i class="stone is-ikke_startet"></i>Ikke startet</span>
+    </p>
   </div>
 </section>
 

@@ -156,8 +156,11 @@ def home():
             "category": category,
             "percent": category_progress(category, progress),
             "counts": status_counts(category, progress),
+            # One stone per principle in the wall on the home page: (number, title, status)
+            "stones": [(number, title, progress[number]["status"] if number in progress else "ikke_startet")
+                       for number, title, _link in category["principles"]],
         })
-    # Number of principles marked "Implementert", shown next to the big ring.
+    # Number of principles marked "Implementert", shown above the wall.
     implemented = sum(card["counts"]["implementert"] for card in cards)
     # Overall progress is the average over all 21 principles, not over the 4 cards,
     # so the large category (10 principles) weighs more than the small ones.
