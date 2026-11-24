@@ -101,6 +101,37 @@
     </ul>
   </section>
 
+  <!-- Security: what is protected and what is not, in short. The full version is SECURITY.md. -->
+  <section class="about-section" aria-labelledby="sikkerhet">
+    <h2 id="sikkerhet">Sikkerhet og personvern</h2>
+    <p>Et GRC-verktøy samler de mest følsomme opplysningene en virksomhet har: svakheter,
+       manglende tiltak og risikoer. Derfor er Grunnmur bygget slik at ingen server noen gang
+       får dataene dine.</p>
+    <div class="about-pair">
+      <div>
+        <h3>Beskyttet</h3>
+        <ul class="about-ticks">
+          <li>Ingen server, database, innlogging eller sporing. {% if static_site %}Dataene finnes bare i din nettleser.{% else %}Dataene finnes bare på din maskin.{% endif %}</li>
+          <li>Ingen skript, fonter eller filer fra andre nettsteder.</li>
+          <li>En sikkerhetspolicy (CSP) lar nettleseren bare kjøre sidens egne skript.</li>
+          <li>Tekst du skriver, vises alltid som tekst og kan aldri kjøres som kode.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ikke beskyttet</h3>
+        <ul class="about-crosses">
+          <li>Dataene er ikke kryptert. Den som har tilgang til enheten din, kan lese dem.</li>
+          <li>Nettleserutvidelser med tilgang til alle sider kan lese det siden viser.</li>
+          <li>Eksportfilen er vanlig tekst. Lagre den kryptert, og ikke send den på e-post.</li>
+          <li>Ingen innlogging, roller eller logg over hvem som endret hva.</li>
+        </ul>
+      </div>
+    </div>
+    <p><strong>Ikke ment for sensitive opplysninger fra en virksomhet.</strong> Bruk Grunnmur
+       til læring, i en hjemmelab eller som mal. Hele vurderingen står i
+       <a href="https://github.com/ulaskorhan/grc-grunnmur/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a>.</p>
+  </section>
+
   <!-- About the project. Written without "jeg" and without a name, so the site reads as a
        tool, not a personal page. A contact address can be added here later. -->
   <section class="about-section about-project" aria-labelledby="prosjektet">

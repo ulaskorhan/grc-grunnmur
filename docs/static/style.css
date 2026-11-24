@@ -572,6 +572,7 @@ button:active { transform: scale(0.98); }
 /* "Er" and "er ikke" side by side from tablet width, one under the other on phones */
 .about-pair { display: grid; gap: 20px; }
 @media (min-width: 640px) { .about-pair { grid-template-columns: 1fr 1fr; } }
+.about-pair + p, p + .about-pair { margin-top: 16px; }
 .about-ticks, .about-crosses { list-style: none; padding-left: 0 !important; }
 .about-ticks li, .about-crosses li { position: relative; padding-left: 26px; }
 .about-ticks li::before, .about-crosses li::before {

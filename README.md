@@ -95,6 +95,9 @@ The homepage lists open risks whose review is overdue or due within 30 days, and
 - On the public version the data lives only in that browser. Clearing the browser's
   data deletes it, so export a file now and then as a backup.
 - The exported file holds your notes as plain text. It is not encrypted.
+- Not meant for sensitive information from an organisation. See
+  [SECURITY.md](SECURITY.md) for the data flow, the threats, the controls and the
+  accepted risks.
 
 ## Running it
 
@@ -104,7 +107,8 @@ python3 -m venv .venv
 .venv/bin/python app.py
 ```
 
-Then open <http://127.0.0.1:5050>.
+Then open <http://127.0.0.1:5050>. While developing, `GRUNNMUR_DEBUG=1 .venv/bin/python app.py`
+reloads on code changes. Debug mode is off by default (see [SECURITY.md](SECURITY.md)).
 
 ## Tests
 
@@ -115,6 +119,7 @@ Then open <http://127.0.0.1:5050>.
 
 The tests in `tests/` check the risk rules and reminders, the incident log, the history, export and import, that every
 page loads, that user text is escaped, that the public build never contains local data,
+the security controls (forms from other sites, host names, the content security policy),
 and the cyber level check (without going online). Each test gets its own empty database.
 A GitHub Action (`.github/workflows/tests.yml`) runs them on every push.
 
@@ -148,6 +153,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `cyber_level.py`: NSM's national cyber risk level (updated by hand)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: the check of NSM's news feed every third day
 - `build.py`: builds the static version into `docs/`
+- `SECURITY.md`: security considerations: data flow, threats, controls and accepted risks
 - `tests/`: the pytest tests; `requirements-dev.txt` adds pytest
 - `templates/`: the HTML pages (Jinja)
 - `static/style.css`: the styling, mobile first, with dark mode and print styles
@@ -156,6 +162,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/static-incidents.js`: the incident log in the browser (public version)
 - `static/static-history.js`: notes the progress history in the browser (public version)
 - `static/history.js`: the history graph and table in the report (both versions)
+- `static/page.js`: small helpers on every page (open linked sections, confirm before deleting, print), kept out of the HTML for the content security policy
 - `static/motion.js`: soft fade-in while scrolling (both versions; off with reduced motion)
 - `static/risk-tools.js`: heat map filter and NSM suggestions (both versions)
 - `static/report.js`: fills the report from the browser (public version)

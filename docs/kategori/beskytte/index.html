@@ -2,6 +2,13 @@
 <html lang="no">
 <head>
   <meta charset="utf-8">
+  <!-- Content security policy: the browser only runs scripts and loads files from this site itself.
+       A second safety net if an escaping bug ever let user text into the page as code.
+       Inline style="" attributes are allowed: a few elements set a CSS variable that way (e.g. --p).
+       No third-party scripts, fonts or trackers, and forms can only post to this site. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
@@ -4571,22 +4578,8 @@
        </p>
   </footer>
 
-  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into closed <details>:
-       open the target and every <details> around it, so it is visible.
-       Some browsers do this on their own; this makes it work everywhere. -->
-  <script>
-    function openFromHash() {
-      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      if (!target) return;
-      for (var el = target; el; el = el.parentElement.closest("details")) {
-        if (el.tagName === "DETAILS") el.open = true;
-        if (!el.parentElement) break;
-      }
-      target.scrollIntoView();
-    }
-    openFromHash();
-    window.addEventListener("hashchange", openFromHash);
-  </script>
+  <!-- Opens linked <details>, asks before deleting, and the print button (no inline code: see the CSP above) -->
+  <script src="/grc-grunnmur/static/page.js"></script>
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->

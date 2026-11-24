@@ -2,6 +2,13 @@
 <html lang="no">
 <head>
   <meta charset="utf-8">
+  <!-- Content security policy: the browser only runs scripts and loads files from this site itself.
+       A second safety net if an escaping bug ever let user text into the page as code.
+       Inline style="" attributes are allowed: a few elements set a CSS variable that way (e.g. --p).
+       No third-party scripts, fonts or trackers, and forms can only post to this site. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <!-- Makes the page use the phone's real width instead of a zoomed-out desktop view -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
@@ -285,6 +292,37 @@
     </ul>
   </section>
 
+  <!-- Security: what is protected and what is not, in short. The full version is SECURITY.md. -->
+  <section class="about-section" aria-labelledby="sikkerhet">
+    <h2 id="sikkerhet">Sikkerhet og personvern</h2>
+    <p>Et GRC-verktøy samler de mest følsomme opplysningene en virksomhet har: svakheter,
+       manglende tiltak og risikoer. Derfor er Grunnmur bygget slik at ingen server noen gang
+       får dataene dine.</p>
+    <div class="about-pair">
+      <div>
+        <h3>Beskyttet</h3>
+        <ul class="about-ticks">
+          <li>Ingen server, database, innlogging eller sporing. Dataene finnes bare i din nettleser.</li>
+          <li>Ingen skript, fonter eller filer fra andre nettsteder.</li>
+          <li>En sikkerhetspolicy (CSP) lar nettleseren bare kjøre sidens egne skript.</li>
+          <li>Tekst du skriver, vises alltid som tekst og kan aldri kjøres som kode.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ikke beskyttet</h3>
+        <ul class="about-crosses">
+          <li>Dataene er ikke kryptert. Den som har tilgang til enheten din, kan lese dem.</li>
+          <li>Nettleserutvidelser med tilgang til alle sider kan lese det siden viser.</li>
+          <li>Eksportfilen er vanlig tekst. Lagre den kryptert, og ikke send den på e-post.</li>
+          <li>Ingen innlogging, roller eller logg over hvem som endret hva.</li>
+        </ul>
+      </div>
+    </div>
+    <p><strong>Ikke ment for sensitive opplysninger fra en virksomhet.</strong> Bruk Grunnmur
+       til læring, i en hjemmelab eller som mal. Hele vurderingen står i
+       <a href="https://github.com/ulaskorhan/grc-grunnmur/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a>.</p>
+  </section>
+
   <!-- About the project. Written without "jeg" and without a name, so the site reads as a
        tool, not a personal page. A contact address can be added here later. -->
   <section class="about-section about-project" aria-labelledby="prosjektet">
@@ -365,22 +403,8 @@
        </p>
   </footer>
 
-  <!-- A link like iso27002#k8.8 or kategori/beskytte#p2.3 points into closed <details>:
-       open the target and every <details> around it, so it is visible.
-       Some browsers do this on their own; this makes it work everywhere. -->
-  <script>
-    function openFromHash() {
-      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      if (!target) return;
-      for (var el = target; el; el = el.parentElement.closest("details")) {
-        if (el.tagName === "DETAILS") el.open = true;
-        if (!el.parentElement) break;
-      }
-      target.scrollIntoView();
-    }
-    openFromHash();
-    window.addEventListener("hashchange", openFromHash);
-  </script>
+  <!-- Opens linked <details>, asks before deleting, and the print button (no inline code: see the CSP above) -->
+  <script src="/grc-grunnmur/static/page.js"></script>
 
   
   <!-- Only on the GitHub Pages version: saves progress in the browser (localStorage) -->

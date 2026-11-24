@@ -93,6 +93,8 @@ forfalt eller skal skje innen 30 dager, og åpne avvik.
 - I den offentlige versjonen finnes dataene bare i den nettleseren. Sletter du nettleserens
   data, forsvinner de, så eksporter en fil av og til som backup.
 - Den eksporterte filen har notatene dine som vanlig tekst. Den er ikke kryptert.
+- Ikke ment for sensitive opplysninger fra en virksomhet. Se
+  [SECURITY.md](SECURITY.md) for dataflyt, trusler, tiltak og aksepterte risikoer.
 
 ## Kjøre den
 
@@ -102,7 +104,8 @@ python3 -m venv .venv
 .venv/bin/python app.py
 ```
 
-Åpne deretter <http://127.0.0.1:5050>.
+Åpne deretter <http://127.0.0.1:5050>. Under utvikling laster `GRUNNMUR_DEBUG=1 .venv/bin/python app.py`
+inn kodeendringer automatisk. Debugmodus er av som standard (se [SECURITY.md](SECURITY.md)).
 
 ## Tester
 
@@ -112,7 +115,7 @@ python3 -m venv .venv
 ```
 
 Testene i `tests/` sjekker risikoreglene og påminnelsene, avviksloggen, historikken, eksport og import, at alle sider
-lastes, at tekst fra brukeren escapes, at den offentlige versjonen aldri inneholder lokale
+lastes, at tekst fra brukeren escapes, sikkerhetstiltakene (skjemaer fra andre nettsteder, vertsnavn, CSP), at den offentlige versjonen aldri inneholder lokale
 data, og sjekken av cyberrisikonivået (uten å gå på nett). Hver test får sin egen tomme
 database. En GitHub Action (`.github/workflows/tests.yml`) kjører dem ved hver push.
 
@@ -146,6 +149,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `cyber_level.py`: NSMs nasjonale cyberrisikonivå (oppdateres for hånd)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: sjekken av NSMs nyhetsfeed hver tredje dag
 - `build.py`: bygger den statiske versjonen i `docs/`
+- `SECURITY.md`: sikkerhetsvurderingen: dataflyt, trusler, tiltak og aksepterte risikoer
 - `tests/`: pytest-testene; `requirements-dev.txt` legger til pytest
 - `templates/`: HTML-sidene (Jinja)
 - `static/style.css`: stilen, mobil først, med mørk modus og utskriftsstil
@@ -154,6 +158,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/static-incidents.js`: avviksloggen i nettleseren (offentlig versjon)
 - `static/static-history.js`: noterer fremdriftshistorikken i nettleseren (offentlig versjon)
 - `static/history.js`: grafen og tabellen over historikken i rapporten (begge versjoner)
+- `static/page.js`: små hjelpere på hver side (åpne lenkede seksjoner, bekrefte sletting, skriv ut), holdt utenfor HTML-en på grunn av sikkerhetspolicyen (CSP)
 - `static/motion.js`: myk inntoning ved rulling (begge versjoner; av ved redusert bevegelse)
 - `static/risk-tools.js`: filter i varmekartet og forslag fra NSM (begge versjoner)
 - `static/report.js`: fyller rapporten fra nettleseren (offentlig versjon)
