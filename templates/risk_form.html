@@ -169,7 +169,7 @@
 <form method="post" class="delete-form" id="delete-form"
       action="{{ url_for('risk_delete', risk_id=risk_id) if risk_id else '#' }}"
       {% if not risk_id %}hidden{% endif %}
-      onsubmit="return confirm('Slette denne risikoen?')">
+      data-confirm="Slette denne risikoen?">
   <button type="submit" class="danger-button">Slett risiko</button>
 </form>
 {% endblock %}

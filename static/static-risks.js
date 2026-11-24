@@ -221,7 +221,7 @@ function setupForm() {
     if (saveRisks(list)) location.href = form.dataset.listUrl;
   });
 
-  // The delete form already asks "Slette denne risikoen?" (onsubmit in the HTML).
+  // The delete form already asks "Slette denne risikoen?" (data-confirm, page.js).
   // If the user said no, the event is cancelled and we do nothing.
   document.getElementById("delete-form").addEventListener("submit", function (event) {
     if (event.defaultPrevented) return;

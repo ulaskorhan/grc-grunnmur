@@ -108,7 +108,7 @@
 <form method="post" class="delete-form" id="delete-form"
       action="{{ url_for('incident_delete', incident_id=incident_id) if incident_id else '#' }}"
       {% if not incident_id %}hidden{% endif %}
-      onsubmit="return confirm('Slette dette avviket?')">
+      data-confirm="Slette dette avviket?">
   <button type="submit" class="danger-button">Slett avvik</button>
 </form>
 {% endblock %}

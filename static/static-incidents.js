@@ -160,7 +160,7 @@ function setupIncidentForm() {
     if (saveIncidents(list)) location.href = form.dataset.listUrl;
   });
 
-  // The delete form already asks "Slette dette avviket?" (onsubmit in the HTML)
+  // The delete form already asks "Slette dette avviket?" (data-confirm, page.js)
   document.getElementById("delete-form").addEventListener("submit", function (event) {
     if (event.defaultPrevented) return;
     event.preventDefault();

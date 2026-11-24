@@ -1,6 +1,7 @@
 """Grunnmur: a small personal GRC app built on NSM Grunnprinsipper for IKT-sikkerhet.
 
 Run with:  .venv/bin/python app.py   and open http://127.0.0.1:5050
+           (GRUNNMUR_DEBUG=1 .venv/bin/python app.py while developing: reloads on code changes)
 
 Pages:
   /                     homepage: short intro, the 4 categories with progress, and a list of every part
@@ -25,6 +26,7 @@ Pages:
 """
 
 import json
+import os
 from datetime import date
 
 from flask import Flask, abort, redirect, render_template, request, url_for
@@ -49,6 +51,9 @@ app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 app.config["STATIC_SITE"] = False
 # v7: refuse uploads larger than this, before Flask reads them (see too_large below)
 app.config["MAX_CONTENT_LENGTH"] = backup.MAX_BYTES
+# Only answer requests addressed to this computer by name. Stops "DNS rebinding", where a
+# web page makes the browser reach 127.0.0.1 under another site's name to read the data.
+app.config["TRUSTED_HOSTS"] = ["127.0.0.1", "localhost"]
 
 # The public address. Link previews (og:image) need a full URL, not a relative path.
 SITE_URL = "https://ulaskorhan.github.io/grc-grunnmur"
@@ -342,6 +347,39 @@ def history_ids():
         "isms": [number for clause in iso27001.CLAUSES for number, _title in clause["items"]],
         "soa": list(iso27002.CONTROLS),
     }
+
+
+# ---------- Security (see SECURITY.md) ----------
+
+@app.before_request
+def block_cross_site_forms():
+    """Refuse a form sent from another website (CSRF).
+
+    Any page you visit could otherwise post a hidden form to 127.0.0.1:5050 and change
+    or delete your data. Browsers say where a POST comes from in the Origin header, and
+    newer ones also in Sec-Fetch-Site. If either says another site, the request is refused.
+    No header at all (curl, the tests) is allowed: those do not come from a web page.
+    """
+    if request.method != "POST":
+        return None
+    origin = request.headers.get("Origin")
+    if origin and origin != request.host_url.rstrip("/"):
+        abort(403)
+    if request.headers.get("Sec-Fetch-Site") == "cross-site":
+        abort(403)
+    return None
+
+
+@app.after_request
+def security_headers(response):
+    """Extra protection that only a server can send (GitHub Pages cannot set headers).
+
+    The content security policy itself is in base.html, so it works in both versions.
+    """
+    response.headers["X-Frame-Options"] = "DENY"                # no showing the app inside another site
+    response.headers["X-Content-Type-Options"] = "nosniff"       # files are only read as their real type
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return response
 
 
 @app.after_request
@@ -721,5 +759,7 @@ def incident_delete(incident_id):
 
 if __name__ == "__main__":
     db.init_db()
-    # 127.0.0.1 = only reachable from this computer. debug=True reloads on code changes.
-    app.run(host="127.0.0.1", port=5050, debug=True)
+    # 127.0.0.1 = only reachable from this computer.
+    # Debug mode (reload on code changes, error pages with a code console) is off by default:
+    # the console can run any code. Turn it on while developing with GRUNNMUR_DEBUG=1.
+    app.run(host="127.0.0.1", port=5050, debug=os.environ.get("GRUNNMUR_DEBUG") == "1")
