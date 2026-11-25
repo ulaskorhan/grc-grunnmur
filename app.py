@@ -34,6 +34,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 import backup
 import cyber_level
 import db
+import demo
 import examples
 import incidents
 import iso27001
@@ -483,6 +484,8 @@ def render_data_page(error=None, status=200):
         added=request.args.get("nye", 0, type=int),
         added_incidents=request.args.get("nye_avvik", 0, type=int),
         rules=backup.rules_for_browser(),
+        # Only on GitHub Pages: the "Prøv med eksempeldata" button (demo.py)
+        example=demo.example_file(history_ids()) if app.config["STATIC_SITE"] else None,
     )
     return page, status
 
@@ -520,6 +523,12 @@ def data_import():
     added, added_incidents = db.import_all(data, replace=IMPORT_MODES[mode])
     # Post/Redirect/Get, like the other forms: a refresh will not import the file again
     return redirect(url_for("data_page", importert=mode, nye=added, nye_avvik=added_incidents))
+
+
+@app.errorhandler(404)
+def not_found(_error):
+    """A page that does not exist: a Grunnmur page with links back, not the browser's default."""
+    return render_template("404.html"), 404
 
 
 @app.errorhandler(413)

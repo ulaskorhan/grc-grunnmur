@@ -7,7 +7,8 @@
                   1. export: builds the JSON file from localStorage and downloads it,
                   2. import: checks the file with the same rules as backup.py
                      (read from #backup-rules), then replaces or merges the data,
-                  3. counts what is saved.
+                  3. counts what is saved,
+                  4. loads the example data (demo.py) with the same import.
   The file format is described at the top of backup.py.
 */
 
@@ -389,7 +390,29 @@ importForm.addEventListener("submit", function (event) {
   });
 });
 
+// "Prøv med eksempeldata" (GitHub Pages only): the example file from demo.py is in the page,
+// and goes through exactly the same checks and import as a file would.
+function loadExample() {
+  const hasData = Object.values(DATA_KEYS).some(function (key) {
+    const value = readKey(key, null);
+    return value && Object.keys(value).length > 0;
+  });
+  if (hasData && !confirm("Slette alt du har lagret nå og erstatte det med eksempeldataene?")) return;
+  const [data, error] = cleanBackup(JSON.parse(document.getElementById("example-data").textContent));
+  if (error) {
+    showMessage(error + " Ingenting er endret.", true);
+    return;
+  }
+  if (importData(data, true) === null) {
+    showMessage("Kunne ikke lagre. Nettleseren blokkerer lokal lagring. Ingenting er endret.", true);
+    return;
+  }
+  showMessage("✓ Eksempeldataene er lastet inn. Se forsiden, risikoregisteret og rapporten.", false);
+  updateCounts();
+}
+
 if (isStatic) {
   document.getElementById("export-data").addEventListener("click", exportData);
+  document.getElementById("load-example").addEventListener("click", loadExample);
   updateCounts();
 }

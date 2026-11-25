@@ -58,6 +58,8 @@ The homepage lists open risks whose review is overdue or due within 30 days, and
   my local database is never part of the build.
 - The same templates are used in both versions, so they look and work the same.
 - Export and import use one JSON format in both versions (described in `backup.py`).
+- On the public version, "Prøv med eksempeldata" on the Data page loads a fictional home lab
+  (`demo.py`) into the visitor's browser through the same import, so the checks are the same.
   An imported file is checked completely before anything is saved, with the same rules
   as the forms. If one value is wrong, nothing changes. On import the user chooses to
   replace everything or to merge; a merge never adds a risk that is already there.
@@ -149,10 +151,13 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `iso27001.py`: clauses 4–10, PDCA phases and one example per requirement
 - `risks.py`: risk scales, levels, validation, residual risk and heat maps
 - `incidents.py`: the incident log's severities, statuses and form checks
+- `demo.py`: the example data (a fictional home lab) behind "Prøv med eksempeldata"
 - `examples.py`: one home lab example per principle
 - `cyber_level.py`: NSM's national cyber risk level (updated by hand)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: the check of NSM's news feed every third day
 - `build.py`: builds the static version into `docs/`
+- `LICENSE`: MIT for the code; NSM's and ISO's content is not covered
+- `templates/404.html`: the page for addresses that do not exist (`docs/404.html` on GitHub Pages)
 - `SECURITY.md`: security considerations: data flow, threats, controls and accepted risks
 - `tests/`: the pytest tests; `requirements-dev.txt` adds pytest
 - `templates/`: the HTML pages (Jinja)
@@ -171,3 +176,9 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `static/favicon.svg`, `static/og-image.png`: the tab icon and the picture shown when the link is shared
 
 Built with Python, Flask and SQLite. No JavaScript framework.
+
+## Licence
+
+The code is under the [MIT licence](LICENSE). The NSM principle titles, measure headings,
+priorities and ISO mapping belong to NSM, and ISO/IEC 27001 and 27002 belong to ISO and IEC;
+they are not covered by the licence.

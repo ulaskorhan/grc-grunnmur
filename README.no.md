@@ -58,6 +58,8 @@ forfalt eller skal skje innen 30 dager, og åpne avvik.
   lokale database kommer aldri med i byggingen.
 - Begge versjonene bruker de samme malene, så de ser like ut og virker likt.
 - Eksport og import bruker samme JSON-format i begge versjonene (beskrevet i `backup.py`).
+- I den offentlige versjonen laster «Prøv med eksempeldata» på Data-siden inn en oppdiktet
+  hjemmelab (`demo.py`) i nettleseren gjennom den samme importen, så kontrollene er de samme.
   En importert fil sjekkes helt før noe lagres, med de samme reglene som skjemaene.
   Er én verdi feil, endres ingenting. Ved import velger brukeren å erstatte alt eller
   slå sammen. Sammenslåing legger aldri til en risiko som finnes fra før.
@@ -145,10 +147,13 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `iso27001.py`: kapittel 4–10, PDCA-faser og ett eksempel per krav
 - `risks.py`: risikoskalaer, nivåer, validering, restrisiko og varmekart
 - `incidents.py`: avviksloggens alvorlighet, statuser og sjekk av skjemaet
+- `demo.py`: eksempeldataene (en oppdiktet hjemmelab) bak «Prøv med eksempeldata»
 - `examples.py`: ett hjemmelab-eksempel per prinsipp
 - `cyber_level.py`: NSMs nasjonale cyberrisikonivå (oppdateres for hånd)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: sjekken av NSMs nyhetsfeed hver tredje dag
 - `build.py`: bygger den statiske versjonen i `docs/`
+- `LICENSE`: MIT for koden; innhold fra NSM og ISO er ikke omfattet
+- `templates/404.html`: siden for adresser som ikke finnes (`docs/404.html` på GitHub Pages)
 - `SECURITY.md`: sikkerhetsvurderingen: dataflyt, trusler, tiltak og aksepterte risikoer
 - `tests/`: pytest-testene; `requirements-dev.txt` legger til pytest
 - `templates/`: HTML-sidene (Jinja)
@@ -167,3 +172,9 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `static/favicon.svg`, `static/og-image.png`: ikonet i fanen og bildet som vises når lenken deles
 
 Bygget med Python, Flask og SQLite. Uten JavaScript-rammeverk.
+
+## Lisens
+
+Koden har [MIT-lisens](LICENSE). Prinsipptitlene, tiltaksoverskriftene, prioriteringen og
+ISO-koblingen tilhører NSM, og ISO/IEC 27001 og 27002 tilhører ISO og IEC; de er ikke omfattet
+av lisensen.

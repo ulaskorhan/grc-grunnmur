@@ -14,6 +14,12 @@ def test_page_loads(client, url):
     assert client.get(url).status_code == 200
 
 
+def test_unknown_address_shows_the_404_page(client):
+    response = client.get("/finnes-ikke")
+    assert response.status_code == 404
+    assert "Fant ikke siden" in response.get_data(as_text=True)
+
+
 def test_risk_title_is_escaped(client):
     client.post("/risikoer/ny", data={**RISK_FORM, "title": "<script>alert(1)</script>"})
     html = client.get("/risikoer").get_data(as_text=True)

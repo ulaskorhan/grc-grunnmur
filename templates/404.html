@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Fant ikke siden · Grunnmur{% endblock %}
+
+{% block content %}
+<!-- Shown for any address that does not exist. On GitHub Pages this is docs/404.html,
+     which GitHub serves for every unknown address, so all links here are absolute. -->
+<section class="page-head not-found">
+  <div>
+    <p class="eyebrow">Feil 404</p>
+    <h1>Fant ikke siden</h1>
+    <p class="lead">Adressen finnes ikke, eller siden er flyttet. Dataene dine er ikke påvirket.</p>
+    <p class="not-found-links">
+      <a class="button" href="{{ url_for('home') }}">Til forsiden</a>
+      <a href="{{ url_for('risk_list') }}">Risikoer</a>
+      <a href="{{ url_for('report') }}">Rapport</a>
+      <a href="{{ url_for('about') }}">Om Grunnmur</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

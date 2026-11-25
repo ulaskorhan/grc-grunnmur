@@ -25,10 +25,10 @@ BASE_PATH = os.environ.get("BASE_PATH", "/grc-grunnmur")
 OUT = Path(__file__).parent / "docs"
 
 
-def save_page(client, url, file_path):
+def save_page(client, url, file_path, expected=200):
     """Request one page from Flask and write its HTML to docs/."""
     response = client.get(url, base_url="http://localhost" + BASE_PATH)
-    if response.status_code != 200:
+    if response.status_code != expected:
         raise SystemExit(f"Failed to build {url}: HTTP {response.status_code}")
     file_path.parent.mkdir(parents=True, exist_ok=True)
     file_path.write_bytes(response.data)
@@ -62,6 +62,8 @@ def main():
     # v7: only the Data page. Export and import happen in the browser there (static/data.js).
     save_page(client, "/data", OUT / "data" / "index.html")
     save_page(client, "/om", OUT / "om" / "index.html")
+    # GitHub Pages shows docs/404.html for every address that does not exist
+    save_page(client, "/finnes-ikke", OUT / "404.html", expected=404)
 
     shutil.copytree(Path(__file__).parent / "static", OUT / "static")
     # Tells GitHub Pages to serve the files as they are, without Jekyll processing.

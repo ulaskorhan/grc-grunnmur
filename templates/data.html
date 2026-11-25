@@ -20,6 +20,18 @@
 <p class="form-error" id="import-error" role="alert" {% if not error %}hidden{% endif %}>{{ error or '' }}</p>
 
 <div class="about data-page">
+  {% if static_site %}
+  <!-- Example data: a fictional home lab (demo.py), loaded into this browser only -->
+  <section class="about-section example-section">
+    <h2>Prøv med eksempeldata</h2>
+    <p>Se hvordan Grunnmur ser ut i bruk, med en oppdiktet hjemmelab: status på prinsipper og
+       tiltak, fire risikoer, tre avvik og tre uker med historikk.</p>
+    <button type="button" class="inline-button" id="load-example">Last inn eksempeldata</button>
+    <p class="muted data-note">Alt er oppdiktet. Eksempeldataene erstatter det som er lagret i
+       denne nettleseren nå, så eksporter først hvis du vil ta vare på noe.
+       Fjern dem med «Slett mine data» nederst på siden.</p>
+  </section>
+  {% endif %}
   <!-- 1. What is saved now. data-saved="..." is filled by data.js on GitHub Pages. -->
   <section class="about-section">
     <h2>Det du har lagret</h2>
@@ -84,6 +96,7 @@
 
 <!-- The rules for data.js: which numbers and statuses exist (from backup.py) -->
 <script id="backup-rules" type="application/json">{{ rules|tojson }}</script>
+{% if example %}<script id="example-data" type="application/json">{{ example|tojson }}</script>{% endif %}
 {% endblock %}
 
 {% block page_scripts %}

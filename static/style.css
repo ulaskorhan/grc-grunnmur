@@ -752,6 +752,8 @@ button:active { transform: scale(0.98); }
 }
 .empty-state p { margin: 0 0 8px; }
 .empty-state .button { margin-top: 8px; }
+.not-found { padding-bottom: 48px; }
+.not-found-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 20px; }
 
 /* The list of risks */
 .risk-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }

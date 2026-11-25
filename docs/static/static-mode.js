@@ -174,9 +174,11 @@ document.querySelectorAll("details.item form").forEach(function (form) {
 const clearButton = document.getElementById("clear-data");
 if (clearButton) {
   clearButton.addEventListener("click", function () {
-    if (confirm("Slette alt du har lagret i denne nettleseren (fremdrift, tiltak, risikoer, styringssystem og SoA)?")) {
+    if (confirm("Slette alt du har lagret i denne nettleseren (fremdrift, tiltak, risikoer, avvik, styringssystem, SoA og historikk)?")) {
       try {
-        ["grunnmur-progress", "grunnmur-measures", "grunnmur-risks", "grunnmur-isms", "grunnmur-soa"].forEach(function (key) {
+        // Every key the site uses, including the incidents (v8) and the history (v9)
+        ["grunnmur-progress", "grunnmur-measures", "grunnmur-risks", "grunnmur-isms", "grunnmur-soa",
+         "grunnmur-incidents", "grunnmur-history"].forEach(function (key) {
           localStorage.removeItem(key);
         });
       } catch (error) { /* nothing saved */ }
