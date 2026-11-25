@@ -152,7 +152,7 @@ For å se byggingen lokalt: `BASE_PATH= .venv/bin/python build.py`, og deretter
 - `cyber_level.py`: NSMs nasjonale cyberrisikonivå (oppdateres for hånd)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: sjekken av NSMs nyhetsfeed hver tredje dag
 - `build.py`: bygger den statiske versjonen i `docs/`
-- `LICENSE`: MIT for koden; innhold fra NSM og ISO er ikke omfattet
+- `LICENSE`: MIT for koden (innhold fra NSM og ISO er ikke omfattet, se Lisens nederst)
 - `templates/404.html`: siden for adresser som ikke finnes (`docs/404.html` på GitHub Pages)
 - `SECURITY.md`: sikkerhetsvurderingen: dataflyt, trusler, tiltak og aksepterte risikoer
 - `tests/`: pytest-testene; `requirements-dev.txt` legger til pytest

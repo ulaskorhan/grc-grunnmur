@@ -156,7 +156,7 @@ For a local preview of the build: `BASE_PATH= .venv/bin/python build.py`, then
 - `cyber_level.py`: NSM's national cyber risk level (updated by hand)
 - `check_cyber_level.py`, `.github/workflows/check-cyber-level.yml`: the check of NSM's news feed every third day
 - `build.py`: builds the static version into `docs/`
-- `LICENSE`: MIT for the code; NSM's and ISO's content is not covered
+- `LICENSE`: MIT for the code (NSM and ISO content is not covered, see Licence below)
 - `templates/404.html`: the page for addresses that do not exist (`docs/404.html` on GitHub Pages)
 - `SECURITY.md`: security considerations: data flow, threats, controls and accepted risks
 - `tests/`: the pytest tests; `requirements-dev.txt` adds pytest

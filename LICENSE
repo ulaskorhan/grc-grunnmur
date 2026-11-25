@@ -19,15 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
--------------------------------------------------------------------------------
-
-Content from other sources is not covered by this licence:
-
-- The titles of NSM's basic principles for ICT security (Grunnprinsipper for
-  IKT-sikkerhet), the headings of NSM's measures, NSM's priority groups and
-  NSM's mapping to ISO/IEC 27002 belong to the Norwegian National Security
-  Authority (NSM). See nsm_data.py, nsm_measures.py and nsm_iso_mapping.py for
-  the sources.
-- ISO/IEC 27001 and ISO/IEC 27002 are copyrighted by ISO and IEC. Grunnmur only
-  uses their clause and control numbers, with short titles in its own words.
